@@ -6,13 +6,13 @@
 This is an application that allows one to organize and track their thoughts on albums and/or singles
 they have listened to.  
 
-The main functions are:
-    - Create an album review  
-    - Create a single review  
-    - Group existing reviews together  
-    - Add to a list tracking upcoming album and/or single releases  
-    - View the number of reviews that received certain ratings. For example: 5 albums received a 7/10  
-    - Sort by critera. For example: sort by overall rating highest to lowest  
+The main functions are:  
+- Create an album review  
+- Create a single review  
+- Group existing reviews together  
+- Add to a list tracking upcoming album and/or single releases  
+- View the number of reviews that received certain ratings. For example: 5 albums received a 7/10  
+- Sort by critera. For example: sort by overall rating highest to lowest  
 
 ## Who will use it  
 
