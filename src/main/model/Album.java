@@ -9,20 +9,26 @@ public class Album {
     // REQUIRES: 0.0 <= rating <= 10.0
     // EFFECTS: Creates an album with a name, artist, genre, an empty tracklist
     // (meaning number of songs and length (mins and seconds parts) are also zero),
-    // rating, and a
-    // review
+    // rating, and review
     public Album(String name, String artist, String genre, double rating, String review) {
         // stub
 
     }
 
+
+    // EFFECTS: adds given song to tracklist
+    public void addSong(Song song) {
+        // stub
+    }
+
     // REQUIRES: lengthMinsPart >= 0, 0 <= lengthSecPart <= 59, 0.0 <= rating <=
     // 10.0
     // MODIFIES: this
-    // EFFECTS: Add song to tracklist with the given info
-    public void addSong(String name, String artist, int lengthMinsPart, int lengthSecsPart, double rating,
+    // EFFECTS: Create a song with the given info and return it
+    public Song createSong(String name, String artist, int lengthMinsPart, int lengthSecsPart, double rating,
             String review) {
-        // stub
+        return null;
+
     }
 
     // REQUIRES: song with the given name and artist is in the tracklist
