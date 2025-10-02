@@ -12,7 +12,7 @@ public class Song {
     }
 
 
-    // REQUIRES: amount > 0.0
+    // REQUIRES: amount > 0.0, this.getRating() + amount <= 10.0
     // MODIFIES: this
     // EFFECTS: increases song rating by the given amount
     public void increaseRating(double amount){
@@ -20,7 +20,7 @@ public class Song {
 
     }
 
-    // REQUIRES: amount > 0.0
+    // REQUIRES: amount > 0.0, this.getRating() - amount >= 0.0
     // MODIFIES: this
     // EFFECTS: decreases song rating by the given amount
     public void decreaseRating(double amount){
@@ -52,7 +52,7 @@ public class Song {
         return ""; //stub
     }
 
-    public String getlength(){
+    public String getLength(){
         return ""; //stub
     }
 
