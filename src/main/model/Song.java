@@ -1,20 +1,25 @@
 package model;
 
-// Represents a song with a name, artist, length, rating, and a review
+// Represents a song with a name, artist, length (mins and seconds parts), rating, and a review
 public class Song {
     private String name;
     private String artist;
-    private String length;
+    private int lengthMinsPart;
+    private int lengthSecsPart;
     private double rating;
     private String review;
 
-    // REQUIRES: length in the format mins:seconds, 0.0 <= rating <= 10.0
-    // EFFECTS: Creates a song with the given name, artist, length, rating, and
+    // REQUIRES: lengthMinsPart >= 0, 0 <= lengthSecPart <= 59, 0.0 <= rating <=
+    // 10.0
+    // EFFECTS: Creates a song with the given name, artist, length (mins and second
+    // parts), rating, and
     // review
-    public Song(String name, String artist, String length, double rating, String review) {
+    public Song(String name, String artist, int lengthMinsPart, int lengthSecsPart, double rating, String review) {
         this.name = name;
         this.artist = artist;
-        this.length = length;
+        this.lengthMinsPart = lengthMinsPart;
+        this.lengthSecsPart = lengthSecsPart;
+
         this.rating = rating;
         this.review = review;
 
@@ -44,8 +49,9 @@ public class Song {
         this.artist = artist;
     }
 
-    public void setLength(String length) {
-        this.length = length;
+    public void setLength(int lengthMinsPart, int lengthSecsPart) {
+        this.lengthMinsPart = lengthMinsPart;
+        this.lengthSecsPart = lengthSecsPart;
     }
 
     public void setReview(String review) {
@@ -60,8 +66,12 @@ public class Song {
         return this.artist;
     }
 
-    public String getLength() {
-        return this.length;
+    public int getLengthMinsPart() {
+        return this.lengthMinsPart;
+    }
+
+    public int getLengthSecsPart() {
+        return this.lengthSecsPart;
     }
 
     public double getRating() {
@@ -75,7 +85,8 @@ public class Song {
     @Override
     // EFFECTS: returns formatted information about the song as a string
     public String toString() {
-        return "Name: " + this.name + ", Artist: " + this.artist + ", Length: " + this.length + ", Rating: "
+        return "Name: " + this.name + ", Artist: " + this.artist + ", Length: " + this.lengthMinsPart + " mins "
+                + this.lengthSecsPart + " secs" + ", Rating: "
                 + this.rating + ", Review: " + this.review;
     }
 }

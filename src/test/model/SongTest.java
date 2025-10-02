@@ -9,7 +9,7 @@ public class SongTest {
 
     @BeforeEach
     void runBefore() {
-        testSong = new Song("ceilings", "Lizzy McAlpine", "3:02", 9.0, "");
+        testSong = new Song("ceilings", "Lizzy McAlpine", 3, 2, 9.0, "");
 
     }
 
@@ -17,7 +17,8 @@ public class SongTest {
     void testConstructor() {
         assertEquals(testSong.getName(), "ceilings");
         assertEquals(testSong.getArtist(), "Lizzy McAlpine");
-        assertEquals(testSong.getLength(), "3:02");
+        assertEquals(testSong.getLengthMinsPart(), 3);
+        assertEquals(testSong.getLengthSecsPart(), 2);
         assertEquals(testSong.getRating(), 9.0);
         assertEquals(testSong.getReview(), "");
     }
@@ -55,6 +56,6 @@ public class SongTest {
     @Test
     void testToString() {
         assertTrue(testSong.toString()
-                .contains("Name: ceilings, Artist: Lizzy McAlpine, Length: 3:02, Rating: 9.0, Review: "));
+                .contains("Name: ceilings, Artist: Lizzy McAlpine, Length: 3 mins 2 secs, Rating: 9.0, Review: "));
     }
 }
