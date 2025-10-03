@@ -15,9 +15,16 @@ public class Album {
 
     }
 
-
+    // MODIFIES: this
     // EFFECTS: adds given song to tracklist
     public void addSong(Song song) {
+        // stub
+    }
+
+    // REQUIRES: song with the given name and artist is in the tracklist
+    // MODIFIES: this
+    // EFFECTS: Remove song with given name and artist from tracklist
+    public void removeSong(String name, String artist) {
         // stub
     }
 
@@ -29,13 +36,6 @@ public class Album {
             String review) {
         return null;
 
-    }
-
-    // REQUIRES: song with the given name and artist is in the tracklist
-    // MODIFIES: this
-    // EFFECTS: Remove song with given name and artist from tracklist
-    public void removeSong(String name, String artist) {
-        // stub
     }
 
     public String getName() {
@@ -73,6 +73,7 @@ public class Album {
     // EFFECTS: Gets the average rating for all songs in the album rounded to 1
     // decimal place
     public double getAverageRating() {
+        // when implementing use javas decimal formatting
         return 0.0;
     }
 
@@ -114,9 +115,15 @@ public class Album {
         // stub
     }
 
-    // EFFECTS: returns formatted information about the album as a string
+    // EFFECTS: returns formatted information about the album as a string except for tracklist
     public String toString() {
         return "";
+    }
+
+    // EFFECTS: returns formatted tracklist as a string
+    public String trackListToString(){
+        return "";
+
     }
 
 }
