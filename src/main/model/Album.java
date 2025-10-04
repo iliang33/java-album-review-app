@@ -21,9 +21,8 @@ public class Album {
         // stub
     }
 
-    // REQUIRES: song with the given name and artist is in the tracklist
     // MODIFIES: this
-    // EFFECTS: Remove song with given name and artist from tracklist
+    // EFFECTS: Remove song with given name and artist from tracklist, do nothing if not there
     public void removeSong(String name, String artist) {
         // stub
     }

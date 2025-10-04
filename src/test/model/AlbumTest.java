@@ -104,6 +104,28 @@ public class AlbumTest {
     }
 
     @Test
+    void testRemoveSongInEmptyTracklist() {
+        assertTrue(testAlbum.getTracklist().isEmpty());
+        testAlbum.removeSong("Sparks Fly", "Taylor Swift");
+        assertTrue(testAlbum.getTracklist().isEmpty());
+
+    }
+
+    @Test
+    void testRemoveSongNotInTracklist() {
+        testAlbum.addSong(otherTestSong);
+        testAlbum.addSong(oneMoreTestSong);
+
+        testAlbum.removeSong("Mine", "Taylor Swift");
+
+        assertFalse(testAlbum.getTracklist().contains(otherTestSong));
+        assertFalse(testAlbum.getTracklist().contains(oneMoreTestSong));
+
+        assertEquals(testAlbum.getTracklist().size(), 2);
+
+    }
+
+    @Test
     void testCreateSong() {
         Song newSong = testAlbum.createSong("Back To December", "Taylor Swift", 4, 54, 10, "");
         Song anotherSong = testAlbum.createSong("Speak Now", "Taylor Swift", 4, 02, 9, "");
@@ -183,18 +205,18 @@ public class AlbumTest {
     }
 
     @Test
-    void testTrackListToStringNoSongs(){
+    void testTrackListToStringNoSongs() {
         assertEquals(testAlbum.trackListToString(), "");
     }
 
     @Test
-    void testTrackListToStringOneSong(){
+    void testTrackListToStringOneSong() {
         testAlbum.addSong(testSong);
         assertEquals(testAlbum.trackListToString(), "Mine");
     }
 
     @Test
-    void testTrackListToStringThreeSongs(){
+    void testTrackListToStringThreeSongs() {
         testAlbum.addSong(testSong);
         testAlbum.addSong(otherTestSong);
         testAlbum.addSong(oneMoreTestSong);
