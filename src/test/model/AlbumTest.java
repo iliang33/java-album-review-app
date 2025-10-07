@@ -218,7 +218,7 @@ public class AlbumTest {
     @Test
     void testTrackListToStringOneSong() {
         testAlbum.addSong(testSong);
-        assertEquals(testAlbum.trackListToString(), "1. Mine");
+        assertEquals(testAlbum.trackListToString(), "1. Mine by Taylor Swift");
     }
 
     @Test
@@ -227,7 +227,8 @@ public class AlbumTest {
         testAlbum.addSong(otherTestSong);
         testAlbum.addSong(oneMoreTestSong);
 
-        assertEquals(testAlbum.trackListToString(), "1. Mine\n2. Sparks Fly\n3. Dear John");
+        assertEquals(testAlbum.trackListToString(),
+                "1. Mine by Taylor Swift\n2. Sparks Fly by Taylor Swift\n3. Dear John by Taylor Swift");
     }
 
 }

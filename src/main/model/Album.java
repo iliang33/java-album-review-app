@@ -62,7 +62,6 @@ public class Album {
 
     // REQUIRES: lengthMinsPart >= 0, 0 <= lengthSecPart <= 59, 0.0 <= rating <=
     // 10.0
-    // MODIFIES: this
     // EFFECTS: Create a song with the given info and return it
     public Song createSong(String name, String artist, int lengthMinsPart, int lengthSecsPart, double rating,
             String review) {
@@ -105,7 +104,6 @@ public class Album {
     // EFFECTS: Gets the average rating for all songs in the album rounded to 1
     // decimal place
     public double getAverageRating() {
-        // when implementing use javas decimal formatting
         double total = 0.0;
 
         for (Song song : tracklist) {
@@ -177,8 +175,9 @@ public class Album {
         this.review = review;
     }
 
-    // EFFECTS: returns formatted information about the album as a string except for
+    // EFFECTS: returns all information about the album as a string except for
     // tracklist
+    @Override
     public String toString() {
         return "Name: " + this.name + "\nArtist: " + this.artist + "\nGenre: " + this.genre + "\nNumber of songs: "
                 + this.getNumberOfSongs() + "\nLength: "
@@ -187,14 +186,17 @@ public class Album {
                 + this.rating + "\nReview: " + this.review;
     }
 
-    // EFFECTS: returns formatted tracklist as a string
+    // EFFECTS: returns the name of each song and artist in tracklist as a string
     public String trackListToString() {
         String stringTracklist = "";
-        for (int i = 0; i < this.tracklist.size(); i++){
-            stringTracklist += i + 1 + ". ";
-            stringTracklist += this.tracklist.get(i).getName();
+        for (int i = 0; i < this.tracklist.size(); i++) {
+            Song currentSong = this.tracklist.get(i);
 
-            if (i != this.tracklist.size() - 1){
+            stringTracklist += i + 1 + ". ";
+            stringTracklist += currentSong.getName();
+            stringTracklist += " by " + currentSong.getArtist();
+
+            if (i != this.tracklist.size() - 1) {
                 stringTracklist += "\n";
             }
 
