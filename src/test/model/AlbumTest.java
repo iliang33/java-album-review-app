@@ -118,8 +118,8 @@ public class AlbumTest {
 
         testAlbum.removeSong("Mine", "Taylor Swift");
 
-        assertFalse(testAlbum.getTracklist().contains(otherTestSong));
-        assertFalse(testAlbum.getTracklist().contains(oneMoreTestSong));
+        assertTrue(testAlbum.getTracklist().contains(otherTestSong));
+        assertTrue(testAlbum.getTracklist().contains(oneMoreTestSong));
 
         assertEquals(testAlbum.getTracklist().size(), 2);
 
@@ -171,6 +171,8 @@ public class AlbumTest {
 
     @Test
     void setLengthNoSongs() {
+        testAlbum.setLength();
+
         assertEquals(testAlbum.getLengthMinsPart(), 0);
         assertEquals(testAlbum.getLengthSecsPart(), 0);
 
@@ -179,6 +181,8 @@ public class AlbumTest {
     @Test
     void setLengthOneSong() {
         testAlbum.addSong(testSong);
+
+        testAlbum.setLength();
 
         assertEquals(testAlbum.getLengthMinsPart(), 3);
         assertEquals(testAlbum.getLengthSecsPart(), 51);
@@ -191,6 +195,8 @@ public class AlbumTest {
         testAlbum.addSong(otherTestSong);
         testAlbum.addSong(oneMoreTestSong);
 
+        testAlbum.setLength();
+
         assertEquals(testAlbum.getLengthMinsPart(), 14);
         assertEquals(testAlbum.getLengthSecsPart(), 57);
 
@@ -200,8 +206,8 @@ public class AlbumTest {
     void testToString() {
         assertTrue(testAlbum.toString()
                 .contains(
-                        "Name: Speak Now, Artist: Taylor Swift, Genre: Pop Rock, "
-                                + "Number of songs: 0, Length: 0 mins 0 secs, Rating: 9.0, Review: "));
+                        "Name: Speak Now\nArtist: Taylor Swift\nGenre: Pop Rock"
+                                + "\nNumber of songs: 0\nLength: 0 mins 0 secs\nRating: 9.1\nReview: "));
     }
 
     @Test
@@ -212,7 +218,7 @@ public class AlbumTest {
     @Test
     void testTrackListToStringOneSong() {
         testAlbum.addSong(testSong);
-        assertEquals(testAlbum.trackListToString(), "Mine");
+        assertEquals(testAlbum.trackListToString(), "1. Mine");
     }
 
     @Test
@@ -221,7 +227,7 @@ public class AlbumTest {
         testAlbum.addSong(otherTestSong);
         testAlbum.addSong(oneMoreTestSong);
 
-        assertEquals(testAlbum.trackListToString(), "Mine\nSparks Fly\nDear John");
+        assertEquals(testAlbum.trackListToString(), "1. Mine\n2. Sparks Fly\n3. Dear John");
     }
 
 }

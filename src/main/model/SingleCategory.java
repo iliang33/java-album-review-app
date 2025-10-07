@@ -1,5 +1,5 @@
 package model;
 
-public class SingleCategory {
+public class SingleCategory{
 
 }

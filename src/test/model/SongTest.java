@@ -56,6 +56,6 @@ public class SongTest {
     @Test
     void testToString() {
         assertTrue(testSong.toString()
-                .contains("Name: ceilings, Artist: Lizzy McAlpine, Length: 3 mins 2 secs, Rating: 9.0, Review: "));
+                .contains("Name: ceilings\nArtist: Lizzy McAlpine\nLength: 3 mins 2 secs\nRating: 9.0\nReview: "));
     }
 }

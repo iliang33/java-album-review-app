@@ -1,5 +1,5 @@
 package model;
 
-public class AlbumCategory {
+public class AlbumCategory{
 
 }

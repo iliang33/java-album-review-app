@@ -85,8 +85,8 @@ public class Song {
     @Override
     // EFFECTS: returns formatted information about the song as a string
     public String toString() {
-        return "Name: " + this.name + ", Artist: " + this.artist + ", Length: " + this.lengthMinsPart + " mins "
-                + this.lengthSecsPart + " secs" + ", Rating: "
-                + this.rating + ", Review: " + this.review;
+        return "Name: " + this.name + "\nArtist: " + this.artist + "\nLength: " + this.lengthMinsPart + " mins "
+                + this.lengthSecsPart + " secs" + "\nRating: "
+                + this.rating + "\nReview: " + this.review;
     }
 }
