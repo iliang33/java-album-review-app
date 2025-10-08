@@ -61,6 +61,10 @@ public class AlbumReviewApp {
 
     // MODIFIES: this
     // EFFECTS: acts upon user input
+
+    // WHEN REACH 25 LINE LIMIT, MAKE HELPER FUNCTIONS TO SPLIT IT,
+    // LIKE processCreationInput, processListingInput, processSortingInput etc....
+
     public void processInput(String input) {
         if (input.equalsIgnoreCase("ca")) {
             createAlbum();
@@ -74,6 +78,8 @@ public class AlbumReviewApp {
             removeSingle();
         } else if (input.equalsIgnoreCase("cc")) {
             createCategory();
+        } else if (input.equalsIgnoreCase("ac")) {
+            addToCategory();
         } else if (input.equalsIgnoreCase("l")) {
             printAllReviews();
         } else if (input.equalsIgnoreCase("lc")) {
@@ -159,14 +165,8 @@ public class AlbumReviewApp {
         System.out.println("Enter name of artist");
         String artist = scan.nextLine();
 
-        int indexOfAlbumToAddSongTo = -1;
+        int indexOfAlbumToAddSongTo = getIndexOfWantedAlbum(name, artist);
         boolean addMoreSongs = true;
-
-        for (int i = 0; i < this.albums.size(); i++) {
-            if (albums.get(i).getName().equalsIgnoreCase(name) && albums.get(i).getArtist().equalsIgnoreCase(artist)) {
-                indexOfAlbumToAddSongTo = i;
-            }
-        }
 
         if (indexOfAlbumToAddSongTo != -1) {
             while (addMoreSongs) {
@@ -220,14 +220,8 @@ public class AlbumReviewApp {
         System.out.println("Enter album artist name to remove");
         String artist = scan.nextLine();
 
-        int indexOfAlbumToRemove = -1;
-        for (int i = 0; i < this.albums.size(); i++) {
-            Album currentAlbum = this.albums.get(i);
-            if (currentAlbum.getName().equalsIgnoreCase(name) && currentAlbum.getArtist().equalsIgnoreCase(artist)) {
-                indexOfAlbumToRemove = i;
-            }
+        int indexOfAlbumToRemove = getIndexOfWantedAlbum(name, artist);
 
-        }
         if (indexOfAlbumToRemove != -1) {
             this.albums.remove(indexOfAlbumToRemove);
 
@@ -264,14 +258,8 @@ public class AlbumReviewApp {
         System.out.println("Enter single artist name to remove");
         String artist = scan.nextLine();
 
-        int indexOfSingleToRemove = -1;
-        for (int i = 0; i < this.singles.size(); i++) {
-            Song currentSingle = this.singles.get(i);
-            if (currentSingle.getName().equalsIgnoreCase(name) && currentSingle.getArtist().equalsIgnoreCase(artist)) {
-                indexOfSingleToRemove = i;
-            }
+        int indexOfSingleToRemove = getIndexOfWantedSingle(name, artist);
 
-        }
         if (indexOfSingleToRemove != -1) {
             this.singles.remove(indexOfSingleToRemove);
 
@@ -293,7 +281,15 @@ public class AlbumReviewApp {
     // MODIFIES: this
     // EFFECTS: add the given album to the category with the given name and
     // remove the album from the album list
-    public void addToCategory(String name, Album album) {
+    public void addToCategory() {
+        System.out.println("Enter name of category to add to");
+        String name = scan.nextLine();
+
+        System.out.println("Enter name of album to add");
+        String albumName = scan.nextLine();
+
+        System.out.println("Enter name of artist of album to add");
+        String artistName = scan.nextLine();
 
     }
 
@@ -423,6 +419,52 @@ public class AlbumReviewApp {
     // MODIFIES: this
     // EFFECTS: updates given single rating to the given rating
     public void updateSingleRating(String singleName, double newRating) {
+
+    }
+
+    // EFFECTS: return the index of the album in albums list specified by name and
+    // artist
+    public int getIndexOfWantedAlbum(String name, String artist) {
+
+        int indexOfWantedAlbum = -1;
+        for (int i = 0; i < this.albums.size(); i++) {
+            Album currentAlbum = this.albums.get(i);
+            if (currentAlbum.getName().equalsIgnoreCase(name) && currentAlbum.getArtist().equalsIgnoreCase(artist)) {
+                indexOfWantedAlbum = i;
+            }
+
+        }
+        return indexOfWantedAlbum;
+
+    }
+
+    // EFFECTS: return the index of the single in singles list specified by name and
+    // artist
+    public int getIndexOfWantedSingle(String name, String artist) {
+        int indexOfWantedSingle = -1;
+        for (int i = 0; i < this.singles.size(); i++) {
+            Song currentSingle = this.singles.get(i);
+            if (currentSingle.getName().equalsIgnoreCase(name) && currentSingle.getArtist().equalsIgnoreCase(artist)) {
+                indexOfWantedSingle = i;
+            }
+
+        }
+        return indexOfWantedSingle;
+
+    }
+
+    // EFFECTS: return the index of the category in albums list specified by name
+    public int getIndexOfWantedCategory(String name) {
+
+        int indexOfWantedCategory = -1;
+        for (int i = 0; i < this.categories.size(); i++) {
+            AlbumCategory currentCategory = this.categories.get(i);
+            if (currentCategory.getName().equalsIgnoreCase(name)) {
+                indexOfWantedCategory = i;
+            }
+
+        }
+        return indexOfWantedCategory;
 
     }
 
