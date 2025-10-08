@@ -23,5 +23,6 @@ Becuase of this I thought it would be enjoyable to turn this into a project.
 - As a user, I want to be able to see all of my created reviews    
 - As a user, I want to be able to sort reviews by critera such as by artist name alphabetical  
 - As a user, I want to be able to edit and update existing reviews
+- As a user I want to be able to group album/song reviews by categories
 
  
