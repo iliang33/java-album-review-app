@@ -1,14 +1,13 @@
 
-# Album/Single Review Application 
+# Album Review Application 
 
 ## What it does  
 
-This is an application that allows one to organize and track their thoughts on albums **and/or** singles
-they have listened to.  
+This is an application that allows one to organize and track their thoughts on **albums** they have listened to.  
 
 ## Who will use it 
 
-Anyone that wishes to have a place to keep track of their album and/or singles in an easy and organized way.  
+Anyone that wishes to have a place to keep track of their album reviews in an easy and organized way.  
 
 ## Why it is of interest to me  
 
@@ -19,8 +18,8 @@ Becuase of this I thought it would be enjoyable to turn this into a project.
 
 ## User Stories  
   
-- As a user, I want to be able to create/remove an album and/or single review   
-- As a user I want to be able to add/remove album reviews to different categories to group them  
+- As a user, I want to be able to create and remove an album review 
+- As a user, I want to be able to add and remove album reviews to different categories to group them  
 - As a user, I want to be able to see all my reviews that are both in or not in categories 
 - As a user, I want to be able to sort reviews by critera such as by artist name alphabetical  
 - As a user, I want to be able to update existing reviews and categories  

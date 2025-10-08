@@ -11,26 +11,28 @@ import java.util.Scanner;
 // Album Review Application
 public class AlbumReviewApp {
 
-    // remember that it is up to the callers responsiblity to fufill the requires
-    // clause
-    // not the method specification
-
-    // so make sure you ensure that when you call a method with user input
+    // make sure you that when you call a method with user input
     // that before you pass it to the method, it fits the requires clause
-    // so use ifs to check.
+
+    // when taking user input for ratings, make sure it is between 0.0 and 10.0
+    // inclusive,
+    // if not, let user know and tell them to enter a valid value by using while
+    // loop with scanner
+    // consider helper methods for this
+
+    // ensure there are messages tha are printed to let the user know if an action
+    // is
+    // performed succesfully or not
 
     private List<AlbumCategory> categories;
     private List<Album> albums;
-    private List<Song> singles;
     private Scanner scan;
 
     // EFFECTS: runs the application and initializes both the scanner and the lists
-    // used
-    // to track album categories, albums, and singles
+    // used to track album categories and albums,
     public AlbumReviewApp() {
         this.categories = new ArrayList<>();
         this.albums = new ArrayList<>();
-        this.singles = new ArrayList<>();
         this.scan = new Scanner(System.in);
 
         runApp();
@@ -72,10 +74,6 @@ public class AlbumReviewApp {
             addToTrackList();
         } else if (input.equalsIgnoreCase("ra")) {
             removeAlbum();
-        } else if (input.equalsIgnoreCase("cs")) {
-            createSingle();
-        } else if (input.equalsIgnoreCase("rs")) {
-            removeSingle();
         } else if (input.equalsIgnoreCase("cc")) {
             createCategory();
         } else if (input.equalsIgnoreCase("rc")) {
@@ -102,9 +100,7 @@ public class AlbumReviewApp {
 
         System.out.println("\tType ca to create an album review");
         System.out.println("\tType atl to add songs to the tracklist of an existing album review");
-        System.out.println("\tType ra to remove an album review");
-        System.out.println("\tType cs to create a single review");
-        System.out.println("\tType rs to remove an single review\n");
+        System.out.println("\tType ra to remove an album review\n");
 
         System.out.println("\tType cc to create a category");
         System.out.println("\tType rc to remove a category");
@@ -114,16 +110,11 @@ public class AlbumReviewApp {
         System.out.println("\tType l to list all reviews");
         System.out.println("\tType lc to list all categories\n");
 
-        System.out.println("\tType saaa to sort an album by artist alphabetical");
-        System.out.println("\tType sana to sort an album by name alphabetical");
-        System.out.println("\tType sara to sort an album by rating high to low\n");
-
-        System.out.println("\tType ssaa to sort a single by artist alphabetical");
-        System.out.println("\tType ssna to sort a single by name alphabetical");
-        System.out.println("\tType ssra to sort a single by rating high to low\n");
+        System.out.println("\tType saaa to sort all album reviews by artist alphabetical");
+        System.out.println("\tType sana to sort all album reviews by name alphabetical");
+        System.out.println("\tType sara to sort all album reviews by rating high to low\n");
 
         System.out.println("\tType ua to update an album review");
-        System.out.println("\tType us to update an single review");
 
         System.out.println("\tType at to add songs to an album tracklist");
 
@@ -237,46 +228,6 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates a new single with the given information and adds it to the
-    // single list
-    public void createSingle() {
-        System.out.println("Enter name of single");
-        String name = scan.nextLine();
-
-        System.out.println("Enter name of artist");
-        String artist = scan.nextLine();
-
-        System.out.println("Enter single rating");
-        double rating = Double.parseDouble(scan.nextLine());
-
-        System.out.println("Enter review");
-        String review = scan.nextLine();
-
-        this.singles.add(new Song(name, artist, rating, review));
-
-    }
-
-    // MODIFIES: this
-    // EFFECTS: removes a single with the given name and artist from the single list
-    public void removeSingle() {
-        System.out.println("Enter name of single to remove");
-        String name = scan.nextLine();
-
-        System.out.println("Enter single artist name to remove");
-        String artist = scan.nextLine();
-
-        int indexOfSingleToRemove = getIndexOfWantedSingle(name, artist);
-
-        if (indexOfSingleToRemove != -1) {
-            this.singles.remove(indexOfSingleToRemove);
-
-        } else {
-            System.out.println("Single not found");
-        }
-
-    }
-
-    // MODIFIES: this
     // EFFECTS: creates a new category with the given name and adds it to the
     // categories list
     public void createCategory() {
@@ -305,8 +256,7 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: add the given album to the category with the given name and
-    // remove the album from the album list
+    // EFFECTS: add the given album to the category with the given name
     public void addToCategory() {
         System.out.println("Enter name of category to add to");
         String name = scan.nextLine();
@@ -359,12 +309,12 @@ public class AlbumReviewApp {
         }
     }
 
-    // EFFECTS: prints all reviews (albums and singles)
+    // EFFECTS: prints all reviews
     // user is informed if there are no reviews
     public void printAllReviews() {
         System.out.println("\n");
 
-        if (!this.albums.isEmpty() || !this.categories.isEmpty() || !this.singles.isEmpty()) {
+        if (!this.albums.isEmpty() || !this.categories.isEmpty()) {
             System.out.println("Albums:\n");
             for (Album album : albums) {
                 System.out.println(album.toString());
@@ -378,11 +328,6 @@ public class AlbumReviewApp {
                     System.out.println("Tracklist:\n" + album.trackListToString());
                     System.out.println("\n");
                 }
-            }
-            System.out.println("\nSingles:\n");
-            for (Song single : singles) {
-                System.out.println(single.toString());
-                System.out.println("\n");
             }
 
         } else {
@@ -433,24 +378,6 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: sorts singles list by artist alphabetically
-    public void sortSinglesByAlphabeticalArtist() {
-
-    }
-
-    // MODIFIES: this
-    // EFFECTS: sorts singles list by name alphabetically
-    public void sortSinglesByAlphabeticalName() {
-
-    }
-
-    // MODIFIES: this
-    // EFFECTS: sorts singles list by rating high to low
-    public void sortSinglesByRating() {
-
-    }
-
-    // MODIFIES: this
     // EFFECTS: updates a name of a category given by oldName to newName
     public void updateCategoryName(String oldName, String newName) {
 
@@ -469,18 +396,6 @@ public class AlbumReviewApp {
 
     }
 
-    // MODIFIES: this
-    // EFFECTS: updates a given String single field (name, artist, review) to a new
-    // given value
-    public void updateSingleNotRatingField(String singleName, String fieldName, String newValue) {
-
-    }
-
-    // MODIFIES: this
-    // EFFECTS: updates given single rating to the given rating
-    public void updateSingleRating(String singleName, double newRating) {
-
-    }
 
     // EFFECTS: return the index of the album in albums list specified by name and
     // artist
@@ -495,21 +410,6 @@ public class AlbumReviewApp {
 
         }
         return indexOfWantedAlbum;
-
-    }
-
-    // EFFECTS: return the index of the single in singles list specified by name and
-    // artist
-    public int getIndexOfWantedSingle(String name, String artist) {
-        int indexOfWantedSingle = -1;
-        for (int i = 0; i < this.singles.size(); i++) {
-            Song currentSingle = this.singles.get(i);
-            if (currentSingle.getName().equalsIgnoreCase(name) && currentSingle.getArtist().equalsIgnoreCase(artist)) {
-                indexOfWantedSingle = i;
-            }
-
-        }
-        return indexOfWantedSingle;
 
     }
 
