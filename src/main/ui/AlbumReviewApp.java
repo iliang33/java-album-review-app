@@ -225,6 +225,8 @@ public class AlbumReviewApp {
         if (indexOfAlbumToRemove != -1) {
             this.albums.remove(indexOfAlbumToRemove);
 
+        } else {
+            System.out.println("Album not found");
         }
 
     }
@@ -263,6 +265,8 @@ public class AlbumReviewApp {
         if (indexOfSingleToRemove != -1) {
             this.singles.remove(indexOfSingleToRemove);
 
+        } else {
+            System.out.println("Single not found");
         }
 
     }
@@ -290,6 +294,20 @@ public class AlbumReviewApp {
 
         System.out.println("Enter name of artist of album to add");
         String artistName = scan.nextLine();
+
+        int indexOfCategoryToAddto = getIndexOfWantedCategory(name);
+        int indexOfAlbum = getIndexOfWantedAlbum(albumName, artistName);
+
+        if (indexOfCategoryToAddto != -1) {
+            if (indexOfAlbum != 1) {
+                this.categories.get(indexOfCategoryToAddto).addAlbum(this.albums.get(indexOfAlbum));
+                this.albums.remove(indexOfAlbum);
+            } else {
+                System.out.println("Album not found");
+            }
+        } else {
+            System.out.println("Category not found");
+        }
 
     }
 
