@@ -44,7 +44,7 @@ public class Album {
         int indexOfSongToRemove = -1;
         for (int i = 0; i < this.tracklist.size(); i++) {
             Song currentSong = this.tracklist.get(i);
-            if (currentSong.getName().equals(name) && currentSong.getArtist().equals(artist)) {
+            if (currentSong.getName().equalsIgnoreCase(name) && currentSong.getArtist().equalsIgnoreCase(artist)) {
                 indexOfSongToRemove = i;
             }
 

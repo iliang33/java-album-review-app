@@ -31,7 +31,7 @@ public class AlbumCategory {
         int indexOfAlbumToRemove = -1;
         for (int i = 0; i < this.albumList.size(); i++) {
             Album currentAlbum = this.albumList.get(i);
-            if (currentAlbum.getName().equals(name) && currentAlbum.getArtist().equals(artist)) {
+            if (currentAlbum.getName().equalsIgnoreCase(name) && currentAlbum.getArtist().equalsIgnoreCase(artist)) {
                 indexOfAlbumToRemove = i;
             }
 
