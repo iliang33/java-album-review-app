@@ -20,9 +20,10 @@ Becuase of this I thought it would be enjoyable to turn this into a project.
 ## User Stories  
   
 - As a user, I want to be able to create/remove an album and/or single review   
-- As a user, I want to be able to see all of my created reviews    
+- As a user I want to be able to add/remove album reviews to different categories to group them  
+- As a user, I want to be able to see all my reviews that are both in or not in categories 
 - As a user, I want to be able to sort reviews by critera such as by artist name alphabetical  
-- As a user, I want to be able to edit and update existing reviews
-- As a user I want to be able to group album/song reviews by categories
+- As a user, I want to be able to update existing reviews and categories  
+
 
  
