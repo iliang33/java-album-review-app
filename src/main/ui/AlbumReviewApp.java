@@ -74,9 +74,10 @@ public class AlbumReviewApp {
             removeSingle();
         } else if (input.equalsIgnoreCase("cc")) {
             createCategory();
-
         } else if (input.equalsIgnoreCase("l")) {
             printAllReviews();
+        } else if (input.equalsIgnoreCase("lc")) {
+            printAllCategories();
         } else {
             System.out.println("Not a valid input");
         }
@@ -99,7 +100,8 @@ public class AlbumReviewApp {
         System.out.println("\tType ac to add to a category");
         System.out.println("\tType rc to remove from a category\n");
 
-        System.out.println("\tType l to list all reviews\n");
+        System.out.println("\tType l to list all reviews");
+        System.out.println("\tType lc to list all categories\n");
 
         System.out.println("\tType saaa to sort an album by artist alphabetical");
         System.out.println("\tType sana to sort an album by name alphabetical");
@@ -306,7 +308,7 @@ public class AlbumReviewApp {
     public void printAllReviews() {
         System.out.println("\n");
 
-        if (!this.albums.isEmpty() || !!this.categories.isEmpty() || this.singles.isEmpty()) {
+        if (!this.albums.isEmpty() || !this.categories.isEmpty() || !this.singles.isEmpty()) {
             System.out.println("Albums:\n");
             for (Album album : albums) {
                 System.out.println(album.toString());
@@ -333,8 +335,26 @@ public class AlbumReviewApp {
 
     }
 
-    // EFFECTS: prints the tracklist of the album with the given name
-    public void printAlbumTracklist(String name) {
+    // EFFECTS: prints out name of all categories and the info about the albums
+    // in them
+    public void printAllCategories() {
+        System.out.println("\n");
+
+        if (!this.categories.isEmpty()) {
+            System.out.println("Categories:\n");
+
+            for (AlbumCategory category : categories) {
+                System.out.println(category.getName() + ":");
+                for (Album album : category.getAlbumList()) {
+                    System.out.println(album.toString());
+                    System.out.println("Tracklist:\n" + album.trackListToString());
+                    System.out.println("\n");
+                }
+            }
+
+        } else {
+            System.out.println("You have no categories!");
+        }
 
     }
 
