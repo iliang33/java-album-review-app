@@ -1,7 +1,6 @@
 package ui;
 
 import model.Album;
-import model.Song;
 
 // Album Review Application
 public class AlbumReviewApp {
@@ -150,6 +149,36 @@ public class AlbumReviewApp {
     // MODIFIES: this
     // EFFECTS: sorts singles list by rating high to low
     public void sortSinglesByRating(){
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: updates a name of a category given by oldName to newName
+    public void updateCategoryName(String oldName, String newName){
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: updates a given String album field (name, artist, genre, review) to a new given value
+    public void updateAlbumNotRatingField(String albumName, String fieldName, String newValue){
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: updates given album rating to the given rating
+    public void updateAlbumRating(String albumName, double newRating){
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: updates a given String single field (name, artist, review) to a new given value
+    public void updateSingleNotRatingField(String singleName, String fieldName, String newValue){
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: updates given single rating to the given rating
+    public void updateSingleRating(String singleName, double newRating){
 
     }
 
