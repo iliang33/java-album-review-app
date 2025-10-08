@@ -168,31 +168,43 @@ public class AlbumReviewApp {
 
         if (indexOfAlbumToAddSongTo != -1) {
             while (addMoreSongs) {
-                System.out.println("Enter name of song");
-                String songName = scan.nextLine();
-
-                System.out.println("Enter name of artist");
-                String artistName = scan.nextLine();
-
-                System.out.println("Enter song rating");
-                double rating = Double.parseDouble(scan.nextLine());
-
-                System.out.println("Enter review");
-                String review = scan.nextLine();
-
-                this.albums.get(indexOfAlbumToAddSongTo).addSong(new Song(songName, artistName, rating, review));
-
-                System.out.println("add more songs? (type n to stop, anything otherwise)");
-                String response = scan.nextLine();
-
-                if (response.equalsIgnoreCase("n")) {
+                if (!promptUserToAddSongs(indexOfAlbumToAddSongTo)) {
                     addMoreSongs = false;
-
                 }
 
             }
         } else {
             System.out.println("Album not found");
+        }
+
+    }
+
+    // EFFECTS: asks users for information to add songs to a tracklist
+    // and returns true if user wants to add more songs, false otherwise
+
+    // this is a helper function for addToTrackList()
+    public boolean promptUserToAddSongs(int indexOfAlbumToAddSongTo) {
+        System.out.println("Enter name of song");
+        String songName = scan.nextLine();
+
+        System.out.println("Enter name of artist");
+        String artistName = scan.nextLine();
+
+        System.out.println("Enter song rating");
+        double rating = Double.parseDouble(scan.nextLine());
+
+        System.out.println("Enter review");
+        String review = scan.nextLine();
+
+        this.albums.get(indexOfAlbumToAddSongTo).addSong(new Song(songName, artistName, rating, review));
+
+        System.out.println("add more songs? (type n to stop, anything otherwise)");
+        String response = scan.nextLine();
+
+        if (response.equalsIgnoreCase("n")) {
+            return false;
+        } else {
+            return true;
         }
 
     }
