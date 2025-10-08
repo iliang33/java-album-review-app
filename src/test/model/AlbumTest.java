@@ -13,9 +13,9 @@ public class AlbumTest {
     @BeforeEach
     void runBefore() {
         testAlbum = new Album("Speak Now", "Taylor Swift", "Pop Rock", 9.1, "");
-        testSong = new Song("Mine", "Taylor Swift", 3, 51, 9, "");
-        otherTestSong = new Song("Sparks Fly", "Taylor Swift", 4, 21, 9.5, "");
-        oneMoreTestSong = new Song("Dear John", "Taylor Swift", 6, 45, 9, "");
+        testSong = new Song("Mine", "Taylor Swift", 9, "");
+        otherTestSong = new Song("Sparks Fly", "Taylor Swift", 9.5, "");
+        oneMoreTestSong = new Song("Dear John", "Taylor Swift", 9, "");
     }
 
     @Test
@@ -25,8 +25,6 @@ public class AlbumTest {
         assertEquals(testAlbum.getGenre(), "Pop Rock");
         assertTrue(testAlbum.getTracklist().isEmpty());
         assertEquals(testAlbum.getNumberOfSongs(), 0);
-        assertEquals(testAlbum.getLengthMinsPart(), 0);
-        assertEquals(testAlbum.getLengthSecsPart(), 0);
         assertEquals(testAlbum.getRating(), 9.1);
         assertEquals(testAlbum.getReview(), "");
 
@@ -127,20 +125,16 @@ public class AlbumTest {
 
     @Test
     void testCreateSong() {
-        Song newSong = testAlbum.createSong("Back To December", "Taylor Swift", 4, 54, 10, "");
-        Song anotherSong = testAlbum.createSong("Speak Now", "Taylor Swift", 4, 02, 9, "");
+        Song newSong = testAlbum.createSong("Back To December", "Taylor Swift", 10, "");
+        Song anotherSong = testAlbum.createSong("Speak Now", "Taylor Swift", 9, "");
 
         assertEquals(newSong.getName(), "Back To December");
         assertEquals(newSong.getArtist(), "Taylor Swift");
-        assertEquals(newSong.getLengthMinsPart(), 4);
-        assertEquals(newSong.getLengthSecsPart(), 54);
         assertEquals(newSong.getRating(), 10);
         assertEquals(newSong.getReview(), "");
 
         assertEquals(anotherSong.getName(), "Speak Now");
         assertEquals(anotherSong.getArtist(), "Taylor Swift");
-        assertEquals(anotherSong.getLengthMinsPart(), 4);
-        assertEquals(anotherSong.getLengthSecsPart(), 02);
         assertEquals(anotherSong.getRating(), 9);
         assertEquals(anotherSong.getReview(), "");
     }
@@ -170,44 +164,11 @@ public class AlbumTest {
     }
 
     @Test
-    void setLengthNoSongs() {
-        testAlbum.setLength();
-
-        assertEquals(testAlbum.getLengthMinsPart(), 0);
-        assertEquals(testAlbum.getLengthSecsPart(), 0);
-
-    }
-
-    @Test
-    void setLengthOneSong() {
-        testAlbum.addSong(testSong);
-
-        testAlbum.setLength();
-
-        assertEquals(testAlbum.getLengthMinsPart(), 3);
-        assertEquals(testAlbum.getLengthSecsPart(), 51);
-
-    }
-
-    @Test
-    void setLengthThreeSongs() {
-        testAlbum.addSong(testSong);
-        testAlbum.addSong(otherTestSong);
-        testAlbum.addSong(oneMoreTestSong);
-
-        testAlbum.setLength();
-
-        assertEquals(testAlbum.getLengthMinsPart(), 14);
-        assertEquals(testAlbum.getLengthSecsPart(), 57);
-
-    }
-
-    @Test
     void testToString() {
         assertTrue(testAlbum.toString()
                 .contains(
                         "Name: Speak Now\nArtist: Taylor Swift\nGenre: Pop Rock"
-                                + "\nNumber of songs: 0\nLength: 0 mins 0 secs\nRating: 9.1\nReview: "));
+                                + "\nNumber of songs: 0\nRating: 9.1\nReview: "));
     }
 
     @Test

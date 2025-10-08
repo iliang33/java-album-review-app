@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-// Represents an album with a name, artist, genre, number of songs, length (mins and seconds parts), tracklist of songs
+// Represents an album with a name, artist, genre, number of songs, tracklist of songs
 //  overall rating, and review
 public class Album {
     private String name;
@@ -11,14 +11,12 @@ public class Album {
     private String genre;
     private List<Song> tracklist;
     private int numberOfSongs;
-    private int lengthMinsPart;
-    private int lengthSecsPart;
     private double rating;
     private String review;
 
     // REQUIRES: 0.0 <= rating <= 10.0
     // EFFECTS: Creates an album with a name, artist, genre, an empty tracklist
-    // (meaning number of songs and length (mins and seconds parts) are also zero),
+    // (meaning number of songs is also zero),
     // rating, and review
     public Album(String name, String artist, String genre, double rating, String review) {
         this.name = name;
@@ -26,8 +24,6 @@ public class Album {
         this.genre = genre;
         this.tracklist = new ArrayList<>();
         this.numberOfSongs = 0;
-        this.lengthMinsPart = 0;
-        this.lengthSecsPart = 0;
         this.rating = rating;
         this.review = review;
 
@@ -60,12 +56,11 @@ public class Album {
 
     }
 
-    // REQUIRES: lengthMinsPart >= 0, 0 <= lengthSecPart <= 59, 0.0 <= rating <=
-    // 10.0
+    // REQUIRES: 0.0 <= rating <= 10.0
     // EFFECTS: Create a song with the given info and return it
-    public Song createSong(String name, String artist, int lengthMinsPart, int lengthSecsPart, double rating,
+    public Song createSong(String name, String artist, double rating,
             String review) {
-        return new Song(name, artist, lengthMinsPart, lengthSecsPart, rating, review);
+        return new Song(name, artist, rating, review);
 
     }
 
@@ -83,14 +78,6 @@ public class Album {
 
     public int getNumberOfSongs() {
         return this.numberOfSongs;
-    }
-
-    public int getLengthMinsPart() {
-        return this.lengthMinsPart;
-    }
-
-    public int getLengthSecsPart() {
-        return this.lengthSecsPart;
     }
 
     public List<Song> getTracklist() {
@@ -138,31 +125,6 @@ public class Album {
         this.numberOfSongs = num;
     }
 
-    // MODIFIES: this
-    // EFFECTS: sets the length to the total length of the songs in the tracklist
-    public void setLength() {
-
-        int totalLengthMinPart = 0;
-        int totalLengthSecPart = 0;
-
-        for (Song song : this.tracklist) {
-            totalLengthMinPart += song.getLengthMinsPart();
-            totalLengthSecPart += song.getLengthSecsPart();
-        }
-
-        int convertedMinsFromSecs = Math.floorDiv(totalLengthSecPart, 60);
-        int leftoverSecs = 0;
-
-        if (totalLengthSecPart < 60) {
-            leftoverSecs = totalLengthSecPart;
-        } else {
-            leftoverSecs = totalLengthSecPart % 60;
-        }
-
-        this.lengthMinsPart = totalLengthMinPart + convertedMinsFromSecs;
-        this.lengthSecsPart = leftoverSecs;
-    }
-
     public void setTracklist(List<Song> tracklist) {
         this.tracklist = tracklist;
     }
@@ -180,9 +142,7 @@ public class Album {
     @Override
     public String toString() {
         return "Name: " + this.name + "\nArtist: " + this.artist + "\nGenre: " + this.genre + "\nNumber of songs: "
-                + this.getNumberOfSongs() + "\nLength: "
-                + this.lengthMinsPart + " mins "
-                + this.lengthSecsPart + " secs" + "\nRating: "
+                + this.getNumberOfSongs() + "\nRating: "
                 + this.rating + "\nReview: " + this.review;
     }
 

@@ -109,8 +109,6 @@ public class AlbumCategoryTest {
         assertEquals(newAlbum.getGenre(), "Dance-Pop");
         assertTrue(newAlbum.getTracklist().isEmpty());
         assertEquals(newAlbum.getNumberOfSongs(), 0);
-        assertEquals(newAlbum.getLengthMinsPart(), 0);
-        assertEquals(newAlbum.getLengthSecsPart(), 0);
         assertEquals(newAlbum.getRating(), 7.9);
         assertEquals(newAlbum.getReview(), "");
 
@@ -119,8 +117,6 @@ public class AlbumCategoryTest {
         assertEquals(anotherAlbum.getGenre(), "Pop");
         assertTrue(anotherAlbum.getTracklist().isEmpty());
         assertEquals(anotherAlbum.getNumberOfSongs(), 0);
-        assertEquals(anotherAlbum.getLengthMinsPart(), 0);
-        assertEquals(anotherAlbum.getLengthSecsPart(), 0);
         assertEquals(anotherAlbum.getRating(), 8.1);
         assertEquals(anotherAlbum.getReview(), "");
 

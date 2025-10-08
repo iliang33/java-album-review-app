@@ -73,7 +73,7 @@ public class AlbumReviewApp {
     // MODIFIES: this
     // EFFECTS: creates a new single with the given information and adds it to the
     // single list
-    public void createSingle(String name, String artist, int lengthMinsPart, int lengthSecsPart, double rating,
+    public void createSingle(String name, String artist, double rating,
             String review) {
 
     }

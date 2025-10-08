@@ -1,25 +1,18 @@
 package model;
 
-// Represents a song with a name, artist, length (mins and seconds parts), rating, and a review
+// Represents a song with a name, artist, rating, and a review
 public class Song {
     private String name;
     private String artist;
-    private int lengthMinsPart;
-    private int lengthSecsPart;
     private double rating;
     private String review;
 
-    // REQUIRES: lengthMinsPart >= 0, 0 <= lengthSecPart <= 59, 0.0 <= rating <=
-    // 10.0
-    // EFFECTS: Creates a song with the given name, artist, length (mins and second
-    // parts), rating, and
+    // REQUIRES: 0.0 <= rating <= 10.0
+    // EFFECTS: Creates a song with the given name, artist, rating, and
     // review
-    public Song(String name, String artist, int lengthMinsPart, int lengthSecsPart, double rating, String review) {
+    public Song(String name, String artist, double rating, String review) {
         this.name = name;
         this.artist = artist;
-        this.lengthMinsPart = lengthMinsPart;
-        this.lengthSecsPart = lengthSecsPart;
-
         this.rating = rating;
         this.review = review;
 
@@ -49,11 +42,6 @@ public class Song {
         this.artist = artist;
     }
 
-    public void setLength(int lengthMinsPart, int lengthSecsPart) {
-        this.lengthMinsPart = lengthMinsPart;
-        this.lengthSecsPart = lengthSecsPart;
-    }
-
     public void setReview(String review) {
         this.review = review;
     }
@@ -64,14 +52,6 @@ public class Song {
 
     public String getArtist() {
         return this.artist;
-    }
-
-    public int getLengthMinsPart() {
-        return this.lengthMinsPart;
-    }
-
-    public int getLengthSecsPart() {
-        return this.lengthSecsPart;
     }
 
     public double getRating() {
@@ -85,8 +65,7 @@ public class Song {
     @Override
     // EFFECTS: returns information about the song as a string
     public String toString() {
-        return "Name: " + this.name + "\nArtist: " + this.artist + "\nLength: " + this.lengthMinsPart + " mins "
-                + this.lengthSecsPart + " secs" + "\nRating: "
+        return "Name: " + this.name + "\nArtist: " + this.artist + "\nRating: "
                 + this.rating + "\nReview: " + this.review;
     }
 }
