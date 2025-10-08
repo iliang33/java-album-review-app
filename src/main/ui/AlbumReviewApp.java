@@ -19,10 +19,6 @@ public class AlbumReviewApp {
     // that before you pass it to the method, it fits the requires clause
     // so use ifs to check.
 
-    // when a user wants to add a album to a category or add a single to a category
-    // or add a song to an album, give them the option to choose an exisiting
-    // album/single/song or to create a new one then add
-
     private List<AlbumCategory> categories;
     private List<Album> albums;
     private List<Song> singles;
@@ -49,7 +45,7 @@ public class AlbumReviewApp {
         while (!hasExit) {
             showMainOptions();
 
-            input = scan.next();
+            input = scan.nextLine();
             input.toLowerCase();
 
             if (input.equalsIgnoreCase("e")) {
@@ -68,12 +64,17 @@ public class AlbumReviewApp {
     public void processInput(String input) {
         if (input.equalsIgnoreCase("ca")) {
             createAlbum();
+        } else if (input.equalsIgnoreCase("atl")) {
+            addToTrackList();
         } else if (input.equalsIgnoreCase("ra")) {
             removeAlbum();
         } else if (input.equalsIgnoreCase("cs")) {
             createSingle();
         } else if (input.equalsIgnoreCase("rs")) {
             removeSingle();
+        } else if (input.equalsIgnoreCase("cc")) {
+            createCategory();
+
         } else if (input.equalsIgnoreCase("l")) {
             printAllReviews();
         } else {
@@ -89,6 +90,7 @@ public class AlbumReviewApp {
         System.out.println("\tType e to exit the app\n");
 
         System.out.println("\tType ca to create an album review");
+        System.out.println("\tType atl to add songs to the tracklist of an existing album review");
         System.out.println("\tType ra to remove an album review");
         System.out.println("\tType cs to create a single review");
         System.out.println("\tType rs to remove an single review\n");
@@ -97,7 +99,7 @@ public class AlbumReviewApp {
         System.out.println("\tType ac to add to a category");
         System.out.println("\tType rc to remove from a category\n");
 
-        System.out.println("\tType l to list all reviews");
+        System.out.println("\tType l to list all reviews\n");
 
         System.out.println("\tType saaa to sort an album by artist alphabetical");
         System.out.println("\tType sana to sort an album by name alphabetical");
@@ -111,7 +113,6 @@ public class AlbumReviewApp {
         System.out.println("\tType us to update an single review");
 
         System.out.println("\tType at to add songs to an album tracklist");
-        System.out.println("\tType tl to show album tracklist");
 
     }
 
@@ -130,21 +131,69 @@ public class AlbumReviewApp {
     // album list
     public void createAlbum() {
         System.out.println("Enter name of album");
-        String name = scan.next();
+        String name = scan.nextLine();
 
         System.out.println("Enter name of artist");
-        String artist = scan.next();
+        String artist = scan.nextLine();
 
         System.out.println("Enter genre");
-        String genre = scan.next();
+        String genre = scan.nextLine();
 
         System.out.println("Enter album rating");
-        double rating = Double.parseDouble(scan.next());
+        double rating = Double.parseDouble(scan.nextLine());
 
         System.out.println("Enter review");
-        String review = scan.next();
+        String review = scan.nextLine();
 
         this.albums.add(new Album(name, artist, genre, rating, review));
+
+    }
+
+    // EFFECTS: takes user input to add songs to the tracklist of an album
+    public void addToTrackList() {
+        System.out.println("Enter name of album to add tracklist to");
+        String name = scan.nextLine();
+
+        System.out.println("Enter name of artist");
+        String artist = scan.nextLine();
+
+        int indexOfAlbumToAddSongTo = -1;
+        boolean addMoreSongs = true;
+
+        for (int i = 0; i < this.albums.size(); i++) {
+            if (albums.get(i).getName().equalsIgnoreCase(name) && albums.get(i).getArtist().equalsIgnoreCase(artist)) {
+                indexOfAlbumToAddSongTo = i;
+            }
+        }
+
+        if (indexOfAlbumToAddSongTo != -1) {
+            while (addMoreSongs) {
+                System.out.println("Enter name of song");
+                String songName = scan.nextLine();
+
+                System.out.println("Enter name of artist");
+                String artistName = scan.nextLine();
+
+                System.out.println("Enter song rating");
+                double rating = Double.parseDouble(scan.nextLine());
+
+                System.out.println("Enter review");
+                String review = scan.nextLine();
+
+                this.albums.get(indexOfAlbumToAddSongTo).addSong(new Song(songName, artistName, rating, review));
+
+                System.out.println("add more songs? (type n to stop, anything otherwise)");
+                String response = scan.nextLine();
+
+                if (response.equalsIgnoreCase("n")) {
+                    addMoreSongs = false;
+
+                }
+
+            }
+        } else {
+            System.out.println("Album not found");
+        }
 
     }
 
@@ -152,10 +201,10 @@ public class AlbumReviewApp {
     // EFFECTS: removes an album with the given name and artist from the album list
     public void removeAlbum() {
         System.out.println("Enter name of album to remove");
-        String name = scan.next();
+        String name = scan.nextLine();
 
         System.out.println("Enter album artist name to remove");
-        String artist = scan.next();
+        String artist = scan.nextLine();
 
         int indexOfAlbumToRemove = -1;
         for (int i = 0; i < this.albums.size(); i++) {
@@ -177,16 +226,16 @@ public class AlbumReviewApp {
     // single list
     public void createSingle() {
         System.out.println("Enter name of single");
-        String name = scan.next();
+        String name = scan.nextLine();
 
         System.out.println("Enter name of artist");
-        String artist = scan.next();
+        String artist = scan.nextLine();
 
         System.out.println("Enter single rating");
-        double rating = Double.parseDouble(scan.next());
+        double rating = Double.parseDouble(scan.nextLine());
 
         System.out.println("Enter review");
-        String review = scan.next();
+        String review = scan.nextLine();
 
         this.singles.add(new Song(name, artist, rating, review));
 
@@ -196,10 +245,10 @@ public class AlbumReviewApp {
     // EFFECTS: removes a single with the given name and artist from the single list
     public void removeSingle() {
         System.out.println("Enter name of single to remove");
-        String name = scan.next();
+        String name = scan.nextLine();
 
         System.out.println("Enter single artist name to remove");
-        String artist = scan.next();
+        String artist = scan.nextLine();
 
         int indexOfSingleToRemove = -1;
         for (int i = 0; i < this.singles.size(); i++) {
@@ -217,9 +266,13 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates a new category with the given information and adds it to the
+    // EFFECTS: creates a new category with the given name and adds it to the
     // categories list
-    public void createCategory(String name) {
+    public void createCategory() {
+        System.out.println("Enter desired category name");
+        String name = scan.nextLine();
+
+        this.categories.add(new AlbumCategory(name));
 
     }
 
@@ -245,12 +298,14 @@ public class AlbumReviewApp {
             System.out.println("Albums:\n");
             for (Album album : albums) {
                 System.out.println(album.toString());
+                System.out.println("Tracklist:\n" + album.trackListToString());
                 System.out.println("\n");
 
             }
             for (AlbumCategory category : categories) {
                 for (Album album : category.getAlbumList()) {
                     System.out.println(album.toString());
+                    System.out.println("Tracklist:\n" + album.trackListToString());
                     System.out.println("\n");
                 }
             }
