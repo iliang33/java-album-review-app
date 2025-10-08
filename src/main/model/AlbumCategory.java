@@ -30,7 +30,7 @@ public class AlbumCategory {
 
     // REQUIRES: 0.0 <= rating <= 10.0
     // EFFECTS: Create an album with the given info and return it
-    public Song createAlbum(String name, String artist, String genre, double rating,
+    public Album createAlbum(String name, String artist, String genre, double rating,
             String review) {
         return null;
     }
@@ -48,7 +48,7 @@ public class AlbumCategory {
     }
 
     // EFFECTS: returns name and artist of each album in album list as a string
-    public String toStringAlbumList(){
+    public String albumListToString(){
         return ""; // stub
     }
 }
