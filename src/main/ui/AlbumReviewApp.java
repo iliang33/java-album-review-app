@@ -78,8 +78,12 @@ public class AlbumReviewApp {
             removeSingle();
         } else if (input.equalsIgnoreCase("cc")) {
             createCategory();
-        } else if (input.equalsIgnoreCase("ac")) {
+        } else if (input.equalsIgnoreCase("rc")) {
+            removeCategory();
+        } else if (input.equalsIgnoreCase("aac")) {
             addToCategory();
+        } else if (input.equalsIgnoreCase("rac")) {
+            removeFromCategory();
         } else if (input.equalsIgnoreCase("l")) {
             printAllReviews();
         } else if (input.equalsIgnoreCase("lc")) {
@@ -103,8 +107,9 @@ public class AlbumReviewApp {
         System.out.println("\tType rs to remove an single review\n");
 
         System.out.println("\tType cc to create a category");
-        System.out.println("\tType ac to add to a category");
-        System.out.println("\tType rc to remove from a category\n");
+        System.out.println("\tType rc to remove a category");
+        System.out.println("\tType aac to add an album to a category");
+        System.out.println("\tType rac to remove an album from a category\n");
 
         System.out.println("\tType l to list all reviews");
         System.out.println("\tType lc to list all categories\n");
@@ -283,6 +288,23 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
+    // EFFECTS: removes the category with the given name from category list
+    public void removeCategory() {
+        System.out.println("Enter name of category to remove");
+        String name = scan.nextLine();
+
+        int indexOfCategoryToRemove = getIndexOfWantedCategory(name);
+
+        if (indexOfCategoryToRemove != -1) {
+            this.categories.remove(indexOfCategoryToRemove);
+
+        } else {
+            System.out.println("Category not found");
+        }
+
+    }
+
+    // MODIFIES: this
     // EFFECTS: add the given album to the category with the given name and
     // remove the album from the album list
     public void addToCategory() {
@@ -299,22 +321,42 @@ public class AlbumReviewApp {
         int indexOfAlbum = getIndexOfWantedAlbum(albumName, artistName);
 
         if (indexOfCategoryToAddto != -1) {
-            if (indexOfAlbum != 1) {
+            if (indexOfAlbum != -1) {
                 this.categories.get(indexOfCategoryToAddto).addAlbum(this.albums.get(indexOfAlbum));
                 this.albums.remove(indexOfAlbum);
             } else {
-                System.out.println("Album not found");
+                System.out.println("Album not found. Is it created?");
             }
         } else {
-            System.out.println("Category not found");
+            System.out.println("Category not found. Is it created?");
         }
 
     }
 
     // MODIFIES: this
     // EFFECTS: remove the given album from the category with the given name
-    public void removeFromCategory(String name, Album album) {
+    public void removeFromCategory() {
+        System.out.println("Enter name of category to remove from");
+        String name = scan.nextLine();
 
+        System.out.println("Enter name of album to remove");
+        String albumName = scan.nextLine();
+
+        System.out.println("Enter name of artist of album to remove");
+        String artistName = scan.nextLine();
+
+        int indexOfCategoryToRemoveFrom = getIndexOfWantedCategory(name);
+        int indexOfAlbum = getIndexOfWantedAlbum(albumName, artistName);
+
+        if (indexOfCategoryToRemoveFrom != -1) {
+            if (indexOfAlbum != 1) {
+                this.categories.get(indexOfCategoryToRemoveFrom).removeAlbum(albumName, artistName);
+            } else {
+                System.out.println("Album not found. Is it created?");
+            }
+        } else {
+            System.out.println("Category not found. Is it created?");
+        }
     }
 
     // EFFECTS: prints all reviews (albums and singles)
@@ -358,7 +400,7 @@ public class AlbumReviewApp {
             System.out.println("Categories:\n");
 
             for (AlbumCategory category : categories) {
-                System.out.println(category.getName() + ":");
+                System.out.println(category.getName() + ":\n");
                 for (Album album : category.getAlbumList()) {
                     System.out.println(album.toString());
                     System.out.println("Tracklist:\n" + album.trackListToString());
