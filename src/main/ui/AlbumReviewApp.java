@@ -314,7 +314,7 @@ public class AlbumReviewApp {
     public void printAllReviews() {
         System.out.println("\n");
 
-        if (!this.albums.isEmpty() || !this.categories.isEmpty()) {
+        if (!this.albums.isEmpty()) {
             System.out.println("Albums:\n");
             for (Album album : albums) {
                 System.out.println(album.toString());
@@ -322,14 +322,6 @@ public class AlbumReviewApp {
                 System.out.println("\n");
 
             }
-            for (AlbumCategory category : categories) {
-                for (Album album : category.getAlbumList()) {
-                    System.out.println(album.toString());
-                    System.out.println("Tracklist:\n" + album.trackListToString());
-                    System.out.println("\n");
-                }
-            }
-
         } else {
             System.out.println("You have no reviews!");
         }
