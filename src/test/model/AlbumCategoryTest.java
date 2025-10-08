@@ -144,7 +144,7 @@ public class AlbumCategoryTest {
         testAlbumCategory.addAlbum(lastTestAlbum);
 
         assertEquals(testAlbumCategory.albumListToString(),
-                "1. Melodrama by Lorde\n 2. After Laughter by Paramore\n 3. The Secret of Us by Gracie Abrams");
+                "1. Melodrama by Lorde\n2. After Laughter by Paramore\n3. 21 by Adele");
     }
 
 }

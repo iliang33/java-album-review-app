@@ -1,21 +1,26 @@
 package ui;
 
 import model.Album;
+import model.AlbumCategory;
 import model.Song;
 
 public class Main {
     public static void main(String[] args) {
 
-        Album testAlbum = new Album("Speak Now", "Taylor Swift", "Pop Rock", 9.1, "");
-        Song testSong = new Song("Mine", "Taylor Swift", 3, 51, 9, "");
-        Song otherTestSong = new Song("Sparks Fly", "Taylor Swift", 4, 21, 9.5, "");
-        Song oneMoreTestSong = new Song("Dear John", "Taylor Swift", 6, 45, 9, "");
+        AlbumCategory testAlbumCategory = new AlbumCategory("Pop Albums");
+        Album testAlbum = new Album("Melodrama", "Lorde", "Alt-Pop", 8.5, "");
+        Album testAlbum2 = new Album("Speak Now", "Taylor Swift", "Pop Rock", 9.1, "");
+        Album otherTestAlbum = new Album("After Laughter", "Paramore", "Pop Rock", 8.0, "");
+        Album lastTestAlbum = new Album("21", "Adele", "Pop Soul", 8.3, "");
 
-        testAlbum.addSong(testSong);
-        testAlbum.addSong(otherTestSong);
-        testAlbum.addSong(oneMoreTestSong);
+        testAlbumCategory.addAlbum(testAlbum);
+        testAlbumCategory.addAlbum(testAlbum2);
+        testAlbumCategory.addAlbum(otherTestAlbum);
+        testAlbumCategory.addAlbum(lastTestAlbum);
 
-        System.out.println(testAlbum.trackListToString());
+
+
+        System.out.println(testAlbumCategory.albumListToString());
 
         // new AlbumReviewApp();
     }
