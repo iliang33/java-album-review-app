@@ -94,8 +94,10 @@ public class AlbumReviewApp {
             sortAlbumsByAlphabeticalName();
         } else if (input.equalsIgnoreCase("sra")) {
             sortAlbumsByRating();
+        } else if (input.equalsIgnoreCase("uc")) {
+            updateCategoryName();
         } else {
-            System.out.println("Not a valid input");
+            System.out.println("\n\nNot a valid input");
         }
 
     }
@@ -122,6 +124,7 @@ public class AlbumReviewApp {
         System.out.println("\tType sna to sort all album reviews by name alphabetical");
         System.out.println("\tType sra to sort all album reviews by rating high to low\n");
 
+        System.out.println("\tType uc to update a category's name");
         System.out.println("\tType ua to update an album review");
 
     }
@@ -451,8 +454,27 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: updates the name of a category given by oldName to newName
-    public void updateCategoryName(String oldName, String newName) {
+    // EFFECTS: updates the name of a category given by oldName to newName if the category exists
+    public void updateCategoryName() {
+
+        System.out.println("Enter name of category to change");
+        String oldName = scan.nextLine();
+
+        System.out.println("Enter new name");
+        String newName = scan.nextLine();
+
+        if (getIndexOfWantedCategory(oldName) != -1) {
+            for (int i = 0; i < this.categories.size(); i++) {
+                AlbumCategory currentCategory = this.categories.get(i);
+                if (currentCategory.getName().equals(oldName)) {
+                    currentCategory.setName(newName);
+                    break;
+                }
+            }
+            System.out.println("\n\nCategory updated!");
+        } else {
+            System.out.println("\n\nCategory not found!");
+        }
 
     }
 
