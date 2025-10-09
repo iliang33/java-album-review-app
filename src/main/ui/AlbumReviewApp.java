@@ -25,13 +25,15 @@ public class AlbumReviewApp {
     private List<AlbumCategory> categories;
     private List<Album> albums;
     private Scanner scan;
+    private boolean validInput;
 
-    // EFFECTS: runs the application and initializes both the scanner and the lists
-    // used to track album categories and albums,
+    // EFFECTS: runs the application, and initializes valid input and both the
+    // scanner and the lists used to track album categories and albums,
     public AlbumReviewApp() {
         this.categories = new ArrayList<>();
         this.albums = new ArrayList<>();
         this.scan = new Scanner(System.in);
+        this.validInput = false;
 
         runApp();
     }
@@ -86,7 +88,12 @@ public class AlbumReviewApp {
         processAlbumCategoryRelatedCreationAndRemoval(input);
         processListing(input);
         processSorting(input);
-        processUpdatingAndInvalidInput(input);
+        processUpdating(input);
+
+        if (!this.validInput) {
+            System.out.println("\n\nNot a valid input");
+
+        }
 
     }
 
@@ -94,12 +101,16 @@ public class AlbumReviewApp {
     // EFFECTS: acts upon input involving album related creation and removal
     public void processAlbumRelatedCreationAndRemoval(String input) {
         if (input.equalsIgnoreCase("ca")) {
+            this.validInput = true;
             createAlbum();
         } else if (input.equalsIgnoreCase("atl")) {
+            this.validInput = true;
             addToTrackList();
         } else if (input.equalsIgnoreCase("rtl")) {
+            this.validInput = true;
             removeFromTrackList();
         } else if (input.equalsIgnoreCase("ra")) {
+            this.validInput = true;
             removeAlbum();
         }
 
@@ -110,12 +121,16 @@ public class AlbumReviewApp {
     // removal
     public void processAlbumCategoryRelatedCreationAndRemoval(String input) {
         if (input.equalsIgnoreCase("cc")) {
+            this.validInput = true;
             createCategory();
         } else if (input.equalsIgnoreCase("rc")) {
+            this.validInput = true;
             removeCategory();
         } else if (input.equalsIgnoreCase("aac")) {
+            this.validInput = true;
             addToCategory();
         } else if (input.equalsIgnoreCase("rac")) {
+            this.validInput = true;
             removeFromCategory();
         }
     }
@@ -124,8 +139,10 @@ public class AlbumReviewApp {
     // EFFECTS: acts upon input involving listing
     public void processListing(String input) {
         if (input.equalsIgnoreCase("l")) {
+            this.validInput = true;
             printAllReviews();
         } else if (input.equalsIgnoreCase("lc")) {
+            this.validInput = true;
             printAllCategories();
         }
 
@@ -135,23 +152,26 @@ public class AlbumReviewApp {
     // EFFECTS: acts upon input involving sorting
     public void processSorting(String input) {
         if (input.equalsIgnoreCase("saa")) {
+            this.validInput = true;
             sortAlbumsByAlphabeticalArtist();
         } else if (input.equalsIgnoreCase("sna")) {
+            this.validInput = true;
             sortAlbumsByAlphabeticalName();
         } else if (input.equalsIgnoreCase("sra")) {
+            this.validInput = true;
             sortAlbumsByRating();
         }
     }
 
     // MODIFIES: this
-    // EFFECTS: acts upon input involving updating and invalid input
-    public void processUpdatingAndInvalidInput(String input) {
+    // EFFECTS: acts upon input involving updatinginput
+    public void processUpdating(String input) {
         if (input.equalsIgnoreCase("uc")) {
+            this.validInput = true;
             updateCategoryName();
         } else if (input.equalsIgnoreCase("ua")) {
+            this.validInput = true;
             runUpdateSubMenu();
-        } else {
-            System.out.println("\n\nNot a valid input");
         }
     }
 
@@ -162,7 +182,7 @@ public class AlbumReviewApp {
                 || input.equalsIgnoreCase("r") || input.equalsIgnoreCase("re")) {
             updateAlbumField();
         } else {
-            System.out.println("Not a valid input");
+            System.out.println("\n\nNot a valid input");
         }
     }
 
@@ -251,8 +271,13 @@ public class AlbumReviewApp {
 
         if (indexOfAlbumToAddSongTo != -1) {
             while (addMoreSongs) {
-                if (!promptUserToAddSongs(indexOfAlbumToAddSongTo)) {
-                    addMoreSongs = false;
+                try {
+                    if (!promptUserToAddSongs(indexOfAlbumToAddSongTo)) {
+                        addMoreSongs = false;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("\n\nNot a valid number");
+
                 }
 
             }
@@ -274,7 +299,7 @@ public class AlbumReviewApp {
         System.out.println("Enter name of artist");
         String artistName = scan.nextLine();
 
-        System.out.println("Enter song rating");
+        System.out.println("Enter song rating (from 0 to 10)");
         double rating = Double.parseDouble(scan.nextLine());
 
         System.out.println("Enter review");
@@ -337,9 +362,9 @@ public class AlbumReviewApp {
 
         if (songNumber >= 1 && songNumber <= tracklistSize) {
             this.albums.get(indexOfAlbumToRemoveSongFrom).getTracklist().remove(songNumber - 1);
-            System.out.println("Song removed!");
+            System.out.println("\n\nSong removed!");
         } else {
-            System.out.println("Not a valid number");
+            System.out.println("\n\nNot a valid number");
         }
 
         System.out.println("\n\nkeep removing songs? (type n to stop, anything otherwise)");
@@ -366,10 +391,10 @@ public class AlbumReviewApp {
 
         if (indexOfAlbumToRemove != -1) {
             this.albums.remove(indexOfAlbumToRemove);
-            System.out.println("Album removed!");
+            System.out.println("\n\nAlbum removed!");
 
         } else {
-            System.out.println("Album not found");
+            System.out.println("\n\nAlbum not found");
         }
 
     }
@@ -401,10 +426,10 @@ public class AlbumReviewApp {
 
         if (indexOfCategoryToRemove != -1) {
             this.categories.remove(indexOfCategoryToRemove);
-            System.out.println("Category removed!");
+            System.out.println("\n\nCategory removed!");
 
         } else {
-            System.out.println("Category not found");
+            System.out.println("\n\nCategory not found");
         }
 
     }
@@ -435,10 +460,10 @@ public class AlbumReviewApp {
                 }
 
             } else {
-                System.out.println("Album not found. Is it created?");
+                System.out.println("\n\nAlbum not found. Is it created?");
             }
         } else {
-            System.out.println("Category not found. Is it created?");
+            System.out.println("\n\nCategory not found. Is it created?");
         }
 
     }
@@ -461,12 +486,12 @@ public class AlbumReviewApp {
         if (indexOfCategoryToRemoveFrom != -1) {
             if (indexOfAlbum != 1) {
                 this.categories.get(indexOfCategoryToRemoveFrom).removeAlbum(albumName, artistName);
-                System.out.println("Album removed from category!");
+                System.out.println("\n\nAlbum removed from category!");
             } else {
-                System.out.println("Album not found. Is it created?");
+                System.out.println("\n\nAlbum not found. Is it created?");
             }
         } else {
-            System.out.println("Category not found. Is it created?");
+            System.out.println("\n\nCategory not found. Is it created?");
         }
     }
 
@@ -483,7 +508,7 @@ public class AlbumReviewApp {
 
             }
         } else {
-            System.out.println("You have no reviews!");
+            System.out.println("\n\nYou have no reviews!");
         }
 
     }
@@ -506,7 +531,7 @@ public class AlbumReviewApp {
             }
 
         } else {
-            System.out.println("You have no categories!");
+            System.out.println("\n\nYou have no categories!");
         }
 
     }
