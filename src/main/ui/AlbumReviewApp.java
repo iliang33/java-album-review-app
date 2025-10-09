@@ -94,6 +94,8 @@ public class AlbumReviewApp {
             createAlbum();
         } else if (input.equalsIgnoreCase("atl")) {
             addToTrackList();
+        } else if (input.equalsIgnoreCase("rtl")) {
+            removeFromTrackList();
         } else if (input.equalsIgnoreCase("ra")) {
             removeAlbum();
         } else if (input.equalsIgnoreCase("cc")) {
@@ -143,6 +145,7 @@ public class AlbumReviewApp {
 
         System.out.println("\tType ca to create an album review");
         System.out.println("\tType atl to add songs to the tracklist of an existing album review");
+        System.out.println("\tType rtl to remove songs from the tracklist of an existing album review");
         System.out.println("\tType ra to remove an album review\n");
 
         System.out.println("\tType cc to create a category");
@@ -255,7 +258,62 @@ public class AlbumReviewApp {
         } else {
             System.out.println("\n\nSong already in tracklist");
         }
-        System.out.println("\n\nadd more songs? (type n to stop, anything otherwise)");
+        System.out.println("\n\nstop adding songs? (type n to stop, anything otherwise)");
+        String response = scan.nextLine();
+
+        if (response.equalsIgnoreCase("n")) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
+    // EFFECTS: takes user input to remove songs to the tracklist of an album
+    public void removeFromTrackList() {
+        System.out.println("Enter name of album to remove songs from its tracklist");
+        String name = scan.nextLine();
+
+        System.out.println("Enter name of artist");
+        String artist = scan.nextLine();
+
+        int indexOfAlbum = getIndexOfWantedAlbum(name, artist);
+        boolean removeMoreSongs = true;
+
+        if (indexOfAlbum != -1) {
+            while (removeMoreSongs) {
+                try {
+                    if (!promptUserToRemoveSongs(indexOfAlbum, this.albums.get(indexOfAlbum).getTracklist().size())) {
+                        removeMoreSongs = false;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("\n\nNot a valid number");
+
+                }
+
+            }
+        } else {
+            System.out.println("\n\nAlbum not found");
+        }
+
+    }
+
+    // EFFECTS: asks users for information to remove songs from a tracklist and
+    // returns true if user wants to add more songs, false otherwise
+
+    // this is a helper function for addToTrackList()
+    public boolean promptUserToRemoveSongs(int indexOfAlbumToRemoveSongFrom, int tracklistSize) {
+        System.out.println("Enter number of song in tracklist");
+        Integer songNumber = Integer.parseInt(scan.nextLine());
+
+        if (songNumber >= 1 && songNumber <= tracklistSize) {
+            this.albums.get(indexOfAlbumToRemoveSongFrom).getTracklist().remove(songNumber - 1);
+            System.out.println("Song removed!");
+        } else {
+            System.out.println("Not a valid number");
+        }
+
+        System.out.println("\n\nStop removing? (type n to stop, anything otherwise)");
         String response = scan.nextLine();
 
         if (response.equalsIgnoreCase("n")) {
@@ -547,6 +605,7 @@ public class AlbumReviewApp {
 
         } else if (field.equalsIgnoreCase("review")) {
             updateReviewField(name, artist);
+        }
 
     }
 
@@ -723,7 +782,6 @@ public class AlbumReviewApp {
         }
 
     }
-
 
     // EFFECTS: return the index of the album in albums list specified by name and
     // artist
