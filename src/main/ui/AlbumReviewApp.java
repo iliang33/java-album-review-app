@@ -284,15 +284,15 @@ public class AlbumReviewApp {
                         addMoreSongs = false;
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("\nGiven rating was not a number");
+                    System.out.println("\nGiven rating was not a number\n");
                 } catch (NotInRatingRangeException e) {
-                    System.out.println("\nRating not in range of 0.0 to 10.0");
+                    System.out.println("\nRating not in range of 0.0 to 10.0\n");
 
                 }
 
             }
         } else {
-            System.out.println("Album not found");
+            System.out.println("\n\nAlbum not found");
         }
 
     }
@@ -379,10 +379,10 @@ public class AlbumReviewApp {
             this.albums.get(indexOfAlbumToRemoveSongFrom).getTracklist().remove(songNumber - 1);
             System.out.println("\n\nSong removed!");
         } else {
-            System.out.println("\n\nNot a valid number");
+            System.out.println("\nNot a valid number");
         }
 
-        System.out.println("\n\nkeep removing songs? (type n to stop, anything otherwise)");
+        System.out.println("\nkeep removing songs? (type n to stop, anything otherwise)");
         String response = scan.nextLine();
 
         if (response.equalsIgnoreCase("n")) {
@@ -423,7 +423,7 @@ public class AlbumReviewApp {
 
         if (getIndexOfWantedCategory(name) == -1) {
             this.categories.add(new AlbumCategory(name));
-            System.out.println("\n\nCategory created!");
+            System.out.println("\nCategory created!");
 
         } else {
             System.out.println("\n\nCategory already exists");
@@ -441,10 +441,10 @@ public class AlbumReviewApp {
 
         if (indexOfCategoryToRemove != -1) {
             this.categories.remove(indexOfCategoryToRemove);
-            System.out.println("\n\nCategory removed!");
+            System.out.println("\nCategory removed!");
 
         } else {
-            System.out.println("\n\nCategory not found");
+            System.out.println("\nCategory not found");
         }
 
     }
@@ -499,7 +499,7 @@ public class AlbumReviewApp {
         int indexOfAlbum = getIndexOfWantedAlbum(albumName, artistName);
 
         if (indexOfCategoryToRemoveFrom != -1) {
-            if (indexOfAlbum != 1) {
+            if (indexOfAlbum != -1) {
                 this.categories.get(indexOfCategoryToRemoveFrom).removeAlbum(albumName, artistName);
                 System.out.println("\n\nAlbum removed from category!");
             } else {
@@ -546,7 +546,7 @@ public class AlbumReviewApp {
             }
 
         } else {
-            System.out.println("\n\nYou have no categories!");
+            System.out.println("You have no categories!");
         }
 
     }
