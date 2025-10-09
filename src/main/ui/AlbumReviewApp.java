@@ -104,7 +104,16 @@ public class AlbumReviewApp {
     public void processAlbumRelatedCreationAndRemoval(String input) {
         if (input.equalsIgnoreCase("ca")) {
             this.validInput = true;
-            createAlbum();
+            try {
+                createAlbum();
+            } catch (NumberFormatException e) {
+                System.out.println("\nGiven rating was not a number");
+
+            } catch (NotInRatingRangeException e) {
+                System.out.println("\nRating not in range of 0.0 to 10.0");
+
+            }
+
         } else if (input.equalsIgnoreCase("atl")) {
             this.validInput = true;
             addToTrackList();
@@ -234,7 +243,7 @@ public class AlbumReviewApp {
     // MODIFIES: this
     // EFFECTS: creates a new album with the given information and adds it to the
     // album list if there isn't already an album with the same name and artist
-    public void createAlbum() {
+    public void createAlbum() throws NotInRatingRangeException {
         System.out.println("Enter name of album");
         String name = scan.nextLine();
 
@@ -246,6 +255,11 @@ public class AlbumReviewApp {
 
         System.out.println("Enter album rating");
         double rating = Double.parseDouble(scan.nextLine());
+
+        if (!(rating >= 0.0 && rating <= 10.0)) {
+            throw new NotInRatingRangeException();
+
+        }
 
         System.out.println("Enter review");
         String review = scan.nextLine();
@@ -278,9 +292,9 @@ public class AlbumReviewApp {
                         addMoreSongs = false;
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("\nNot a number");
+                    System.out.println("\nGiven rating was not a number");
                 } catch (NotInRatingRangeException e) {
-                    System.out.println("\nNot in range of 0.0 to 10.0");
+                    System.out.println("\nRating not in range of 0.0 to 10.0");
 
                 }
 
@@ -667,7 +681,16 @@ public class AlbumReviewApp {
             updateGenreField(name, artist);
 
         } else if (field.equalsIgnoreCase("rating")) {
-            updateRatingField(name, artist);
+            try {
+                updateRatingField(name, artist);
+
+            } catch (NumberFormatException e) {
+                System.out.println("\nGiven rating was not a number");
+
+            } catch (NotInRatingRangeException e) {
+                System.out.println("\nRating was not in range of 0.0 to 10.0");
+
+            }
 
         } else if (field.equalsIgnoreCase("review")) {
             updateReviewField(name, artist);
@@ -782,10 +805,14 @@ public class AlbumReviewApp {
     // EFFECTS: updates the rating field of a given album (referenced by name and
     // artist) with the given new value
 
-    public void updateRatingField(String albumName, String artist) {
+    public void updateRatingField(String albumName, String artist) throws NotInRatingRangeException {
 
         System.out.println("Enter new rating");
-        String newRating = scan.nextLine();
+        Double newRating = Double.parseDouble(scan.nextLine());
+
+        if (!(newRating >= 0.0 && newRating <= 10.0)) {
+            throw new NotInRatingRangeException();
+        }
 
         boolean foundAlbumInACategory = false;
 
@@ -793,7 +820,7 @@ public class AlbumReviewApp {
             for (int j = 0; i < this.categories.get(i).getAlbumList().size(); j++) {
                 Album currentAlbum = this.categories.get(i).getAlbumList().get(j);
                 if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
-                    currentAlbum.setRating(Double.parseDouble(newRating));
+                    currentAlbum.setRating(newRating);
                     foundAlbumInACategory = true;
                     System.out.println("\n\nAlbum updated!");
                     break;
@@ -804,7 +831,7 @@ public class AlbumReviewApp {
         // if it is in a category, it must be in the list of all albums
         if (!foundAlbumInACategory) {
             if (getIndexOfWantedAlbum(albumName, artist) != -1) {
-                this.albums.get(getIndexOfWantedAlbum(albumName, artist)).setRating(Double.parseDouble(newRating));
+                this.albums.get(getIndexOfWantedAlbum(albumName, artist)).setRating(newRating);
                 System.out.println("\n\nAlbum updated!");
             } else {
                 System.out.println("\n\nAlbum not found!");

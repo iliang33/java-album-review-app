@@ -14,7 +14,7 @@ public class Album {
     private String review;
 
     // REQUIRES: 0.0 <= rating <= 10.0
-    // EFFECTS: Creates an album with a name, artist, genre, an empty tracklist,
+    // EFFECTS: creates an album with a name, artist, genre, an empty tracklist,
     // rating, and review
     public Album(String name, String artist, String genre, double rating, String review) {
         this.name = name;
@@ -52,7 +52,6 @@ public class Album {
         }
 
     }
-
 
     public String getName() {
         return this.name;
