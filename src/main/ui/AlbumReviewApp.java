@@ -332,9 +332,8 @@ public class AlbumReviewApp {
             System.out.println("\nSong already in tracklist");
         }
         System.out.println("\nkeep adding songs? (type n to stop, anything otherwise)");
-        String response = scan.nextLine();
 
-        if (response.equalsIgnoreCase("n")) {
+        if (scan.nextLine().equalsIgnoreCase("n")) {
             return false;
         } else {
             return true;
@@ -815,7 +814,6 @@ public class AlbumReviewApp {
                 if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
                     currentAlbum.setRating(newRating);
                     foundAlbumInACategory = true;
-                    System.out.println("\n\nAlbum updated!");
                     break;
                 }
             }
@@ -825,7 +823,6 @@ public class AlbumReviewApp {
         if (!foundAlbumInACategory) {
             if (getIndexOfWantedAlbum(albumName, artist) != -1) {
                 this.albums.get(getIndexOfWantedAlbum(albumName, artist)).setRating(newRating);
-                System.out.println("\n\nAlbum updated!");
             } else {
                 System.out.println("\n\nAlbum not found!");
             }
