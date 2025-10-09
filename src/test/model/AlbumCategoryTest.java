@@ -129,26 +129,6 @@ public class AlbumCategoryTest {
 
     }
 
-    @Test
-    void testAlbumListToStringNoAlbums() {
-        assertEquals(testAlbumCategory.albumListToString(), "");
-    }
-
-    @Test
-    void testAlbumListToStringOneAlbum() {
-        testAlbumCategory.addAlbum(testAlbum);
-        assertEquals(testAlbumCategory.albumListToString(), "1. Melodrama by Lorde");
-    }
-
-    @Test
-    void testAlbumListToStringThreeAlbums() {
-        testAlbumCategory.addAlbum(testAlbum);
-        testAlbumCategory.addAlbum(otherTestAlbum);
-        testAlbumCategory.addAlbum(lastTestAlbum);
-
-        assertEquals(testAlbumCategory.albumListToString(),
-                "1. Melodrama by Lorde\n2. After Laughter by Paramore\n3. 21 by Adele");
-    }
 
     @Test
     void testSetName() {

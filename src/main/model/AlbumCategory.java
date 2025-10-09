@@ -28,6 +28,8 @@ public class AlbumCategory {
     // EFFECTS: remove album with given name and artist from album list, do nothing
     // if it's not there
     public void removeAlbum(String name, String artist) {
+
+        // -1 means the album was not found
         int indexOfAlbumToRemove = -1;
         for (int i = 0; i < this.albumList.size(); i++) {
             Album currentAlbum = this.albumList.get(i);
@@ -52,23 +54,5 @@ public class AlbumCategory {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    // EFFECTS: returns name and artist of each album in album list as a string
-    public String albumListToString() {
-        String stringAlbumlist = "";
-        for (int i = 0; i < this.albumList.size(); i++) {
-            Album currentAlbum = this.albumList.get(i);
-
-            stringAlbumlist += i + 1 + ". ";
-            stringAlbumlist += currentAlbum.getName();
-            stringAlbumlist += " by " + currentAlbum.getArtist();
-
-            if (i != this.albumList.size() - 1) {
-                stringAlbumlist += "\n";
-            }
-
-        }
-        return stringAlbumlist;
     }
 }

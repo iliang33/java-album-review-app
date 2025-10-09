@@ -38,6 +38,7 @@ public class Album {
     // EFFECTS: Remove song with given name and artist from tracklist, do nothing if
     // not there
     public void removeSong(String name, String artist) {
+        // value of -1 means the song was not found
         int indexOfSongToRemove = -1;
         for (int i = 0; i < this.tracklist.size(); i++) {
             Song currentSong = this.tracklist.get(i);
@@ -112,11 +113,12 @@ public class Album {
         for (int i = 0; i < this.tracklist.size(); i++) {
             Song currentSong = this.tracklist.get(i);
 
-            stringTracklist += "\t";
-            stringTracklist += i + 1 + ". ";
+            stringTracklist += "\t"; // indents each song
+            stringTracklist += i+1 + ". "; // numbers song in tracklist
             stringTracklist += currentSong.getName();
             stringTracklist += " by " + currentSong.getArtist();
 
+            // makes each song on a seperate line
             if (i != this.tracklist.size() - 1) {
                 stringTracklist += "\n";
             }
