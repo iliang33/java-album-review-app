@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
+// Set of tests for the AlbumCategory class
 public class AlbumCategoryTest {
     AlbumCategory testAlbumCategory;
     Album testAlbum;
