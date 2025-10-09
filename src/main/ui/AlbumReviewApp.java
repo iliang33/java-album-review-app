@@ -245,12 +245,20 @@ public class AlbumReviewApp {
 
     // MODIFIES: this
     // EFFECTS: creates a new category with the given name and adds it to the
-    // categories list
+    // categories list if it does not already exist
     public void createCategory() {
         System.out.println("Enter desired category name");
         String name = scan.nextLine();
 
-        this.categories.add(new AlbumCategory(name));
+        if (getIndexOfWantedCategory(name) == -1) {
+            this.categories.add(new AlbumCategory(name));
+            System.out.println("\n\nCategory created!");
+
+        } else {
+            System.out.println("\n\nCategory already exists");
+        }
+
+        
 
     }
 
@@ -469,7 +477,7 @@ public class AlbumReviewApp {
         int indexOfWantedCategory = -1;
         for (int i = 0; i < this.categories.size(); i++) {
             AlbumCategory currentCategory = this.categories.get(i);
-            if (currentCategory.getName().equalsIgnoreCase(name)) {
+            if (currentCategory.getName().equals(name)) {
                 indexOfWantedCategory = i;
             }
 
