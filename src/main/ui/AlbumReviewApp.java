@@ -86,6 +86,8 @@ public class AlbumReviewApp {
             printAllReviews();
         } else if (input.equalsIgnoreCase("lc")) {
             printAllCategories();
+        } else if (input.equalsIgnoreCase("saa")) {
+            sortAlbumsByAlphabeticalArtist();
         } else {
             System.out.println("Not a valid input");
         }
@@ -110,9 +112,9 @@ public class AlbumReviewApp {
         System.out.println("\tType l to list all reviews");
         System.out.println("\tType lc to list all categories\n");
 
-        System.out.println("\tType saaa to sort all album reviews by artist alphabetical");
-        System.out.println("\tType sana to sort all album reviews by name alphabetical");
-        System.out.println("\tType sara to sort all album reviews by rating high to low\n");
+        System.out.println("\tType saa to sort all album reviews by artist alphabetical");
+        System.out.println("\tType sna to sort all album reviews by name alphabetical");
+        System.out.println("\tType sra to sort all album reviews by rating high to low\n");
 
         System.out.println("\tType ua to update an album review");
 
@@ -132,7 +134,7 @@ public class AlbumReviewApp {
 
     // MODIFIES: this
     // EFFECTS: creates a new album with the given information and adds it to the
-    // album list
+    // album list if there isn't already and album with the same name and artist
     public void createAlbum() {
         System.out.println("Enter name of album");
         String name = scan.nextLine();
@@ -319,7 +321,6 @@ public class AlbumReviewApp {
             for (Album album : albums) {
                 System.out.println(album.toString());
                 System.out.println("Tracklist:\n" + album.trackListToString());
-                System.out.println("\n");
 
             }
         } else {
@@ -352,8 +353,27 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: sorts album list by artist alphabetically
+    // EFFECTS: sorts album list by artist alphabetically then prints out the sorted
+    // album list
     public void sortAlbumsByAlphabeticalArtist() {
+        for (int i = 0; i < this.albums.size(); i++) {
+            for (int j = 0; j < this.albums.size(); j++) {
+                // a negative result from compareTo means the string on the left should go
+                // before
+                // the string on the right
+                if (this.albums.get(i).getArtist().compareToIgnoreCase(this.albums.get(j).getArtist()) < 0) {
+                    // stores the album so it doesn't get lost during swapping
+                    Album currentAlbumComparingToOthers = this.albums.get(i);
+
+                    // swap positions
+                    this.albums.set(i, this.albums.get(j));
+                    this.albums.set(j, currentAlbumComparingToOthers);
+
+                }
+            }
+
+        }
+        printAllReviews();
 
     }
 
@@ -370,7 +390,7 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: updates a name of a category given by oldName to newName
+    // EFFECTS: updates the name of a category given by oldName to newName
     public void updateCategoryName(String oldName, String newName) {
 
     }
@@ -379,20 +399,22 @@ public class AlbumReviewApp {
     // EFFECTS: updates a given String album field (name, artist, genre, review) to
     // a new given value
     public void updateAlbumNotRatingField(String albumName, String fieldName, String newValue) {
+        // update the one in the all albums list and in the corresponding category if it
+        // is in one
 
     }
 
     // MODIFIES: this
     // EFFECTS: updates given album rating to the given rating
     public void updateAlbumRating(String albumName, double newRating) {
+        // update the one in the all albums list and in the corresponding category if it
+        // is in one
 
     }
-
 
     // EFFECTS: return the index of the album in albums list specified by name and
     // artist
     public int getIndexOfWantedAlbum(String name, String artist) {
-
         int indexOfWantedAlbum = -1;
         for (int i = 0; i < this.albums.size(); i++) {
             Album currentAlbum = this.albums.get(i);
