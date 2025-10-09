@@ -9,7 +9,7 @@ public class AlbumCategory {
     private String name;
     private List<Album> albumList;
 
-    // EFFECTS: creates an album category with the given name and creates an empty
+    // EFFECTS: creates an album category with the given name and with an empty
     // list of stored albums
     public AlbumCategory(String name) {
         this.name = name;
@@ -54,5 +54,23 @@ public class AlbumCategory {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    // EFFECTS: returns name and artist of each album in album list as a string
+    public String albumListToString() {
+        String stringAlbumlist = "";
+        for (int i = 0; i < this.albumList.size(); i++) {
+            Album currentAlbum = this.albumList.get(i);
+
+            stringAlbumlist += i + 1 + ". ";
+            stringAlbumlist += currentAlbum.getName();
+            stringAlbumlist += " by " + currentAlbum.getArtist();
+
+            if (i != this.albumList.size() - 1) {
+                stringAlbumlist += "\n";
+            }
+
+        }
+        return stringAlbumlist;
     }
 }

@@ -51,7 +51,7 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: takes update sub menu user input
+    // EFFECTS: takes update sub-menu user input
     public void runUpdateSubMenu() {
         boolean goBack = false;
         String input = null;
@@ -164,7 +164,7 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: acts upon input involving updatinginput
+    // EFFECTS: acts upon input involving updating
     public void processUpdating(String input) {
         if (input.equalsIgnoreCase("uc")) {
             this.validInput = true;
@@ -176,7 +176,7 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: acts upon process updates sub menu user input
+    // EFFECTS: acts upon update related user input in sub-menu
     public void processUpdateSubMenuInput(String input) {
         if (input.equalsIgnoreCase("n")) {
             updateAlbumField(input);
@@ -193,7 +193,7 @@ public class AlbumReviewApp {
         }
     }
 
-    // EFFECTS: prints out options
+    // EFFECTS: prints out main menu options
     public void showMainOptions() {
         System.out.println("\nOptions:");
 
@@ -221,7 +221,7 @@ public class AlbumReviewApp {
 
     }
 
-    // EFFECTS: prints out a sub menu of options for updating album reviews
+    // EFFECTS: prints out a sub-menu of options for updating album reviews
     public void showUpdatingReviewsOptions() {
 
         System.out.println("\nAlbum Review Updating Options:");
@@ -238,7 +238,9 @@ public class AlbumReviewApp {
 
     // MODIFIES: this
     // EFFECTS: creates a new album with the given information and adds it to the
-    // album list if there isn't already an album with the same name and artist
+    // album list if there isn't already an album with the same name and artist.
+    // throws an exception if given rating is not between 0.0 and 10.0 both
+    // inclusive
     public void createAlbum() throws NotInRatingRangeException {
         System.out.println("Enter name of album");
         String name = scan.nextLine();
@@ -269,8 +271,8 @@ public class AlbumReviewApp {
         }
     }
 
-    // EFFECTS: takes user input to add songs to the tracklist of an album if it's
-    // not already in there
+    // EFFECTS: takes user input to add songs to the tracklist of an album if the
+    // song is not already in there
     public void addToTrackList() {
         System.out.println("Enter name of album to add tracklist to");
         String name = scan.nextLine();
@@ -301,9 +303,10 @@ public class AlbumReviewApp {
 
     }
 
-    // EFFECTS: asks users for information to add songs to a tracklist if it's not
-    // already there and returns true if user wants to add more songs, false
-    // otherwise
+    // EFFECTS: asks users for information to add songs to a tracklist if the song
+    // is not already there. Returns true if user wants to add more songs, false
+    // otherwise. Throws an exception if given rating is not between 0.0 and 10.0
+    // both inclusive
 
     // this is a helper function for addToTrackList()
     public boolean promptUserToAddSongs(int indexOfAlbumToAddSongTo) throws NotInRatingRangeException {
@@ -487,7 +490,7 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: remove the given album from the category with the given name the
+    // EFFECTS: remove the given album from the category with the given name if
     // they both exist
     public void removeFromCategory() {
         System.out.println("Enter name of category to remove from");
@@ -515,7 +518,6 @@ public class AlbumReviewApp {
     }
 
     // EFFECTS: prints all reviews
-    // user is informed if there are no reviews
     public void printAllReviews() {
         System.out.println("\n");
 
@@ -542,6 +544,8 @@ public class AlbumReviewApp {
 
             for (AlbumCategory category : categories) {
                 System.out.println(category.getName() + ":\n");
+                System.out.println(category.albumListToString());
+                System.out.println("\n");
                 for (Album album : category.getAlbumList()) {
                     System.out.println(album.toString());
                     System.out.println("Tracklist:\n" + album.trackListToString());
@@ -658,9 +662,6 @@ public class AlbumReviewApp {
     // EFFECTS: updates a given album field (name, artist, genre, rating, review,
     // tracklist) to a new given value if it exists
     public void updateAlbumField(String field) {
-        // update the one in the all albums list and in the corresponding category if it
-        // is in one
-
         System.out.println("Enter name of album to update");
         String name = scan.nextLine();
 
@@ -695,7 +696,7 @@ public class AlbumReviewApp {
 
     // MODIFIES: this
     // EFFECTS: updates the name field of a given album (referenced by name and
-    // artist) with the given new value
+    // artist) with the given new value if given album exists
 
     public void updateNameField(String albumName, String artist) {
         System.out.println("Enter new name");
@@ -729,7 +730,7 @@ public class AlbumReviewApp {
 
     // MODIFIES: this
     // EFFECTS: updates the artist field of a given album (referenced by name and
-    // artist) with the given new value
+    // artist) with the given new value if given album exists
 
     public void updateArtistField(String albumName, String artist) {
         System.out.println("Enter new artist");
@@ -763,7 +764,7 @@ public class AlbumReviewApp {
 
     // MODIFIES: this
     // EFFECTS: updates the genre field of a given album (referenced by name and
-    // artist) with the given new value
+    // artist) with the given new value if given album exists
 
     public void updateGenreField(String albumName, String artist) {
         System.out.println("Enter new genre");
@@ -796,7 +797,7 @@ public class AlbumReviewApp {
     }
     // MODIFIES: this
     // EFFECTS: updates the rating field of a given album (referenced by name and
-    // artist) with the given new value
+    // artist) with the given new value if given album exists
 
     public void updateRatingField(String albumName, String artist) throws NotInRatingRangeException {
         System.out.println("Enter new rating (0.0 to 10.0)");
@@ -832,7 +833,7 @@ public class AlbumReviewApp {
 
     // MODIFIES: this
     // EFFECTS: updates the review field of a given album (referenced by name and
-    // artist) with the given new value
+    // artist) with the given new value if given album exists
 
     public void updateReviewField(String albumName, String artist) {
 
@@ -866,9 +867,9 @@ public class AlbumReviewApp {
     }
 
     // EFFECTS: return the index of the album in albums list specified by name and
-    // artist
+    // artist. returns -1 if not found
     public int getIndexOfWantedAlbum(String name, String artist) {
-        // -1 means album not found
+
         int indexOfWantedAlbum = -1;
         for (int i = 0; i < this.albums.size(); i++) {
             Album currentAlbum = this.albums.get(i);
@@ -882,9 +883,9 @@ public class AlbumReviewApp {
     }
 
     // EFFECTS: return the index of the album (referenced by name and artist) in the
-    // given category (referenced by name)
+    // given category (referenced by name). returns -1 if not found
     public int getIndexOfWantedAlbumInCategory(String name, String artist, int indexOfWantedCategory) {
-        // -1 means album not found
+
         int indexOfWantedAlbum = -1;
         for (int i = 0; i < this.categories.get(indexOfWantedCategory).getAlbumList().size(); i++) {
             Album currentAlbum = this.categories.get(indexOfWantedCategory).getAlbumList().get(i);
@@ -897,9 +898,9 @@ public class AlbumReviewApp {
 
     }
 
-    // EFFECTS: return the index of the category in albums list specified by name
+    // EFFECTS: return the index of the category in albums list specified by name.
+    // returns -1 if not found
     public int getIndexOfWantedCategory(String name) {
-        // -1 means category not found
 
         int indexOfWantedCategory = -1;
         for (int i = 0; i < this.categories.size(); i++) {
@@ -914,11 +915,9 @@ public class AlbumReviewApp {
     }
 
     // EFFECTS: return the index of the song (referenced by song name) in the given
-    // album's
-    // (referenced by album index) tracklist
+    // album's (referenced by album index) tracklist. returns -1 if not found
     public int getIndexOfWantedSongInAlbumTracklist(String name, int indexOfAlbum) {
 
-        // -1 means song not found
         int indexOfWantedSong = -1;
         for (int i = 0; i < this.albums.get(indexOfAlbum).getTracklist().size(); i++) {
             Song currentSong = this.albums.get(indexOfAlbum).getTracklist().get(i);

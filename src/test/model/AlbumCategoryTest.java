@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
 // Set of tests for the AlbumCategory class
 public class AlbumCategoryTest {
     AlbumCategory testAlbumCategory;
@@ -138,6 +137,27 @@ public class AlbumCategoryTest {
 
         testAlbumCategory.setName("Rap Albums");
         assertEquals(testAlbumCategory.getName(), "Rap Albums");
+    }
+
+    @Test
+    void testAlbumListToStringNoAlbums() {
+        assertEquals(testAlbumCategory.albumListToString(), "");
+    }
+
+    @Test
+    void testAlbumListToStringOneAlbum() {
+        testAlbumCategory.addAlbum(testAlbum);
+        assertEquals(testAlbumCategory.albumListToString(), "1. Melodrama by Lorde");
+    }
+
+    @Test
+    void testAlbumListToStringThreeAlbums() {
+        testAlbumCategory.addAlbum(testAlbum);
+        testAlbumCategory.addAlbum(otherTestAlbum);
+        testAlbumCategory.addAlbum(lastTestAlbum);
+
+        assertEquals(testAlbumCategory.albumListToString(),
+                "1. Melodrama by Lorde\n2. After Laughter by Paramore\n3. 21 by Adele");
     }
 
 }

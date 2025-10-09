@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-// Represents an album with a name, artist, genre, tracklist of songs rating, and review
+// Represents an album with a name, artist, genre, tracklist of songs, rating, and review
 public class Album {
     private String name;
     private String artist;
