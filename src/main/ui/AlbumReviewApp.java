@@ -180,9 +180,16 @@ public class AlbumReviewApp {
     // MODIFIES: this
     // EFFECTS: acts upon process updates sub menu user input
     public void processUpdateSubMenuInput(String input) {
-        if (input.equalsIgnoreCase("n") || input.equalsIgnoreCase("a") || input.equalsIgnoreCase("g")
-                || input.equalsIgnoreCase("r") || input.equalsIgnoreCase("re")) {
-            updateAlbumField();
+        if (input.equalsIgnoreCase("n")) {
+            updateAlbumField(input);
+        } else if (input.equalsIgnoreCase("a")) {
+            updateAlbumField(input);
+        } else if (input.equalsIgnoreCase("g")) {
+            updateAlbumField(input);
+        } else if (input.equalsIgnoreCase("r")) {
+            updateAlbumField(input);
+        } else if (input.equalsIgnoreCase("re")) {
+            updateAlbumField(input);
         } else {
             System.out.println("\n\nNot a valid input");
         }
@@ -652,7 +659,7 @@ public class AlbumReviewApp {
     // MODIFIES: this
     // EFFECTS: updates a given album field (name, artist, genre, rating, review,
     // tracklist) to a new given value if it exists
-    public void updateAlbumField() {
+    public void updateAlbumField(String field) {
         // update the one in the all albums list and in the corresponding category if it
         // is in one
 
@@ -662,19 +669,16 @@ public class AlbumReviewApp {
         System.out.println("Enter name of artist of album to update");
         String artist = scan.nextLine();
 
-        System.out.println("Enter album field to update (name, artist, genre, rating, review, tracklist)");
-        String field = scan.nextLine();
-
-        if (field.equalsIgnoreCase("name")) {
+        if (field.equalsIgnoreCase("n")) {
             updateNameField(name, artist);
 
-        } else if (field.equalsIgnoreCase("artist")) {
+        } else if (field.equalsIgnoreCase("a")) {
             updateArtistField(name, artist);
 
-        } else if (field.equalsIgnoreCase("genre")) {
+        } else if (field.equalsIgnoreCase("g")) {
             updateGenreField(name, artist);
 
-        } else if (field.equalsIgnoreCase("rating")) {
+        } else if (field.equalsIgnoreCase("r")) {
             try {
                 updateRatingField(name, artist);
 
@@ -686,7 +690,7 @@ public class AlbumReviewApp {
 
             }
 
-        } else if (field.equalsIgnoreCase("review")) {
+        } else if (field.equalsIgnoreCase("re")) {
             updateReviewField(name, artist);
         }
     }
