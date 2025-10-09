@@ -13,8 +13,6 @@ import exceptions.NotInRatingRangeException;
 // Album Review Application
 public class AlbumReviewApp {
 
-    // ADD COMMENTS TO DESCRIBE CONFUSING CODE
-
     private List<AlbumCategory> categories;
     private List<Album> albums;
     private Scanner scan;
@@ -490,7 +488,8 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: remove the given album from the category with the given name
+    // EFFECTS: remove the given album from the category with the given name the
+    // they both exist
     public void removeFromCategory() {
         System.out.println("Enter name of category to remove from");
         String name = scan.nextLine();
@@ -700,7 +699,6 @@ public class AlbumReviewApp {
     // artist) with the given new value
 
     public void updateNameField(String albumName, String artist) {
-
         System.out.println("Enter new name");
         String newName = scan.nextLine();
 
@@ -735,7 +733,6 @@ public class AlbumReviewApp {
     // artist) with the given new value
 
     public void updateArtistField(String albumName, String artist) {
-
         System.out.println("Enter new artist");
         String newArtist = scan.nextLine();
 
@@ -803,7 +800,6 @@ public class AlbumReviewApp {
     // artist) with the given new value
 
     public void updateRatingField(String albumName, String artist) throws NotInRatingRangeException {
-
         System.out.println("Enter new rating (0.0 to 10.0)");
         Double newRating = Double.parseDouble(scan.nextLine());
 
@@ -875,6 +871,7 @@ public class AlbumReviewApp {
     // EFFECTS: return the index of the album in albums list specified by name and
     // artist
     public int getIndexOfWantedAlbum(String name, String artist) {
+        // -1 means album not found
         int indexOfWantedAlbum = -1;
         for (int i = 0; i < this.albums.size(); i++) {
             Album currentAlbum = this.albums.get(i);
@@ -888,9 +885,9 @@ public class AlbumReviewApp {
     }
 
     // EFFECTS: return the index of the album (referenced by name and artist) in the
-    // given category
-    // (referenced by name)
+    // given category (referenced by name)
     public int getIndexOfWantedAlbumInCategory(String name, String artist, int indexOfWantedCategory) {
+        // -1 means album not found
         int indexOfWantedAlbum = -1;
         for (int i = 0; i < this.categories.get(indexOfWantedCategory).getAlbumList().size(); i++) {
             Album currentAlbum = this.categories.get(indexOfWantedCategory).getAlbumList().get(i);
@@ -905,6 +902,7 @@ public class AlbumReviewApp {
 
     // EFFECTS: return the index of the category in albums list specified by name
     public int getIndexOfWantedCategory(String name) {
+        // -1 means category not found
 
         int indexOfWantedCategory = -1;
         for (int i = 0; i < this.categories.size(); i++) {
@@ -923,6 +921,7 @@ public class AlbumReviewApp {
     // (referenced by album index) tracklist
     public int getIndexOfWantedSongInAlbumTracklist(String name, int indexOfAlbum) {
 
+        // -1 means song not found
         int indexOfWantedSong = -1;
         for (int i = 0; i < this.albums.get(indexOfAlbum).getTracklist().size(); i++) {
             Song currentSong = this.albums.get(indexOfAlbum).getTracklist().get(i);
