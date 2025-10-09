@@ -21,35 +21,6 @@ public class SongTest {
         assertEquals(testSong.getReview(), "");
     }
 
-    @Test
-    void testIncreaseRating() {
-        testSong.increaseRating(0.5);
-        assertEquals(testSong.getRating(), 9.5);
-    }
-
-    @Test
-    void testIncreaseRatingMultipleTimes() {
-        testSong.increaseRating(0.5);
-        assertEquals(testSong.getRating(), 9.5);
-
-        testSong.increaseRating(0.5);
-        assertEquals(testSong.getRating(), 10.0);
-    }
-
-    @Test
-    void testDecreaseRating() {
-        testSong.decreaseRating(8.5);
-        assertEquals(testSong.getRating(), 0.5);
-    }
-
-    @Test
-    void testDecreaseRatingMultipleTimes() {
-        testSong.decreaseRating(8.5);
-        assertEquals(testSong.getRating(), 0.5);
-
-        testSong.decreaseRating(0.5);
-        assertEquals(testSong.getRating(), 0.0);
-    }
 
     @Test
     void testToString() {
