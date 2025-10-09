@@ -90,6 +90,8 @@ public class AlbumReviewApp {
             printAllCategories();
         } else if (input.equalsIgnoreCase("saa")) {
             sortAlbumsByAlphabeticalArtist();
+        } else if (input.equalsIgnoreCase("sna")) {
+            sortAlbumsByAlphabeticalName();
         } else {
             System.out.println("Not a valid input");
         }
@@ -119,8 +121,6 @@ public class AlbumReviewApp {
         System.out.println("\tType sra to sort all album reviews by rating high to low\n");
 
         System.out.println("\tType ua to update an album review");
-
-        System.out.println("\tType at to add songs to an album tracklist");
 
     }
 
@@ -258,8 +258,6 @@ public class AlbumReviewApp {
             System.out.println("\n\nCategory already exists");
         }
 
-        
-
     }
 
     // MODIFIES: this
@@ -387,8 +385,7 @@ public class AlbumReviewApp {
         for (int i = 0; i < this.albums.size(); i++) {
             for (int j = 0; j < this.albums.size(); j++) {
                 // a negative result from compareTo means the string on the left should go
-                // before
-                // the string on the right
+                // before the string on the right
                 if (this.albums.get(i).getArtist().compareToIgnoreCase(this.albums.get(j).getArtist()) < 0) {
                     // stores the album so it doesn't get lost during swapping
                     Album currentAlbumComparingToOthers = this.albums.get(i);
@@ -406,8 +403,26 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: sorts album list by name alphabetically
+    // EFFECTS: sorts album list by name alphabetically then prints out the sorted
+    // album list
     public void sortAlbumsByAlphabeticalName() {
+        for (int i = 0; i < this.albums.size(); i++) {
+            for (int j = 0; j < this.albums.size(); j++) {
+                // a negative result from compareTo means the string on the left should go
+                // before the string on the right
+                if (this.albums.get(i).getName().compareToIgnoreCase(this.albums.get(j).getName()) < 0) {
+                    // stores the album so it doesn't get lost during swapping
+                    Album currentAlbumComparingToOthers = this.albums.get(i);
+
+                    // swap positions
+                    this.albums.set(i, this.albums.get(j));
+                    this.albums.set(j, currentAlbumComparingToOthers);
+
+                }
+            }
+
+        }
+        printAllReviews();
 
     }
 
