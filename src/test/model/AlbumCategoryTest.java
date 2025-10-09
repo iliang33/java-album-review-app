@@ -100,9 +100,39 @@ public class AlbumCategoryTest {
     }
 
     @Test
+    void testRemoveAlbumNotInCategory() {
+        testAlbumCategory.addAlbum(testAlbum);
+        testAlbumCategory.addAlbum(otherTestAlbum);
+        testAlbumCategory.addAlbum(lastTestAlbum);
+
+        testAlbumCategory.removeAlbum("Folklore", "Taylor Swift");
+
+        assertTrue(testAlbumCategory.getAlbumList().contains(otherTestAlbum));
+        assertTrue(testAlbumCategory.getAlbumList().contains(testAlbum));
+        assertTrue(testAlbumCategory.getAlbumList().contains(lastTestAlbum));
+        assertEquals(testAlbumCategory.getAlbumList().size(), 3);
+
+    }
+
+    @Test
+    void testRemoveAlbumWhereOneOfGivenNameAndArtistIsInTheCategory(){
+        testAlbumCategory.addAlbum(testAlbum);
+        testAlbumCategory.addAlbum(otherTestAlbum);
+        testAlbumCategory.addAlbum(lastTestAlbum);
+
+        testAlbumCategory.removeAlbum("Melodrama", "Taylor Swift");
+
+        assertTrue(testAlbumCategory.getAlbumList().contains(otherTestAlbum));
+        assertTrue(testAlbumCategory.getAlbumList().contains(testAlbum));
+        assertTrue(testAlbumCategory.getAlbumList().contains(lastTestAlbum));
+        assertEquals(testAlbumCategory.getAlbumList().size(), 3);
+
+    }
+
+    @Test
     void testCreateAlbum() {
-        Album newAlbum = new Album("Dangerous Woman", "Ariana Grande", "Dance-Pop", 7.9, "");
-        Album anotherAlbum = new Album("The Secret of Us", "Gracie Abrams", "Pop", 8.1, "");
+        Album newAlbum = testAlbumCategory.createAlbum("Dangerous Woman", "Ariana Grande", "Dance-Pop", 7.9, "");
+        Album anotherAlbum = testAlbumCategory.createAlbum("The Secret of Us", "Gracie Abrams", "Pop", 8.1, "");
 
         assertEquals(newAlbum.getName(), "Dangerous Woman");
         assertEquals(newAlbum.getArtist(), "Ariana Grande");
@@ -139,6 +169,15 @@ public class AlbumCategoryTest {
 
         assertEquals(testAlbumCategory.albumListToString(),
                 "1. Melodrama by Lorde\n2. After Laughter by Paramore\n3. 21 by Adele");
+    }
+
+    @Test
+    void testSetName() {
+        testAlbumCategory.setName("Pop Albums");
+        assertEquals(testAlbumCategory.getName(), "Pop Albums");
+
+        testAlbumCategory.setName("Rap Albums");
+        assertEquals(testAlbumCategory.getName(), "Rap Albums");
     }
 
 }

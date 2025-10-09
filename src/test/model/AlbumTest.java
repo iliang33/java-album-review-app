@@ -113,7 +113,21 @@ public class AlbumTest {
         testAlbum.addSong(otherTestSong);
         testAlbum.addSong(oneMoreTestSong);
 
-        testAlbum.removeSong("Mine", "Taylor Swift");
+        testAlbum.removeSong("A Matter of Time", "Laufey");
+
+        assertTrue(testAlbum.getTracklist().contains(otherTestSong));
+        assertTrue(testAlbum.getTracklist().contains(oneMoreTestSong));
+
+        assertEquals(testAlbum.getTracklist().size(), 2);
+
+    }
+
+    @Test
+    void testRemoveSongWhereOneOfGivenNameAndArtistIsInTheTracklist() {
+        testAlbum.addSong(otherTestSong);
+        testAlbum.addSong(oneMoreTestSong);
+
+        testAlbum.removeSong("Sparks Fly", "Lorde");
 
         assertTrue(testAlbum.getTracklist().contains(otherTestSong));
         assertTrue(testAlbum.getTracklist().contains(oneMoreTestSong));
@@ -137,7 +151,6 @@ public class AlbumTest {
         assertEquals(anotherSong.getRating(), 9);
         assertEquals(anotherSong.getReview(), "");
     }
-
 
     @Test
     void testToString() {
@@ -168,4 +181,52 @@ public class AlbumTest {
                 "1. Mine by Taylor Swift\n2. Sparks Fly by Taylor Swift\n3. Dear John by Taylor Swift");
     }
 
+
+    @Test
+    void testSetArtist() {
+        testAlbum.setArtist("Daya");
+        assertEquals(testAlbum.getArtist(), "Daya");
+
+        testAlbum.setArtist("Sza");
+        assertEquals(testAlbum.getArtist(), "Sza");
+    }
+
+    @Test
+    void testSetName() {
+        testAlbum.setName("Red");
+        assertEquals(testAlbum.getName(), "Red");
+
+        testAlbum.setName("Fearless");
+        assertEquals(testAlbum.getName(), "Fearless");
+    }
+
+    @Test
+    void testSetGenre() {
+        testAlbum.setGenre("Soul");
+        assertEquals(testAlbum.getGenre(), "Soul");
+
+        testAlbum.setGenre("Folk");
+        assertEquals(testAlbum.getGenre(), "Folk");
+    }
+
+    @Test
+    void testSetRating() {
+        testAlbum.setRating(0.0);
+        assertEquals(testAlbum.getRating(), 0.0);
+
+        testAlbum.setRating(5.0);
+        assertEquals(testAlbum.getRating(), 5.0);
+
+        testAlbum.setRating(10.0);
+        assertEquals(testAlbum.getRating(), 10.0);
+    }
+
+    @Test
+    void testSetReview() {
+        testAlbum.setReview("Good lyrics");
+        assertEquals(testAlbum.getReview(), "Good lyrics");
+
+        testAlbum.setReview("Great vocals");
+        assertEquals(testAlbum.getReview(), "Great vocals");
+    }
 }
