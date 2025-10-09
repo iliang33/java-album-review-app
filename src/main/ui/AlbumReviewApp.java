@@ -20,10 +20,6 @@ public class AlbumReviewApp {
     // loop with scanner
     // consider helper methods for this
 
-    // ensure there are messages tha are printed to let the user know if an action
-    // is
-    // performed succesfully or not
-
     // ADD COMMENTS TO DESCRIBE CONFUSING CODE
 
     private List<AlbumCategory> categories;
@@ -85,7 +81,6 @@ public class AlbumReviewApp {
 
     // MODIFIES: this
     // EFFECTS: acts upon main menu user input
-
     public void processMainInput(String input) {
         processAlbumRelatedCreationAndRemoval(input);
         processAlbumCategoryRelatedCreationAndRemoval(input);
@@ -292,7 +287,7 @@ public class AlbumReviewApp {
         } else {
             System.out.println("\n\nSong already in tracklist");
         }
-        System.out.println("\n\nstop adding songs? (type n to stop, anything otherwise)");
+        System.out.println("\n\nkeep adding songs? (type n to stop, anything otherwise)");
         String response = scan.nextLine();
 
         if (response.equalsIgnoreCase("n")) {
@@ -347,7 +342,7 @@ public class AlbumReviewApp {
             System.out.println("Not a valid number");
         }
 
-        System.out.println("\n\nStop removing? (type n to stop, anything otherwise)");
+        System.out.println("\n\nkeep removing songs? (type n to stop, anything otherwise)");
         String response = scan.nextLine();
 
         if (response.equalsIgnoreCase("n")) {
@@ -371,6 +366,7 @@ public class AlbumReviewApp {
 
         if (indexOfAlbumToRemove != -1) {
             this.albums.remove(indexOfAlbumToRemove);
+            System.out.println("Album removed!");
 
         } else {
             System.out.println("Album not found");
@@ -405,6 +401,7 @@ public class AlbumReviewApp {
 
         if (indexOfCategoryToRemove != -1) {
             this.categories.remove(indexOfCategoryToRemove);
+            System.out.println("Category removed!");
 
         } else {
             System.out.println("Category not found");
@@ -464,6 +461,7 @@ public class AlbumReviewApp {
         if (indexOfCategoryToRemoveFrom != -1) {
             if (indexOfAlbum != 1) {
                 this.categories.get(indexOfCategoryToRemoveFrom).removeAlbum(albumName, artistName);
+                System.out.println("Album removed from category!");
             } else {
                 System.out.println("Album not found. Is it created?");
             }
@@ -718,7 +716,6 @@ public class AlbumReviewApp {
     // artist) with the given new value
 
     public void updateGenreField(String albumName, String artist) {
-
         System.out.println("Enter new genre");
         String newGenre = scan.nextLine();
 
@@ -874,7 +871,6 @@ public class AlbumReviewApp {
             if (currentSong.getName().equalsIgnoreCase(name)) {
                 indexOfWantedSong = i;
             }
-
         }
         return indexOfWantedSong;
 

@@ -81,23 +81,7 @@ public class Album {
         return this.rating;
     }
 
-    // EFFECTS: Gets the average rating for all songs in the album rounded to 1
-    // decimal place
-    public double getAverageRating() {
-        double total = 0.0;
-
-        for (Song song : tracklist) {
-            total += song.getRating();
-        }
-
-        // returns the average rounded to one decimal place
-        // total / this.tracklist.size() is the average
-        // multiplying it by 10.0 shifts the decimal one place and Math.round
-        // rounds to the nearest integer. Finally, dividing by 10.0, moves the
-        // decimal back one place
-        return Math.round((total / this.tracklist.size()) * 10.0) / 10.0;
-    }
-
+    
     public String getReview() {
         return this.review;
     }
@@ -112,11 +96,6 @@ public class Album {
 
     public void setGenre(String genre) {
         this.genre = genre;
-    }
-
-
-    public void setTracklist(List<Song> tracklist) {
-        this.tracklist = tracklist;
     }
 
     public void setRating(double rating) {
@@ -151,7 +130,6 @@ public class Album {
 
         }
         return stringTracklist;
-
     }
 
 }

@@ -34,18 +34,6 @@ public class Song {
 
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setArtist(String artist) {
-        this.artist = artist;
-    }
-
-    public void setReview(String review) {
-        this.review = review;
-    }
-
     public String getName() {
         return this.name;
     }

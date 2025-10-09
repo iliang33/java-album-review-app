@@ -138,36 +138,13 @@ public class AlbumTest {
         assertEquals(anotherSong.getReview(), "");
     }
 
-    @Test
-    void testGetAverageRatingNoSongs() {
-        assertEquals(testAlbum.getAverageRating(), 0);
-
-    }
-
-    @Test
-    void testGetAverageRatingOneSong() {
-        testAlbum.addSong(testSong);
-
-        assertEquals(testAlbum.getAverageRating(), 9.0);
-
-    }
-
-    @Test
-    void testGetAverageRatingThreeSongs() {
-        testAlbum.addSong(testSong);
-        testAlbum.addSong(otherTestSong);
-        testAlbum.addSong(oneMoreTestSong);
-
-        assertEquals(testAlbum.getAverageRating(), 9.2);
-
-    }
 
     @Test
     void testToString() {
         assertTrue(testAlbum.toString()
                 .contains(
                         "Name: Speak Now\nArtist: Taylor Swift\nGenre: Pop Rock"
-                                + "\nNumber of songs: 0\nRating: 9.1\nReview: "));
+                                + "\nRating: 9.1\nReview: "));
     }
 
     @Test
