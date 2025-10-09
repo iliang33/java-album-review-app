@@ -86,10 +86,18 @@ public class AlbumReviewApp {
     // MODIFIES: this
     // EFFECTS: acts upon main menu user input
 
-    // WHEN REACH 25 LINE LIMIT, MAKE HELPER FUNCTIONS TO SPLIT IT,
-    // LIKE processCreationInput, processListingInput, processSortingInput etc....
-
     public void processMainInput(String input) {
+        processAlbumRelatedCreationAndRemoval(input);
+        processAlbumCategoryRelatedCreationAndRemoval(input);
+        processListing(input);
+        processSorting(input);
+        processUpdatingAndInvalidInput(input);
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: acts upon input involving album related creation and removal
+    public void processAlbumRelatedCreationAndRemoval(String input) {
         if (input.equalsIgnoreCase("ca")) {
             createAlbum();
         } else if (input.equalsIgnoreCase("atl")) {
@@ -98,7 +106,15 @@ public class AlbumReviewApp {
             removeFromTrackList();
         } else if (input.equalsIgnoreCase("ra")) {
             removeAlbum();
-        } else if (input.equalsIgnoreCase("cc")) {
+        }
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: acts upon input involving album category related creation and
+    // removal
+    public void processAlbumCategoryRelatedCreationAndRemoval(String input) {
+        if (input.equalsIgnoreCase("cc")) {
             createCategory();
         } else if (input.equalsIgnoreCase("rc")) {
             removeCategory();
@@ -106,24 +122,42 @@ public class AlbumReviewApp {
             addToCategory();
         } else if (input.equalsIgnoreCase("rac")) {
             removeFromCategory();
-        } else if (input.equalsIgnoreCase("l")) {
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: acts upon input involving listing
+    public void processListing(String input) {
+        if (input.equalsIgnoreCase("l")) {
             printAllReviews();
         } else if (input.equalsIgnoreCase("lc")) {
             printAllCategories();
-        } else if (input.equalsIgnoreCase("saa")) {
+        }
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: acts upon input involving sorting
+    public void processSorting(String input) {
+        if (input.equalsIgnoreCase("saa")) {
             sortAlbumsByAlphabeticalArtist();
         } else if (input.equalsIgnoreCase("sna")) {
             sortAlbumsByAlphabeticalName();
         } else if (input.equalsIgnoreCase("sra")) {
             sortAlbumsByRating();
-        } else if (input.equalsIgnoreCase("uc")) {
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: acts upon input involving updating and invalid input
+    public void processUpdatingAndInvalidInput(String input) {
+        if (input.equalsIgnoreCase("uc")) {
             updateCategoryName();
         } else if (input.equalsIgnoreCase("ua")) {
             runUpdateSubMenu();
         } else {
             System.out.println("\n\nNot a valid input");
         }
-
     }
 
     // MODIFIES: this
