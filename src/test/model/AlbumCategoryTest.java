@@ -108,7 +108,6 @@ public class AlbumCategoryTest {
         assertEquals(newAlbum.getArtist(), "Ariana Grande");
         assertEquals(newAlbum.getGenre(), "Dance-Pop");
         assertTrue(newAlbum.getTracklist().isEmpty());
-        assertEquals(newAlbum.getNumberOfSongs(), 0);
         assertEquals(newAlbum.getRating(), 7.9);
         assertEquals(newAlbum.getReview(), "");
 
@@ -116,7 +115,6 @@ public class AlbumCategoryTest {
         assertEquals(anotherAlbum.getArtist(), "Gracie Abrams");
         assertEquals(anotherAlbum.getGenre(), "Pop");
         assertTrue(anotherAlbum.getTracklist().isEmpty());
-        assertEquals(anotherAlbum.getNumberOfSongs(), 0);
         assertEquals(anotherAlbum.getRating(), 8.1);
         assertEquals(anotherAlbum.getReview(), "");
 

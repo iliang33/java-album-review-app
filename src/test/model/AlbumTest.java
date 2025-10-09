@@ -24,7 +24,6 @@ public class AlbumTest {
         assertEquals(testAlbum.getArtist(), "Taylor Swift");
         assertEquals(testAlbum.getGenre(), "Pop Rock");
         assertTrue(testAlbum.getTracklist().isEmpty());
-        assertEquals(testAlbum.getNumberOfSongs(), 0);
         assertEquals(testAlbum.getRating(), 9.1);
         assertEquals(testAlbum.getReview(), "");
 

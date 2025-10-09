@@ -3,27 +3,24 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-// Represents an album with a name, artist, genre, number of songs, tracklist of songs
+// Represents an album with a name, artist, genre, tracklist of songs
 //  overall rating, and review
 public class Album {
     private String name;
     private String artist;
     private String genre;
     private List<Song> tracklist;
-    private int numberOfSongs;
     private double rating;
     private String review;
 
     // REQUIRES: 0.0 <= rating <= 10.0
-    // EFFECTS: Creates an album with a name, artist, genre, an empty tracklist
-    // (meaning number of songs is also zero),
+    // EFFECTS: Creates an album with a name, artist, genre, an empty tracklist,
     // rating, and review
     public Album(String name, String artist, String genre, double rating, String review) {
         this.name = name;
         this.artist = artist;
         this.genre = genre;
         this.tracklist = new ArrayList<>();
-        this.numberOfSongs = 0;
         this.rating = rating;
         this.review = review;
 
@@ -76,10 +73,6 @@ public class Album {
         return this.genre;
     }
 
-    public int getNumberOfSongs() {
-        return this.numberOfSongs;
-    }
-
     public List<Song> getTracklist() {
         return this.tracklist;
     }
@@ -121,9 +114,6 @@ public class Album {
         this.genre = genre;
     }
 
-    public void setNumberOfSongs(int num) {
-        this.numberOfSongs = num;
-    }
 
     public void setTracklist(List<Song> tracklist) {
         this.tracklist = tracklist;
@@ -141,8 +131,7 @@ public class Album {
     // tracklist
     @Override
     public String toString() {
-        return "Name: " + this.name + "\nArtist: " + this.artist + "\nGenre: " + this.genre + "\nNumber of songs: "
-                + this.getNumberOfSongs() + "\nRating: "
+        return "Name: " + this.name + "\nArtist: " + this.artist + "\nGenre: " + this.genre  + "\nRating: "
                 + this.rating + "\nReview: " + this.review;
     }
 
