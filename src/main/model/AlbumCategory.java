@@ -9,7 +9,7 @@ public class AlbumCategory {
     private String name;
     private List<Album> albumList;
 
-    // EFFECTS: Creates an album category with the given name and creates an empty
+    // EFFECTS: creates an album category with the given name and creates an empty
     // list of stored albums
     public AlbumCategory(String name) {
         this.name = name;
@@ -25,7 +25,7 @@ public class AlbumCategory {
     }
 
     // MODIFIES: this
-    // EFFECTS: Remove album with given name and artist from album list, do nothing
+    // EFFECTS: remove album with given name and artist from album list, do nothing
     // if it's not there
     public void removeAlbum(String name, String artist) {
         int indexOfAlbumToRemove = -1;
@@ -34,20 +34,12 @@ public class AlbumCategory {
             if (currentAlbum.getName().equalsIgnoreCase(name) && currentAlbum.getArtist().equalsIgnoreCase(artist)) {
                 indexOfAlbumToRemove = i;
             }
-
         }
         if (indexOfAlbumToRemove != -1) {
             this.albumList.remove(indexOfAlbumToRemove);
 
         }
 
-    }
-
-    // REQUIRES: 0.0 <= rating <= 10.0
-    // EFFECTS: Create an album with the given info and return it
-    public Album createAlbum(String name, String artist, String genre, double rating,
-            String review) {
-        return new Album(name, artist, genre, rating, review);
     }
 
     public String getName() {

@@ -115,7 +115,7 @@ public class AlbumCategoryTest {
     }
 
     @Test
-    void testRemoveAlbumWhereOneOfGivenNameAndArtistIsInTheCategory(){
+    void testRemoveAlbumWhereOneOfGivenNameAndArtistIsInTheCategory() {
         testAlbumCategory.addAlbum(testAlbum);
         testAlbumCategory.addAlbum(otherTestAlbum);
         testAlbumCategory.addAlbum(lastTestAlbum);
@@ -126,27 +126,6 @@ public class AlbumCategoryTest {
         assertTrue(testAlbumCategory.getAlbumList().contains(testAlbum));
         assertTrue(testAlbumCategory.getAlbumList().contains(lastTestAlbum));
         assertEquals(testAlbumCategory.getAlbumList().size(), 3);
-
-    }
-
-    @Test
-    void testCreateAlbum() {
-        Album newAlbum = testAlbumCategory.createAlbum("Dangerous Woman", "Ariana Grande", "Dance-Pop", 7.9, "");
-        Album anotherAlbum = testAlbumCategory.createAlbum("The Secret of Us", "Gracie Abrams", "Pop", 8.1, "");
-
-        assertEquals(newAlbum.getName(), "Dangerous Woman");
-        assertEquals(newAlbum.getArtist(), "Ariana Grande");
-        assertEquals(newAlbum.getGenre(), "Dance-Pop");
-        assertTrue(newAlbum.getTracklist().isEmpty());
-        assertEquals(newAlbum.getRating(), 7.9);
-        assertEquals(newAlbum.getReview(), "");
-
-        assertEquals(anotherAlbum.getName(), "The Secret of Us");
-        assertEquals(anotherAlbum.getArtist(), "Gracie Abrams");
-        assertEquals(anotherAlbum.getGenre(), "Pop");
-        assertTrue(anotherAlbum.getTracklist().isEmpty());
-        assertEquals(anotherAlbum.getRating(), 8.1);
-        assertEquals(anotherAlbum.getReview(), "");
 
     }
 

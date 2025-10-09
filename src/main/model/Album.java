@@ -53,13 +53,6 @@ public class Album {
 
     }
 
-    // REQUIRES: 0.0 <= rating <= 10.0
-    // EFFECTS: Create a song with the given info and return it
-    public Song createSong(String name, String artist, double rating,
-            String review) {
-        return new Song(name, artist, rating, review);
-
-    }
 
     public String getName() {
         return this.name;

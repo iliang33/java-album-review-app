@@ -137,22 +137,6 @@ public class AlbumTest {
     }
 
     @Test
-    void testCreateSong() {
-        Song newSong = testAlbum.createSong("Back To December", "Taylor Swift", 10, "");
-        Song anotherSong = testAlbum.createSong("Speak Now", "Taylor Swift", 9, "");
-
-        assertEquals(newSong.getName(), "Back To December");
-        assertEquals(newSong.getArtist(), "Taylor Swift");
-        assertEquals(newSong.getRating(), 10);
-        assertEquals(newSong.getReview(), "");
-
-        assertEquals(anotherSong.getName(), "Speak Now");
-        assertEquals(anotherSong.getArtist(), "Taylor Swift");
-        assertEquals(anotherSong.getRating(), 9);
-        assertEquals(anotherSong.getReview(), "");
-    }
-
-    @Test
     void testToString() {
         assertTrue(testAlbum.toString()
                 .contains(
