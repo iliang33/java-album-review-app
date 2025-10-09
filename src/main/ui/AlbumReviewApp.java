@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import exceptions.NotInRatingRangeException;
+
 // Album Review Application
 public class AlbumReviewApp {
 
@@ -276,7 +278,9 @@ public class AlbumReviewApp {
                         addMoreSongs = false;
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("\n\nNot a valid number");
+                    System.out.println("\nNot a number");
+                } catch (NotInRatingRangeException e) {
+                    System.out.println("\nNot in range of 0.0 to 10.0");
 
                 }
 
@@ -292,7 +296,7 @@ public class AlbumReviewApp {
     // otherwise
 
     // this is a helper function for addToTrackList()
-    public boolean promptUserToAddSongs(int indexOfAlbumToAddSongTo) {
+    public boolean promptUserToAddSongs(int indexOfAlbumToAddSongTo) throws NotInRatingRangeException {
         System.out.println("Enter name of song");
         String songName = scan.nextLine();
 
@@ -301,6 +305,11 @@ public class AlbumReviewApp {
 
         System.out.println("Enter song rating (from 0 to 10)");
         double rating = Double.parseDouble(scan.nextLine());
+
+        if (!(rating >= 0.0 && rating <= 10.0)) {
+            throw new NotInRatingRangeException();
+
+        }
 
         System.out.println("Enter review");
         String review = scan.nextLine();
@@ -341,7 +350,7 @@ public class AlbumReviewApp {
                         removeMoreSongs = false;
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("\n\nNot a valid number");
+                    System.out.println("\nNot a number");
 
                 }
 
