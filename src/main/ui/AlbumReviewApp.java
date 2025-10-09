@@ -56,20 +56,26 @@ public class AlbumReviewApp {
                 hasExit = true;
                 System.out.println("\nApp Exited");
             } else {
-                processInput(input);
+                processMainInput(input);
             }
 
         }
+    }
+
+
+    // MODIFIES: this
+    // EFFECTS: takes update sub menu user input
+    public void runUpdateSubMenu(){
 
     }
 
     // MODIFIES: this
-    // EFFECTS: acts upon user input
+    // EFFECTS: acts upon main menu user input
 
     // WHEN REACH 25 LINE LIMIT, MAKE HELPER FUNCTIONS TO SPLIT IT,
     // LIKE processCreationInput, processListingInput, processSortingInput etc....
 
-    public void processInput(String input) {
+    public void processMainInput(String input) {
         if (input.equalsIgnoreCase("ca")) {
             createAlbum();
         } else if (input.equalsIgnoreCase("atl")) {
@@ -102,6 +108,13 @@ public class AlbumReviewApp {
 
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: acts upon process updates sub menu user input
+    public void processUpdateSubMenuInput(String input){
+
+    }
+
     // EFFECTS: prints out options
     public void showMainOptions() {
         System.out.println("\nOptions:");
@@ -131,11 +144,17 @@ public class AlbumReviewApp {
 
     // EFFECTS: prints out a sub menu of options for sorting
     public void showSortingOptions() {
+        System.out.println("\nAlbum Review Updating Options:");
 
+        System.out.println("\tType b to return to main menu\n");
+
+        System.out.println("\tType cc to create a category");
+        System.out.println("\tType rc to remove a category");
+        System.out.println("\tType aac to add an album to a category");
     }
 
-    // EFFECTS: prints out a sub menu of options for updating reviews/categories
-    public void showEditingOptions() {
+    // EFFECTS: prints out a sub menu of options for updating album reviews
+    public void showUpdatingReviewsOptions() {
 
     }
 
@@ -454,7 +473,8 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: updates the name of a category given by oldName to newName if the category exists
+    // EFFECTS: updates the name of a category given by oldName to newName if the
+    // category exists
     public void updateCategoryName() {
 
         System.out.println("Enter name of category to change");
@@ -481,15 +501,23 @@ public class AlbumReviewApp {
     // MODIFIES: this
     // EFFECTS: updates a given String album field (name, artist, genre, review) to
     // a new given value
-    public void updateAlbumNotRatingField(String albumName, String fieldName, String newValue) {
+    public void updateAlbumStringField(String albumName, String fieldName, String newValue) {
         // update the one in the all albums list and in the corresponding category if it
         // is in one
 
     }
 
     // MODIFIES: this
-    // EFFECTS: updates given album rating to the given rating
+    // EFFECTS: updates given album's rating to the given rating
     public void updateAlbumRating(String albumName, double newRating) {
+        // update the one in the all albums list and in the corresponding category if it
+        // is in one
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds, removes, or changes order of songs in a given albums tracklist
+    public void updateAlbumTracklist() {
         // update the one in the all albums list and in the corresponding category if it
         // is in one
 
