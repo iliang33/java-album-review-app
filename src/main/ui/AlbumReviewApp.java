@@ -13,15 +13,6 @@ import exceptions.NotInRatingRangeException;
 // Album Review Application
 public class AlbumReviewApp {
 
-    // make sure you that when you call a method with user input
-    // that before you pass it to the method, it fits the requires clause
-
-    // when taking user input for ratings, make sure it is between 0.0 and 10.0
-    // inclusive,
-    // if not, let user know and tell them to enter a valid value by using while
-    // loop with scanner
-    // consider helper methods for this
-
     // ADD COMMENTS TO DESCRIBE CONFUSING CODE
 
     private List<AlbumCategory> categories;
@@ -114,15 +105,15 @@ public class AlbumReviewApp {
 
             }
 
+        } else if (input.equalsIgnoreCase("ra")) {
+            this.validInput = true;
+            removeAlbum();
         } else if (input.equalsIgnoreCase("atl")) {
             this.validInput = true;
             addToTrackList();
         } else if (input.equalsIgnoreCase("rtl")) {
             this.validInput = true;
             removeFromTrackList();
-        } else if (input.equalsIgnoreCase("ra")) {
-            this.validInput = true;
-            removeAlbum();
         }
 
     }
@@ -204,9 +195,10 @@ public class AlbumReviewApp {
         System.out.println("\tType e to exit the app\n");
 
         System.out.println("\tType ca to create an album review");
+        System.out.println("\tType ra to remove an album review");
         System.out.println("\tType atl to add songs to the tracklist of an existing album review");
-        System.out.println("\tType rtl to remove songs from the tracklist of an existing album review");
-        System.out.println("\tType ra to remove an album review\n");
+        System.out.println("\tType rtl to remove songs from the tracklist of an existing album review\n");
+        
 
         System.out.println("\tType cc to create a category");
         System.out.println("\tType rc to remove a category");
@@ -253,7 +245,7 @@ public class AlbumReviewApp {
         System.out.println("Enter genre");
         String genre = scan.nextLine();
 
-        System.out.println("Enter album rating");
+        System.out.println("Enter album rating (0.0 to 10.0)");
         double rating = Double.parseDouble(scan.nextLine());
 
         if (!(rating >= 0.0 && rating <= 10.0)) {
@@ -695,7 +687,6 @@ public class AlbumReviewApp {
         } else if (field.equalsIgnoreCase("review")) {
             updateReviewField(name, artist);
         }
-
     }
 
     // MODIFIES: this
@@ -807,7 +798,7 @@ public class AlbumReviewApp {
 
     public void updateRatingField(String albumName, String artist) throws NotInRatingRangeException {
 
-        System.out.println("Enter new rating");
+        System.out.println("Enter new rating (0.0 to 10.0)");
         Double newRating = Double.parseDouble(scan.nextLine());
 
         if (!(newRating >= 0.0 && newRating <= 10.0)) {
