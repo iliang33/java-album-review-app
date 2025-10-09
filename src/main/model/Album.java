@@ -112,6 +112,7 @@ public class Album {
         for (int i = 0; i < this.tracklist.size(); i++) {
             Song currentSong = this.tracklist.get(i);
 
+            stringTracklist += "\t";
             stringTracklist += i + 1 + ". ";
             stringTracklist += currentSong.getName();
             stringTracklist += " by " + currentSong.getArtist();

@@ -198,7 +198,6 @@ public class AlbumReviewApp {
         System.out.println("\tType ra to remove an album review");
         System.out.println("\tType atl to add songs to the tracklist of an existing album review");
         System.out.println("\tType rtl to remove songs from the tracklist of an existing album review\n");
-        
 
         System.out.println("\tType cc to create a category");
         System.out.println("\tType rc to remove a category");
@@ -325,9 +324,9 @@ public class AlbumReviewApp {
             System.out.println("\n\nSong Added!");
 
         } else {
-            System.out.println("\n\nSong already in tracklist");
+            System.out.println("\nSong already in tracklist");
         }
-        System.out.println("\n\nkeep adding songs? (type n to stop, anything otherwise)");
+        System.out.println("\nkeep adding songs? (type n to stop, anything otherwise)");
         String response = scan.nextLine();
 
         if (response.equalsIgnoreCase("n")) {
@@ -426,7 +425,7 @@ public class AlbumReviewApp {
             System.out.println("\nCategory created!");
 
         } else {
-            System.out.println("\n\nCategory already exists");
+            System.out.println("\nCategory already exists");
         }
 
     }
@@ -519,7 +518,7 @@ public class AlbumReviewApp {
             System.out.println("Albums:\n");
             for (Album album : albums) {
                 System.out.println(album.toString());
-                System.out.println("Tracklist:\n" + album.trackListToString());
+                System.out.println("Tracklist:\n" + album.trackListToString() + "\n");
 
             }
         } else {
@@ -553,7 +552,8 @@ public class AlbumReviewApp {
 
     // MODIFIES: this
     // EFFECTS: sorts album list by artist alphabetically then prints out the sorted
-    // album list
+    // album list. If two albums have the same artist, the album added first is
+    // shown first
     public void sortAlbumsByAlphabeticalArtist() {
         for (int i = 0; i < this.albums.size(); i++) {
             for (int j = 0; j < this.albums.size(); j++) {
@@ -577,7 +577,8 @@ public class AlbumReviewApp {
 
     // MODIFIES: this
     // EFFECTS: sorts album list by name alphabetically then prints out the sorted
-    // album list
+    // album list. if two albums have the same name, the one added first is shown
+    // first
     public void sortAlbumsByAlphabeticalName() {
         for (int i = 0; i < this.albums.size(); i++) {
             for (int j = 0; j < this.albums.size(); j++) {
@@ -600,7 +601,8 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: sorts album list by rating high to low
+    // EFFECTS: sorts album list by rating high to low. if two albums have same
+    // rating, the album added first is shown first
     public void sortAlbumsByRating() {
         for (int i = 0; i < this.albums.size(); i++) {
             for (int j = 0; j < this.albums.size(); j++) {
@@ -701,7 +703,7 @@ public class AlbumReviewApp {
         boolean foundAlbumInACategory = false;
 
         for (int i = 0; i < this.categories.size(); i++) {
-            for (int j = 0; i < this.categories.get(i).getAlbumList().size(); j++) {
+            for (int j = 0; j < this.categories.get(i).getAlbumList().size(); j++) {
                 Album currentAlbum = this.categories.get(i).getAlbumList().get(j);
                 if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
                     currentAlbum.setName(newName);
@@ -736,7 +738,7 @@ public class AlbumReviewApp {
         boolean foundAlbumInACategory = false;
 
         for (int i = 0; i < this.categories.size(); i++) {
-            for (int j = 0; i < this.categories.get(i).getAlbumList().size(); j++) {
+            for (int j = 0; j < this.categories.get(i).getAlbumList().size(); j++) {
                 Album currentAlbum = this.categories.get(i).getAlbumList().get(j);
                 if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
                     currentAlbum.setArtist(newArtist);
@@ -770,7 +772,7 @@ public class AlbumReviewApp {
         boolean foundAlbumInACategory = false;
 
         for (int i = 0; i < this.categories.size(); i++) {
-            for (int j = 0; i < this.categories.get(i).getAlbumList().size(); j++) {
+            for (int j = 0; j < this.categories.get(i).getAlbumList().size(); j++) {
                 Album currentAlbum = this.categories.get(i).getAlbumList().get(j);
                 if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
                     currentAlbum.setGenre(newGenre);
@@ -808,7 +810,7 @@ public class AlbumReviewApp {
         boolean foundAlbumInACategory = false;
 
         for (int i = 0; i < this.categories.size(); i++) {
-            for (int j = 0; i < this.categories.get(i).getAlbumList().size(); j++) {
+            for (int j = 0; j < this.categories.get(i).getAlbumList().size(); j++) {
                 Album currentAlbum = this.categories.get(i).getAlbumList().get(j);
                 if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
                     currentAlbum.setRating(newRating);
@@ -843,7 +845,7 @@ public class AlbumReviewApp {
         boolean foundAlbumInACategory = false;
 
         for (int i = 0; i < this.categories.size(); i++) {
-            for (int j = 0; i < this.categories.get(i).getAlbumList().size(); j++) {
+            for (int j = 0; j < this.categories.get(i).getAlbumList().size(); j++) {
                 Album currentAlbum = this.categories.get(i).getAlbumList().get(j);
                 if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
                     currentAlbum.setReview(newReview);
