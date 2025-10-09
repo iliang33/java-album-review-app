@@ -92,6 +92,8 @@ public class AlbumReviewApp {
             sortAlbumsByAlphabeticalArtist();
         } else if (input.equalsIgnoreCase("sna")) {
             sortAlbumsByAlphabeticalName();
+        } else if (input.equalsIgnoreCase("sra")) {
+            sortAlbumsByRating();
         } else {
             System.out.println("Not a valid input");
         }
@@ -429,6 +431,22 @@ public class AlbumReviewApp {
     // MODIFIES: this
     // EFFECTS: sorts album list by rating high to low
     public void sortAlbumsByRating() {
+        for (int i = 0; i < this.albums.size(); i++) {
+            for (int j = 0; j < this.albums.size(); j++) {
+
+                if (this.albums.get(i).getRating() > this.albums.get(j).getRating()) {
+                    // stores the album so it doesn't get lost during swapping
+                    Album currentAlbumComparingToOthers = this.albums.get(i);
+
+                    // swap positions
+                    this.albums.set(i, this.albums.get(j));
+                    this.albums.set(j, currentAlbumComparingToOthers);
+
+                }
+            }
+
+        }
+        printAllReviews();
 
     }
 
