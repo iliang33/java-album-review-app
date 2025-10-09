@@ -50,7 +50,6 @@ public class AlbumReviewApp {
             showMainOptions();
 
             input = scan.nextLine();
-            input.toLowerCase();
 
             if (input.equalsIgnoreCase("e")) {
                 hasExit = true;
@@ -62,10 +61,25 @@ public class AlbumReviewApp {
         }
     }
 
-
     // MODIFIES: this
     // EFFECTS: takes update sub menu user input
-    public void runUpdateSubMenu(){
+    public void runUpdateSubMenu() {
+        boolean goBack = false;
+        String input = null;
+
+        while (!goBack) {
+            showUpdatingReviewsOptions();
+
+            input = scan.nextLine();
+
+            if (input.equalsIgnoreCase("b")) {
+                goBack = true;
+                System.out.println("\nBack to main menu");
+            } else {
+                processUpdateSubMenuInput(input);
+            }
+
+        }
 
     }
 
@@ -102,17 +116,23 @@ public class AlbumReviewApp {
             sortAlbumsByRating();
         } else if (input.equalsIgnoreCase("uc")) {
             updateCategoryName();
+        } else if (input.equalsIgnoreCase("ua")) {
+            runUpdateSubMenu();
         } else {
             System.out.println("\n\nNot a valid input");
         }
 
     }
 
-
     // MODIFIES: this
     // EFFECTS: acts upon process updates sub menu user input
-    public void processUpdateSubMenuInput(String input){
-
+    public void processUpdateSubMenuInput(String input) {
+        if (input.equalsIgnoreCase("n") || input.equalsIgnoreCase("a") || input.equalsIgnoreCase("g")
+                || input.equalsIgnoreCase("r") || input.equalsIgnoreCase("re")) {
+            updateAlbumField();
+        } else {
+            System.out.println("Not a valid input");
+        }
     }
 
     // EFFECTS: prints out options
@@ -142,19 +162,18 @@ public class AlbumReviewApp {
 
     }
 
-    // EFFECTS: prints out a sub menu of options for sorting
-    public void showSortingOptions() {
+    // EFFECTS: prints out a sub menu of options for updating album reviews
+    public void showUpdatingReviewsOptions() {
+
         System.out.println("\nAlbum Review Updating Options:");
 
         System.out.println("\tType b to return to main menu\n");
 
-        System.out.println("\tType cc to create a category");
-        System.out.println("\tType rc to remove a category");
-        System.out.println("\tType aac to add an album to a category");
-    }
-
-    // EFFECTS: prints out a sub menu of options for updating album reviews
-    public void showUpdatingReviewsOptions() {
+        System.out.println("\tType n to update an album's name");
+        System.out.println("\tType a to update an album's artist");
+        System.out.println("\tType g to update an album's genre");
+        System.out.println("\tType r to update an album's rating");
+        System.out.println("\tType re to update an album's review");
 
     }
 
@@ -499,29 +518,212 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: updates a given String album field (name, artist, genre, review) to
-    // a new given value
-    public void updateAlbumStringField(String albumName, String fieldName, String newValue) {
+    // EFFECTS: updates a given album field (name, artist, genre, rating, review,
+    // tracklist) to a new given value if it exists
+    public void updateAlbumField() {
         // update the one in the all albums list and in the corresponding category if it
         // is in one
+
+        System.out.println("Enter name of album to update");
+        String name = scan.nextLine();
+
+        System.out.println("Enter name of artist of album to update");
+        String artist = scan.nextLine();
+
+        System.out.println("Enter album field to update (name, artist, genre, rating, review, tracklist)");
+        String field = scan.nextLine();
+
+        if (field.equalsIgnoreCase("name")) {
+            updateNameField(name, artist);
+
+        } else if (field.equalsIgnoreCase("artist")) {
+            updateArtistField(name, artist);
+
+        } else if (field.equalsIgnoreCase("genre")) {
+            updateGenreField(name, artist);
+
+        } else if (field.equalsIgnoreCase("rating")) {
+            updateRatingField(name, artist);
+
+        } else if (field.equalsIgnoreCase("review")) {
+            updateReviewField(name, artist);
 
     }
 
     // MODIFIES: this
-    // EFFECTS: updates given album's rating to the given rating
-    public void updateAlbumRating(String albumName, double newRating) {
-        // update the one in the all albums list and in the corresponding category if it
-        // is in one
+    // EFFECTS: updates the name field of a given album (referenced by name and
+    // artist) with the given new value
+
+    public void updateNameField(String albumName, String artist) {
+
+        System.out.println("Enter new name");
+        String newName = scan.nextLine();
+
+        boolean foundAlbumInACategory = false;
+
+        for (int i = 0; i < this.categories.size(); i++) {
+            for (int j = 0; i < this.categories.get(i).getAlbumList().size(); j++) {
+                Album currentAlbum = this.categories.get(i).getAlbumList().get(j);
+                if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
+                    currentAlbum.setName(newName);
+                    foundAlbumInACategory = true;
+                    System.out.println("\n\nAlbum updated!");
+                    break;
+                }
+            }
+        }
+        // since an album has to be created before it is added to a category
+        // if it is in a category, it must be in the list of all albums
+        if (!foundAlbumInACategory) {
+            if (getIndexOfWantedAlbum(albumName, artist) != -1) {
+                this.albums.get(getIndexOfWantedAlbum(albumName, artist)).setName(newName);
+                System.out.println("\n\nAlbum updated!");
+            } else {
+                System.out.println("\n\nAlbum not found!");
+            }
+        }
 
     }
 
     // MODIFIES: this
-    // EFFECTS: adds, removes, or changes order of songs in a given albums tracklist
-    public void updateAlbumTracklist() {
-        // update the one in the all albums list and in the corresponding category if it
-        // is in one
+    // EFFECTS: updates the artist field of a given album (referenced by name and
+    // artist) with the given new value
+
+    public void updateArtistField(String albumName, String artist) {
+
+        System.out.println("Enter new artist");
+        String newArtist = scan.nextLine();
+
+        boolean foundAlbumInACategory = false;
+
+        for (int i = 0; i < this.categories.size(); i++) {
+            for (int j = 0; i < this.categories.get(i).getAlbumList().size(); j++) {
+                Album currentAlbum = this.categories.get(i).getAlbumList().get(j);
+                if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
+                    currentAlbum.setArtist(newArtist);
+                    foundAlbumInACategory = true;
+                    System.out.println("\n\nAlbum updated!");
+                    break;
+                }
+            }
+        }
+        // since an album has to be created before it is added to a category
+        // if it is in a category, it must be in the list of all albums
+        if (!foundAlbumInACategory) {
+            if (getIndexOfWantedAlbum(albumName, artist) != -1) {
+                this.albums.get(getIndexOfWantedAlbum(albumName, artist)).setArtist(newArtist);
+                System.out.println("\n\nAlbum updated!");
+            } else {
+                System.out.println("\n\nAlbum not found!");
+            }
+        }
 
     }
+
+    // MODIFIES: this
+    // EFFECTS: updates the genre field of a given album (referenced by name and
+    // artist) with the given new value
+
+    public void updateGenreField(String albumName, String artist) {
+
+        System.out.println("Enter new genre");
+        String newGenre = scan.nextLine();
+
+        boolean foundAlbumInACategory = false;
+
+        for (int i = 0; i < this.categories.size(); i++) {
+            for (int j = 0; i < this.categories.get(i).getAlbumList().size(); j++) {
+                Album currentAlbum = this.categories.get(i).getAlbumList().get(j);
+                if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
+                    currentAlbum.setGenre(newGenre);
+                    foundAlbumInACategory = true;
+                    System.out.println("\n\nAlbum updated!");
+                    break;
+                }
+            }
+        }
+        // since an album has to be created before it is added to a category
+        // if it is in a category, it must be in the list of all albums
+        if (!foundAlbumInACategory) {
+            if (getIndexOfWantedAlbum(albumName, artist) != -1) {
+                this.albums.get(getIndexOfWantedAlbum(albumName, artist)).setGenre(newGenre);
+                System.out.println("\n\nAlbum updated!");
+            } else {
+                System.out.println("\n\nAlbum not found!");
+            }
+        }
+
+    }
+    // MODIFIES: this
+    // EFFECTS: updates the rating field of a given album (referenced by name and
+    // artist) with the given new value
+
+    public void updateRatingField(String albumName, String artist) {
+
+        System.out.println("Enter new rating");
+        String newRating = scan.nextLine();
+
+        boolean foundAlbumInACategory = false;
+
+        for (int i = 0; i < this.categories.size(); i++) {
+            for (int j = 0; i < this.categories.get(i).getAlbumList().size(); j++) {
+                Album currentAlbum = this.categories.get(i).getAlbumList().get(j);
+                if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
+                    currentAlbum.setRating(Double.parseDouble(newRating));
+                    foundAlbumInACategory = true;
+                    System.out.println("\n\nAlbum updated!");
+                    break;
+                }
+            }
+        }
+        // since an album has to be created before it is added to a category
+        // if it is in a category, it must be in the list of all albums
+        if (!foundAlbumInACategory) {
+            if (getIndexOfWantedAlbum(albumName, artist) != -1) {
+                this.albums.get(getIndexOfWantedAlbum(albumName, artist)).setRating(Double.parseDouble(newRating));
+                System.out.println("\n\nAlbum updated!");
+            } else {
+                System.out.println("\n\nAlbum not found!");
+            }
+        }
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: updates the review field of a given album (referenced by name and
+    // artist) with the given new value
+
+    public void updateReviewField(String albumName, String artist) {
+
+        System.out.println("Enter new review");
+        String newReview = scan.nextLine();
+
+        boolean foundAlbumInACategory = false;
+
+        for (int i = 0; i < this.categories.size(); i++) {
+            for (int j = 0; i < this.categories.get(i).getAlbumList().size(); j++) {
+                Album currentAlbum = this.categories.get(i).getAlbumList().get(j);
+                if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
+                    currentAlbum.setReview(newReview);
+                    foundAlbumInACategory = true;
+                    System.out.println("\n\nAlbum updated!");
+                    break;
+                }
+            }
+        }
+        // since an album has to be created before it is added to a category
+        // if it is in a category, it must be in the list of all albums
+        if (!foundAlbumInACategory) {
+            if (getIndexOfWantedAlbum(albumName, artist) != -1) {
+                this.albums.get(getIndexOfWantedAlbum(albumName, artist)).setReview(newReview);
+                System.out.println("\n\nAlbum updated!");
+            } else {
+                System.out.println("\n\nAlbum not found!");
+            }
+        }
+
+    }
+
 
     // EFFECTS: return the index of the album in albums list specified by name and
     // artist
