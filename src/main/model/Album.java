@@ -74,7 +74,6 @@ public class Album {
         return this.rating;
     }
 
-    
     public String getReview() {
         return this.review;
     }
@@ -103,7 +102,7 @@ public class Album {
     // tracklist
     @Override
     public String toString() {
-        return "Name: " + this.name + "\nArtist: " + this.artist + "\nGenre: " + this.genre  + "\nRating: "
+        return "Name: " + this.name + "\nArtist: " + this.artist + "\nGenre: " + this.genre + "\nRating: "
                 + this.rating + "\nReview: " + this.review;
     }
 
@@ -114,7 +113,7 @@ public class Album {
             Song currentSong = this.tracklist.get(i);
 
             stringTracklist += "\t"; // indents each song
-            stringTracklist += i+1 + ". "; // numbers song in tracklist
+            stringTracklist += i + 1 + ". "; // numbers song in tracklist
             stringTracklist += currentSong.getName();
             stringTracklist += " by " + currentSong.getArtist();
 

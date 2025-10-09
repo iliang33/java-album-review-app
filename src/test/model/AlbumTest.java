@@ -165,7 +165,6 @@ public class AlbumTest {
                 "\t1. Mine by Taylor Swift\n\t2. Sparks Fly by Taylor Swift\n\t3. Dear John by Taylor Swift");
     }
 
-
     @Test
     void testSetArtist() {
         testAlbum.setArtist("Daya");

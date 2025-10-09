@@ -129,7 +129,6 @@ public class AlbumCategoryTest {
 
     }
 
-
     @Test
     void testSetName() {
         testAlbumCategory.setName("Pop Albums");
