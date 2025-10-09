@@ -24,6 +24,8 @@ public class AlbumReviewApp {
     // is
     // performed succesfully or not
 
+    // ADD COMMENTS TO DESCRIBE CONFUSING CODE
+
     private List<AlbumCategory> categories;
     private List<Album> albums;
     private Scanner scan;
@@ -134,7 +136,7 @@ public class AlbumReviewApp {
 
     // MODIFIES: this
     // EFFECTS: creates a new album with the given information and adds it to the
-    // album list if there isn't already and album with the same name and artist
+    // album list if there isn't already an album with the same name and artist
     public void createAlbum() {
         System.out.println("Enter name of album");
         String name = scan.nextLine();
@@ -185,8 +187,9 @@ public class AlbumReviewApp {
 
     }
 
-    // EFFECTS: asks users for information to add songs to a tracklist
-    // and returns true if user wants to add more songs, false otherwise
+    // EFFECTS: asks users for information to add songs to a tracklist if it's not
+    // already there and returns true if user wants to add more songs, false
+    // otherwise
 
     // this is a helper function for addToTrackList()
     public boolean promptUserToAddSongs(int indexOfAlbumToAddSongTo) {
@@ -202,9 +205,14 @@ public class AlbumReviewApp {
         System.out.println("Enter review");
         String review = scan.nextLine();
 
-        this.albums.get(indexOfAlbumToAddSongTo).addSong(new Song(songName, artistName, rating, review));
+        if (getIndexOfWantedSongInAlbumTracklist(songName, indexOfAlbumToAddSongTo) == -1) {
+            this.albums.get(indexOfAlbumToAddSongTo).addSong(new Song(songName, artistName, rating, review));
+            System.out.println("\n\nSong Added!");
 
-        System.out.println("add more songs? (type n to stop, anything otherwise)");
+        } else {
+            System.out.println("\n\nSong already in tracklist");
+        }
+        System.out.println("\n\nadd more songs? (type n to stop, anything otherwise)");
         String response = scan.nextLine();
 
         if (response.equalsIgnoreCase("n")) {
@@ -467,6 +475,23 @@ public class AlbumReviewApp {
 
         }
         return indexOfWantedCategory;
+
+    }
+
+    // EFFECTS: return the index of the song (referenced by song name) in the given
+    // album's
+    // (referenced by album index) tracklist
+    public int getIndexOfWantedSongInAlbumTracklist(String name, int indexOfAlbum) {
+
+        int indexOfWantedSong = -1;
+        for (int i = 0; i < this.albums.get(indexOfAlbum).getTracklist().size(); i++) {
+            Song currentSong = this.albums.get(indexOfAlbum).getTracklist().get(i);
+            if (currentSong.getName().equalsIgnoreCase(name)) {
+                indexOfWantedSong = i;
+            }
+
+        }
+        return indexOfWantedSong;
 
     }
 
