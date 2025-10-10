@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 // Set of tests for the Album class
 public class AlbumTest {
     private Album testAlbum;
+    private Album otherTestAlbum;
     private Song testSong;
     private Song otherTestSong;
     private Song oneMoreTestSong;
@@ -14,6 +15,7 @@ public class AlbumTest {
     @BeforeEach
     void runBefore() {
         testAlbum = new Album("Speak Now", "Taylor Swift", "Pop Rock", 9.1, "");
+        otherTestAlbum = new Album("1989", "Taylor Swift", "Pop", 7.4, "");
         testSong = new Song("Mine", "Taylor Swift", 9, "");
         otherTestSong = new Song("Sparks Fly", "Taylor Swift", 9.5, "");
         oneMoreTestSong = new Song("Dear John", "Taylor Swift", 9, "");
@@ -224,5 +226,42 @@ public class AlbumTest {
 
         testAlbum.setReview("Great vocals");
         assertEquals(testAlbum.getReview(), "Great vocals");
+    }
+
+    @Test
+    void testMergeAlbumBothEmpty() {
+        testAlbum.mergeAlbum(otherTestAlbum);
+        assertTrue(testAlbum.getTracklist().isEmpty());
+        assertTrue(otherTestAlbum.getTracklist().isEmpty());
+
+    }
+
+    @Test
+    void testMergeAlbumNoDuplicates() {
+        testAlbum.addSong(testSong);
+        testAlbum.addSong(otherTestSong);
+
+        otherTestAlbum.addSong(oneMoreTestSong);
+
+        testAlbum.mergeAlbum(otherTestAlbum);
+        assertEquals(testAlbum.getTracklist().size(), 3);
+        assertEquals(testAlbum.getTracklist().get(2), oneMoreTestSong);
+        assertTrue(otherTestAlbum.getTracklist().isEmpty());
+
+    }
+
+    @Test
+    void testMergeAlbumWithDuplicates() {
+        testAlbum.addSong(testSong);
+        testAlbum.addSong(otherTestSong);
+
+        otherTestAlbum.addSong(otherTestSong);
+        otherTestAlbum.addSong(oneMoreTestSong);
+
+        testAlbum.mergeAlbum(otherTestAlbum);
+        assertEquals(testAlbum.getTracklist().size(), 3);
+        assertEquals(testAlbum.getTracklist().get(2), oneMoreTestSong);
+        assertEquals(otherTestAlbum.getTracklist().size(), 1);
+
     }
 }
