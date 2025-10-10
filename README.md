@@ -22,7 +22,8 @@ Because of this I thought it would be enjoyable to turn this into a project.
 - As a user, I want to be able to add and remove album reviews to different categories to group them  
 - As a user, I want to be able to see all of my reviews 
 - As a user, I want to be able to sort reviews by critera such as by artist name alphabetical  
-- As a user, I want to be able to update existing reviews and categories  
+- As a user, I want to be able to update existing reviews and categories   
+- As a user, I want to be able to merge two albums together but with no duplicates  
 
 
  
