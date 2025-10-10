@@ -61,6 +61,18 @@ public class AlbumCategoryTest {
     }
 
     @Test
+    void testRemoveAlbumCasing() {
+        testAlbumCategory.addAlbum(testAlbum);
+        testAlbumCategory.addAlbum(otherTestAlbum);
+        testAlbumCategory.addAlbum(lastTestAlbum);
+
+        testAlbumCategory.removeAlbum("AFTER LaughtER", "ParaMORE");
+        assertFalse(testAlbumCategory.getAlbumList().contains(otherTestAlbum));
+        assertEquals(testAlbumCategory.getAlbumList().size(), 2);
+
+    }
+
+    @Test
     void testRemoveAlbumLastFirst() {
         testAlbumCategory.addAlbum(testAlbum);
         testAlbumCategory.addAlbum(otherTestAlbum);
@@ -127,6 +139,14 @@ public class AlbumCategoryTest {
         assertTrue(testAlbumCategory.getAlbumList().contains(testAlbum));
         assertTrue(testAlbumCategory.getAlbumList().contains(lastTestAlbum));
         assertEquals(testAlbumCategory.getAlbumList().size(), 3);
+
+    }
+
+    @Test
+    void testRemoveAlbumFromEmptyList() {
+        testAlbumCategory.removeAlbum("The life of a showgirl", "Taylor Swift");
+
+        assertTrue(testAlbumCategory.getAlbumList().isEmpty());
 
     }
 

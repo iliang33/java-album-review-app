@@ -62,6 +62,18 @@ public class AlbumTest {
     }
 
     @Test
+    void testRemoveSongCasing() {
+        testAlbum.addSong(testSong);
+        testAlbum.addSong(otherTestSong);
+        testAlbum.addSong(oneMoreTestSong);
+
+        testAlbum.removeSong("minE", "taylor SwifT");
+        assertFalse(testAlbum.getTracklist().contains(testSong));
+        assertEquals(testAlbum.getTracklist().size(), 2);
+
+    }
+
+    @Test
     void testRemoveSongLastFirst() {
         testAlbum.addSong(testSong);
         testAlbum.addSong(otherTestSong);

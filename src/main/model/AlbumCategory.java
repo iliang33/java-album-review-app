@@ -16,7 +16,7 @@ public class AlbumCategory {
         albumList = new ArrayList<>();
     }
 
-    // REQUIRES: an album with the same name and artist is not already in the
+    // REQUIRES: an album with the same name and artist that is not already in the
     // tracklist
     // MODIFIES: this
     // EFFECTS: adds given album to album list
