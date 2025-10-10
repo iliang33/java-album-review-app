@@ -53,6 +53,12 @@ public class Album {
 
     }
 
+    // MODIFIES: this, albumToMergeWith
+    // EFFECTS: combines albumToMergeWith tracklist with this album's tracklist but without duplicates
+    public void mergeAlbum(Album albumToMergeWith) {
+
+    }
+
     public String getName() {
         return this.name;
     }
