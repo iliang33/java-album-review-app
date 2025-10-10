@@ -259,9 +259,9 @@ public class AlbumTest {
         otherTestAlbum.addSong(oneMoreTestSong);
 
         testAlbum.mergeAlbum(otherTestAlbum);
-        assertEquals(testAlbum.getTracklist().size(), 3);
-        assertEquals(testAlbum.getTracklist().get(2), oneMoreTestSong);
-        assertEquals(otherTestAlbum.getTracklist().size(), 1);
+        assertEquals(testAlbum.getTracklist().size(), 4);
+        assertEquals(testAlbum.getTracklist().get(3), oneMoreTestSong);
+        assertEquals(otherTestAlbum.getTracklist().size(), 0);
 
     }
 }

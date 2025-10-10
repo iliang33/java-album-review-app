@@ -106,6 +106,9 @@ public class AlbumReviewApp {
         } else if (input.equalsIgnoreCase("ra")) {
             this.validInput = true;
             removeAlbum();
+        } else if (input.equalsIgnoreCase("m")) {
+            this.validInput = true;
+            mergeAlbums();
         } else if (input.equalsIgnoreCase("atl")) {
             this.validInput = true;
             addToTrackList();
@@ -201,6 +204,8 @@ public class AlbumReviewApp {
 
         System.out.println("\tType ca to create an album review");
         System.out.println("\tType ra to remove an album review");
+        System.out.println(
+                "\tType m to merge the tracklists of two album reviews that are not in any categories");
         System.out.println("\tType atl to add songs to the tracklist of an existing album review");
         System.out.println("\tType rtl to remove songs from the tracklist of an existing album review\n");
 
@@ -274,7 +279,7 @@ public class AlbumReviewApp {
     // EFFECTS: takes user input to add songs to the tracklist of an album if the
     // song is not already in there
     public void addToTrackList() {
-        System.out.println("Enter name of album to add tracklist to");
+        System.out.println("Enter name of album to add to tracklist of");
         String name = scan.nextLine();
 
         System.out.println("Enter name of artist");
@@ -416,6 +421,40 @@ public class AlbumReviewApp {
 
         } else {
             System.out.println("\n\nAlbum not found");
+        }
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: combines the two given album's tracklists together but
+    // without duplicates only if the album's are in any categories. The second
+    // album is removed from albums list
+    public void mergeAlbums() {
+        System.out.println("Enter name of first album (this one will have the merged tracklist)");
+        String name = scan.nextLine();
+
+        System.out.println("Enter album artist name of first album");
+        String artist = scan.nextLine();
+
+        System.out.println("Enter name of second album (this album will be deleted)");
+        String name2 = scan.nextLine();
+
+        System.out.println("Enter album artist name of second album");
+        String artist2 = scan.nextLine();
+
+        int indexOfFirstAlbum = getIndexOfWantedAlbum(name, artist);
+        int indexOfSecondAlbum = getIndexOfWantedAlbum(name2, artist2);
+
+        if (indexOfFirstAlbum != -1 && indexOfSecondAlbum != -1) {
+            if (!albumIsInAnyCategory(name, artist) && !albumIsInAnyCategory(name2, artist2)) {
+                this.albums.get(indexOfFirstAlbum).mergeAlbum(this.albums.get(indexOfSecondAlbum));
+                this.albums.remove(indexOfSecondAlbum);
+                System.out.println("\nAlbums merged!");
+            } else {
+                System.out.println("\nError: neither of the albums should be in a category");
+            }
+        } else {
+            System.out.println("\nEither one of or both albums were not found");
         }
 
     }
@@ -926,6 +965,21 @@ public class AlbumReviewApp {
             }
         }
         return indexOfWantedSong;
+
+    }
+
+    // EFFECTS: returns true if the given album (referenced by name and artist) is
+    // found in any category, false otherwise
+    public boolean albumIsInAnyCategory(String name, String artist) {
+        for (AlbumCategory category : this.categories) {
+            for (Album album : category.getAlbumList()) {
+                if (album.getName().equals(name) && album.getArtist().equals(artist)) {
+                    return true;
+
+                }
+            }
+        }
+        return false;
 
     }
 

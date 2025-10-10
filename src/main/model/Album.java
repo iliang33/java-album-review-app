@@ -54,8 +54,19 @@ public class Album {
     }
 
     // MODIFIES: this, albumToMergeWith
-    // EFFECTS: combines albumToMergeWith tracklist with this album's tracklist but without duplicates
+    // EFFECTS: combines albumToMergeWith tracklist with this album's tracklist. duplicates are allowed
     public void mergeAlbum(Album albumToMergeWith) {
+        // clone used to work around concurrent modification exception
+        List<Song> albumToMergeWithClone = new ArrayList<>();
+
+        for (Song song : albumToMergeWith.getTracklist()) {
+            albumToMergeWithClone.add(song);
+        }
+        for (Song song : albumToMergeWithClone) {
+            this.tracklist.add(song);
+            albumToMergeWith.getTracklist().remove(song);
+
+        }
 
     }
 
