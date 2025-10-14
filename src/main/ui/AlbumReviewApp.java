@@ -31,6 +31,10 @@ public class AlbumReviewApp {
 
     // MODIFIES: this
     // EFFECTS: takes user input
+
+    // referenced from the TellerApp demo
+    // https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
+
     public void runApp() {
         boolean hasExit = false;
         String input = null;
@@ -52,6 +56,9 @@ public class AlbumReviewApp {
 
     // MODIFIES: this
     // EFFECTS: takes update sub-menu user input
+
+    // referenced from the TellerApp demo
+    // https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
     public void runUpdateSubMenu() {
         boolean goBack = false;
         String input = null;
@@ -74,6 +81,9 @@ public class AlbumReviewApp {
 
     // MODIFIES: this
     // EFFECTS: acts upon main menu user input
+
+    // referenced from the TellerApp demo
+    // https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
     public void processMainInput(String input) {
         processAlbumRelatedCreationAndRemoval(input);
         processAlbumCategoryRelatedCreationAndRemoval(input);
@@ -197,6 +207,9 @@ public class AlbumReviewApp {
     }
 
     // EFFECTS: prints out main menu options
+
+    // referenced from the TellerApp demo
+    // https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
     public void showMainOptions() {
         System.out.println("\nOptions:");
 
@@ -227,6 +240,9 @@ public class AlbumReviewApp {
     }
 
     // EFFECTS: prints out a sub-menu of options for updating album reviews
+
+    // referenced from the TellerApp demo
+    // https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
     public void showUpdatingReviewsOptions() {
 
         System.out.println("\nAlbum Review Updating Options:");
