@@ -3,8 +3,13 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents an album with a name, artist, genre, tracklist of songs, rating, and review
-public class Album {
+public class Album implements Writable {
     private String name;
     private String artist;
     private String genre;
@@ -141,6 +146,37 @@ public class Album {
 
         }
         return stringTracklist;
+    }
+
+    // referenced from JsonSerializationDemo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
+    // EFFECTS: returns this album as a JSON object
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", this.name);
+        json.put("artist", this.artist);
+        json.put("genre", this.genre);
+        json.put("rating", this.rating);
+        json.put("review", this.review);
+        json.put("tracklist", tracklistToJson());
+        return json;
+    }
+
+    // referenced from JsonSerializationDemo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
+    // EFFECTS: returns songs in this album's tracklist as a JSON array
+    private JSONArray tracklistToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Song song : this.tracklist) {
+            jsonArray.put(song.toJson());
+        }
+
+        return jsonArray;
     }
 
 }

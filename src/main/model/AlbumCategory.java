@@ -3,9 +3,14 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a named category of albums that can be used to group album reviews
 //   with similar themes
-public class AlbumCategory {
+public class AlbumCategory implements Writable {
     private String name;
     private List<Album> albumList;
 
@@ -73,4 +78,32 @@ public class AlbumCategory {
         }
         return stringAlbumlist;
     }
+
+    // referenced from JsonSerializationDemo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
+    // EFFECTS: returns this album category as a JSON object
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", this.name);
+        json.put("albums", albumsToJson());
+        return json;
+    }
+
+    // referenced from JsonSerializationDemo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
+    // EFFECTS: returns albums in this album category as a JSON array
+    private JSONArray albumsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Album album : this.albumList) {
+            jsonArray.put(album.toJson());
+        }
+
+        return jsonArray;
+    }
+
 }

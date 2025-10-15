@@ -1,7 +1,11 @@
 package model;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a song with a name, artist, rating, and a review
-public class Song {
+public class Song implements Writable {
     private String name;
     private String artist;
     private double rating;
@@ -39,5 +43,20 @@ public class Song {
     public String toString() {
         return "Name: " + this.name + "\nArtist: " + this.artist + "\nRating: "
                 + this.rating + "\nReview: " + this.review;
+    }
+
+    // referenced from JsonSerializationDemo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
+    // EFFECTS: returns this song as a JSON object
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", this.name);
+        json.put("artist", this.artist);
+        json.put("rating", this.rating);
+        json.put("review", this.review);
+        return json;
     }
 }
