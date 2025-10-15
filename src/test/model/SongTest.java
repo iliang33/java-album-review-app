@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 // Set of tests for the Song class
+//@ExcludeFromJacocoGeneratedReport
 public class SongTest {
     private Song testSong;
 

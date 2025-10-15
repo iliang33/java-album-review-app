@@ -11,6 +11,7 @@ import java.util.Scanner;
 import exceptions.NotInRatingRangeException;
 
 // Album Review Application
+//@ExcludeFromJacocoGeneratedReport
 public class AlbumReviewApp {
 
     private List<AlbumCategory> categories;
