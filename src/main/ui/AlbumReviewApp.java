@@ -922,6 +922,28 @@ public class AlbumReviewApp {
 
     }
 
+    // EFFECTS: saves all album categories to file
+    public void saveAlbumCategories() {
+
+    }
+
+    // EFFECTS: saves all albums to file
+    public void saveAlbums() {
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads all album categories from file
+    public void loadAlbumCategories() {
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads all albums from file
+    public void loadAlbums() {
+
+    }
+
     // EFFECTS: return the index of the album in albums list specified by name and
     // artist. returns -1 if not found
     public int getIndexOfWantedAlbum(String name, String artist) {
