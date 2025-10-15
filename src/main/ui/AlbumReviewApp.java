@@ -922,16 +922,6 @@ public class AlbumReviewApp {
 
     }
 
-    // EFFECTS: saves all album categories to file
-    public void saveAlbumCategories() {
-
-    }
-
-    // EFFECTS: saves all albums to file
-    public void saveAlbums() {
-
-    }
-
     // MODIFIES: this
     // EFFECTS: loads all album categories from file
     public void loadAlbumCategories() {
