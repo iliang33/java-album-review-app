@@ -4,8 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 // Set of tests for the Album class
-//@ExcludeFromJacocoGeneratedReport
+@ExcludeFromJacocoGeneratedReport
 public class AlbumTest {
     private Album testAlbum;
     private Album otherTestAlbum;

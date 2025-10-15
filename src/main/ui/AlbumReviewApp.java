@@ -9,9 +9,10 @@ import java.util.List;
 import java.util.Scanner;
 
 import exceptions.NotInRatingRangeException;
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
 // Album Review Application
-//@ExcludeFromJacocoGeneratedReport
+@ExcludeFromJacocoGeneratedReport
 public class AlbumReviewApp {
 
     private List<AlbumCategory> categories;
