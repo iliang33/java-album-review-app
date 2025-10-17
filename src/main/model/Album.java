@@ -63,12 +63,12 @@ public class Album implements Writable {
     // duplicates are allowed
     public void mergeAlbum(Album albumToMergeWith) {
         // clone used to work around concurrent modification exception
-        List<Song> albumToMergeWithClone = new ArrayList<>();
+        List<Song> tracklistAlbumToMergeWithClone = new ArrayList<>();
 
         for (Song song : albumToMergeWith.getTracklist()) {
-            albumToMergeWithClone.add(song);
+            tracklistAlbumToMergeWithClone.add(song);
         }
-        for (Song song : albumToMergeWithClone) {
+        for (Song song : tracklistAlbumToMergeWithClone) {
             this.tracklist.add(song);
             albumToMergeWith.getTracklist().remove(song);
 

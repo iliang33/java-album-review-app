@@ -21,7 +21,7 @@ public class AlbumReviewApp {
     private boolean validInput;
 
     // EFFECTS: runs the application, and initializes valid input and both the
-    // scanner and the lists used to track album categories and albums,
+    // scanner and the lists used to track album categories and albums.
     public AlbumReviewApp() {
         this.categories = new ArrayList<>();
         this.albums = new ArrayList<>();
