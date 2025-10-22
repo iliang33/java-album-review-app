@@ -11,9 +11,6 @@ import model.AlbumCategory;
 
 @ExcludeFromJacocoGeneratedReport
 public class JsonTest {
-    protected void checkAlbumCategory(String name, AlbumCategory category) {
-        assertEquals(name, category.getName());
-    }
 
     protected void checkAlbum(String name, String artist, String genre, double rating, String review, Album album) {
         assertEquals(name, album.getName());
@@ -21,5 +18,12 @@ public class JsonTest {
         assertEquals(genre, album.getGenre());
         assertEquals(rating, album.getRating());
         assertEquals(review, album.getReview());
+    }
+
+    protected void checkSong(String name, String artist, String genre, double rating, String review, Song song) {
+        assertEquals(name, song.getName());
+        assertEquals(artist, song.getArtist());
+        assertEquals(rating, song.getRating());
+        assertEquals(review, song.getReview());
     }
 }
