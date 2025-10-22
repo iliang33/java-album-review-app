@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 // Represents a manager that stores and handles operation on all created album review and album categories
 public class ReviewManager {
 
@@ -9,12 +11,14 @@ public class ReviewManager {
 
     }
 
+    // REQUIRES: album is not already in list
     // MODIFIES: this
     // EFFECTS: adds given album to all albums list
     public void addAlbum(Album album) {
 
     }
 
+    // REQUIRES: the album exists
     // MODIFIES: this
     // EFFECTS: removes given album (referenced by name and artist) from all albums
     // list
@@ -22,6 +26,7 @@ public class ReviewManager {
 
     }
 
+    // REQUIRES: album exists and song is not already in list
     // EFFECTS: creates and adds song with the given info to the tracklist of the
     // album with the given info
     public void addToAlbumTracklist(String albumName, String albumArtist, String songName, String songArtist,
@@ -29,18 +34,20 @@ public class ReviewManager {
 
     }
 
-    // REQUIRES: songNumber >= 1 && songNumber <= tracklist size
+    // REQUIRES: songNumber >= 1 && songNumber <= tracklist size and the album exists
     // EFFECTS: removes the song in the given position number in tracklist from
     // given album (referenced by name and artist)
     public void removeFromAlbumTracklist(String albumName, String albumArtist, int songNumber) {
     }
 
+    // REQUIRES: category is not already in list
     // MODIFIES: this
     // EFFECTS: adds given category to all categories list
     public void addCategory(AlbumCategory category) {
 
     }
 
+    // REQUIRES: the category exists
     // MODIFIES: this
     // EFFECTS: removes given category (referenced by name) from all categories
     // list
@@ -48,10 +55,12 @@ public class ReviewManager {
 
     }
 
+    // REQUIRES: category exists and album is not already in category
     // EFFECTS: adds album with the given info to category with the given name
     public void addToCategory(String categoryName, String albumName, String albumArtist) {
     }
 
+    // REQUIRES: the album and the category both exist
     // MODIFIES: this
     // EFFECTS: removes the album with given info from the category with given name
     public void removeFromCategory(String categoryName, String albumName, String albumArtist) {
@@ -114,6 +123,16 @@ public class ReviewManager {
     // found in any category, false otherwise
     public boolean albumIsInAnyCategory(Album album) {
         return false;
+    }
+
+    public List<Album> getAlbumsList() {
+        return null;
+
+    }
+
+    public List<AlbumCategory> getAlbumCategoriesList() {
+        return null;
+
     }
 
 }
