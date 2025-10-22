@@ -98,7 +98,7 @@ public class ReviewManager {
         return null;
     }
 
-    // EFFECTS: return album specified by name
+    // EFFECTS: return album specified by name and
     // artist in given category. returns null if not found
     public Album getWantedAlbumInWantedCategory(String name, String artist, AlbumCategory category) {
         return null;

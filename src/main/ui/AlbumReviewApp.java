@@ -444,7 +444,8 @@ public class AlbumReviewApp {
 
     // MODIFIES: this
     // EFFECTS: combines the two given album's tracklists together only if the
-    // album's are not in any categories. The second album is removed from albums list
+    // album's are not in any categories. The second album is removed from albums
+    // list
     public void mergeAlbums() {
         System.out.println("Enter name of first album (this one will have the merged tracklist)");
         String name = scan.nextLine();
@@ -665,7 +666,8 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: sorts album list by rating high to low. if two albums have same
+    // EFFECTS: sorts album list by rating high to low. then prints out the sorted
+    // album list. if two albums have same
     // rating, the album added first is shown first
     public void sortAlbumsByRating() {
         for (int i = 0; i < this.albums.size(); i++) {
