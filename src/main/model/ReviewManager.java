@@ -34,7 +34,8 @@ public class ReviewManager {
 
     }
 
-    // REQUIRES: songNumber >= 1 && songNumber <= tracklist size and the album exists
+    // REQUIRES: songNumber >= 1 && songNumber <= tracklist size and the album
+    // exists
     // EFFECTS: removes the song in the given position number in tracklist from
     // given album (referenced by name and artist)
     public void removeFromAlbumTracklist(String albumName, String albumArtist, int songNumber) {
@@ -67,26 +68,16 @@ public class ReviewManager {
 
     }
 
-    // EFFECTS: prints all reviews
-    public void printAllReviews() {
-    }
-
-    // EFFECTS: prints out name of all categories and the info about the albums
-    // in them
-    public void printAllCategories() {
-    }
-
     // MODIFIES: this
-    // EFFECTS: sorts album list by artist alphabetically then prints out the sorted
-    // album list. If two albums have the same artist, the album added first is
+    // EFFECTS: sorts album list by artist alphabetically. If two albums have the
+    // same artist, the album added first is
     // shown first
     public void sortAlbumsByAlphabeticalArtist() {
     }
 
     // MODIFIES: this
-    // EFFECTS: sorts album list by name alphabetically then prints out the sorted
-    // album list. if two albums have the same name, the one added first is shown
-    // first
+    // EFFECTS: sorts album list by name alphabetically. If two albums have the same
+    // name, the one added first is shown first
     public void sortAlbumsByAlphabeticalName() {
     }
 
