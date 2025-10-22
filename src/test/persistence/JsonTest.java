@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Album;
-import model.AlbumCategory;
+import model.Song;
 
 // referenced from JsonSerializationDemo
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
@@ -20,7 +20,7 @@ public class JsonTest {
         assertEquals(review, album.getReview());
     }
 
-    protected void checkSong(String name, String artist, String genre, double rating, String review, Song song) {
+    protected void checkSong(String name, String artist, double rating, String review, Song song) {
         assertEquals(name, song.getName());
         assertEquals(artist, song.getArtist());
         assertEquals(rating, song.getRating());
