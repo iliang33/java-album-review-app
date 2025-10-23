@@ -11,6 +11,7 @@ import org.json.*;
 import model.Album;
 import model.AlbumCategory;
 import model.ReviewManager;
+import model.Song;
 
 // referenced from JsonSerializationDemo
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
@@ -71,6 +72,7 @@ public class JsonReader {
         String review = jsonObject.getString("review");
 
         Album album = new Album(name, artist, genre, rating, review);
+        addTracklist(album, jsonObject);
 
         manager.addAlbum(album);
     }
@@ -94,7 +96,10 @@ public class JsonReader {
         double rating = jsonObject.getDouble("rating");
         String review = jsonObject.getString("review");
 
+
+
         Album album = new Album(name, artist, genre, rating, review);
+        addTracklist(album, jsonObject);
 
         category.addAlbum(album);
     }
@@ -118,5 +123,27 @@ public class JsonReader {
         addAlbumsToCategory(category, jsonObject);
 
         manager.addCategory(category);
+    }
+
+    // MODIFIES: album
+    // EFFECTS: parses tracklist from JSON object and adds them to album
+    private void addTracklist(Album album, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("tracklist");
+        for (Object json : jsonArray) {
+            JSONObject nextSong = (JSONObject) json;
+            addSong(album, nextSong);
+        }
+    }
+
+    // MODIFIES: album
+    // EFFECTS: parses song from JSON object and adds it to album
+    private void addSong(Album album, JSONObject jsonObject) {
+        String name = jsonObject.getString("name");
+        String artist = jsonObject.getString("artist");
+        double rating = jsonObject.getDouble("rating");
+        String review = jsonObject.getString("review");
+
+        Song song = new Song(name, artist, rating, review);
+        album.addSong(song);
     }
 }
