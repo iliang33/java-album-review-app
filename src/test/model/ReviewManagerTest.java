@@ -320,6 +320,15 @@ public class ReviewManagerTest {
     }
 
     @Test
+    void testSortAlbumsByAlphabeticalArtistEmptyList() {
+        manager.sortAlbumsByAlphabeticalArtist();
+        List<Album> albums = manager.getAlbumsList();
+
+        assertTrue(albums.isEmpty());
+
+    }
+
+    @Test
     void testSortAlbumsByAlphabeticalArtistAlreadySorted() {
         manager.addAlbum(lastTestAlbum);
         manager.addAlbum(anotherTestAlbum);
@@ -379,6 +388,15 @@ public class ReviewManagerTest {
     }
 
     @Test
+    void testSortAlbumsByAlphabeticalNameEmptyList() {
+        manager.sortAlbumsByAlphabeticalName();
+        List<Album> albums = manager.getAlbumsList();
+
+        assertTrue(albums.isEmpty());
+
+    }
+
+    @Test
     void testSortAlbumsByAlphabeticalNameAlreadySorted() {
         manager.addAlbum(otherTestAlbum);
         manager.addAlbum(anotherTestAlbum);
@@ -435,6 +453,15 @@ public class ReviewManagerTest {
         assertEquals(albums.get(0), otherTestAlbum);
         assertEquals(albums.get(1), anotherTestAlbum);
         assertEquals(albums.get(2), testAlbum);
+    }
+
+    @Test
+    void testSortAlbumsByRating() {
+        manager.sortAlbumsByRating();
+        List<Album> albums = manager.getAlbumsList();
+
+        assertTrue(albums.isEmpty());
+
     }
 
     @Test
@@ -617,7 +644,7 @@ public class ReviewManagerTest {
 
         manager.addAlbum(testAlbum);
 
-        Song song = manager.getWantedSongInTracklist("Mine", testAlbum);
+        Song song = manager.getWantedSongInTracklist("Mine", "Taylor Swift", testAlbum);
 
         assertEquals(song, testSong);
     }
@@ -625,7 +652,7 @@ public class ReviewManagerTest {
     @Test
     void testGetWantedSongInTracklistNotFoundEmptyTracklist() {
         manager.addAlbum(testAlbum);
-        Song song = manager.getWantedSongInTracklist("Mine", testAlbum);
+        Song song = manager.getWantedSongInTracklist("Mine", "Taylor Swift", testAlbum);
 
         assertNull(song);
     }
@@ -635,13 +662,23 @@ public class ReviewManagerTest {
         testAlbum.addSong(testSong);
         testAlbum.addSong(otherTestSong);
         manager.addAlbum(testAlbum);
-        Song song = manager.getWantedSongInTracklist("Timeless", testAlbum);
+        Song song = manager.getWantedSongInTracklist("Juna", "Clairo", testAlbum);
 
         assertNull(song);
     }
 
     @Test
-    void testAlbumIsInAnyOneCategory(){
+    void testGetWantedSongInTracklistNotFoundOneOfNameArtistCorrect() {
+        testAlbum.addSong(testSong);
+        testAlbum.addSong(otherTestSong);
+        manager.addAlbum(testAlbum);
+        Song song = manager.getWantedSongInTracklist("Timeless", "Taylor Swift", testAlbum);
+
+        assertNull(song);
+    }
+
+    @Test
+    void testAlbumIsInAnyOneCategory() {
         testAlbumCategory.addAlbum(testAlbum);
 
         manager.addCategory(testAlbumCategory);
@@ -652,7 +689,7 @@ public class ReviewManagerTest {
     }
 
     @Test
-    void testAlbumIsInAnyTwoCategories(){
+    void testAlbumIsInAnyTwoCategories() {
         testAlbumCategory.addAlbum(testAlbum);
         otherAlbumCategory.addAlbum(testAlbum);
 
@@ -664,7 +701,7 @@ public class ReviewManagerTest {
     }
 
     @Test
-    void testAlbumIsNotInAnyCategoryEmptyAlbumList(){
+    void testAlbumIsNotInAnyCategoryEmptyAlbumList() {
         manager.addCategory(testAlbumCategory);
         manager.addCategory(otherAlbumCategory);
 
@@ -673,7 +710,7 @@ public class ReviewManagerTest {
     }
 
     @Test
-    void testAlbumIsNotInAnyCategoryNonEmptyAlbumList(){
+    void testAlbumIsNotInAnyCategoryNonEmptyAlbumList() {
         testAlbumCategory.addAlbum(testAlbum);
         otherAlbumCategory.addAlbum(testAlbum);
 
