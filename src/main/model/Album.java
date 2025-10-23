@@ -59,18 +59,14 @@ public class Album implements Writable {
     }
 
     // MODIFIES: this, albumToMergeWith
-    // EFFECTS: combines albumToMergeWith tracklist with this album's tracklist.
-    // duplicates are allowed
+    // EFFECTS: adds any songs from albumToMeregeWith into this album's tracklist if
+    // not already there
     public void mergeAlbum(Album albumToMergeWith) {
-        // clone used to work around concurrent modification exception
-        List<Song> tracklistAlbumToMergeWithClone = new ArrayList<>();
 
         for (Song song : albumToMergeWith.getTracklist()) {
-            tracklistAlbumToMergeWithClone.add(song);
-        }
-        for (Song song : tracklistAlbumToMergeWithClone) {
-            this.tracklist.add(song);
-            albumToMergeWith.getTracklist().remove(song);
+            if (!this.tracklist.contains(song)) {
+                this.tracklist.add(song);
+            }
 
         }
 

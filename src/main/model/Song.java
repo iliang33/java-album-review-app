@@ -1,5 +1,6 @@
 package model;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import org.json.JSONObject;
 
 import persistence.Writable;
@@ -59,4 +60,40 @@ public class Song implements Writable {
         json.put("review", this.review);
         return json;
     }
+
+    @ExcludeFromJacocoGeneratedReport
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        result = prime * result + ((artist == null) ? 0 : artist.hashCode());
+        return result;
+    }
+
+    @ExcludeFromJacocoGeneratedReport
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Song other = (Song) obj;
+        if (name == null) {
+            if (other.name != null)
+                return false;
+        } else if (!name.equals(other.name))
+            return false;
+        if (artist == null) {
+            if (other.artist != null)
+                return false;
+        } else if (!artist.equals(other.artist))
+            return false;
+        return true;
+    }
+
+    
+    
 }
