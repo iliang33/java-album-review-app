@@ -2,10 +2,8 @@ package ui;
 
 import model.Album;
 import model.AlbumCategory;
-import model.Song;
+import model.ReviewManager;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import exceptions.NotInRatingRangeException;
@@ -15,18 +13,14 @@ import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 @ExcludeFromJacocoGeneratedReport
 public class AlbumReviewApp {
 
-    private List<AlbumCategory> categories;
-    private List<Album> albums;
+    private ReviewManager manager;
     private Scanner scan;
-    private boolean validInput;
 
     // EFFECTS: runs the application, and initializes valid input and both the
     // scanner and the lists used to track album categories and albums.
     public AlbumReviewApp() {
-        this.categories = new ArrayList<>();
-        this.albums = new ArrayList<>();
+        manager = new ReviewManager();
         this.scan = new Scanner(System.in);
-        this.validInput = false;
 
         runApp();
     }
@@ -92,18 +86,12 @@ public class AlbumReviewApp {
         processSorting(input);
         processUpdating(input);
 
-        if (!this.validInput) {
-            System.out.println("\n\nNot a valid input");
-
-        }
-
     }
 
     // MODIFIES: this
     // EFFECTS: acts upon input involving album related creation and removal
     public void processAlbumRelatedCreationAndRemoval(String input) {
         if (input.equalsIgnoreCase("ca")) {
-            this.validInput = true;
             try {
                 createAlbum();
             } catch (NumberFormatException e) {
@@ -115,16 +103,12 @@ public class AlbumReviewApp {
             }
 
         } else if (input.equalsIgnoreCase("ra")) {
-            this.validInput = true;
             removeAlbum();
         } else if (input.equalsIgnoreCase("m")) {
-            this.validInput = true;
             mergeAlbums();
         } else if (input.equalsIgnoreCase("atl")) {
-            this.validInput = true;
             addToTrackList();
         } else if (input.equalsIgnoreCase("rtl")) {
-            this.validInput = true;
             removeFromTrackList();
         }
 
@@ -135,16 +119,12 @@ public class AlbumReviewApp {
     // removal
     public void processAlbumCategoryRelatedCreationAndRemoval(String input) {
         if (input.equalsIgnoreCase("cc")) {
-            this.validInput = true;
             createCategory();
         } else if (input.equalsIgnoreCase("rc")) {
-            this.validInput = true;
             removeCategory();
         } else if (input.equalsIgnoreCase("aac")) {
-            this.validInput = true;
             addToCategory();
         } else if (input.equalsIgnoreCase("rac")) {
-            this.validInput = true;
             removeFromCategory();
         }
     }
@@ -153,10 +133,8 @@ public class AlbumReviewApp {
     // EFFECTS: acts upon input involving listing
     public void processListing(String input) {
         if (input.equalsIgnoreCase("l")) {
-            this.validInput = true;
             printAllReviews();
         } else if (input.equalsIgnoreCase("lc")) {
-            this.validInput = true;
             printAllCategories();
         }
 
@@ -166,14 +144,14 @@ public class AlbumReviewApp {
     // EFFECTS: acts upon input involving sorting
     public void processSorting(String input) {
         if (input.equalsIgnoreCase("saa")) {
-            this.validInput = true;
-            sortAlbumsByAlphabeticalArtist();
+            manager.sortAlbumsByAlphabeticalArtist();
+            printAllReviews();
         } else if (input.equalsIgnoreCase("sna")) {
-            this.validInput = true;
-            sortAlbumsByAlphabeticalName();
+            manager.sortAlbumsByAlphabeticalName();
+            printAllReviews();
         } else if (input.equalsIgnoreCase("sra")) {
-            this.validInput = true;
-            sortAlbumsByRating();
+            manager.sortAlbumsByRating();
+            printAllReviews();
         }
     }
 
@@ -181,10 +159,8 @@ public class AlbumReviewApp {
     // EFFECTS: acts upon input involving updating
     public void processUpdating(String input) {
         if (input.equalsIgnoreCase("uc")) {
-            this.validInput = true;
             updateCategoryName();
         } else if (input.equalsIgnoreCase("ua")) {
-            this.validInput = true;
             runUpdateSubMenu();
         }
     }
@@ -284,8 +260,8 @@ public class AlbumReviewApp {
         System.out.println("Enter review");
         String review = scan.nextLine();
 
-        if (getIndexOfWantedAlbum(name, artist) == -1) {
-            this.albums.add(new Album(name, artist, genre, rating, review));
+        if (manager.getWantedAlbum(name, artist) == null) {
+            manager.addAlbum(new Album(name, artist, genre, rating, review));
             System.out.println("\n\nAlbum created!");
 
         } else {
@@ -302,13 +278,13 @@ public class AlbumReviewApp {
         System.out.println("Enter name of artist");
         String artist = scan.nextLine();
 
-        int indexOfAlbumToAddSongTo = getIndexOfWantedAlbum(name, artist);
+        Album albumToAddSongTo = manager.getWantedAlbum(name, artist);
         boolean addMoreSongs = true;
 
-        if (indexOfAlbumToAddSongTo != -1) {
+        if (albumToAddSongTo != null) {
             while (addMoreSongs) {
                 try {
-                    if (!promptUserToAddSongs(indexOfAlbumToAddSongTo)) {
+                    if (!promptUserToAddSongs(albumToAddSongTo)) {
                         addMoreSongs = false;
                     }
                 } catch (NumberFormatException e) {
@@ -331,7 +307,7 @@ public class AlbumReviewApp {
     // both inclusive
 
     // this is a helper function for addToTrackList()
-    public boolean promptUserToAddSongs(int indexOfAlbumToAddSongTo) throws NotInRatingRangeException {
+    public boolean promptUserToAddSongs(Album albumToAddSongTo) throws NotInRatingRangeException {
         System.out.println("Enter name of song");
         String songName = scan.nextLine();
 
@@ -349,8 +325,8 @@ public class AlbumReviewApp {
         System.out.println("Enter review");
         String review = scan.nextLine();
 
-        if (getIndexOfWantedSongInAlbumTracklist(songName, indexOfAlbumToAddSongTo) == -1) {
-            this.albums.get(indexOfAlbumToAddSongTo).addSong(new Song(songName, artistName, rating, review));
+        if (manager.getWantedSongInTracklist(songName, artistName, albumToAddSongTo) == null) {
+            manager.addToAlbumTracklist(albumToAddSongTo, songName, artistName, rating, review);
             System.out.println("\n\nSong Added!");
 
         } else {
@@ -374,13 +350,13 @@ public class AlbumReviewApp {
         System.out.println("Enter name of artist");
         String artist = scan.nextLine();
 
-        int indexOfAlbum = getIndexOfWantedAlbum(name, artist);
+        Album wantedAlbum = manager.getWantedAlbum(name, artist);
         boolean removeMoreSongs = true;
 
-        if (indexOfAlbum != -1) {
+        if (wantedAlbum != null) {
             while (removeMoreSongs) {
                 try {
-                    if (!promptUserToRemoveSongs(indexOfAlbum, this.albums.get(indexOfAlbum).getTracklist().size())) {
+                    if (!promptUserToRemoveSongs(wantedAlbum, wantedAlbum.getTracklist().size())) {
                         removeMoreSongs = false;
                     }
                 } catch (NumberFormatException e) {
@@ -399,12 +375,12 @@ public class AlbumReviewApp {
     // returns true if user wants to add more songs, false otherwise
 
     // this is a helper function for addToTrackList()
-    public boolean promptUserToRemoveSongs(int indexOfAlbumToRemoveSongFrom, int tracklistSize) {
+    public boolean promptUserToRemoveSongs(Album albumToRemoveSongFrom, int tracklistSize) {
         System.out.println("Enter number of song in tracklist");
         Integer songNumber = Integer.parseInt(scan.nextLine());
 
         if (songNumber >= 1 && songNumber <= tracklistSize) {
-            this.albums.get(indexOfAlbumToRemoveSongFrom).getTracklist().remove(songNumber - 1);
+            manager.removeFromAlbumTracklist(albumToRemoveSongFrom, songNumber);
             System.out.println("\n\nSong removed!");
         } else {
             System.out.println("\nNot a valid number");
@@ -430,10 +406,10 @@ public class AlbumReviewApp {
         System.out.println("Enter album artist name to remove");
         String artist = scan.nextLine();
 
-        int indexOfAlbumToRemove = getIndexOfWantedAlbum(name, artist);
+        Album albumToRemove = manager.getWantedAlbum(name, artist);
 
-        if (indexOfAlbumToRemove != -1) {
-            this.albums.remove(indexOfAlbumToRemove);
+        if (albumToRemove != null) {
+            manager.removeAlbum(albumToRemove);
             System.out.println("\n\nAlbum removed!");
 
         } else {
@@ -459,13 +435,14 @@ public class AlbumReviewApp {
         System.out.println("Enter album artist name of second album");
         String artist2 = scan.nextLine();
 
-        int indexOfFirstAlbum = getIndexOfWantedAlbum(name, artist);
-        int indexOfSecondAlbum = getIndexOfWantedAlbum(name2, artist2);
+        Album firstAlbum = manager.getWantedAlbum(name, artist);
+        Album secondAlbum = manager.getWantedAlbum(name2, artist2);
 
-        if (indexOfFirstAlbum != -1 && indexOfSecondAlbum != -1) {
-            if (!albumIsInAnyCategory(name, artist) && !albumIsInAnyCategory(name2, artist2)) {
-                this.albums.get(indexOfFirstAlbum).mergeAlbum(this.albums.get(indexOfSecondAlbum));
-                this.albums.remove(indexOfSecondAlbum);
+        if (firstAlbum != null && secondAlbum != null) {
+            if (!manager.albumIsInAnyCategory(firstAlbum) && !manager.albumIsInAnyCategory(secondAlbum)) {
+                manager.getAlbumsList().get(manager.getIndexOfAlbum(firstAlbum))
+                        .mergeAlbum(manager.getAlbumsList().get(manager.getIndexOfAlbum(secondAlbum)));
+                manager.removeAlbum(secondAlbum);
                 System.out.println("\nAlbums merged!");
             } else {
                 System.out.println("\nError: neither of the albums should be in a category");
@@ -483,8 +460,8 @@ public class AlbumReviewApp {
         System.out.println("Enter desired category name");
         String name = scan.nextLine();
 
-        if (getIndexOfWantedCategory(name) == -1) {
-            this.categories.add(new AlbumCategory(name));
+        if (manager.getWantedCategory(name) == null) {
+            manager.addCategory(new AlbumCategory(name));
             System.out.println("\nCategory created!");
 
         } else {
@@ -499,10 +476,10 @@ public class AlbumReviewApp {
         System.out.println("Enter name of category to remove");
         String name = scan.nextLine();
 
-        int indexOfCategoryToRemove = getIndexOfWantedCategory(name);
+        AlbumCategory categoryToRemove = manager.getWantedCategory(name);
 
-        if (indexOfCategoryToRemove != -1) {
-            this.categories.remove(indexOfCategoryToRemove);
+        if (categoryToRemove != null) {
+            manager.removeCategory(categoryToRemove);
             System.out.println("\nCategory removed!");
 
         } else {
@@ -524,13 +501,13 @@ public class AlbumReviewApp {
         System.out.println("Enter name of artist of album to add");
         String artistName = scan.nextLine();
 
-        int indexOfCategoryToAddto = getIndexOfWantedCategory(name);
-        int indexOfAlbum = getIndexOfWantedAlbum(albumName, artistName);
+        AlbumCategory categoryToAddto = manager.getWantedCategory(name);
+        Album wantedAlbum = manager.getWantedAlbum(albumName, artistName);
 
-        if (indexOfCategoryToAddto != -1) {
-            if (indexOfAlbum != -1) {
-                if (getIndexOfWantedAlbumInCategory(albumName, artistName, indexOfCategoryToAddto) == -1) {
-                    this.categories.get(indexOfCategoryToAddto).addAlbum(this.albums.get(indexOfAlbum));
+        if (categoryToAddto != null) {
+            if (wantedAlbum != null) {
+                if (manager.getWantedAlbumInWantedCategory(albumName, artistName, categoryToAddto) == null) {
+                    manager.addToCategory(categoryToAddto, albumName, artistName);
                     System.out.println("\n\nAlbum added!");
                 } else {
                     System.out.println("\n\nAlbum already in the category");
@@ -558,12 +535,12 @@ public class AlbumReviewApp {
         System.out.println("Enter name of artist of album to remove");
         String artistName = scan.nextLine();
 
-        int indexOfCategoryToRemoveFrom = getIndexOfWantedCategory(name);
-        int indexOfAlbum = getIndexOfWantedAlbum(albumName, artistName);
+        AlbumCategory categoryToRemoveFrom = manager.getWantedCategory(name);
+        Album wantedAlbum = manager.getWantedAlbum(albumName, artistName);
 
-        if (indexOfCategoryToRemoveFrom != -1) {
-            if (indexOfAlbum != -1) {
-                this.categories.get(indexOfCategoryToRemoveFrom).removeAlbum(albumName, artistName);
+        if (categoryToRemoveFrom != null) {
+            if (wantedAlbum != null) {
+                manager.removeFromCategory(categoryToRemoveFrom, albumName, artistName);
                 System.out.println("\n\nAlbum removed from category!");
             } else {
                 System.out.println("\n\nAlbum not found. Is it created?");
@@ -575,11 +552,10 @@ public class AlbumReviewApp {
 
     // EFFECTS: prints all reviews
     public void printAllReviews() {
-        System.out.println("\n");
 
-        if (!this.albums.isEmpty()) {
-            System.out.println("Albums:\n");
-            for (Album album : albums) {
+        if (!manager.getAlbumsList().isEmpty()) {
+            System.out.println("\nAlbums:\n");
+            for (Album album : manager.getAlbumsList()) {
                 System.out.println(album.toString());
                 System.out.println("Tracklist:\n" + album.trackListToString() + "\n");
 
@@ -595,10 +571,10 @@ public class AlbumReviewApp {
     public void printAllCategories() {
         System.out.println("\n");
 
-        if (!this.categories.isEmpty()) {
+        if (!manager.getAlbumCategoriesList().isEmpty()) {
             System.out.println("Categories:\n");
 
-            for (AlbumCategory category : categories) {
+            for (AlbumCategory category : manager.getAlbumCategoriesList()) {
                 System.out.println(category.getName() + ":\n");
                 System.out.println(category.albumListToString());
                 System.out.println("\n");
@@ -616,80 +592,6 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: sorts album list by artist alphabetically then prints out the sorted
-    // album list. If two albums have the same artist, the album added first is
-    // shown first
-    public void sortAlbumsByAlphabeticalArtist() {
-        for (int i = 0; i < this.albums.size(); i++) {
-            for (int j = 0; j < this.albums.size(); j++) {
-                // a negative result from compareTo means the string on the left should go
-                // before the string on the right
-                if (this.albums.get(i).getArtist().compareToIgnoreCase(this.albums.get(j).getArtist()) < 0) {
-                    // stores the album so it doesn't get lost during swapping
-                    Album currentAlbumComparingToOthers = this.albums.get(i);
-
-                    // swap positions
-                    this.albums.set(i, this.albums.get(j));
-                    this.albums.set(j, currentAlbumComparingToOthers);
-
-                }
-            }
-
-        }
-        printAllReviews();
-
-    }
-
-    // MODIFIES: this
-    // EFFECTS: sorts album list by name alphabetically then prints out the sorted
-    // album list. if two albums have the same name, the one added first is shown
-    // first
-    public void sortAlbumsByAlphabeticalName() {
-        for (int i = 0; i < this.albums.size(); i++) {
-            for (int j = 0; j < this.albums.size(); j++) {
-                // a negative result from compareTo means the string on the left should go
-                // before the string on the right
-                if (this.albums.get(i).getName().compareToIgnoreCase(this.albums.get(j).getName()) < 0) {
-                    // stores the album so it doesn't get lost during swapping
-                    Album currentAlbumComparingToOthers = this.albums.get(i);
-
-                    // swap positions
-                    this.albums.set(i, this.albums.get(j));
-                    this.albums.set(j, currentAlbumComparingToOthers);
-
-                }
-            }
-
-        }
-        printAllReviews();
-
-    }
-
-    // MODIFIES: this
-    // EFFECTS: sorts album list by rating high to low. then prints out the sorted
-    // album list. if two albums have same
-    // rating, the album added first is shown first
-    public void sortAlbumsByRating() {
-        for (int i = 0; i < this.albums.size(); i++) {
-            for (int j = 0; j < this.albums.size(); j++) {
-
-                if (this.albums.get(i).getRating() > this.albums.get(j).getRating()) {
-                    // stores the album so it doesn't get lost during swapping
-                    Album currentAlbumComparingToOthers = this.albums.get(i);
-
-                    // swap positions
-                    this.albums.set(i, this.albums.get(j));
-                    this.albums.set(j, currentAlbumComparingToOthers);
-
-                }
-            }
-
-        }
-        printAllReviews();
-
-    }
-
-    // MODIFIES: this
     // EFFECTS: updates the name of a category given by oldName to newName if the
     // category exists
     public void updateCategoryName() {
@@ -700,9 +602,9 @@ public class AlbumReviewApp {
         System.out.println("Enter new name");
         String newName = scan.nextLine();
 
-        if (getIndexOfWantedCategory(oldName) != -1) {
-            for (int i = 0; i < this.categories.size(); i++) {
-                AlbumCategory currentCategory = this.categories.get(i);
+        if (manager.getWantedCategory(oldName) != null) {
+            for (int i = 0; i < manager.getAlbumCategoriesList().size(); i++) {
+                AlbumCategory currentCategory = manager.getAlbumCategoriesList().get(i);
                 if (currentCategory.getName().equals(oldName)) {
                     currentCategory.setName(newName);
                     break;
@@ -754,16 +656,15 @@ public class AlbumReviewApp {
     // MODIFIES: this
     // EFFECTS: updates the name field of a given album (referenced by name and
     // artist) with the given new value if given album exists
-
     public void updateNameField(String albumName, String artist) {
         System.out.println("Enter new name");
         String newName = scan.nextLine();
 
         boolean foundAlbumInACategory = false;
 
-        for (int i = 0; i < this.categories.size(); i++) {
-            for (int j = 0; j < this.categories.get(i).getAlbumList().size(); j++) {
-                Album currentAlbum = this.categories.get(i).getAlbumList().get(j);
+        for (int i = 0; i < manager.getAlbumCategoriesList().size(); i++) {
+            for (int j = 0; j < manager.getAlbumCategoriesList().get(i).getAlbumList().size(); j++) {
+                Album currentAlbum = manager.getAlbumCategoriesList().get(i).getAlbumList().get(j);
                 if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
                     currentAlbum.setName(newName);
                     foundAlbumInACategory = true;
@@ -775,8 +676,9 @@ public class AlbumReviewApp {
         // since an album has to be created before it is added to a category
         // if it is in a category, it must be in the list of all albums
         if (!foundAlbumInACategory) {
-            if (getIndexOfWantedAlbum(albumName, artist) != -1) {
-                this.albums.get(getIndexOfWantedAlbum(albumName, artist)).setName(newName);
+            if (manager.getWantedAlbum(albumName, artist) != null) {
+                manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(albumName, artist)))
+                        .setName(newName);
                 System.out.println("\n\nAlbum updated!");
             } else {
                 System.out.println("\n\nAlbum not found!");
@@ -788,16 +690,15 @@ public class AlbumReviewApp {
     // MODIFIES: this
     // EFFECTS: updates the artist field of a given album (referenced by name and
     // artist) with the given new value if given album exists
-
     public void updateArtistField(String albumName, String artist) {
         System.out.println("Enter new artist");
         String newArtist = scan.nextLine();
 
         boolean foundAlbumInACategory = false;
 
-        for (int i = 0; i < this.categories.size(); i++) {
-            for (int j = 0; j < this.categories.get(i).getAlbumList().size(); j++) {
-                Album currentAlbum = this.categories.get(i).getAlbumList().get(j);
+        for (int i = 0; i < manager.getAlbumCategoriesList().size(); i++) {
+            for (int j = 0; j < manager.getAlbumCategoriesList().get(i).getAlbumList().size(); j++) {
+                Album currentAlbum = manager.getAlbumCategoriesList().get(i).getAlbumList().get(j);
                 if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
                     currentAlbum.setArtist(newArtist);
                     foundAlbumInACategory = true;
@@ -809,8 +710,9 @@ public class AlbumReviewApp {
         // since an album has to be created before it is added to a category
         // if it is in a category, it must be in the list of all albums
         if (!foundAlbumInACategory) {
-            if (getIndexOfWantedAlbum(albumName, artist) != -1) {
-                this.albums.get(getIndexOfWantedAlbum(albumName, artist)).setArtist(newArtist);
+            if (manager.getWantedAlbum(albumName, artist) != null) {
+                manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(albumName, artist)))
+                        .setArtist(newArtist);
                 System.out.println("\n\nAlbum updated!");
             } else {
                 System.out.println("\n\nAlbum not found!");
@@ -822,16 +724,15 @@ public class AlbumReviewApp {
     // MODIFIES: this
     // EFFECTS: updates the genre field of a given album (referenced by name and
     // artist) with the given new value if given album exists
-
     public void updateGenreField(String albumName, String artist) {
         System.out.println("Enter new genre");
         String newGenre = scan.nextLine();
 
         boolean foundAlbumInACategory = false;
 
-        for (int i = 0; i < this.categories.size(); i++) {
-            for (int j = 0; j < this.categories.get(i).getAlbumList().size(); j++) {
-                Album currentAlbum = this.categories.get(i).getAlbumList().get(j);
+        for (int i = 0; i < manager.getAlbumCategoriesList().size(); i++) {
+            for (int j = 0; j < manager.getAlbumCategoriesList().get(i).getAlbumList().size(); j++) {
+                Album currentAlbum = manager.getAlbumCategoriesList().get(i).getAlbumList().get(j);
                 if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
                     currentAlbum.setGenre(newGenre);
                     foundAlbumInACategory = true;
@@ -843,8 +744,9 @@ public class AlbumReviewApp {
         // since an album has to be created before it is added to a category
         // if it is in a category, it must be in the list of all albums
         if (!foundAlbumInACategory) {
-            if (getIndexOfWantedAlbum(albumName, artist) != -1) {
-                this.albums.get(getIndexOfWantedAlbum(albumName, artist)).setGenre(newGenre);
+            if (manager.getWantedAlbum(albumName, artist) != null) {
+                manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(albumName, artist)))
+                        .setGenre(newGenre);
                 System.out.println("\n\nAlbum updated!");
             } else {
                 System.out.println("\n\nAlbum not found!");
@@ -855,7 +757,6 @@ public class AlbumReviewApp {
     // MODIFIES: this
     // EFFECTS: updates the rating field of a given album (referenced by name and
     // artist) with the given new value if given album exists
-
     public void updateRatingField(String albumName, String artist) throws NotInRatingRangeException {
         System.out.println("Enter new rating (0.0 to 10.0)");
         Double newRating = Double.parseDouble(scan.nextLine());
@@ -866,21 +767,21 @@ public class AlbumReviewApp {
 
         boolean foundAlbumInACategory = false;
 
-        for (int i = 0; i < this.categories.size(); i++) {
-            for (int j = 0; j < this.categories.get(i).getAlbumList().size(); j++) {
-                Album currentAlbum = this.categories.get(i).getAlbumList().get(j);
+        for (int i = 0; i < manager.getAlbumCategoriesList().size(); i++) {
+            for (int j = 0; j < manager.getAlbumCategoriesList().get(i).getAlbumList().size(); j++) {
+                Album currentAlbum = manager.getAlbumCategoriesList().get(i).getAlbumList().get(j);
                 if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
                     currentAlbum.setRating(newRating);
                     foundAlbumInACategory = true;
-                    break;
                 }
             }
         }
         // since an album has to be created before it is added to a category
         // if it is in a category, it must be in the list of all albums
         if (!foundAlbumInACategory) {
-            if (getIndexOfWantedAlbum(albumName, artist) != -1) {
-                this.albums.get(getIndexOfWantedAlbum(albumName, artist)).setRating(newRating);
+            if (manager.getWantedAlbum(albumName, artist) != null) {
+                manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(albumName, artist)))
+                        .setRating(newRating);
             } else {
                 System.out.println("\n\nAlbum not found!");
             }
@@ -891,7 +792,6 @@ public class AlbumReviewApp {
     // MODIFIES: this
     // EFFECTS: updates the review field of a given album (referenced by name and
     // artist) with the given new value if given album exists
-
     public void updateReviewField(String albumName, String artist) {
 
         System.out.println("Enter new review");
@@ -899,9 +799,9 @@ public class AlbumReviewApp {
 
         boolean foundAlbumInACategory = false;
 
-        for (int i = 0; i < this.categories.size(); i++) {
-            for (int j = 0; j < this.categories.get(i).getAlbumList().size(); j++) {
-                Album currentAlbum = this.categories.get(i).getAlbumList().get(j);
+        for (int i = 0; i < manager.getAlbumCategoriesList().size(); i++) {
+            for (int j = 0; j < manager.getAlbumCategoriesList().get(i).getAlbumList().size(); j++) {
+                Album currentAlbum = manager.getAlbumCategoriesList().get(i).getAlbumList().get(j);
                 if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
                     currentAlbum.setReview(newReview);
                     foundAlbumInACategory = true;
@@ -913,8 +813,9 @@ public class AlbumReviewApp {
         // since an album has to be created before it is added to a category
         // if it is in a category, it must be in the list of all albums
         if (!foundAlbumInACategory) {
-            if (getIndexOfWantedAlbum(albumName, artist) != -1) {
-                this.albums.get(getIndexOfWantedAlbum(albumName, artist)).setReview(newReview);
+            if (manager.getWantedAlbum(albumName, artist) != null) {
+                manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(albumName, artist)))
+                        .setReview(newReview);
                 System.out.println("\n\nAlbum updated!");
             } else {
                 System.out.println("\n\nAlbum not found!");
@@ -934,83 +835,4 @@ public class AlbumReviewApp {
     public void loadAlbums() {
 
     }
-
-    // EFFECTS: return the index of the album in albums list specified by name and
-    // artist. returns -1 if not found
-    public int getIndexOfWantedAlbum(String name, String artist) {
-
-        int indexOfWantedAlbum = -1;
-        for (int i = 0; i < this.albums.size(); i++) {
-            Album currentAlbum = this.albums.get(i);
-            if (currentAlbum.getName().equalsIgnoreCase(name) && currentAlbum.getArtist().equalsIgnoreCase(artist)) {
-                indexOfWantedAlbum = i;
-            }
-
-        }
-        return indexOfWantedAlbum;
-
-    }
-
-    // EFFECTS: return the index of the album (referenced by name and artist) in the
-    // given category (referenced by name). returns -1 if not found
-    public int getIndexOfWantedAlbumInCategory(String name, String artist, int indexOfWantedCategory) {
-
-        int indexOfWantedAlbum = -1;
-        for (int i = 0; i < this.categories.get(indexOfWantedCategory).getAlbumList().size(); i++) {
-            Album currentAlbum = this.categories.get(indexOfWantedCategory).getAlbumList().get(i);
-            if (currentAlbum.getName().equalsIgnoreCase(name) && currentAlbum.getArtist().equalsIgnoreCase(artist)) {
-                indexOfWantedAlbum = i;
-            }
-
-        }
-        return indexOfWantedAlbum;
-
-    }
-
-    // EFFECTS: return the index of the category in albums list specified by name.
-    // returns -1 if not found
-    public int getIndexOfWantedCategory(String name) {
-
-        int indexOfWantedCategory = -1;
-        for (int i = 0; i < this.categories.size(); i++) {
-            AlbumCategory currentCategory = this.categories.get(i);
-            if (currentCategory.getName().equals(name)) {
-                indexOfWantedCategory = i;
-            }
-
-        }
-        return indexOfWantedCategory;
-
-    }
-
-    // EFFECTS: return the index of the song (referenced by song name) in the given
-    // album's (referenced by album index) tracklist. returns -1 if not found
-    public int getIndexOfWantedSongInAlbumTracklist(String name, int indexOfAlbum) {
-
-        int indexOfWantedSong = -1;
-        for (int i = 0; i < this.albums.get(indexOfAlbum).getTracklist().size(); i++) {
-            Song currentSong = this.albums.get(indexOfAlbum).getTracklist().get(i);
-            if (currentSong.getName().equalsIgnoreCase(name)) {
-                indexOfWantedSong = i;
-            }
-        }
-        return indexOfWantedSong;
-
-    }
-
-    // EFFECTS: returns true if the given album (referenced by name and artist) is
-    // found in any category, false otherwise
-    public boolean albumIsInAnyCategory(String name, String artist) {
-        for (AlbumCategory category : this.categories) {
-            for (Album album : category.getAlbumList()) {
-                if (album.getName().equals(name) && album.getArtist().equals(artist)) {
-                    return true;
-
-                }
-            }
-        }
-        return false;
-
-    }
-
 }

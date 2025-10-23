@@ -84,7 +84,7 @@ public class ReviewManager {
 
     // MODIFIES: this
     // EFFECTS: sorts album list by artist alphabetically. If two albums have the
-    // same artist, the album added first is shown first
+    // same artist, the order does not matter
     public void sortAlbumsByAlphabeticalArtist() {
         for (int i = 0; i < this.albums.size(); i++) {
             for (int j = 0; j < this.albums.size(); j++) {
@@ -106,7 +106,7 @@ public class ReviewManager {
 
     // MODIFIES: this
     // EFFECTS: sorts album list by name alphabetically. If two albums have the same
-    // name, the one added first is shown first
+    // name, the order does not matter
     public void sortAlbumsByAlphabeticalName() {
         for (int i = 0; i < this.albums.size(); i++) {
             for (int j = 0; j < this.albums.size(); j++) {
@@ -128,7 +128,7 @@ public class ReviewManager {
 
     // MODIFIES: this
     // EFFECTS: sorts album list by rating high to low. if two albums have same
-    // rating, the album added first is shown first
+    // rating, the order does not matter
     public void sortAlbumsByRating() {
         for (int i = 0; i < this.albums.size(); i++) {
             for (int j = 0; j < this.albums.size(); j++) {
