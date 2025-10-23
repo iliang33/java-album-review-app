@@ -3,7 +3,11 @@ package ui;
 import model.Album;
 import model.AlbumCategory;
 import model.ReviewManager;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 import exceptions.NotInRatingRangeException;
@@ -15,12 +19,17 @@ public class AlbumReviewApp {
 
     private ReviewManager manager;
     private Scanner scan;
+    private static final String JSON_SAVE_FILE = "./data/ReviewManager.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: runs the application, and initializes valid input and both the
     // scanner and the lists used to track album categories and albums.
-    public AlbumReviewApp() {
+    public AlbumReviewApp() throws FileNotFoundException {
         manager = new ReviewManager();
         this.scan = new Scanner(System.in);
+        jsonWriter = new JsonWriter(JSON_SAVE_FILE);
+        jsonReader = new JsonReader(JSON_SAVE_FILE);
 
         runApp();
     }
@@ -85,6 +94,7 @@ public class AlbumReviewApp {
         processListing(input);
         processSorting(input);
         processUpdating(input);
+        processLoadingAndSaving(input);
 
     }
 
@@ -183,6 +193,14 @@ public class AlbumReviewApp {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: acts upon input involving loading and saving
+    public void processLoadingAndSaving(String input) {
+        if (input.equalsIgnoreCase("ld")) {
+            loadReviewManager();
+        } 
+    }
+
     // referenced from TellerApp
     // https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
 
@@ -212,7 +230,8 @@ public class AlbumReviewApp {
         System.out.println("\tType sra to sort all album reviews by rating high to low\n");
 
         System.out.println("\tType uc to update a category's name");
-        System.out.println("\tType ua to update an album review");
+        System.out.println("\tType ua to update an album review\n");
+        System.out.println("\tType ld to load saved album reviews and categories");
 
     }
 
@@ -754,6 +773,7 @@ public class AlbumReviewApp {
         }
 
     }
+
     // MODIFIES: this
     // EFFECTS: updates the rating field of a given album (referenced by name and
     // artist) with the given new value if given album exists
@@ -824,15 +844,19 @@ public class AlbumReviewApp {
 
     }
 
-    // MODIFIES: this
-    // EFFECTS: loads all album categories from file
-    public void loadAlbumCategories() {
 
-    }
+    // referenced from JsonSerializationDemo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
     // MODIFIES: this
-    // EFFECTS: loads all albums from file
-    public void loadAlbums() {
+    // EFFECTS: loads review managerfrom file
+    public void loadReviewManager() {
+        try {
+            manager = jsonReader.readReviewManager();
+            System.out.println("\nLoaded reviews and categories from"  + JSON_SAVE_FILE);
+        } catch (IOException e) {
+            System.out.println("Error: failed to read from file: " + JSON_SAVE_FILE);
+        }
 
     }
 }
