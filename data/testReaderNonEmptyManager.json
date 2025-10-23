@@ -15,6 +15,22 @@
             "rating": 9.0,
             "review": "Her best",
             "tracklist": []
+        },
+        {
+            "name": "GUTS",
+            "artist": "Olivia Rodrigo",
+            "genre": "Pop Rock",
+            "rating": 8.6,
+            "review": "Fun",
+            "tracklist": []
+        },
+        {
+            "name": "SOUR",
+            "artist": "Olivia Rodrigo",
+            "genre": "Pop Rock",
+            "rating": 8.5,
+            "review": "Fun",
+            "tracklist": []
         }
     ],
     "categories": [

@@ -38,20 +38,6 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of AlbumCategory to file
-    public void writeAlbumCategory(AlbumCategory category) {
-        JSONObject json = category.toJson();
-        saveToFile(json.toString(TAB));
-    }
-
-    // MODIFIES: this
-    // EFFECTS: writes JSON representation of Album to file
-    public void writeAlbum(Album album) {
-        JSONObject json = album.toJson();
-        saveToFile(json.toString(TAB));
-    }
-
-    // MODIFIES: this
     // EFFECTS: closes writer
     public void close() {
         jsonWriter.close();
