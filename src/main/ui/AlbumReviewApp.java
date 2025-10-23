@@ -198,7 +198,9 @@ public class AlbumReviewApp {
     public void processLoadingAndSaving(String input) {
         if (input.equalsIgnoreCase("ld")) {
             loadReviewManager();
-        } 
+        } else if (input.equalsIgnoreCase("sv")) {
+            saveReviewManager();
+        }
     }
 
     // referenced from TellerApp
@@ -232,6 +234,7 @@ public class AlbumReviewApp {
         System.out.println("\tType uc to update a category's name");
         System.out.println("\tType ua to update an album review\n");
         System.out.println("\tType ld to load saved album reviews and categories");
+        System.out.println("\tType sv to save album reviews and categories");
 
     }
 
@@ -844,7 +847,6 @@ public class AlbumReviewApp {
 
     }
 
-
     // referenced from JsonSerializationDemo
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
@@ -853,7 +855,7 @@ public class AlbumReviewApp {
     public void loadReviewManager() {
         try {
             manager = jsonReader.readReviewManager();
-            System.out.println("\nLoaded reviews and categories from"  + JSON_SAVE_FILE);
+            System.out.println("\nLoaded reviews and categories from" + JSON_SAVE_FILE);
         } catch (IOException e) {
             System.out.println("Error: failed to read from file: " + JSON_SAVE_FILE);
         }
@@ -864,8 +866,16 @@ public class AlbumReviewApp {
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
     // MODIFIES: this
-    // EFFECTS: savs review manager to file
+    // EFFECTS: saves review manager to file
     public void saveReviewManager() {
+        try {
+            jsonWriter.open();
+            jsonWriter.writeReviewManager(manager);
+            jsonWriter.close();
+            System.out.println("\nSaved reviews and categories to " + JSON_SAVE_FILE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: failed to write to file: " + JSON_SAVE_FILE);
+        }
 
     }
 }
