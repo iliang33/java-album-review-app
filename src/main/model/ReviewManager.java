@@ -3,8 +3,13 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // Represents a manager that stores and handles operation on all created album review and album categories
-public class ReviewManager {
+public class ReviewManager implements Writable {
     private List<Album> albums;
     private List<AlbumCategory> categories;
 
@@ -247,6 +252,47 @@ public class ReviewManager {
 
         }
         return -1;
+    }
+
+    // referenced from JsonSerializationDemo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
+    // EFFECTS: returns this review manager as a JSON object
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("albums", albumsToJson());
+        json.put("categories", categoriesToJson());
+        return json;
+    }
+
+    // referenced from JsonSerializationDemo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
+    // EFFECTS: returns albums in this this review manager as a JSON array
+    private JSONArray albumsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Album album : this.albums) {
+            jsonArray.put(album.toJson());
+        }
+
+        return jsonArray;
+    }
+
+    // referenced from JsonSerializationDemo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
+    // EFFECTS: returns categories in this this review manager as a JSON array
+    private JSONArray categoriesToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (AlbumCategory category : this.categories) {
+            jsonArray.put(category.toJson());
+        }
+
+        return jsonArray;
     }
 
 }

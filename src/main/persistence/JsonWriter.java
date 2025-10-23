@@ -2,6 +2,8 @@ package persistence;
 
 import model.Album;
 import model.AlbumCategory;
+import model.ReviewManager;
+
 import org.json.JSONObject;
 
 import java.io.*;
@@ -9,7 +11,7 @@ import java.io.*;
 // referenced from JsonSerializationDemo
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
-// Represents a writer that writes the JSON representation of Album and AlbumCategory to file
+// Represents a writer that writes the JSON representation of ReviewManager, Album and AlbumCategory to file
 
 public class JsonWriter {
     private static final int TAB = 4;
@@ -26,6 +28,13 @@ public class JsonWriter {
     // destination file cannot be found or opened
     public void open() throws FileNotFoundException {
         jsonWriter = new PrintWriter(new File(destinationFile));
+    }
+
+    // MODIFIES: this
+    // EFFECTS: writes JSON representation of ReviewManager to file
+    public void writeReviewManager(ReviewManager manager) {
+        JSONObject json = manager.toJson();
+        saveToFile(json.toString(TAB));
     }
 
     // MODIFIES: this

@@ -10,18 +10,27 @@ import org.json.*;
 
 import model.Album;
 import model.AlbumCategory;
+import model.ReviewManager;
 import model.Song;
 
 // referenced from JsonSerializationDemo
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
-// Represents a reader that reads album category and album from JSON data stored in file
+// Represents a reader that reads review manager, album category and album from JSON data stored in file
 public class JsonReader {
     private String source;
 
     // EFFECTS: constructs reader to read from the source file
     public JsonReader(String source) {
         this.source = source;
+    }
+
+    // EFFECTS: reads review manager from file and returns it;
+    // throws IOException if an error occurs reading data from file
+    public ReviewManager readReviewManager() throws IOException {
+        String jsonData = readFile(source);
+        JSONObject jsonObject = new JSONObject(jsonData);
+        return parseReviewManager(jsonObject);
     }
 
     // EFFECTS: reads album category from file and returns it;
@@ -49,6 +58,14 @@ public class JsonReader {
         }
 
         return contentBuilder.toString();
+    }
+
+    // EFFECTS: parses review manager from JSON object and returns it
+    private ReviewManager parseReviewManager(JSONObject jsonObject) {
+        ReviewManager manager = new ReviewManager();
+        addAlbumsToManager(manager, jsonObject);
+        addCategoriesToManager(manager, jsonObject);
+        return manager;
     }
 
     // EFFECTS: parses album category from JSON object and returns it
@@ -82,6 +99,16 @@ public class JsonReader {
         }
     }
 
+    // MODIFIES: manager
+    // EFFECTS: parses albums from JSON object and adds them to review manager
+    private void addAlbumsToManager(ReviewManager manager, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("albums");
+        for (Object json : jsonArray) {
+            JSONObject nextAlbum = (JSONObject) json;
+            addAlbumToManager(manager, nextAlbum);
+        }
+    }
+
     // MODIFIES: category
     // EFFECTS: parses album from JSON object and adds it to album category
     private void addAlbum(AlbumCategory category, JSONObject jsonObject) {
@@ -94,6 +121,40 @@ public class JsonReader {
         Album album = new Album(name, artist, genre, rating, review);
 
         category.addAlbum(album);
+    }
+
+    // MODIFIES: manager
+    // EFFECTS: parses album from JSON object and adds it to review manager
+    private void addAlbumToManager(ReviewManager manager, JSONObject jsonObject) {
+        String name = jsonObject.getString("name");
+        String artist = jsonObject.getString("artist");
+        String genre = jsonObject.getString("genre");
+        double rating = jsonObject.getDouble("rating");
+        String review = jsonObject.getString("review");
+
+        Album album = new Album(name, artist, genre, rating, review);
+
+        manager.addAlbum(album);
+    }
+
+    // MODIFIES: manager
+    // EFFECTS: parses categories from JSON object and adds them to review manager
+    private void addCategoriesToManager(ReviewManager manager, JSONObject jsonObject) {
+        JSONArray jsonArray = jsonObject.getJSONArray("categories");
+        for (Object json : jsonArray) {
+            JSONObject nextAlbum = (JSONObject) json;
+            addCategory(manager, nextAlbum);
+        }
+    }
+
+    // MODIFIES: manager
+    // EFFECTS: parses category from JSON object and adds it to review manager
+    private void addCategory(ReviewManager manager, JSONObject jsonObject) {
+        String name = jsonObject.getString("name");
+
+        AlbumCategory category = new AlbumCategory(name);
+
+        manager.addCategory(category);
     }
 
     // MODIFIES: album
