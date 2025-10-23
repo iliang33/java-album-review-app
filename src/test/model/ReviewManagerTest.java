@@ -64,29 +64,17 @@ public class ReviewManagerTest {
         manager.addAlbum(otherTestAlbum);
         manager.addAlbum(lastTestAlbum);
 
-        manager.removeAlbum("Speak Now", "Taylor Swift");
+        manager.removeAlbum(testAlbum);
         assertFalse(manager.getAlbumsList().contains(testAlbum));
         assertEquals(manager.getAlbumsList().size(), 2);
 
-        manager.removeAlbum("1989", "Taylor Swift");
+        manager.removeAlbum(otherTestAlbum);
         assertFalse(manager.getAlbumsList().contains(otherTestAlbum));
         assertEquals(manager.getAlbumsList().size(), 1);
 
-        manager.removeAlbum("21", "Adele");
+        manager.removeAlbum(lastTestAlbum);
         assertFalse(manager.getAlbumsList().contains(lastTestAlbum));
         assertEquals(manager.getAlbumsList().size(), 0);
-
-    }
-
-    @Test
-    void testRemoveAlbumCasing() {
-        manager.addAlbum(testAlbum);
-        manager.addAlbum(otherTestAlbum);
-        manager.addAlbum(lastTestAlbum);
-
-        manager.removeAlbum("SPEAK noW", "TAYlor SwifT");
-        assertFalse(manager.getAlbumsList().contains(testAlbum));
-        assertEquals(manager.getAlbumsList().size(), 2);
 
     }
 
@@ -96,15 +84,15 @@ public class ReviewManagerTest {
         manager.addAlbum(otherTestAlbum);
         manager.addAlbum(lastTestAlbum);
 
-        manager.removeAlbum("21", "Adele");
+        manager.removeAlbum(lastTestAlbum);
         assertFalse(manager.getAlbumsList().contains(lastTestAlbum));
         assertEquals(manager.getAlbumsList().size(), 2);
 
-        manager.removeAlbum("Speak Now", "Taylor Swift");
+        manager.removeAlbum(testAlbum);
         assertFalse(manager.getAlbumsList().contains(testAlbum));
         assertEquals(manager.getAlbumsList().size(), 1);
 
-        manager.removeAlbum("1989", "Taylor Swift");
+        manager.removeAlbum(otherTestAlbum);
         assertFalse(manager.getAlbumsList().contains(otherTestAlbum));
         assertEquals(manager.getAlbumsList().size(), 0);
 
@@ -116,15 +104,15 @@ public class ReviewManagerTest {
         manager.addAlbum(otherTestAlbum);
         manager.addAlbum(lastTestAlbum);
 
-        manager.removeAlbum("1989", "Taylor Swift");
+        manager.removeAlbum(otherTestAlbum);
         assertFalse(manager.getAlbumsList().contains(otherTestAlbum));
         assertEquals(manager.getAlbumsList().size(), 2);
 
-        manager.removeAlbum("Speak Now", "Taylor Swift");
+        manager.removeAlbum(testAlbum);
         assertFalse(manager.getAlbumsList().contains(testAlbum));
         assertEquals(manager.getAlbumsList().size(), 1);
 
-        manager.removeAlbum("21", "Adele");
+        manager.removeAlbum(lastTestAlbum);
         assertFalse(manager.getAlbumsList().contains(lastTestAlbum));
         assertEquals(manager.getAlbumsList().size(), 0);
 
@@ -136,7 +124,7 @@ public class ReviewManagerTest {
         manager.addAlbum(otherTestAlbum);
         manager.addAlbum(lastTestAlbum);
 
-        manager.removeAlbum("Folklore", "Taylor Swift");
+        manager.removeAlbum(anotherTestAlbum);
 
         assertTrue(manager.getAlbumsList().contains(otherTestAlbum));
         assertTrue(manager.getAlbumsList().contains(testAlbum));
@@ -151,7 +139,7 @@ public class ReviewManagerTest {
         manager.addAlbum(otherTestAlbum);
         manager.addAlbum(lastTestAlbum);
 
-        manager.removeAlbum("Melodrama", "Taylor Swift");
+        manager.removeAlbum(extraTestAlbum);
 
         assertTrue(manager.getAlbumsList().contains(otherTestAlbum));
         assertTrue(manager.getAlbumsList().contains(testAlbum));
@@ -162,7 +150,7 @@ public class ReviewManagerTest {
 
     @Test
     void testRemoveAlbumFromEmptyList() {
-        manager.removeAlbum("The life of a showgirl", "Taylor Swift");
+        manager.removeAlbum(testAlbum);
 
         assertTrue(manager.getAlbumsList().isEmpty());
 
@@ -171,8 +159,8 @@ public class ReviewManagerTest {
     @Test
     void testAddToAlbumTracklist() {
         manager.addAlbum(testAlbum);
-        manager.addToAlbumTracklist("Speak Now", "Taylor Swift", "Long Live", "Taylor Swift", 9, "Wow");
-        manager.addToAlbumTracklist("Speak Now", "Taylor Swift", "Enchanted", "Taylor Swift", 10, "Perfect");
+        manager.addToAlbumTracklist(testAlbum, "Long Live", "Taylor Swift", 9, "Wow");
+        manager.addToAlbumTracklist(testAlbum, "Enchanted", "Taylor Swift", 10, "Perfect");
 
         Song song1 = testAlbum.getTracklist().get(0);
         Song song2 = testAlbum.getTracklist().get(1);
@@ -194,10 +182,10 @@ public class ReviewManagerTest {
     @Test
     void testRemoveFromAlbumTracklistLastFirst() {
         manager.addAlbum(testAlbum);
-        manager.addToAlbumTracklist("Speak Now", "Taylor Swift", "Long Live", "Taylor Swift", 9, "Wow");
-        manager.addToAlbumTracklist("Speak Now", "Taylor Swift", "Enchanted", "Taylor Swift", 10, "Perfect");
+        manager.addToAlbumTracklist(testAlbum, "Long Live", "Taylor Swift", 9, "Wow");
+        manager.addToAlbumTracklist(testAlbum, "Enchanted", "Taylor Swift", 10, "Perfect");
 
-        manager.removeFromAlbumTracklist("Speak Now", "Taylor Swift", 2);
+        manager.removeFromAlbumTracklist(testAlbum, 2);
 
         Song song1 = testAlbum.getTracklist().get(0);
 
@@ -208,17 +196,17 @@ public class ReviewManagerTest {
         assertEquals(song1.getRating(), 9);
         assertEquals(song1.getReview(), "Wow");
 
-        manager.removeFromAlbumTracklist("Speak Now", "Taylor Swift", 1);
+        manager.removeFromAlbumTracklist(testAlbum, 1);
         assertEquals(testAlbum.getTracklist().size(), 0);
     }
 
     @Test
     void testRemoveFromAlbumTracklistFirstFirst() {
         manager.addAlbum(testAlbum);
-        manager.addToAlbumTracklist("Speak Now", "Taylor Swift", "Long Live", "Taylor Swift", 9, "Wow");
-        manager.addToAlbumTracklist("Speak Now", "Taylor Swift", "Enchanted", "Taylor Swift", 10, "Perfect");
+        manager.addToAlbumTracklist(testAlbum, "Long Live", "Taylor Swift", 9, "Wow");
+        manager.addToAlbumTracklist(testAlbum, "Enchanted", "Taylor Swift", 10, "Perfect");
 
-        manager.removeFromAlbumTracklist("Speak Now", "Taylor Swift", 1);
+        manager.removeFromAlbumTracklist(testAlbum, 1);
 
         Song song = testAlbum.getTracklist().get(0);
 
@@ -229,7 +217,7 @@ public class ReviewManagerTest {
         assertEquals(song.getRating(), 10);
         assertEquals(song.getReview(), "Perfect");
 
-        manager.removeFromAlbumTracklist("Speak Now", "Taylor Swift", 1);
+        manager.removeFromAlbumTracklist(testAlbum, 1);
         assertEquals(testAlbum.getTracklist().size(), 0);
     }
 
@@ -250,12 +238,12 @@ public class ReviewManagerTest {
         manager.addCategory(testAlbumCategory);
         manager.addCategory(otherAlbumCategory);
 
-        manager.removeCategory("Pop 2");
+        manager.removeCategory(otherAlbumCategory);
 
         assertEquals(manager.getAlbumCategoriesList().size(), 1);
         assertEquals(manager.getAlbumCategoriesList().get(0), testAlbumCategory);
 
-        manager.removeCategory("Pop Albums");
+        manager.removeCategory(testAlbumCategory);
 
         assertEquals(manager.getAlbumCategoriesList().size(), 0);
 
@@ -266,12 +254,12 @@ public class ReviewManagerTest {
         manager.addCategory(testAlbumCategory);
         manager.addCategory(otherAlbumCategory);
 
-        manager.removeCategory("Pop Albums");
+        manager.removeCategory(testAlbumCategory);
 
         assertEquals(manager.getAlbumCategoriesList().size(), 1);
         assertEquals(manager.getAlbumCategoriesList().get(0), otherAlbumCategory);
 
-        manager.removeCategory("Pop 2");
+        manager.removeCategory(otherAlbumCategory);
 
         assertEquals(manager.getAlbumCategoriesList().size(), 0);
 
@@ -284,8 +272,8 @@ public class ReviewManagerTest {
         manager.addAlbum(testAlbum);
         manager.addAlbum(lastTestAlbum);
 
-        manager.addToCategory("Pop Albums", "Speak Now", "Taylor Swift");
-        manager.addToCategory("Pop Albums", "21", "Adele");
+        manager.addToCategory(testAlbumCategory, "Speak Now", "Taylor Swift");
+        manager.addToCategory(testAlbumCategory, "21", "Adele");
 
         List<Album> albumList = testAlbumCategory.getAlbumList();
 
@@ -302,15 +290,15 @@ public class ReviewManagerTest {
         manager.addAlbum(testAlbum);
         manager.addAlbum(lastTestAlbum);
 
-        manager.addToCategory("Pop Albums", "Speak Now", "Taylor Swift");
-        manager.addToCategory("Pop Albums", "21", "Adele");
+        manager.addToCategory(testAlbumCategory, "Speak Now", "Taylor Swift");
+        manager.addToCategory(testAlbumCategory, "21", "Adele");
 
-        manager.removeFromCategory("Pop Albums", "21", "Adele");
+        manager.removeFromCategory(testAlbumCategory, "21", "Adele");
 
         assertEquals(testAlbumCategory.getAlbumList().size(), 1);
         assertEquals(testAlbumCategory.getAlbumList().get(0), testAlbum);
 
-        manager.removeFromCategory("Pop Albums", "Speak Now", "Taylor Swift");
+        manager.removeFromCategory(testAlbumCategory, "Speak Now", "Taylor Swift");
 
         assertEquals(testAlbumCategory.getAlbumList().size(), 0);
 
@@ -322,15 +310,15 @@ public class ReviewManagerTest {
 
         manager.addAlbum(testAlbum);
         manager.addAlbum(lastTestAlbum);
-        manager.addToCategory("Pop Albums", "Speak Now", "Taylor Swift");
-        manager.addToCategory("Pop Albums", "21", "Adele");
+        manager.addToCategory(testAlbumCategory, "Speak Now", "Taylor Swift");
+        manager.addToCategory(testAlbumCategory, "21", "Adele");
 
-        manager.removeFromCategory("Pop Albums", "Speak Now", "Taylor Swift");
+        manager.removeFromCategory(testAlbumCategory, "Speak Now", "Taylor Swift");
 
         assertEquals(testAlbumCategory.getAlbumList().size(), 1);
         assertEquals(testAlbumCategory.getAlbumList().get(0), lastTestAlbum);
 
-        manager.removeFromCategory("Pop Albums", "21", "Adele");
+        manager.removeFromCategory(testAlbumCategory, "21", "Adele");
 
         assertEquals(testAlbumCategory.getAlbumList().size(), 0);
 

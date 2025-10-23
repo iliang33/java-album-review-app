@@ -26,19 +26,19 @@ public class ReviewManager {
 
     // REQUIRES: the album exists
     // MODIFIES: this
-    // EFFECTS: removes given album (referenced by name and artist) from all albums
+    // EFFECTS: removes given album from all albums
     // list
-    public void removeAlbum(String name, String artist) {
-        this.albums.remove(getWantedAlbum(name, artist));
+    public void removeAlbum(Album album) {
+        this.albums.remove(album);
 
     }
 
     // REQUIRES: album exists and song is not already in list
     // EFFECTS: creates and adds song with the given info to the tracklist of the
-    // album with the given info
-    public void addToAlbumTracklist(String albumName, String albumArtist, String songName, String songArtist,
+    // given album
+    public void addToAlbumTracklist(Album album, String songName, String songArtist,
             double songRating, String songReview) {
-        this.albums.get(getIndexOfAlbum(getWantedAlbum(albumName, albumArtist)))
+        this.albums.get(getIndexOfAlbum(album))
                 .addSong(new Song(songName, songArtist, songRating, songReview));
 
     }
@@ -46,9 +46,9 @@ public class ReviewManager {
     // REQUIRES: songNumber >= 1 && songNumber <= tracklist size and the album
     // exists
     // EFFECTS: removes the song in the given position number in tracklist from
-    // given album (referenced by name and artist)
-    public void removeFromAlbumTracklist(String albumName, String albumArtist, int songNumber) {
-        this.albums.get(getIndexOfAlbum(getWantedAlbum(albumName, albumArtist))).getTracklist().remove(songNumber - 1);
+    // given album
+    public void removeFromAlbumTracklist(Album album, int songNumber) {
+        this.albums.get(getIndexOfAlbum(album)).getTracklist().remove(songNumber - 1);
     }
 
     // REQUIRES: category is not already in list
@@ -61,24 +61,24 @@ public class ReviewManager {
 
     // REQUIRES: the category exists
     // MODIFIES: this
-    // EFFECTS: removes given category (referenced by name) from all categories
-    // list
-    public void removeCategory(String name) {
-        this.categories.remove(getWantedCategory(name));
+    // EFFECTS: removes given category from all categories list
+    public void removeCategory(AlbumCategory category) {
+        this.categories.remove(category);
 
     }
 
     // REQUIRES: category exists and album is not already in category
-    // EFFECTS: adds album with the given info to category with the given name
-    public void addToCategory(String categoryName, String albumName, String albumArtist) {
-        this.categories.get(getIndexOfCategory(getWantedCategory(categoryName))).addAlbum(getWantedAlbum(albumName, albumArtist));
+    // EFFECTS: adds album with the given info to given category
+    public void addToCategory(AlbumCategory category, String albumName, String albumArtist) {
+        this.categories.get(getIndexOfCategory(category))
+                .addAlbum(getWantedAlbum(albumName, albumArtist));
     }
 
     // REQUIRES: the album and the category both exist
     // MODIFIES: this
-    // EFFECTS: removes the album with given info from the category with given name
-    public void removeFromCategory(String categoryName, String albumName, String albumArtist) {
-        this.categories.get(getIndexOfCategory(getWantedCategory(categoryName))).removeAlbum(albumName, albumArtist);
+    // EFFECTS: removes the album with given info from the given category
+    public void removeFromCategory(AlbumCategory category, String albumName, String albumArtist) {
+        this.categories.get(getIndexOfCategory(category)).removeAlbum(albumName, albumArtist);
 
     }
 
