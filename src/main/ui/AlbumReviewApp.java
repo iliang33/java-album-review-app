@@ -849,7 +849,7 @@ public class AlbumReviewApp {
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
     // MODIFIES: this
-    // EFFECTS: loads review managerfrom file
+    // EFFECTS: loads review manager from file
     public void loadReviewManager() {
         try {
             manager = jsonReader.readReviewManager();
@@ -857,6 +857,15 @@ public class AlbumReviewApp {
         } catch (IOException e) {
             System.out.println("Error: failed to read from file: " + JSON_SAVE_FILE);
         }
+
+    }
+
+    // referenced from JsonSerializationDemo
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
+    // MODIFIES: this
+    // EFFECTS: savs review manager to file
+    public void saveReviewManager() {
 
     }
 }
