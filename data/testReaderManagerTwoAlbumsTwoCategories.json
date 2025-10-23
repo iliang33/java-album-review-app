@@ -1,0 +1,64 @@
+{
+    "albums": [
+        {
+            "name": "Born to Die",
+            "artist": "Lana Del Rey",
+            "genre": "Alt-Pop",
+            "rating": 9.1,
+            "review": "Amazing",
+            "tracklist": []
+        },
+        {
+            "name": "Speak Now",
+            "artist": "Taylor Swift",
+            "genre": "Pop Rock",
+            "rating": 9.0,
+            "review": "Her best",
+            "tracklist": []
+        }
+    ],
+    "categories": [
+        {
+            "name": "My Top Albums",
+            "albums": [
+                {
+                    "name": "Born to Die",
+                    "artist": "Lana Del Rey",
+                    "genre": "Alt-Pop",
+                    "rating": 9.1,
+                    "review": "Amazing",
+                    "tracklist": []
+                },
+                {
+                    "name": "Speak Now",
+                    "artist": "Taylor Swift",
+                    "genre": "Pop Rock",
+                    "rating": 9.0,
+                    "review": "Her best",
+                    "tracklist": []
+                }
+            ]
+        },
+        {
+            "name": "My Other Top Albums",
+            "albums": [
+                {
+                    "name": "GUTS",
+                    "artist": "Olivia Rodrigo",
+                    "genre": "Pop Rock",
+                    "rating": 8.6,
+                    "review": "Fun",
+                    "tracklist": []
+                },
+                {
+                    "name": "SOUR",
+                    "artist": "Olivia Rodrigo",
+                    "genre": "Pop Rock",
+                    "rating": 8.5,
+                    "review": "Fun",
+                    "tracklist": []
+                }
+            ]
+        }
+    ]
+}

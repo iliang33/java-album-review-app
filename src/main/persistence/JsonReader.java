@@ -142,8 +142,8 @@ public class JsonReader {
     private void addCategoriesToManager(ReviewManager manager, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("categories");
         for (Object json : jsonArray) {
-            JSONObject nextAlbum = (JSONObject) json;
-            addCategory(manager, nextAlbum);
+            JSONObject nextCategory = (JSONObject) json;
+            addCategory(manager, nextCategory);
         }
     }
 
@@ -153,6 +153,7 @@ public class JsonReader {
         String name = jsonObject.getString("name");
 
         AlbumCategory category = new AlbumCategory(name);
+        addAlbums(category, jsonObject);
 
         manager.addCategory(category);
     }
