@@ -1,13 +1,18 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 // Represents a manager that stores and handles operation on all created album review and album categories
 public class ReviewManager {
+    private List<Album> albums;
+    private List<AlbumCategory> categories;
 
     // EFFECTS: creates a review manager with no stored album reviews or album
     // categories
     public ReviewManager() {
+        this.albums = new ArrayList<>();
+        this.categories = new ArrayList<>();
 
     }
 
@@ -15,6 +20,7 @@ public class ReviewManager {
     // MODIFIES: this
     // EFFECTS: adds given album to all albums list
     public void addAlbum(Album album) {
+        this.albums.add(album);
 
     }
 
@@ -23,6 +29,7 @@ public class ReviewManager {
     // EFFECTS: removes given album (referenced by name and artist) from all albums
     // list
     public void removeAlbum(String name, String artist) {
+        this.albums.remove(getWantedAlbum(name, artist));
 
     }
 
@@ -31,6 +38,8 @@ public class ReviewManager {
     // album with the given info
     public void addToAlbumTracklist(String albumName, String albumArtist, String songName, String songArtist,
             double songRating, String songReview) {
+        this.albums.get(getIndexOfAlbum(getWantedAlbum(albumName, albumArtist)))
+                .addSong(new Song(songName, songArtist, songRating, songReview));
 
     }
 
@@ -39,12 +48,14 @@ public class ReviewManager {
     // EFFECTS: removes the song in the given position number in tracklist from
     // given album (referenced by name and artist)
     public void removeFromAlbumTracklist(String albumName, String albumArtist, int songNumber) {
+        this.albums.get(getIndexOfAlbum(getWantedAlbum(albumName, albumArtist))).getTracklist().remove(songNumber - 1);
     }
 
     // REQUIRES: category is not already in list
     // MODIFIES: this
     // EFFECTS: adds given category to all categories list
     public void addCategory(AlbumCategory category) {
+        this.categories.add(category);
 
     }
 
@@ -53,77 +64,189 @@ public class ReviewManager {
     // EFFECTS: removes given category (referenced by name) from all categories
     // list
     public void removeCategory(String name) {
+        this.categories.remove(getWantedCategory(name));
 
     }
 
     // REQUIRES: category exists and album is not already in category
     // EFFECTS: adds album with the given info to category with the given name
     public void addToCategory(String categoryName, String albumName, String albumArtist) {
+        this.categories.get(getIndexOfCategory(getWantedCategory(categoryName))).addAlbum(getWantedAlbum(albumName, albumArtist));
     }
 
     // REQUIRES: the album and the category both exist
     // MODIFIES: this
     // EFFECTS: removes the album with given info from the category with given name
     public void removeFromCategory(String categoryName, String albumName, String albumArtist) {
+        this.categories.get(getIndexOfCategory(getWantedCategory(categoryName))).removeAlbum(albumName, albumArtist);
 
     }
 
     // MODIFIES: this
     // EFFECTS: sorts album list by artist alphabetically. If two albums have the
-    // same artist, the album added first is
-    // shown first
+    // same artist, the album added first is shown first
     public void sortAlbumsByAlphabeticalArtist() {
+        for (int i = 0; i < this.albums.size(); i++) {
+            for (int j = 0; j < this.albums.size(); j++) {
+                // a negative result from compareTo means the string on the left should go
+                // before the string on the right
+                if (this.albums.get(i).getArtist().compareToIgnoreCase(this.albums.get(j).getArtist()) < 0) {
+                    // stores the album so it doesn't get lost during swapping
+                    Album currentAlbumComparingToOthers = this.albums.get(i);
+
+                    // swap positions
+                    this.albums.set(i, this.albums.get(j));
+                    this.albums.set(j, currentAlbumComparingToOthers);
+
+                }
+            }
+
+        }
     }
 
     // MODIFIES: this
     // EFFECTS: sorts album list by name alphabetically. If two albums have the same
     // name, the one added first is shown first
     public void sortAlbumsByAlphabeticalName() {
+        for (int i = 0; i < this.albums.size(); i++) {
+            for (int j = 0; j < this.albums.size(); j++) {
+                // a negative result from compareTo means the string on the left should go
+                // before the string on the right
+                if (this.albums.get(i).getName().compareToIgnoreCase(this.albums.get(j).getName()) < 0) {
+                    // stores the album so it doesn't get lost during swapping
+                    Album currentAlbumComparingToOthers = this.albums.get(i);
+
+                    // swap positions
+                    this.albums.set(i, this.albums.get(j));
+                    this.albums.set(j, currentAlbumComparingToOthers);
+
+                }
+            }
+
+        }
     }
 
     // MODIFIES: this
     // EFFECTS: sorts album list by rating high to low. if two albums have same
     // rating, the album added first is shown first
     public void sortAlbumsByRating() {
+        for (int i = 0; i < this.albums.size(); i++) {
+            for (int j = 0; j < this.albums.size(); j++) {
+
+                if (this.albums.get(i).getRating() > this.albums.get(j).getRating()) {
+                    // stores the album so it doesn't get lost during swapping
+                    Album currentAlbumComparingToOthers = this.albums.get(i);
+
+                    // swap positions
+                    this.albums.set(i, this.albums.get(j));
+                    this.albums.set(j, currentAlbumComparingToOthers);
+
+                }
+            }
+
+        }
     }
 
     // EFFECTS: return album specified by name and
     // artist. returns null if not found
     public Album getWantedAlbum(String name, String artist) {
-        return null;
+        Album wantedAlbum = null;
+        for (Album album : this.albums) {
+            if (album.getName().equalsIgnoreCase(name) && album.getArtist().equalsIgnoreCase(artist)) {
+                wantedAlbum = album;
+            }
+
+        }
+        return wantedAlbum;
+
     }
 
     // EFFECTS: return category specified by name, returns null if not found
     public AlbumCategory getWantedCategory(String name) {
-        return null;
+        AlbumCategory wantedCategory = null;
+        for (AlbumCategory category : this.categories) {
+            if (category.getName().equals(name)) {
+                wantedCategory = category;
+            }
+
+        }
+        return wantedCategory;
+
     }
 
     // EFFECTS: return album specified by name and
     // artist in given category. returns null if not found
     public Album getWantedAlbumInWantedCategory(String name, String artist, AlbumCategory category) {
-        return null;
+        Album wantedAlbum = null;
+        for (Album album : category.getAlbumList()) {
+            if (album.getName().equalsIgnoreCase(name) && album.getArtist().equalsIgnoreCase(artist)) {
+                wantedAlbum = album;
+            }
+
+        }
+        return wantedAlbum;
     }
 
-    // EFFECTS: return song specified by name that is in the given album's
+    // EFFECTS: return song specified by name and artist that is in the given
+    // album's
     // tracklist. returns null if not found
-    public Song getWantedSongInTracklist(String name, Album album) {
-        return null;
+    public Song getWantedSongInTracklist(String name, String artist, Album album) {
+        Song wantedSong = null;
+        for (Song song : album.getTracklist()) {
+            if (song.getName().equalsIgnoreCase(name)) {
+                wantedSong = song;
+            }
+        }
+        return wantedSong;
     }
 
     // EFFECTS: returns true if the given album
     // found in any category, false otherwise
     public boolean albumIsInAnyCategory(Album album) {
+        for (AlbumCategory category : this.categories) {
+            if (category.getAlbumList().contains(album)) {
+                return true;
+
+            }
+
+        }
         return false;
     }
 
     public List<Album> getAlbumsList() {
-        return null;
+        return this.albums;
 
     }
 
     public List<AlbumCategory> getAlbumCategoriesList() {
-        return null;
+        return this.categories;
 
+    }
+
+    // REQUIRES: the given album is in the all albums list
+    // EFFECTS: returns the index of the given album in the albums list
+    public int getIndexOfAlbum(Album album) {
+        for (int i = 0; i < this.albums.size(); i++) {
+            if (this.albums.get(i).equals(album)) {
+                return i;
+
+            }
+
+        }
+        return -1;
+    }
+
+    // REQUIRES: the given category is in the all albums list
+    // EFFECTS: returns the index of the given category in the categories list
+    public int getIndexOfCategory(AlbumCategory category) {
+        for (int i = 0; i < this.categories.size(); i++) {
+            if (this.categories.get(i).equals(category)) {
+                return i;
+
+            }
+
+        }
+        return -1;
     }
 
 }

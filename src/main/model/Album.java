@@ -62,7 +62,6 @@ public class Album implements Writable {
     // EFFECTS: adds any songs from albumToMeregeWith into this album's tracklist if
     // not already there
     public void mergeAlbum(Album albumToMergeWith) {
-
         for (Song song : albumToMergeWith.getTracklist()) {
             if (!this.tracklist.contains(song)) {
                 this.tracklist.add(song);

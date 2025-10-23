@@ -77,7 +77,7 @@ class JsonReaderTest extends JsonTest {
             List<Album> albums = category.getAlbumList();
             assertEquals(2, albums.size());
             checkAlbum("Born to Die", "Lana Del Rey", "Alt-Pop", 9.1, "Amazing", albums.get(0));
-            checkAlbum("Speak Now", "Taylor Swift", "Pop Rock", 9.0, "Her best", albums.get(0));
+            checkAlbum("Speak Now", "Taylor Swift", "Pop Rock", 9.0, "Her best", albums.get(1));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
