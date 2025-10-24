@@ -231,27 +231,28 @@ public class ReviewManager implements Writable {
     // REQUIRES: the given album is in the all albums list
     // EFFECTS: returns the index of the given album in the albums list
     public int getIndexOfAlbum(Album album) {
+        int index = 0;
         for (int i = 0; i < this.albums.size(); i++) {
             if (this.albums.get(i).equals(album)) {
-                return i;
+                index = i;
 
             }
 
         }
-        return -1;
+        return index;
     }
 
     // REQUIRES: the given category is in the all albums list
     // EFFECTS: returns the index of the given category in the categories list
     public int getIndexOfCategory(AlbumCategory category) {
+        int index = 0;
         for (int i = 0; i < this.categories.size(); i++) {
             if (this.categories.get(i).equals(category)) {
-                return i;
-
+                index = i;
             }
 
         }
-        return -1;
+        return index;
     }
 
     // referenced from JsonSerializationDemo

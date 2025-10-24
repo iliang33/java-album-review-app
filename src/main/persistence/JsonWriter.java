@@ -1,7 +1,5 @@
 package persistence;
 
-import model.Album;
-import model.AlbumCategory;
 import model.ReviewManager;
 
 import org.json.JSONObject;

@@ -559,9 +559,18 @@ public class ReviewManagerTest {
     }
 
     @Test
-    void testGetWantedAlbumNotFoundOneOfNameAndArtistCorrect() {
+    void testGetWantedAlbumNotFoundArtistCorrect() {
         manager.addAlbum(otherTestAlbum);
         Album album = manager.getWantedAlbum("Speak Now", "Taylor Swift");
+
+        assertNull(album);
+
+    }
+
+    @Test
+    void testGetWantedAlbumNotFoundOneOfNameCorrect() {
+        manager.addAlbum(otherTestAlbum);
+        Album album = manager.getWantedAlbum("1989", "Adele");
 
         assertNull(album);
 
@@ -622,13 +631,25 @@ public class ReviewManagerTest {
     }
 
     @Test
-    void testGetWantedAlbumInWantedCategoryNotFoundOneOfNameArtistCorrect() {
+    void testGetWantedAlbumInWantedCategoryNotFoundArtistCorrect() {
         testAlbumCategory.addAlbum(testAlbum);
         testAlbumCategory.addAlbum(otherTestAlbum);
 
         manager.addCategory(testAlbumCategory);
 
         Album album = manager.getWantedAlbumInWantedCategory("Lover", "Taylor Swift", testAlbumCategory);
+
+        assertNull(album);
+    }
+
+     @Test
+    void testGetWantedAlbumInWantedCategoryNotFoundOneOfNameCorrect() {
+        testAlbumCategory.addAlbum(testAlbum);
+        testAlbumCategory.addAlbum(otherTestAlbum);
+
+        manager.addCategory(testAlbumCategory);
+
+        Album album = manager.getWantedAlbumInWantedCategory("Speak Now", "Dua Lipa", testAlbumCategory);
 
         assertNull(album);
     }
