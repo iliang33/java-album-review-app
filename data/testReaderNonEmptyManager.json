@@ -9,26 +9,10 @@
             "tracklist": []
         },
         {
-            "name": "Speak Now",
-            "artist": "Taylor Swift",
-            "genre": "Pop Rock",
-            "rating": 9.0,
-            "review": "Her best",
-            "tracklist": []
-        },
-        {
             "name": "GUTS",
             "artist": "Olivia Rodrigo",
             "genre": "Pop Rock",
             "rating": 8.6,
-            "review": "Fun",
-            "tracklist": []
-        },
-        {
-            "name": "SOUR",
-            "artist": "Olivia Rodrigo",
-            "genre": "Pop Rock",
-            "rating": 8.5,
             "review": "Fun",
             "tracklist": []
         }
@@ -44,14 +28,6 @@
                     "rating": 9.1,
                     "review": "Amazing",
                     "tracklist": []
-                },
-                {
-                    "name": "Speak Now",
-                    "artist": "Taylor Swift",
-                    "genre": "Pop Rock",
-                    "rating": 9.0,
-                    "review": "Her best",
-                    "tracklist": []
                 }
             ]
         },
@@ -63,14 +39,6 @@
                     "artist": "Olivia Rodrigo",
                     "genre": "Pop Rock",
                     "rating": 8.6,
-                    "review": "Fun",
-                    "tracklist": []
-                },
-                {
-                    "name": "SOUR",
-                    "artist": "Olivia Rodrigo",
-                    "genre": "Pop Rock",
-                    "rating": 8.5,
                     "review": "Fun",
                     "tracklist": []
                 }

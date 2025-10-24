@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 import persistence.Writable;
 
-// Represents a manager that stores and handles operation on all created album review and album categories
+// Represents a manager that stores and handles operations on all created album review and album categories
 public class ReviewManager implements Writable {
     private List<Album> albums;
     private List<AlbumCategory> categories;
@@ -31,8 +31,7 @@ public class ReviewManager implements Writable {
 
     // REQUIRES: the album exists
     // MODIFIES: this
-    // EFFECTS: removes given album from all albums
-    // list
+    // EFFECTS: removes given album from all albums list
     public void removeAlbum(Album album) {
         this.albums.remove(album);
 
@@ -152,8 +151,7 @@ public class ReviewManager implements Writable {
         }
     }
 
-    // EFFECTS: return album specified by name and
-    // artist. returns null if not found
+    // EFFECTS: return album specified by name and artist, null if not found
     public Album getWantedAlbum(String name, String artist) {
         Album wantedAlbum = null;
         for (Album album : this.albums) {
@@ -166,7 +164,7 @@ public class ReviewManager implements Writable {
 
     }
 
-    // EFFECTS: return category specified by name, returns null if not found
+    // EFFECTS: return category specified by name, null if not found
     public AlbumCategory getWantedCategory(String name) {
         AlbumCategory wantedCategory = null;
         for (AlbumCategory category : this.categories) {
@@ -179,8 +177,8 @@ public class ReviewManager implements Writable {
 
     }
 
-    // EFFECTS: return album specified by name and
-    // artist in given category. returns null if not found
+    // EFFECTS: return album specified by name and artist in given categor, null if
+    // not found
     public Album getWantedAlbumInWantedCategory(String name, String artist, AlbumCategory category) {
         Album wantedAlbum = null;
         for (Album album : category.getAlbumList()) {
@@ -193,8 +191,7 @@ public class ReviewManager implements Writable {
     }
 
     // EFFECTS: return song specified by name and artist that is in the given
-    // album's
-    // tracklist. returns null if not found
+    // album's tracklist, null if not found
     public Song getWantedSongInTracklist(String name, String artist, Album album) {
         Song wantedSong = null;
         for (Song song : album.getTracklist()) {
@@ -205,8 +202,7 @@ public class ReviewManager implements Writable {
         return wantedSong;
     }
 
-    // EFFECTS: returns true if the given album
-    // found in any category, false otherwise
+    // EFFECTS: returns true if the given album is in any category, false otherwise
     public boolean albumIsInAnyCategory(Album album) {
         for (AlbumCategory category : this.categories) {
             if (category.getAlbumList().contains(album)) {
@@ -242,7 +238,7 @@ public class ReviewManager implements Writable {
         return index;
     }
 
-    // REQUIRES: the given category is in the all albums list
+    // REQUIRES: the given category is in the all album categories list
     // EFFECTS: returns the index of the given category in the categories list
     public int getIndexOfCategory(AlbumCategory category) {
         int index = 0;
@@ -259,7 +255,6 @@ public class ReviewManager implements Writable {
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
     // EFFECTS: returns this review manager as a JSON object
-
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

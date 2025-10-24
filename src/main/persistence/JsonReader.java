@@ -16,7 +16,7 @@ import model.Song;
 // referenced from JsonSerializationDemo
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
-// Represents a reader that reads review manager, album category and album from JSON data stored in file
+// Represents a reader that reads review manager from JSON data stored in file
 public class JsonReader {
     private String source;
 
@@ -95,8 +95,6 @@ public class JsonReader {
         String genre = jsonObject.getString("genre");
         double rating = jsonObject.getDouble("rating");
         String review = jsonObject.getString("review");
-
-
 
         Album album = new Album(name, artist, genre, rating, review);
         addTracklist(album, jsonObject);

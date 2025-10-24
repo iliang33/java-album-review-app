@@ -9,8 +9,7 @@ import java.io.*;
 // referenced from JsonSerializationDemo
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
-// Represents a writer that writes the JSON representation of ReviewManager, Album and AlbumCategory to file
-
+// Represents a writer that writes the JSON representation of ReviewManager to file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter jsonWriter;

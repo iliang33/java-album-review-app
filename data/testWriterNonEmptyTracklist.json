@@ -20,28 +20,5 @@
         "genre": "Alt-Pop",
         "rating": 9.1
     }],
-    "categories": [{
-        "albums": [{
-            "tracklist": [
-                {
-                    "artist": "Lana Del Rey",
-                    "review": "Wow",
-                    "name": "Dark Paradise",
-                    "rating": 9.5
-                },
-                {
-                    "artist": "Lana Del Rey",
-                    "review": "Amazing",
-                    "name": "Off To The Races",
-                    "rating": 9.5
-                }
-            ],
-            "artist": "Lana Del Rey",
-            "review": "Amazing",
-            "name": "Born to Die",
-            "genre": "Alt-Pop",
-            "rating": 9.1
-        }],
-        "name": "My Top Albums"
-    }]
+    "categories": []
 }

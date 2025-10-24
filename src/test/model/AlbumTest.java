@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
 // Set of tests for the Album class
 @ExcludeFromJacocoGeneratedReport
 public class AlbumTest {

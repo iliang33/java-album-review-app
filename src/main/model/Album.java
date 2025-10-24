@@ -58,15 +58,14 @@ public class Album implements Writable {
 
     }
 
-    // MODIFIES: this, albumToMergeWith
-    // EFFECTS: adds any songs from albumToMeregeWith into this album's tracklist if
-    // not already there
+    // MODIFIES: this
+    // EFFECTS: adds all songs from albumToMergeWith that are not already this
+    // album's tracklist
     public void mergeAlbum(Album albumToMergeWith) {
         for (Song song : albumToMergeWith.getTracklist()) {
             if (!this.tracklist.contains(song)) {
                 this.tracklist.add(song);
             }
-
         }
 
     }
@@ -147,7 +146,6 @@ public class Album implements Writable {
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
     // EFFECTS: returns this album as a JSON object
-
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

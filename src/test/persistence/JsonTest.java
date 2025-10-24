@@ -9,6 +9,7 @@ import model.Song;
 // referenced from JsonSerializationDemo
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
+// Methods useful for testing JsonReader and JsonWriter
 @ExcludeFromJacocoGeneratedReport
 public class JsonTest {
 

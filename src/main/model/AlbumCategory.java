@@ -83,7 +83,6 @@ public class AlbumCategory implements Writable {
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
     // EFFECTS: returns this album category as a JSON object
-
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();

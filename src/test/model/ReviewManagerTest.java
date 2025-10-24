@@ -642,7 +642,7 @@ public class ReviewManagerTest {
         assertNull(album);
     }
 
-     @Test
+    @Test
     void testGetWantedAlbumInWantedCategoryNotFoundOneOfNameCorrect() {
         testAlbumCategory.addAlbum(testAlbum);
         testAlbumCategory.addAlbum(otherTestAlbum);

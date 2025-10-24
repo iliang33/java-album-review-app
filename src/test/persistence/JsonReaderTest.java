@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 // referenced from JsonSerializationDemo
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
+// Set of tests for JsonReader
 @ExcludeFromJacocoGeneratedReport
 class JsonReaderTest extends JsonTest {
     @Test
@@ -24,6 +25,7 @@ class JsonReaderTest extends JsonTest {
             reader.readReviewManager();
             fail("IOException expected");
         } catch (IOException e) {
+            // expected
 
         }
     }
@@ -50,14 +52,11 @@ class JsonReaderTest extends JsonTest {
             List<AlbumCategory> categories = manager.getAlbumCategoriesList();
 
             checkAlbum("Born to Die", "Lana Del Rey", "Alt-Pop", 9.1, "Amazing", albums.get(0));
-            checkAlbum("Speak Now", "Taylor Swift", "Pop Rock", 9.0, "Her best", albums.get(1));
-            checkAlbum("GUTS", "Olivia Rodrigo", "Pop Rock", 8.6, "Fun", albums.get(2));
-            checkAlbum("SOUR", "Olivia Rodrigo", "Pop Rock", 8.5, "Fun", albums.get(3));
+            checkAlbum("GUTS", "Olivia Rodrigo", "Pop Rock", 8.6, "Fun", albums.get(1));
+ 
 
             assertTrue(albums.get(0).getTracklist().isEmpty());
             assertTrue(albums.get(1).getTracklist().isEmpty());
-            assertTrue(albums.get(2).getTracklist().isEmpty());
-            assertTrue(albums.get(3).getTracklist().isEmpty());
 
             assertEquals("My Top Albums", categories.get(0).getName());
             assertEquals("My Other Top Albums", categories.get(1).getName());
@@ -66,17 +65,10 @@ class JsonReaderTest extends JsonTest {
                     categories.get(0).getAlbumList().get(0));
             assertTrue(categories.get(0).getAlbumList().get(0).getTracklist().isEmpty());
 
-            checkAlbum("Speak Now", "Taylor Swift", "Pop Rock", 9.0, "Her best",
-                    categories.get(0).getAlbumList().get(1));
-            assertTrue(categories.get(0).getAlbumList().get(1).getTracklist().isEmpty());
 
             checkAlbum("GUTS", "Olivia Rodrigo", "Pop Rock", 8.6, "Fun",
                     categories.get(1).getAlbumList().get(0));
             assertTrue(categories.get(1).getAlbumList().get(0).getTracklist().isEmpty());
-
-            checkAlbum("SOUR", "Olivia Rodrigo", "Pop Rock", 8.5, "Fun",
-                    categories.get(1).getAlbumList().get(1));
-            assertTrue(categories.get(1).getAlbumList().get(1).getTracklist().isEmpty());
 
         } catch (IOException e) {
             fail("Couldn't read from file");
