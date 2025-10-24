@@ -24,7 +24,7 @@ Because of this I thought it would be enjoyable to turn this into a project.
 - As a user, I want to be able to sort reviews by critera such as by artist name alphabetical  
 - As a user, I want to be able to update existing reviews and categories   
 - As a user, I want to be able to merge two albums not in categories together  
-- As a user, I want to be given the option to save all my reviews and categories when I exit the app  
+- As a user, I want to be given the option to save all my reviews and categories 
 - As a user, I want to be given the option to load all of my saved reviews and categories  
   
 
