@@ -52,7 +52,7 @@ public class JsonReader {
         return manager;
     }
 
-    // MODIFIES: manager
+    // MODIFIES: ReviewManager
     // EFFECTS: parses albums from JSON object and adds them to review manager
     private void addAlbumsToManager(ReviewManager manager, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("albums");
@@ -62,7 +62,7 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: manager
+    // MODIFIES: ReviewManager
     // EFFECTS: parses album from JSON object and adds it to review manager
     private void addAlbumToManager(ReviewManager manager, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
@@ -77,7 +77,7 @@ public class JsonReader {
         manager.addAlbum(album);
     }
 
-    // MODIFIES: category
+    // MODIFIES: AlbumCategory
     // EFFECTS: parses albums from JSON object and adds them to album category
     private void addAlbumsToCategory(AlbumCategory category, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("albums");
@@ -87,7 +87,7 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: category
+    // MODIFIES: AlbumCategory
     // EFFECTS: parses album from JSON object and adds it to album category
     private void addAlbumToCategory(AlbumCategory category, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
@@ -102,7 +102,7 @@ public class JsonReader {
         category.addAlbum(album);
     }
 
-    // MODIFIES: manager
+    // MODIFIES: ReviewManager
     // EFFECTS: parses categories from JSON object and adds them to review manager
     private void addCategoriesToManager(ReviewManager manager, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("categories");
@@ -112,7 +112,7 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: manager
+    // MODIFIES: ReviewManager
     // EFFECTS: parses category from JSON object and adds it to review manager
     private void addCategory(ReviewManager manager, JSONObject jsonObject) {
         String name = jsonObject.getString("name");
@@ -123,7 +123,7 @@ public class JsonReader {
         manager.addCategory(category);
     }
 
-    // MODIFIES: album
+    // MODIFIES: Album
     // EFFECTS: parses tracklist from JSON object and adds them to album
     private void addTracklist(Album album, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("tracklist");
@@ -133,7 +133,7 @@ public class JsonReader {
         }
     }
 
-    // MODIFIES: album
+    // MODIFIES: Album
     // EFFECTS: parses song from JSON object and adds it to album
     private void addSong(Album album, JSONObject jsonObject) {
         String name = jsonObject.getString("name");

@@ -41,7 +41,7 @@ public class AlbumReviewApp {
 
     // MODIFIES: this
     // EFFECTS: takes user input
-    public void runApp() {
+    public void runApp(){
         boolean hasExit = false;
         String input = null;
 

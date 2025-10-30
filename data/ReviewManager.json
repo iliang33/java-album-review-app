@@ -1,48 +1,25 @@
 {
-    "albums": [
-        {
-            "tracklist": [
-                {
-                    "artist": "adele",
-                    "review": "good",
-                    "name": "hello",
-                    "rating": 7
-                },
-                {
-                    "artist": "adele",
-                    "review": "good",
-                    "name": "when we were young",
-                    "rating": 8
-                }
-            ],
-            "artist": "adele",
-            "review": "good",
-            "name": "19",
-            "genre": "pop",
-            "rating": 8
-        },
-        {
-            "tracklist": [
-                {
-                    "artist": "adele",
-                    "review": "wow",
-                    "name": "all i ask",
-                    "rating": 9
-                },
-                {
-                    "artist": "adele",
-                    "review": "eh",
-                    "name": "sweetest devotion",
-                    "rating": 7.6
-                }
-            ],
-            "artist": "adele",
-            "review": "good",
-            "name": "25",
-            "genre": "pop",
-            "rating": 9
-        }
-    ],
+    "albums": [{
+        "tracklist": [
+            {
+                "artist": "adele",
+                "review": "wow",
+                "name": "all i ask",
+                "rating": 9
+            },
+            {
+                "artist": "adele",
+                "review": "eh",
+                "name": "sweetest devotion",
+                "rating": 7.6
+            }
+        ],
+        "artist": "adele",
+        "review": "good",
+        "name": "25",
+        "genre": "pop",
+        "rating": 9
+    }],
     "categories": [
         {
             "albums": [{
