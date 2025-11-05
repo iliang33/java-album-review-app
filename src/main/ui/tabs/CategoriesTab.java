@@ -3,6 +3,7 @@ package ui.tabs;
 import javax.swing.JButton;
 
 import model.ReviewManager;
+import ui.ButtonNames;
 
 // referenced from SmartHomeUI
 // https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
@@ -16,12 +17,19 @@ public class CategoriesTab extends Tab {
     // containing buttons related to category operations
     public CategoriesTab(ReviewManager manager) {
         super(manager);
+        createSidebar();
+        addButtonsToSidebar();
+        setVisible(true);
     }
 
     // MODIFIES: this
     // EFFECTS: adds all buttons related to category operations to the sidebar
     private void addButtonsToSidebar() {
-
+        createCategoryButton();
+        createRemoveCategoryButton();
+        createAddToCategoryButton();
+        createRemoveFromCategoryButton();
+        createUpdateNameButton();
     }
 
     // EFFECTS: displays all created categories
@@ -33,36 +41,45 @@ public class CategoriesTab extends Tab {
     // for
     // a name and creates a category with that name
     private void createCategoryButton() {
+        createButton(ButtonNames.ADD_CATEGORY.getValue());
 
     }
 
     // EFFECTS: creates a remove category button that when clicked, prompts the user
     // for a category and removes it
     private void createRemoveCategoryButton() {
+        createButton(ButtonNames.REMOVE_CATEGORY.getValue());
 
     }
 
     // EFFECTS: creates an add to category button that when clicked, prompts the
     // user for a category and album then adds the album to the category
     private void createAddToCategoryButton() {
+        createButton(ButtonNames.ADD_TO_CATEGORY.getValue());
 
     }
 
     // EFFECTS: creates a remove from category button that when clicked, prompts the
     // user for a category and album, then removes the album from the category
     private void createRemoveFromCategoryButton() {
+        createButton(ButtonNames.REMOVE_FROM_CATEGORY.getValue());
 
     }
 
     // EFFECTS: creates an update name button that when clicked, prompts the user
     // for a category, and a name, then updates that category's name to the name
     private void createUpdateNameButton() {
+        createButton(ButtonNames.UPDATE_NAME.getValue());
 
     }
 
     // EFFECTS: creates and returns a new button with the given name
     private JButton createButton(String buttonName) {
-        return null;
+        JButton button = new JButton(buttonName);
+        button.setMaximumSize(BUTTON_DIMENSION);
+        sidebar.add(button);
+
+        return button;
 
     }
 

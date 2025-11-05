@@ -1,10 +1,5 @@
 package ui.tabs;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.LayoutManager;
-
 import javax.swing.*;
 
 import model.ReviewManager;
@@ -17,21 +12,12 @@ import ui.ButtonNames;
 // album creation, removal, listing and sorting is done
 
 public class AlbumsTab extends Tab {
-    private JPanel sidebar;
-    private static final Dimension BUTTON_DIMENSION = new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT);
-    private static final Dimension RIGID_AREA_DIMENSION = new Dimension(0, 10);
-
     // EFFECTS: creates an albums tab displaying all album reviews and sidebar
     // containing buttons related to album reviews operations
     public AlbumsTab(ReviewManager manager) {
         super(manager);
-
-        sidebar = new JPanel();
-        sidebar.setLayout(new BoxLayout(sidebar, BoxLayout.Y_AXIS));
-        add(sidebar, BorderLayout.EAST);
-
+        createSidebar();
         addButtonsToSidebar();
-
         setVisible(true);
     }
 
