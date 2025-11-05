@@ -1,5 +1,7 @@
 package ui.tabs;
 
+import javax.swing.JButton;
+
 import model.ReviewManager;
 
 // referenced from SmartHomeUI
@@ -55,6 +57,12 @@ public class CategoriesTab extends Tab {
     // EFFECTS: creates an update name button that when clicked, prompts the user
     // for a category, and a name, then updates that category's name to the name
     private void createUpdateNameButton() {
+
+    }
+
+    // EFFECTS: creates and returns a new button with the given name
+    private JButton createButton(String buttonName) {
+        return null;
 
     }
 
