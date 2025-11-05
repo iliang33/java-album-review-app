@@ -18,8 +18,8 @@ public class AlbumReviewGUI extends JFrame {
     public static final int CATEGORIES_TAB_INDEX = 2;
     public static final int UPDATE_TAB_INDEX = 3;
 
-    public static final int WIDTH = 800;
-    public static final int HEIGHT = 800;
+    public static final int WIDTH = 600;
+    public static final int HEIGHT = 600;
     private JTabbedPane navbar;
     private ReviewManager manager;
 

@@ -2,6 +2,9 @@ package ui.tabs;
 
 import model.ReviewManager;
 
+// referenced from SmartHomeUI
+// https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
+
 // represents the categories tab on the navbar of the GUI where 
 // category creation, removal. adding to, removing from, and name updating is done
 

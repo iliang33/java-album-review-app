@@ -2,6 +2,9 @@ package ui.tabs;
 
 import model.ReviewManager;
 
+// referenced from SmartHomeUI
+// https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
+
 // represents the albums tab on the navbar of the GUI where 
 // album creation, removal, listing and sorting is done
 
