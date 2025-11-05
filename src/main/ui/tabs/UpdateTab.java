@@ -1,5 +1,7 @@
 package ui.tabs;
 
+import javax.swing.JButton;
+
 import model.ReviewManager;
 
 // referenced from SmartHomeUI
@@ -55,6 +57,12 @@ public class UpdateTab extends Tab {
     // EFFECTS: prompts user for an album and new review, then updates that album to
     // have the new artist
     private void createUpdateReviewButton() {
+
+    }
+
+    // EFFECTS: creates and returns a new button with the given name
+    private JButton createButton(String buttonName) {
+        return null;
 
     }
 
