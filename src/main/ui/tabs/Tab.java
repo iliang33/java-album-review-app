@@ -1,4 +1,4 @@
-package ui;
+package ui.tabs;
 
 import javax.swing.*;
 
