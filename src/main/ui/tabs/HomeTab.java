@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.ReviewManager;
+import ui.AlbumReviewGUI;
 import ui.ButtonNames;
 
 // referenced from SmartHomeUI
@@ -17,13 +18,16 @@ import ui.ButtonNames;
 public class HomeTab extends Tab {
     private JLabel welcomeMsg;
     private static final String WELCOME = "Welcome to the Album Review App";
+    private AlbumReviewGUI gui;
 
     // EFFECTS: creates a home tab with a welcome message and exit, load and save
     // buttons
-    public HomeTab(ReviewManager manager) {
+    public HomeTab(ReviewManager manager, AlbumReviewGUI gui) {
         super(manager);
+        this.gui = gui;
 
         setLayout(new GridLayout(3, 1));
+        
 
         createWelcomeMessage();
         createSaveLoadButtons();
@@ -53,13 +57,18 @@ public class HomeTab extends Tab {
 
     }
 
-    // EFFECTS: creates exit buttons
+    // EFFECTS: creates exit button, that closes the gui on click
     private void createExitButton() {
         JButton exit = new JButton(ButtonNames.EXIT.getValue());
 
         JPanel buttonRow = formatButtonRow(exit);
         buttonRow.setSize(WIDTH, HEIGHT / 6);
         this.add(buttonRow);
+
+        exit.addActionListener(e -> {
+            gui.dispose();
+            
+        });
 
     }
 

@@ -2,11 +2,14 @@ package ui;
 
 import javax.swing.*;
 
+import model.Album;
 import model.ReviewManager;
+import model.Song;
 import ui.tabs.AlbumsTab;
 import ui.tabs.CategoriesTab;
 import ui.tabs.HomeTab;
 import ui.tabs.UpdateTab;
+import ui.tabs.ViewTab;
 
 // referenced from SmartHomeUI
 // https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
@@ -17,9 +20,10 @@ public class AlbumReviewGUI extends JFrame {
     public static final int ALBUMS_TAB_INDEX = 1;
     public static final int CATEGORIES_TAB_INDEX = 2;
     public static final int UPDATE_TAB_INDEX = 3;
+    public static final int VIEW_TAB_INDEX = 4;
 
-    public static final int WIDTH = 600;
-    public static final int HEIGHT = 600;
+    public final int WIDTH = 600;
+    public final int HEIGHT = 600;
     private JTabbedPane navbar;
     private ReviewManager manager;
 
@@ -30,7 +34,23 @@ public class AlbumReviewGUI extends JFrame {
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+        // Album album1 = new Album("Speak Now", "Taylor Swift", "Pop Rock", 9.1, "Good");
+        // Album album2 = new Album("Melodrama", "Lorde", "Alt-Pop", 8.5, "Cool");
+        // Album album3 = new Album("The Rise and Fall of a Midwest Princess", "Chappell Roan", "Dance-Pop", 8.3, "Fun");
+
+        // Song song1 = new Song("Mine", "Taylor Swift", 9, "");
+        // Song song2 = new Song("Sparks Fly", "Taylor Swift", 9.5, "");
+        // Song song3 = new Song("Dear John", "Taylor Swift", 9, "");
+
+        // album1.addSong(song1);
+        // album1.addSong(song2);
+        // album1.addSong(song3);
+        
         manager = new ReviewManager();
+
+        // manager.addAlbum(album1);
+        // manager.addAlbum(album2);
+        // manager.addAlbum(album3);
 
         navbar = new JTabbedPane();
         navbar.setTabPlacement(JTabbedPane.TOP);
@@ -43,12 +63,13 @@ public class AlbumReviewGUI extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds home, albums, categories, and update tabs to the navbar
+    // EFFECTS: adds home, albums, categories, update, and view tabs to the navbar
     public void showTabs() {
-        JPanel homeTab = new HomeTab(manager);
+        JPanel homeTab = new HomeTab(manager, this);
         JPanel albumsTab = new AlbumsTab(manager);
         JPanel categoriesTab = new CategoriesTab(manager);
         JPanel updateTab = new UpdateTab(manager);
+        JPanel viewTab = new ViewTab(manager, this);
 
         navbar.add(homeTab, HOME_TAB_INDEX);
         navbar.setTitleAt(HOME_TAB_INDEX, "Home");
@@ -61,6 +82,9 @@ public class AlbumReviewGUI extends JFrame {
 
         navbar.add(updateTab, UPDATE_TAB_INDEX);
         navbar.setTitleAt(UPDATE_TAB_INDEX, "Update");
+
+        navbar.add(viewTab, VIEW_TAB_INDEX);
+        navbar.setTitleAt(VIEW_TAB_INDEX, "View");
 
     }
 

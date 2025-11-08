@@ -1,7 +1,5 @@
 package ui.tabs;
 
-import javax.swing.JButton;
-
 import model.ReviewManager;
 import ui.ButtonNames;
 
@@ -32,54 +30,39 @@ public class CategoriesTab extends Tab {
         createUpdateNameButton();
     }
 
-    // EFFECTS: displays all created categories
-    private void showCreatedCategories() {
-
-    }
-
     // EFFECTS: creates an add category button that when clicked, prompts the user
     // for
     // a name and creates a category with that name
     private void createCategoryButton() {
-        createButton(ButtonNames.ADD_CATEGORY.getValue());
+        createButton(ButtonNames.ADD_CATEGORY.getValue(), BUTTON_DIMENSION);
 
     }
 
     // EFFECTS: creates a remove category button that when clicked, prompts the user
     // for a category and removes it
     private void createRemoveCategoryButton() {
-        createButton(ButtonNames.REMOVE_CATEGORY.getValue());
+        createButton(ButtonNames.REMOVE_CATEGORY.getValue(), BUTTON_DIMENSION);
 
     }
 
     // EFFECTS: creates an add to category button that when clicked, prompts the
     // user for a category and album then adds the album to the category
     private void createAddToCategoryButton() {
-        createButton(ButtonNames.ADD_TO_CATEGORY.getValue());
+        createButton(ButtonNames.ADD_TO_CATEGORY.getValue(), BUTTON_DIMENSION);
 
     }
 
     // EFFECTS: creates a remove from category button that when clicked, prompts the
     // user for a category and album, then removes the album from the category
     private void createRemoveFromCategoryButton() {
-        createButton(ButtonNames.REMOVE_FROM_CATEGORY.getValue());
+        createButton(ButtonNames.REMOVE_FROM_CATEGORY.getValue(), BUTTON_DIMENSION);
 
     }
 
     // EFFECTS: creates an update name button that when clicked, prompts the user
     // for a category, and a name, then updates that category's name to the name
     private void createUpdateNameButton() {
-        createButton(ButtonNames.UPDATE_NAME.getValue());
-
-    }
-
-    // EFFECTS: creates and returns a new button with the given name
-    private JButton createButton(String buttonName) {
-        JButton button = new JButton(buttonName);
-        button.setMaximumSize(BUTTON_DIMENSION);
-        sidebar.add(button);
-
-        return button;
+        createButton(ButtonNames.UPDATE_NAME.getValue(), BUTTON_DIMENSION);
 
     }
 

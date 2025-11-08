@@ -1,7 +1,5 @@
 package ui.tabs;
 
-import javax.swing.*;
-
 import model.ReviewManager;
 import ui.ButtonNames;
 
@@ -12,6 +10,7 @@ import ui.ButtonNames;
 // album creation, removal, listing and sorting is done
 
 public class AlbumsTab extends Tab {
+
     // EFFECTS: creates an albums tab displaying all album reviews and sidebar
     // containing buttons related to album reviews operations
     public AlbumsTab(ReviewManager manager) {
@@ -33,37 +32,34 @@ public class AlbumsTab extends Tab {
         createSortByNameAlphaButton();
         createSortByRatingButton();
 
-    }
-
-    // EFFECTS: displays all created albums reviews
-    private void showCreatedReviews() {
 
     }
+
 
     // EFFECTS: creates an add review button that when clicked, prompts the user for
     // album info and creates a new review
     private void createAddReviewButton() {
-        createButton(ButtonNames.ADD_ALBUM.getValue());
+        createButton(ButtonNames.ADD_ALBUM.getValue(), BUTTON_DIMENSION);
 
     }
 
     // EFFECTS: creates a remove review button that when clicked, prompts the user
     // for a review and removes it
     private void createRemoveReviewButton() {
-        createButton(ButtonNames.REMOVE_ALBUM.getValue());
+        createButton(ButtonNames.REMOVE_ALBUM.getValue(), BUTTON_DIMENSION);
     }
 
     // EFFECTS: creates a merge reviews button that when clicked, prompts the user
     // for two albums, and merges the tracklists together
     private void createMergeReviewButton() {
-        createButton(ButtonNames.MERGE.getValue());
+        createButton(ButtonNames.MERGE.getValue(), BUTTON_DIMENSION);
 
     }
 
     // EFFECTS: creates an add tracklist button that when clicked, prompts the user
     // for an album and songs, then adds the songs to the album's tracklist
     private void createAddToTracklistButton() {
-        createButton(ButtonNames.ADD_TO_TRACKLIST.getValue());
+        createButton(ButtonNames.ADD_TO_TRACKLIST.getValue(), BUTTON_DIMENSION);
 
     }
 
@@ -71,39 +67,31 @@ public class AlbumsTab extends Tab {
     // user
     // for an album and song, then removes the songs from the album's tracklist
     private void createRemoveFromTracklistButton() {
-        createButton(ButtonNames.REMOVE_FROM_TRACKLIST.getValue());
+        createButton(ButtonNames.REMOVE_FROM_TRACKLIST.getValue(), BUTTON_DIMENSION);
 
     }
 
     // EFFECTS: creates a sort by album name alphabetical button that when clicked,
     // displays all albums sorted by artist alphabetical
     private void createSortByArtistAlphaButton() {
-        createButton(ButtonNames.SORT_ARTIST.getValue());
+        createButton(ButtonNames.SORT_ARTIST.getValue(), BUTTON_DIMENSION);
 
     }
 
     // EFFECTS: creates a sort by album name alphabetical button that when clicked,
     // displays all albums sorted by album name alphabetical
     private void createSortByNameAlphaButton() {
-        createButton(ButtonNames.SORT_NAME.getValue());
+        createButton(ButtonNames.SORT_NAME.getValue(), BUTTON_DIMENSION);
 
     }
 
     // EFFECTS: creates a sort by rating button that when clicked,
     // displays all albums sorted by rating high to low
     private void createSortByRatingButton() {
-        createButton(ButtonNames.SORT_RATING.getValue());
+        createButton(ButtonNames.SORT_RATING.getValue(), BUTTON_DIMENSION);
 
     }
 
-    // EFFECTS: creates and returns a new button with the given name
-    private JButton createButton(String buttonName) {
-        JButton button = new JButton(buttonName);
-        button.setMaximumSize(BUTTON_DIMENSION);
-        sidebar.add(button);
-
-        return button;
-
-    }
+    
 
 }

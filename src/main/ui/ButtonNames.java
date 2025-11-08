@@ -20,7 +20,7 @@ public enum ButtonNames {
     ADD_TO_CATEGORY("Add to category"),
     REMOVE_FROM_CATEGORY("Remove from category"),
     UPDATE_CATEGORY_NAME("Update category name"),
-    UPDATE_NAME("Update album name"),
+    UPDATE_NAME("Update name"),
     UPDATE_ARTIST("Update artist"),
     UPDATE_GENRE("Update genre"),
     UPDATE_RATING("Update rating"),
