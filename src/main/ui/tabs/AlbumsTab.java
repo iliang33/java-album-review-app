@@ -266,11 +266,11 @@ public class AlbumsTab extends Tab {
 
         int confirmation = getUserConfirmation(this, Prompts.CONTINUE.getValue());
 
-            if (confirmation == 0) { // 0 means user clicked yes
-                return true;
-            } else {
-                return false;
-            }
+        if (confirmation == 0) { // 0 means user clicked yes
+            return true;
+        } else {
+            return false;
+        }
 
     }
 
@@ -278,6 +278,11 @@ public class AlbumsTab extends Tab {
     // displays all albums sorted by artist alphabetical
     private void createSortByArtistAlphaButton() {
         JButton button = createButton(ButtonNames.SORT_ARTIST.getValue(), BUTTON_DIMENSION);
+
+        button.addActionListener(e -> {
+            manager.sortAlbumsByAlphabeticalArtist();
+        });
+
         addToSidebar(button);
 
     }
@@ -286,6 +291,10 @@ public class AlbumsTab extends Tab {
     // displays all albums sorted by album name alphabetical
     private void createSortByNameAlphaButton() {
         JButton button = createButton(ButtonNames.SORT_NAME.getValue(), BUTTON_DIMENSION);
+
+        button.addActionListener(e -> {
+            manager.sortAlbumsByAlphabeticalName();
+        });
         addToSidebar(button);
 
     }
@@ -294,6 +303,10 @@ public class AlbumsTab extends Tab {
     // displays all albums sorted by rating high to low
     private void createSortByRatingButton() {
         JButton button = createButton(ButtonNames.SORT_RATING.getValue(), BUTTON_DIMENSION);
+
+        button.addActionListener(e -> {
+            manager.sortAlbumsByRating();
+        });
         addToSidebar(button);
 
     }
