@@ -6,6 +6,7 @@ import exceptions.NotInRatingRangeException;
 import model.Album;
 import model.ReviewManager;
 import ui.ButtonNames;
+import ui.ErrorMessages;
 import ui.Prompts;
 
 // referenced from SmartHomeUI
@@ -62,14 +63,14 @@ public class AlbumsTab extends Tab {
                     manager.addAlbum(newAlbum);
 
                 } else {
-                    showErrorMessage(this, "Album already exists");
+                    showErrorMessage(this, ErrorMessages.DUPLICATE_ALBUM.getValue());
                 }
 
             } catch (NumberFormatException excpetion) {
-                showErrorMessage(this, "Given rating was not a number");
+                showErrorMessage(this, ErrorMessages.NOT_A_NUM.getValue());
 
             } catch (NotInRatingRangeException | NullPointerException exception) {
-                showErrorMessage(this, "Rating not in range of 0.0 to 10.0");
+                showErrorMessage(this, ErrorMessages.NOT_IN_RANGE.getValue());
 
             }
 
@@ -94,7 +95,7 @@ public class AlbumsTab extends Tab {
                 manager.removeAlbum(albumToRemove);
 
             } else {
-                showErrorMessage(this, "Album not found");
+                showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
             }
 
         });
@@ -123,10 +124,10 @@ public class AlbumsTab extends Tab {
                             .mergeAlbum(manager.getAlbumsList().get(manager.getIndexOfAlbum(secondAlbum)));
                     manager.removeAlbum(secondAlbum);
                 } else {
-                    showErrorMessage(this, "Error: neither of the albums should be in a category");
+                    showErrorMessage(this, ErrorMessages.ALBUM_IN_CATEGORY.getValue());
                 }
             } else {
-                showErrorMessage(this, "Either one of or both albums were not found");
+                showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
             }
         });
 
@@ -139,7 +140,82 @@ public class AlbumsTab extends Tab {
     private void createAddToTracklistButton() {
         JButton button = createButton(ButtonNames.ADD_TO_TRACKLIST.getValue(), BUTTON_DIMENSION);
 
+        button.addActionListener(e -> {
+
+            String name = getUserInput(Prompts.ALBUM_NAME.getValue());
+            String artist = getUserInput(Prompts.ARTIST.getValue());
+
+            Album albumToAddSongTo = manager.getWantedAlbum(name, artist);
+            boolean addMoreSongs = true;
+
+            if (albumToAddSongTo != null) {
+                while (addMoreSongs) {
+                    try {
+                        if (!promptUserToAddSongs(albumToAddSongTo)) {
+                            addMoreSongs = false;
+                        }
+                    } catch (NumberFormatException nfe) {
+                        showErrorMessage(this, ErrorMessages.NOT_A_NUM.getValue());
+                    } catch (NotInRatingRangeException nirre) {
+                        showErrorMessage(this, ErrorMessages.NOT_IN_RANGE.getValue());
+
+                    }
+
+                }
+            } else {
+                showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
+
+            }
+        });
+
         addToSidebar(button);
+
+    }
+
+    // EFFECTS: asks users for information to add songs to a tracklist if the song
+    // is not already there. Returns true if user wants to add more songs, false
+    // otherwise. Throws an exception if given rating is not between 0.0 and 10.0
+    // both inclusive and handles it with an error message
+
+    // this is a helper function for createAddToTracklistButton()
+    public boolean promptUserToAddSongs(Album albumToAddSongTo) throws NotInRatingRangeException {
+        String songName = getUserInput(Prompts.SONG.getValue());
+        String artistName = getUserInput(Prompts.ARTIST.getValue());
+
+        try {
+            Double rating = Double.parseDouble(getUserInput(Prompts.RATING.getValue()));
+
+            if (!(rating >= 0.0 && rating <= 10.0)) {
+                throw new NotInRatingRangeException();
+            }
+
+            String review = getUserInput(Prompts.REVIEW.getValue());
+
+            if (manager.getWantedSongInTracklist(songName, artistName, albumToAddSongTo) == null) {
+                manager.addToAlbumTracklist(albumToAddSongTo, songName, artistName, rating, review);
+
+            } else {
+                showErrorMessage(this, ErrorMessages.DUPLICATE_SONG.getValue());
+            }
+        
+
+            int confirmation = getUserConfirmation(this, Prompts.ADD_MORE_SONGS.getValue());
+
+            if (confirmation == 0) { // 0 means user clicked yes
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (NumberFormatException exception) {
+            showErrorMessage(this, ErrorMessages.NOT_A_NUM.getValue());
+
+        } catch (NotInRatingRangeException | NullPointerException exception) {
+            showErrorMessage(this, ErrorMessages.NOT_IN_RANGE.getValue());
+
+        }
+
+        return false;
 
     }
 

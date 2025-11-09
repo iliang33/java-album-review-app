@@ -12,7 +12,9 @@ public enum Prompts {
     FIRST_ALBUM_NAME("Enter name of first album (this one will have the merged tracklist)"),
     FIRST_ARTIST("Enter artist name of first album"),
     SECOND_ALBUM_NAME("Enter name of second album (this album will be deleted)"),
-    SECOND_ARTIST("Enter artist name of second album");
+    SECOND_ARTIST("Enter artist name of second album"),
+    SONG("Enter song name"),
+    ADD_MORE_SONGS("Continue adding songs?");
     
 
     private final String prompt;

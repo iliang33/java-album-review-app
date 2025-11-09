@@ -63,6 +63,11 @@ public class Tab extends JPanel {
         return inputValue;
     }
 
+    protected int getUserConfirmation(Component component, String prompt) {
+        int confirmation = JOptionPane.showConfirmDialog(component, prompt);
+        return confirmation;
+    }
+
     protected void showErrorMessage(Component parentComponent, String msg) {
         JOptionPane.showMessageDialog(parentComponent, msg);
 
