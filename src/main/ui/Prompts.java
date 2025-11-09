@@ -14,7 +14,8 @@ public enum Prompts {
     SECOND_ALBUM_NAME("Enter name of second album (this album will be deleted)"),
     SECOND_ARTIST("Enter artist name of second album"),
     SONG("Enter song name"),
-    ADD_MORE_SONGS("Continue adding songs?");
+    CONTINUE("Continue?"),
+    SONG_NUMBER("Enter number of song in tracklist");
     
 
     private final String prompt;

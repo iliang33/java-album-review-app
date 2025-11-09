@@ -197,9 +197,8 @@ public class AlbumsTab extends Tab {
             } else {
                 showErrorMessage(this, ErrorMessages.DUPLICATE_SONG.getValue());
             }
-        
 
-            int confirmation = getUserConfirmation(this, Prompts.ADD_MORE_SONGS.getValue());
+            int confirmation = getUserConfirmation(this, Prompts.CONTINUE.getValue());
 
             if (confirmation == 0) { // 0 means user clicked yes
                 return true;
@@ -220,11 +219,58 @@ public class AlbumsTab extends Tab {
     }
 
     // EFFECTS: creates a remove tracklist button that when clicked, prompts the
-    // user
-    // for an album and song, then removes the songs from the album's tracklist
+    // user for an album and song, then removes the songs from the album's tracklist
     private void createRemoveFromTracklistButton() {
         JButton button = createButton(ButtonNames.REMOVE_FROM_TRACKLIST.getValue(), BUTTON_DIMENSION);
+
+        button.addActionListener(e -> {
+            String name = getUserInput(Prompts.ALBUM_NAME.getValue());
+            String artist = getUserInput(Prompts.ARTIST.getValue());
+
+            Album wantedAlbum = manager.getWantedAlbum(name, artist);
+            boolean removeMoreSongs = true;
+
+            if (wantedAlbum != null) {
+                while (removeMoreSongs) {
+                    try {
+                        if (!promptUserToRemoveSongs(wantedAlbum, wantedAlbum.getTracklist().size())) {
+                            removeMoreSongs = false;
+                        }
+                    } catch (NumberFormatException except) {
+                        showErrorMessage(this, ErrorMessages.NOT_A_NUM.getValue());
+
+                    }
+
+                }
+            } else {
+                showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
+            }
+        });
+
         addToSidebar(button);
+
+    }
+
+    // EFFECTS: asks users for information to remove songs from a tracklist and
+    // returns true if user wants to add more songs, false otherwise
+
+    // this is a helper function for createRemoveFromTracklistButton()
+    public boolean promptUserToRemoveSongs(Album albumToRemoveSongFrom, int tracklistSize) {
+        Integer songNumber = Integer.parseInt(getUserInput(Prompts.SONG_NUMBER.getValue()));
+
+        if (songNumber >= 1 && songNumber <= tracklistSize) {
+            manager.removeFromAlbumTracklist(albumToRemoveSongFrom, songNumber);
+        } else {
+            showErrorMessage(this, ErrorMessages.NOT_A_SONG_NUMBER.getValue());
+        }
+
+        int confirmation = getUserConfirmation(this, Prompts.CONTINUE.getValue());
+
+            if (confirmation == 0) { // 0 means user clicked yes
+                return true;
+            } else {
+                return false;
+            }
 
     }
 
