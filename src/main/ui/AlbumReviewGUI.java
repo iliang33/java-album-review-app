@@ -3,6 +3,7 @@ package ui;
 import javax.swing.*;
 
 import model.Album;
+import model.AlbumCategory;
 import model.ReviewManager;
 import model.Song;
 import ui.tabs.AlbumsTab;
@@ -34,23 +35,50 @@ public class AlbumReviewGUI extends JFrame {
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        // Album album1 = new Album("Speak Now", "Taylor Swift", "Pop Rock", 9.1, "Good");
-        // Album album2 = new Album("Melodrama", "Lorde", "Alt-Pop", 8.5, "Cool");
-        // Album album3 = new Album("The Rise and Fall of a Midwest Princess", "Chappell Roan", "Dance-Pop", 8.3, "Fun");
+        Album album1 = new Album("Speak Now", "Taylor Swift", "Pop Rock", 9.1, "Good");
+        Album album2 = new Album("Melodrama", "Lorde", "Alt-Pop", 8.5, "Cool");
+        Album album3 = new Album("The Rise and Fall of a Midwest Princess", "Chappell Roan", "Dance-Pop", 8.3, "Fun");
+        Album album4 = new Album("GNX", "Kendrick Lamar", "Rap", 8.2, "aoty");
 
-        // Song song1 = new Song("Mine", "Taylor Swift", 9, "");
-        // Song song2 = new Song("Sparks Fly", "Taylor Swift", 9.5, "");
-        // Song song3 = new Song("Dear John", "Taylor Swift", 9, "");
+        Song song1 = new Song("Mine", "Taylor Swift", 9, "");
+        Song song2 = new Song("Sparks Fly", "Taylor Swift", 9.5, "");
+        Song song3 = new Song("Dear John", "Taylor Swift", 9, "");
 
-        // album1.addSong(song1);
-        // album1.addSong(song2);
-        // album1.addSong(song3);
-        
+        AlbumCategory cat1 = new AlbumCategory("pop1");
+        AlbumCategory cat2 = new AlbumCategory("pop2");
+        AlbumCategory cat3 = new AlbumCategory("pop3");
+
+        album1.addSong(song1);
+        album1.addSong(song2);
+        album1.addSong(song3);
+
+        album2.addSong(song1);
+        album2.addSong(song2);
+        album2.addSong(song3);
+
+        album3.addSong(song1);
+        album3.addSong(song2);
+        album3.addSong(song3);
+
+        album4.addSong(song1);
+        album4.addSong(song2);
+        album4.addSong(song3);
+
+        cat1.addAlbum(album1);
+        cat1.addAlbum(album2);
+        cat1.addAlbum(album3);
+        cat1.addAlbum(album4);
+
         manager = new ReviewManager();
 
-        // manager.addAlbum(album1);
-        // manager.addAlbum(album2);
-        // manager.addAlbum(album3);
+        manager.addAlbum(album1);
+        manager.addAlbum(album2);
+        manager.addAlbum(album3);
+        manager.addAlbum(album4);
+
+        manager.addCategory(cat1);
+        manager.addCategory(cat2);
+        manager.addCategory(cat3);
 
         navbar = new JTabbedPane();
         navbar.setTabPlacement(JTabbedPane.TOP);

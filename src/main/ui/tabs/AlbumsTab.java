@@ -1,7 +1,10 @@
 package ui.tabs;
 
+import javax.swing.JButton;
+
 import model.ReviewManager;
 import ui.ButtonNames;
+import ui.Prompts;
 
 // referenced from SmartHomeUI
 // https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
@@ -32,14 +35,17 @@ public class AlbumsTab extends Tab {
         createSortByNameAlphaButton();
         createSortByRatingButton();
 
-
     }
-
 
     // EFFECTS: creates an add review button that when clicked, prompts the user for
     // album info and creates a new review
     private void createAddReviewButton() {
-        createButton(ButtonNames.ADD_ALBUM.getValue(), BUTTON_DIMENSION);
+        JButton button = createButton(ButtonNames.ADD_ALBUM.getValue(), BUTTON_DIMENSION);
+
+        button.addActionListener(e -> {
+            String albumName = getUserInput(Prompts.ALBUM_NAME.getValue());
+
+        });
 
     }
 
@@ -91,7 +97,5 @@ public class AlbumsTab extends Tab {
         createButton(ButtonNames.SORT_RATING.getValue(), BUTTON_DIMENSION);
 
     }
-
-    
 
 }

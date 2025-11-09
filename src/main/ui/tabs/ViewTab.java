@@ -8,9 +8,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import model.Album;
+import model.AlbumCategory;
 import model.ReviewManager;
 import model.Song;
 import ui.AlbumReviewGUI;
@@ -20,7 +22,6 @@ import ui.AlbumReviewGUI;
 
 public class ViewTab extends Tab {
 
-    private static final String NO_ALBUMS_MESSAGE = "No albums created";
     private static final String FONT = "Times New Roman";
     private static final int FONT_STYLE = Font.BOLD;
     private static final int FONT_SIZE = 25;
@@ -35,6 +36,7 @@ public class ViewTab extends Tab {
         // showCreatedReviews();
         createSidebar();
         createAlbumButtons();
+        createCategoryButtons();
 
         setVisible(true);
 
@@ -49,7 +51,27 @@ public class ViewTab extends Tab {
             JButton button = createButton("View " + album.getName() + " by " + album.getArtist() + " info",
                     BUTTON_DIMENSION);
             button.addActionListener(e -> {
-                createPopup(album);
+                createAlbumPopup(album);
+
+            });
+
+        }
+
+    }
+
+    // EFFECTS: creates a button for each category that when clicked, a popup window
+    // with info for each album in the category appears
+    private void createCategoryButtons() {
+
+        // use a scroll pane for the pop up window
+
+        List<AlbumCategory> categories = manager.getAlbumCategoriesList();
+
+        for (AlbumCategory category : categories) {
+            JButton button = createButton("View " + category.getName() + " info",
+                    BUTTON_DIMENSION);
+            button.addActionListener(e -> {
+                createCategoryPopup(category);
 
             });
 
@@ -58,18 +80,31 @@ public class ViewTab extends Tab {
     }
 
     // EFFECTS: creates a pop up window that displays the given album's info
-    private void createPopup(Album album) {
+    private void createAlbumPopup(Album album) {
+
         JFrame popup = new JFrame(album.getName() + " by " + album.getArtist());
         popup.setSize(gui.WIDTH, gui.HEIGHT);
 
-        popup.add(showAlbumInfo(album));
+        popup.add(getAlbumInfo(album));
+
+        popup.setLocation(200, 200);
+        popup.setVisible(true);
+    }
+
+    // EFFECTS: creates a pop up window that displays the given category's info
+    private void createCategoryPopup(AlbumCategory category) {
+
+        JFrame popup = new JFrame(category.getName());
+        popup.setSize(gui.WIDTH, gui.HEIGHT);
+
+        popup.add(getCategoryInfo(category));
 
         popup.setLocation(200, 200);
         popup.setVisible(true);
     }
 
     // EFFECTS: returns a JPanel that has labels with info about the given album
-    private JPanel showAlbumInfo(Album album) {
+    private JPanel getAlbumInfo(Album album) {
 
         JPanel albumEntry = new JPanel();
         albumEntry.setLayout(new BoxLayout(albumEntry, BoxLayout.Y_AXIS));
@@ -111,7 +146,21 @@ public class ViewTab extends Tab {
     }
 
     // EFFECTS: displays all created categories
-    private void showCreatedCategories() {
+    private JScrollPane getCategoryInfo(AlbumCategory category) {
+
+        JPanel categoryEntry = new JPanel();
+        categoryEntry.setLayout(new BoxLayout(categoryEntry, BoxLayout.Y_AXIS));
+        categoryEntry.setBorder(new EmptyBorder(25, 25, 25, 0));
+
+        for(Album album : category.getAlbumList()){
+            categoryEntry.add(getAlbumInfo(album));
+
+
+        }
+
+        JScrollPane scroll = new JScrollPane(categoryEntry, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+        return scroll;
 
     }
 
