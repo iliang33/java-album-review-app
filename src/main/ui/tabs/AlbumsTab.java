@@ -92,7 +92,6 @@ public class AlbumsTab extends Tab {
 
             if (albumToRemove != null) {
                 manager.removeAlbum(albumToRemove);
-                
 
             } else {
                 showErrorMessage(this, "Album not found");
@@ -107,8 +106,31 @@ public class AlbumsTab extends Tab {
     // for two albums, and merges the tracklists together
     private void createMergeReviewButton() {
         JButton button = createButton(ButtonNames.MERGE.getValue(), BUTTON_DIMENSION);
+
+        button.addActionListener(e -> {
+            String name = getUserInput(Prompts.FIRST_ALBUM_NAME.getValue());
+            String artist = getUserInput(Prompts.FIRST_ARTIST.getValue());
+
+            String name2 = getUserInput(Prompts.SECOND_ALBUM_NAME.getValue());
+            String artist2 = getUserInput(Prompts.SECOND_ARTIST.getValue());
+
+            Album firstAlbum = manager.getWantedAlbum(name, artist);
+            Album secondAlbum = manager.getWantedAlbum(name2, artist2);
+
+            if (firstAlbum != null && secondAlbum != null) {
+                if (!manager.albumIsInAnyCategory(firstAlbum) && !manager.albumIsInAnyCategory(secondAlbum)) {
+                    manager.getAlbumsList().get(manager.getIndexOfAlbum(firstAlbum))
+                            .mergeAlbum(manager.getAlbumsList().get(manager.getIndexOfAlbum(secondAlbum)));
+                    manager.removeAlbum(secondAlbum);
+                } else {
+                    showErrorMessage(this, "Error: neither of the albums should be in a category");
+                }
+            } else {
+                showErrorMessage(this, "Either one of or both albums were not found");
+            }
+        });
+
         addToSidebar(button);
-        
 
     }
 
@@ -116,6 +138,7 @@ public class AlbumsTab extends Tab {
     // for an album and songs, then adds the songs to the album's tracklist
     private void createAddToTracklistButton() {
         JButton button = createButton(ButtonNames.ADD_TO_TRACKLIST.getValue(), BUTTON_DIMENSION);
+
         addToSidebar(button);
 
     }

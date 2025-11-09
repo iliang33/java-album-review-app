@@ -50,7 +50,6 @@ public class AlbumReviewGUI extends JFrame {
 
         album1.addSong(song1);
         album1.addSong(song2);
-        album1.addSong(song3);
 
         album2.addSong(song1);
         album2.addSong(song2);
@@ -64,8 +63,6 @@ public class AlbumReviewGUI extends JFrame {
         album4.addSong(song2);
         album4.addSong(song3);
 
-        cat1.addAlbum(album1);
-        cat1.addAlbum(album2);
         cat1.addAlbum(album3);
         cat1.addAlbum(album4);
 
