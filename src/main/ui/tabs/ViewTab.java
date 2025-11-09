@@ -35,10 +35,29 @@ public class ViewTab extends Tab {
         this.gui = gui;
         // showCreatedReviews();
         createSidebar();
+        createRefreshButton();
         createAlbumButtons();
         createCategoryButtons();
 
         setVisible(true);
+
+    }
+
+    // EFFECTS: creates a button that when clicked, recreates the button to account
+    // for any newly added albums
+    private void createRefreshButton() {
+        JButton button = createButton("Refresh", BUTTON_DIMENSION);
+        button.addActionListener(e -> {
+            sidebar.removeAll();
+            createRefreshButton();
+            createAlbumButtons();
+            createCategoryButtons();
+            repaint();
+            revalidate();
+
+        });
+
+        addToSidebar(button);
 
     }
 
@@ -54,6 +73,7 @@ public class ViewTab extends Tab {
                 createAlbumPopup(album);
 
             });
+            addToSidebar(button);
 
         }
 
@@ -74,13 +94,14 @@ public class ViewTab extends Tab {
                 createCategoryPopup(category);
 
             });
+            addToSidebar(button);
 
         }
 
     }
 
     // EFFECTS: creates a pop up window that displays the given album's info
-    private void createAlbumPopup(Album album) {
+    public void createAlbumPopup(Album album) {
 
         JFrame popup = new JFrame(album.getName() + " by " + album.getArtist());
         popup.setSize(gui.WIDTH, gui.HEIGHT);
@@ -152,13 +173,13 @@ public class ViewTab extends Tab {
         categoryEntry.setLayout(new BoxLayout(categoryEntry, BoxLayout.Y_AXIS));
         categoryEntry.setBorder(new EmptyBorder(25, 25, 25, 0));
 
-        for(Album album : category.getAlbumList()){
+        for (Album album : category.getAlbumList()) {
             categoryEntry.add(getAlbumInfo(album));
-
 
         }
 
-        JScrollPane scroll = new JScrollPane(categoryEntry, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        JScrollPane scroll = new JScrollPane(categoryEntry, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         return scroll;
 

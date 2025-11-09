@@ -21,7 +21,7 @@ public class Tab extends JPanel {
     public Tab(ReviewManager manager) {
         this.manager = manager;
         setLayout(new BorderLayout());
-        
+
     }
 
     // EFFECTS: creates and returns row with button included
@@ -39,7 +39,6 @@ public class Tab extends JPanel {
         sidebar = new JPanel();
         sidebar.setLayout(new BoxLayout(sidebar, BoxLayout.Y_AXIS));
         add(sidebar, BorderLayout.EAST);
-     
 
     }
 
@@ -48,17 +47,26 @@ public class Tab extends JPanel {
         JButton button = new JButton(buttonName);
         button.setMaximumSize(size);
         button.setHorizontalAlignment(SwingConstants.LEFT);
-        sidebar.add(button);
+        button.setOpaque(false);
 
         return button;
 
     }
 
-    protected String getUserInput(String prompt){
+    // EFFECTS: adds given button to the sidebar
+    protected void addToSidebar(JButton button){
+        sidebar.add(button);
+    }
+
+    protected String getUserInput(String prompt) {
         String inputValue = JOptionPane.showInputDialog(prompt);
         return inputValue;
     }
 
+    protected void showErrorMessage(Component parentComponent, String msg) {
+        JOptionPane.showMessageDialog(parentComponent, msg);
+
+    }
 
     public ReviewManager getManager() {
         return this.manager;

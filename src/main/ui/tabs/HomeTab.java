@@ -27,11 +27,9 @@ public class HomeTab extends Tab {
         this.gui = gui;
 
         setLayout(new GridLayout(3, 1));
-        
 
         createWelcomeMessage();
-        createSaveLoadButtons();
-        createExitButton();
+        createHomeButtons();
     }
 
     // EFFECTS: creates the welcome message that is showned at the top of the home
@@ -44,31 +42,25 @@ public class HomeTab extends Tab {
 
     }
 
-    // EFFECTS: creates save and load buttons
-    private void createSaveLoadButtons() {
-        JButton save = new JButton(ButtonNames.SAVE.getValue());
-        JButton load = new JButton(ButtonNames.LOAD.getValue());
-
-        JPanel buttonRow = formatButtonRow(save);
-        buttonRow.add(load);
-        buttonRow.setSize(WIDTH, HEIGHT / 6);
-
-        this.add(buttonRow);
-
-    }
-
-    // EFFECTS: creates exit button, that closes the gui on click
-    private void createExitButton() {
-        JButton exit = new JButton(ButtonNames.EXIT.getValue());
-
-        JPanel buttonRow = formatButtonRow(exit);
-        buttonRow.setSize(WIDTH, HEIGHT / 6);
-        this.add(buttonRow);
+    // EFFECTS: creates save, load, and exit buttons
+    private void createHomeButtons() {
+        JButton save = createButton(ButtonNames.SAVE.getValue(), BUTTON_DIMENSION);
+        JButton load = createButton(ButtonNames.LOAD.getValue(), BUTTON_DIMENSION);
+        JButton exit = createButton(ButtonNames.EXIT.getValue(), BUTTON_DIMENSION);
 
         exit.addActionListener(e -> {
             gui.dispose();
-            
+
         });
+
+        JPanel buttonRow1 = formatButtonRow(save);
+        buttonRow1.add(load);
+        buttonRow1.setSize(WIDTH, HEIGHT / 6);
+        add(buttonRow1);
+
+        JPanel buttonRow2 = formatButtonRow(exit);
+        buttonRow2.setSize(WIDTH, HEIGHT / 6);
+        add(buttonRow2);
 
     }
 

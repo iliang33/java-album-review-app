@@ -5,7 +5,10 @@ package ui;
 
 public enum Prompts {
     ALBUM_NAME("Enter album name"),
-    ARTIST("Enter artist name");
+    ARTIST("Enter artist name"),
+    GENRE("Enter genre"),
+    RATING("Enter rating"),
+    REVIEW("Enter review"),;
     
 
     private final String prompt;

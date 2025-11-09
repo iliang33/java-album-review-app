@@ -1,5 +1,7 @@
 package ui.tabs;
 
+import javax.swing.JButton;
+
 import model.ReviewManager;
 import ui.ButtonNames;
 
@@ -40,35 +42,40 @@ public class UpdateTab extends Tab {
     // EFFECTS: prompts user for an album and new name, then updates that album to
     // have the new name
     private void createUpdateNameButton() {
-        createButton(ButtonNames.UPDATE_NAME.getValue(), BUTTON_DIMENSION);
+        JButton button = createButton(ButtonNames.UPDATE_NAME.getValue(), BUTTON_DIMENSION);
+        addToSidebar(button);
 
     }
 
     // EFFECTS: prompts user for an album and new artist, then updates that album to
     // have the new artist
     private void createUpdateArtistButton() {
-        createButton(ButtonNames.UPDATE_ARTIST.getValue(), BUTTON_DIMENSION);
+        JButton button = createButton(ButtonNames.UPDATE_ARTIST.getValue(), BUTTON_DIMENSION);
+        addToSidebar(button);
 
     }
 
     // EFFECTS: prompts user for an album and new genre, then updates that album to
     // have the new genre
     private void createUpdateGenreButton() {
-        createButton(ButtonNames.UPDATE_GENRE.getValue(), BUTTON_DIMENSION);
+        JButton button = createButton(ButtonNames.UPDATE_GENRE.getValue(), BUTTON_DIMENSION);
+        addToSidebar(button);
 
     }
 
     // EFFECTS: prompts user for an album and new rating, then updates that album to
     // have the new rating
     private void createUpdateRatingButton() {
-        createButton(ButtonNames.UPDATE_RATING.getValue(), BUTTON_DIMENSION);
+        JButton button = createButton(ButtonNames.UPDATE_RATING.getValue(), BUTTON_DIMENSION);
+        addToSidebar(button);
 
     }
 
     // EFFECTS: prompts user for an album and new review, then updates that album to
     // have the new artist
     private void createUpdateReviewButton() {
-        createButton(ButtonNames.UPDATE_REVIEW.getValue(), BUTTON_DIMENSION);
+        JButton button = createButton(ButtonNames.UPDATE_REVIEW.getValue(), BUTTON_DIMENSION);
+        addToSidebar(button);
 
     }
 

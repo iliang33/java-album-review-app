@@ -94,10 +94,11 @@ public class AlbumReviewGUI extends JFrame {
     // EFFECTS: adds home, albums, categories, update, and view tabs to the navbar
     public void showTabs() {
         JPanel homeTab = new HomeTab(manager, this);
+        JPanel viewTab = new ViewTab(manager, this);
         JPanel albumsTab = new AlbumsTab(manager);
         JPanel categoriesTab = new CategoriesTab(manager);
         JPanel updateTab = new UpdateTab(manager);
-        JPanel viewTab = new ViewTab(manager, this);
+        
 
         navbar.add(homeTab, HOME_TAB_INDEX);
         navbar.setTitleAt(HOME_TAB_INDEX, "Home");
