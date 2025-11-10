@@ -8,7 +8,6 @@ public enum ErrorMessages {
     NOT_A_NUM("Given input was not a number"),
     NOT_IN_RANGE("Rating not in range of 0.0 to 10.0"),
     NO_ALBUM("Album not found"),
-    ALBUM_IN_CATEGORY_MERGE("Error: neither of the albums should be in a category"),
     DUPLICATE_SONG("Song already in tracklist"),
     NOT_A_SONG_NUMBER("Not a valid song number"),
     DUPLICATE_CATEGORY("Category already exists"),

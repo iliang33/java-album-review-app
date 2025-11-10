@@ -119,13 +119,14 @@ public class AlbumsTab extends Tab {
             Album secondAlbum = manager.getWantedAlbum(name2, artist2);
 
             if (firstAlbum != null && secondAlbum != null) {
-                if (!manager.albumIsInAnyCategory(firstAlbum) && !manager.albumIsInAnyCategory(secondAlbum)) {
-                    manager.getAlbumsList().get(manager.getIndexOfAlbum(firstAlbum))
-                            .mergeAlbum(manager.getAlbumsList().get(manager.getIndexOfAlbum(secondAlbum)));
-                    manager.removeAlbum(secondAlbum);
-                } else {
-                    showErrorMessage(this, ErrorMessages.ALBUM_IN_CATEGORY_MERGE.getValue());
+                manager.getAlbumsList().get(manager.getIndexOfAlbum(firstAlbum))
+                        .mergeAlbum(manager.getAlbumsList().get(manager.getIndexOfAlbum(secondAlbum)));
+                manager.removeAlbum(secondAlbum);
+
+                if (manager.albumIsInAnyCategory(secondAlbum)) {
+                    manager.removeFromAllCategories(name2, artist2);
                 }
+
             } else {
                 showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
             }
