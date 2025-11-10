@@ -41,7 +41,7 @@ public class AlbumReviewApp {
 
     // MODIFIES: this
     // EFFECTS: takes user input
-    public void runApp(){
+    public void runApp() {
         boolean hasExit = false;
         String input = null;
 
@@ -681,32 +681,16 @@ public class AlbumReviewApp {
     // EFFECTS: updates the name field of a given album (referenced by name and
     // artist) with the given new value if given album exists
     public void updateNameField(String albumName, String artist) {
+
         System.out.println("Enter new name");
         String newName = scan.nextLine();
 
-        boolean foundAlbumInACategory = false;
-
-        for (int i = 0; i < manager.getAlbumCategoriesList().size(); i++) {
-            for (int j = 0; j < manager.getAlbumCategoriesList().get(i).getAlbumList().size(); j++) {
-                Album currentAlbum = manager.getAlbumCategoriesList().get(i).getAlbumList().get(j);
-                if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
-                    currentAlbum.setName(newName);
-                    foundAlbumInACategory = true;
-                    System.out.println("\n\nAlbum updated!");
-                    break;
-                }
-            }
-        }
-        // since an album has to be created before it is added to a category
-        // if it is in a category, it must be in the list of all albums
-        if (!foundAlbumInACategory) {
-            if (manager.getWantedAlbum(albumName, artist) != null) {
-                manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(albumName, artist)))
-                        .setName(newName);
-                System.out.println("\n\nAlbum updated!");
-            } else {
-                System.out.println("\n\nAlbum not found!");
-            }
+        if (manager.getWantedAlbum(albumName, artist) != null) {
+            manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(albumName, artist)))
+                    .setName(newName);
+            System.out.println("\n\nAlbum updated!");
+        } else {
+            System.out.println("\n\nAlbum not found!");
         }
 
     }
@@ -718,29 +702,12 @@ public class AlbumReviewApp {
         System.out.println("Enter new artist");
         String newArtist = scan.nextLine();
 
-        boolean foundAlbumInACategory = false;
-
-        for (int i = 0; i < manager.getAlbumCategoriesList().size(); i++) {
-            for (int j = 0; j < manager.getAlbumCategoriesList().get(i).getAlbumList().size(); j++) {
-                Album currentAlbum = manager.getAlbumCategoriesList().get(i).getAlbumList().get(j);
-                if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
-                    currentAlbum.setArtist(newArtist);
-                    foundAlbumInACategory = true;
-                    System.out.println("\n\nAlbum updated!");
-                    break;
-                }
-            }
-        }
-        // since an album has to be created before it is added to a category
-        // if it is in a category, it must be in the list of all albums
-        if (!foundAlbumInACategory) {
-            if (manager.getWantedAlbum(albumName, artist) != null) {
-                manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(albumName, artist)))
-                        .setArtist(newArtist);
-                System.out.println("\n\nAlbum updated!");
-            } else {
-                System.out.println("\n\nAlbum not found!");
-            }
+        if (manager.getWantedAlbum(albumName, artist) != null) {
+            manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(albumName, artist)))
+                    .setArtist(newArtist);
+            System.out.println("\n\nAlbum updated!");
+        } else {
+            System.out.println("\n\nAlbum not found!");
         }
 
     }
@@ -752,29 +719,12 @@ public class AlbumReviewApp {
         System.out.println("Enter new genre");
         String newGenre = scan.nextLine();
 
-        boolean foundAlbumInACategory = false;
-
-        for (int i = 0; i < manager.getAlbumCategoriesList().size(); i++) {
-            for (int j = 0; j < manager.getAlbumCategoriesList().get(i).getAlbumList().size(); j++) {
-                Album currentAlbum = manager.getAlbumCategoriesList().get(i).getAlbumList().get(j);
-                if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
-                    currentAlbum.setGenre(newGenre);
-                    foundAlbumInACategory = true;
-                    System.out.println("\n\nAlbum updated!");
-                    break;
-                }
-            }
-        }
-        // since an album has to be created before it is added to a category
-        // if it is in a category, it must be in the list of all albums
-        if (!foundAlbumInACategory) {
-            if (manager.getWantedAlbum(albumName, artist) != null) {
-                manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(albumName, artist)))
-                        .setGenre(newGenre);
-                System.out.println("\n\nAlbum updated!");
-            } else {
-                System.out.println("\n\nAlbum not found!");
-            }
+        if (manager.getWantedAlbum(albumName, artist) != null) {
+            manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(albumName, artist)))
+                    .setGenre(newGenre);
+            System.out.println("\n\nAlbum updated!");
+        } else {
+            System.out.println("\n\nAlbum not found!");
         }
 
     }
@@ -790,26 +740,11 @@ public class AlbumReviewApp {
             throw new NotInRatingRangeException();
         }
 
-        boolean foundAlbumInACategory = false;
-
-        for (int i = 0; i < manager.getAlbumCategoriesList().size(); i++) {
-            for (int j = 0; j < manager.getAlbumCategoriesList().get(i).getAlbumList().size(); j++) {
-                Album currentAlbum = manager.getAlbumCategoriesList().get(i).getAlbumList().get(j);
-                if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
-                    currentAlbum.setRating(newRating);
-                    foundAlbumInACategory = true;
-                }
-            }
-        }
-        // since an album has to be created before it is added to a category
-        // if it is in a category, it must be in the list of all albums
-        if (!foundAlbumInACategory) {
-            if (manager.getWantedAlbum(albumName, artist) != null) {
-                manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(albumName, artist)))
-                        .setRating(newRating);
-            } else {
-                System.out.println("\n\nAlbum not found!");
-            }
+        if (manager.getWantedAlbum(albumName, artist) != null) {
+            manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(albumName, artist)))
+                    .setRating(newRating);
+        } else {
+            System.out.println("\n\nAlbum not found!");
         }
 
     }
@@ -822,29 +757,12 @@ public class AlbumReviewApp {
         System.out.println("Enter new review");
         String newReview = scan.nextLine();
 
-        boolean foundAlbumInACategory = false;
-
-        for (int i = 0; i < manager.getAlbumCategoriesList().size(); i++) {
-            for (int j = 0; j < manager.getAlbumCategoriesList().get(i).getAlbumList().size(); j++) {
-                Album currentAlbum = manager.getAlbumCategoriesList().get(i).getAlbumList().get(j);
-                if (currentAlbum.getName().equalsIgnoreCase(albumName)) {
-                    currentAlbum.setReview(newReview);
-                    foundAlbumInACategory = true;
-                    System.out.println("\n\nAlbum updated!");
-                    break;
-                }
-            }
-        }
-        // since an album has to be created before it is added to a category
-        // if it is in a category, it must be in the list of all albums
-        if (!foundAlbumInACategory) {
-            if (manager.getWantedAlbum(albumName, artist) != null) {
-                manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(albumName, artist)))
-                        .setReview(newReview);
-                System.out.println("\n\nAlbum updated!");
-            } else {
-                System.out.println("\n\nAlbum not found!");
-            }
+        if (manager.getWantedAlbum(albumName, artist) != null) {
+            manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(albumName, artist)))
+                    .setReview(newReview);
+            System.out.println("\n\nAlbum updated!");
+        } else {
+            System.out.println("\n\nAlbum not found!");
         }
 
     }

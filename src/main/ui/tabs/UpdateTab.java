@@ -38,6 +38,11 @@ public class UpdateTab extends Tab {
     // have the new name
     private void createUpdateNameButton() {
         JButton button = createButton(ButtonNames.UPDATE_NAME.getValue(), BUTTON_DIMENSION);
+
+        button.addActionListener(e -> {
+            
+        });
+
         addToSidebar(button);
 
     }
@@ -46,6 +51,11 @@ public class UpdateTab extends Tab {
     // have the new artist
     private void createUpdateArtistButton() {
         JButton button = createButton(ButtonNames.UPDATE_ARTIST.getValue(), BUTTON_DIMENSION);
+
+        button.addActionListener(e -> {
+            
+        });
+
         addToSidebar(button);
 
     }
@@ -54,6 +64,11 @@ public class UpdateTab extends Tab {
     // have the new genre
     private void createUpdateGenreButton() {
         JButton button = createButton(ButtonNames.UPDATE_GENRE.getValue(), BUTTON_DIMENSION);
+
+        button.addActionListener(e -> {
+            
+        });
+
         addToSidebar(button);
 
     }
@@ -62,6 +77,11 @@ public class UpdateTab extends Tab {
     // have the new rating
     private void createUpdateRatingButton() {
         JButton button = createButton(ButtonNames.UPDATE_RATING.getValue(), BUTTON_DIMENSION);
+
+        button.addActionListener(e -> {
+            
+        });
+
         addToSidebar(button);
 
     }
@@ -70,6 +90,11 @@ public class UpdateTab extends Tab {
     // have the new artist
     private void createUpdateReviewButton() {
         JButton button = createButton(ButtonNames.UPDATE_REVIEW.getValue(), BUTTON_DIMENSION);
+
+        button.addActionListener(e -> {
+            
+        });
+        
         addToSidebar(button);
 
     }
