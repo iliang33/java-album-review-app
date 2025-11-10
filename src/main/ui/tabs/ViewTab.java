@@ -146,6 +146,11 @@ public class ViewTab extends Tab {
                 FONT_SIZE);
         albumEntry.add(ratingLabel);
 
+        JLabel reviewLabel = createLabel("Review: " + album.getReview(), WIDTH, HEIGHT / 3, FONT,
+                FONT_STYLE,
+                FONT_SIZE);
+        albumEntry.add(reviewLabel);
+
         JLabel tracklistLabel = createLabel("Tracklist: ", WIDTH, HEIGHT / 3, FONT,
                 FONT_STYLE,
                 FONT_SIZE);
