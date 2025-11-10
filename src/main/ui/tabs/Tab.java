@@ -69,7 +69,7 @@ public class Tab extends JPanel {
     }
 
     protected void showErrorMessage(Component parentComponent, String msg) {
-        JOptionPane.showMessageDialog(parentComponent, msg);
+        JOptionPane.showMessageDialog(parentComponent, msg, "Error", JOptionPane.ERROR_MESSAGE);
 
     }
 

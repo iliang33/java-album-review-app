@@ -15,7 +15,9 @@ public enum Prompts {
     SECOND_ARTIST("Enter artist name of second album"),
     SONG("Enter song name"),
     CONTINUE("Continue?"),
-    SONG_NUMBER("Enter number of song in tracklist");
+    SONG_NUMBER("Enter number of song in tracklist"),
+    CATEGORY_NAME("Enter category name"),
+    NEW_VALUE("Enter new value");
     
 
     private final String prompt;

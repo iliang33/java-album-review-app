@@ -124,7 +124,7 @@ public class AlbumsTab extends Tab {
                             .mergeAlbum(manager.getAlbumsList().get(manager.getIndexOfAlbum(secondAlbum)));
                     manager.removeAlbum(secondAlbum);
                 } else {
-                    showErrorMessage(this, ErrorMessages.ALBUM_IN_CATEGORY.getValue());
+                    showErrorMessage(this, ErrorMessages.ALBUM_IN_CATEGORY_MERGE.getValue());
                 }
             } else {
                 showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());

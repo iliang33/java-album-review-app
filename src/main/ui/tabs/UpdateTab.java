@@ -34,11 +34,6 @@ public class UpdateTab extends Tab {
 
     }
 
-    // EFFECTS: displays all created albums reviews
-    private void showCreatedReviews() {
-
-    }
-
     // EFFECTS: prompts user for an album and new name, then updates that album to
     // have the new name
     private void createUpdateNameButton() {
