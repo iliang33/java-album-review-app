@@ -2,6 +2,7 @@ package ui.tabs;
 
 import javax.swing.JButton;
 
+import exceptions.PopUpClosedOrCancelledException;
 import model.Album;
 import model.AlbumCategory;
 import model.ReviewManager;
@@ -43,13 +44,17 @@ public class CategoriesTab extends Tab {
 
         button.addActionListener(e -> {
 
-            String name = getUserInput(Prompts.CATEGORY_NAME.getValue());
+            try {
+                String name = getUserInput(Prompts.CATEGORY_NAME.getValue());
 
-            if (manager.getWantedCategory(name) == null) {
-                manager.addCategory(new AlbumCategory(name));
+                if (manager.getWantedCategory(name) == null) {
+                    manager.addCategory(new AlbumCategory(name));
 
-            } else {
-                showErrorMessage(this, ErrorMessages.DUPLICATE_CATEGORY.getValue());
+                } else {
+                    showErrorMessage(this, ErrorMessages.DUPLICATE_CATEGORY.getValue());
+                }
+            } catch (PopUpClosedOrCancelledException except) {
+
             }
 
         });
@@ -64,15 +69,19 @@ public class CategoriesTab extends Tab {
         JButton button = createButton(ButtonNames.REMOVE_CATEGORY.getValue(), BUTTON_DIMENSION);
 
         button.addActionListener(e -> {
-            String name = getUserInput(Prompts.CATEGORY_NAME.getValue());
+            try {
+                String name = getUserInput(Prompts.CATEGORY_NAME.getValue());
 
-            AlbumCategory categoryToRemove = manager.getWantedCategory(name);
+                AlbumCategory categoryToRemove = manager.getWantedCategory(name);
 
-            if (categoryToRemove != null) {
-                manager.removeCategory(categoryToRemove);
+                if (categoryToRemove != null) {
+                    manager.removeCategory(categoryToRemove);
 
-            } else {
-                showErrorMessage(this, ErrorMessages.NO_CATEGORY.getValue());
+                } else {
+                    showErrorMessage(this, ErrorMessages.NO_CATEGORY.getValue());
+                }
+            } catch (PopUpClosedOrCancelledException exception) {
+
             }
 
         });
@@ -88,26 +97,31 @@ public class CategoriesTab extends Tab {
 
         button.addActionListener(e -> {
 
-            String name = getUserInput(Prompts.CATEGORY_NAME.getValue());
-            String albumName = getUserInput(Prompts.ALBUM_NAME.getValue());
-            String artistName = getUserInput(Prompts.ARTIST.getValue());
+            try {
 
-            AlbumCategory categoryToAddto = manager.getWantedCategory(name);
-            Album wantedAlbum = manager.getWantedAlbum(albumName, artistName);
+                String name = getUserInput(Prompts.CATEGORY_NAME.getValue());
+                String albumName = getUserInput(Prompts.ALBUM_NAME.getValue());
+                String artistName = getUserInput(Prompts.ARTIST.getValue());
 
-            if (categoryToAddto != null) {
-                if (wantedAlbum != null) {
-                    if (manager.getWantedAlbumInWantedCategory(albumName, artistName, categoryToAddto) == null) {
-                        manager.addToCategory(categoryToAddto, albumName, artistName);
+                AlbumCategory categoryToAddto = manager.getWantedCategory(name);
+                Album wantedAlbum = manager.getWantedAlbum(albumName, artistName);
+
+                if (categoryToAddto != null) {
+                    if (wantedAlbum != null) {
+                        if (manager.getWantedAlbumInWantedCategory(albumName, artistName, categoryToAddto) == null) {
+                            manager.addToCategory(categoryToAddto, albumName, artistName);
+                        } else {
+                            showErrorMessage(this, ErrorMessages.ALBUM_IN_CATEGORY.getValue());
+                        }
+
                     } else {
-                        showErrorMessage(this, ErrorMessages.ALBUM_IN_CATEGORY.getValue());
+                        showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
                     }
-
                 } else {
-                    showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
+                    showErrorMessage(this, ErrorMessages.NO_CATEGORY.getValue());
                 }
-            } else {
-                showErrorMessage(this, ErrorMessages.NO_CATEGORY.getValue());
+            } catch (PopUpClosedOrCancelledException exception) {
+
             }
 
         });
@@ -123,21 +137,27 @@ public class CategoriesTab extends Tab {
 
         button.addActionListener(e -> {
 
-            String name = getUserInput(Prompts.CATEGORY_NAME.getValue());
-            String albumName = getUserInput(Prompts.ALBUM_NAME.getValue());
-            String artistName = getUserInput(Prompts.ARTIST.getValue());
+            try {
 
-            AlbumCategory categoryToRemoveFrom = manager.getWantedCategory(name);
-            Album wantedAlbum = manager.getWantedAlbum(albumName, artistName);
+                String name = getUserInput(Prompts.CATEGORY_NAME.getValue());
+                String albumName = getUserInput(Prompts.ALBUM_NAME.getValue());
+                String artistName = getUserInput(Prompts.ARTIST.getValue());
 
-            if (categoryToRemoveFrom != null) {
-                if (wantedAlbum != null) {
-                    manager.removeFromCategory(categoryToRemoveFrom, albumName, artistName);
+                AlbumCategory categoryToRemoveFrom = manager.getWantedCategory(name);
+                Album wantedAlbum = manager.getWantedAlbum(albumName, artistName);
+
+                if (categoryToRemoveFrom != null) {
+                    if (wantedAlbum != null) {
+                        manager.removeFromCategory(categoryToRemoveFrom, albumName, artistName);
+                    } else {
+                        showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
+                    }
                 } else {
-                    showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
+                    showErrorMessage(this, ErrorMessages.NO_CATEGORY.getValue());
                 }
-            } else {
-                showErrorMessage(this, ErrorMessages.NO_CATEGORY.getValue());
+
+            } catch (PopUpClosedOrCancelledException exception) {
+
             }
 
         });
@@ -153,19 +173,24 @@ public class CategoriesTab extends Tab {
 
         button.addActionListener(e -> {
 
-            String oldName = getUserInput(Prompts.CATEGORY_NAME.getValue());
-            String newName = getUserInput(Prompts.NEW_CATEGORY_NAME.getValue());
+            try {
 
-            if (manager.getWantedCategory(oldName) != null) {
-                for (int i = 0; i < manager.getAlbumCategoriesList().size(); i++) {
-                    AlbumCategory currentCategory = manager.getAlbumCategoriesList().get(i);
-                    if (currentCategory.getName().equals(oldName)) {
-                        currentCategory.setName(newName);
-                        break;
+                String oldName = getUserInput(Prompts.CATEGORY_NAME.getValue());
+                String newName = getUserInput(Prompts.NEW_CATEGORY_NAME.getValue());
+
+                if (manager.getWantedCategory(oldName) != null) {
+                    for (int i = 0; i < manager.getAlbumCategoriesList().size(); i++) {
+                        AlbumCategory currentCategory = manager.getAlbumCategoriesList().get(i);
+                        if (currentCategory.getName().equals(oldName)) {
+                            currentCategory.setName(newName);
+                            break;
+                        }
                     }
+                } else {
+                    showErrorMessage(this, ErrorMessages.NO_CATEGORY.getValue());
                 }
-            } else {
-                showErrorMessage(this, ErrorMessages.NO_CATEGORY.getValue());
+            } catch (PopUpClosedOrCancelledException exception) {
+
             }
 
         });

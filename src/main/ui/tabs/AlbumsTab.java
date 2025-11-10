@@ -3,6 +3,7 @@ package ui.tabs;
 import javax.swing.JButton;
 
 import exceptions.NotInRatingRangeException;
+import exceptions.PopUpClosedOrCancelledException;
 import model.Album;
 import model.ReviewManager;
 import ui.ButtonNames;
@@ -46,10 +47,11 @@ public class AlbumsTab extends Tab {
         JButton button = createButton(ButtonNames.ADD_ALBUM.getValue(), BUTTON_DIMENSION);
 
         button.addActionListener(e -> {
-            String name = getUserInput(Prompts.ALBUM_NAME.getValue());
-            String artist = getUserInput(Prompts.ARTIST.getValue());
-            String genre = getUserInput(Prompts.GENRE.getValue());
+
             try {
+                String name = getUserInput(Prompts.ALBUM_NAME.getValue());
+                String artist = getUserInput(Prompts.ARTIST.getValue());
+                String genre = getUserInput(Prompts.GENRE.getValue());
                 Double rating = Double.parseDouble(getUserInput(Prompts.RATING.getValue()));
 
                 if (!(rating >= 0.0 && rating <= 10.0)) {
@@ -69,8 +71,10 @@ public class AlbumsTab extends Tab {
             } catch (NumberFormatException excpetion) {
                 showErrorMessage(this, ErrorMessages.NOT_A_NUM.getValue());
 
-            } catch (NotInRatingRangeException | NullPointerException exception) {
+            } catch (NotInRatingRangeException except) {
                 showErrorMessage(this, ErrorMessages.NOT_IN_RANGE.getValue());
+
+            } catch (PopUpClosedOrCancelledException exception) {
 
             }
 
@@ -86,16 +90,20 @@ public class AlbumsTab extends Tab {
         JButton button = createButton(ButtonNames.REMOVE_ALBUM.getValue(), BUTTON_DIMENSION);
 
         button.addActionListener(e -> {
-            String name = getUserInput(Prompts.ALBUM_NAME.getValue());
-            String artist = getUserInput(Prompts.ARTIST.getValue());
+            try {
+                String name = getUserInput(Prompts.ALBUM_NAME.getValue());
+                String artist = getUserInput(Prompts.ARTIST.getValue());
 
-            Album albumToRemove = manager.getWantedAlbum(name, artist);
+                Album albumToRemove = manager.getWantedAlbum(name, artist);
 
-            if (albumToRemove != null) {
-                manager.removeAlbum(albumToRemove);
+                if (albumToRemove != null) {
+                    manager.removeAlbum(albumToRemove);
 
-            } else {
-                showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
+                } else {
+                    showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
+                }
+            } catch (PopUpClosedOrCancelledException except) {
+
             }
 
         });
@@ -109,26 +117,30 @@ public class AlbumsTab extends Tab {
         JButton button = createButton(ButtonNames.MERGE.getValue(), BUTTON_DIMENSION);
 
         button.addActionListener(e -> {
-            String name = getUserInput(Prompts.FIRST_ALBUM_NAME.getValue());
-            String artist = getUserInput(Prompts.FIRST_ARTIST.getValue());
+            try {
+                String name = getUserInput(Prompts.FIRST_ALBUM_NAME.getValue());
+                String artist = getUserInput(Prompts.FIRST_ARTIST.getValue());
 
-            String name2 = getUserInput(Prompts.SECOND_ALBUM_NAME.getValue());
-            String artist2 = getUserInput(Prompts.SECOND_ARTIST.getValue());
+                String name2 = getUserInput(Prompts.SECOND_ALBUM_NAME.getValue());
+                String artist2 = getUserInput(Prompts.SECOND_ARTIST.getValue());
 
-            Album firstAlbum = manager.getWantedAlbum(name, artist);
-            Album secondAlbum = manager.getWantedAlbum(name2, artist2);
+                Album firstAlbum = manager.getWantedAlbum(name, artist);
+                Album secondAlbum = manager.getWantedAlbum(name2, artist2);
 
-            if (firstAlbum != null && secondAlbum != null) {
-                manager.getAlbumsList().get(manager.getIndexOfAlbum(firstAlbum))
-                        .mergeAlbum(manager.getAlbumsList().get(manager.getIndexOfAlbum(secondAlbum)));
-                manager.removeAlbum(secondAlbum);
+                if (firstAlbum != null && secondAlbum != null) {
+                    manager.getAlbumsList().get(manager.getIndexOfAlbum(firstAlbum))
+                            .mergeAlbum(manager.getAlbumsList().get(manager.getIndexOfAlbum(secondAlbum)));
+                    manager.removeAlbum(secondAlbum);
 
-                if (manager.albumIsInAnyCategory(secondAlbum)) {
-                    manager.removeFromAllCategories(name2, artist2);
+                    if (manager.albumIsInAnyCategory(secondAlbum)) {
+                        manager.removeFromAllCategories(name2, artist2);
+                    }
+
+                } else {
+                    showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
                 }
+            } catch (PopUpClosedOrCancelledException except) {
 
-            } else {
-                showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
             }
         });
 
@@ -142,22 +154,26 @@ public class AlbumsTab extends Tab {
         JButton button = createButton(ButtonNames.ADD_TO_TRACKLIST.getValue(), BUTTON_DIMENSION);
 
         button.addActionListener(e -> {
+            try {
 
-            String name = getUserInput(Prompts.ALBUM_NAME.getValue());
-            String artist = getUserInput(Prompts.ARTIST.getValue());
+                String name = getUserInput(Prompts.ALBUM_NAME.getValue());
+                String artist = getUserInput(Prompts.ARTIST.getValue());
 
-            Album albumToAddSongTo = manager.getWantedAlbum(name, artist);
-            boolean addMoreSongs = true;
+                Album albumToAddSongTo = manager.getWantedAlbum(name, artist);
+                boolean addMoreSongs = true;
 
-            if (albumToAddSongTo != null) {
-                while (addMoreSongs) {
-                    if (!promptUserToAddSongs(albumToAddSongTo)) {
-                        addMoreSongs = false;
+                if (albumToAddSongTo != null) {
+                    while (addMoreSongs) {
+                        if (!promptUserToAddSongs(albumToAddSongTo)) {
+                            addMoreSongs = false;
+                        }
+
                     }
+                } else {
+                    showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
 
                 }
-            } else {
-                showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
+            } catch (PopUpClosedOrCancelledException except) {
 
             }
         });
@@ -173,10 +189,10 @@ public class AlbumsTab extends Tab {
 
     // this is a helper function for createAddToTracklistButton()
     public boolean promptUserToAddSongs(Album albumToAddSongTo) {
-        String songName = getUserInput(Prompts.SONG.getValue());
-        String artistName = getUserInput(Prompts.ARTIST.getValue());
 
         try {
+            String songName = getUserInput(Prompts.SONG.getValue());
+            String artistName = getUserInput(Prompts.ARTIST.getValue());
             Double rating = Double.parseDouble(getUserInput(Prompts.RATING.getValue()));
 
             if (!(rating >= 0.0 && rating <= 10.0)) {
@@ -203,8 +219,10 @@ public class AlbumsTab extends Tab {
         } catch (NumberFormatException exception) {
             showErrorMessage(this, ErrorMessages.NOT_A_NUM.getValue());
 
-        } catch (NotInRatingRangeException | NullPointerException exception) {
+        } catch (NotInRatingRangeException exception) {
             showErrorMessage(this, ErrorMessages.NOT_IN_RANGE.getValue());
+
+        } catch (PopUpClosedOrCancelledException exception) {
 
         }
 
@@ -218,26 +236,30 @@ public class AlbumsTab extends Tab {
         JButton button = createButton(ButtonNames.REMOVE_FROM_TRACKLIST.getValue(), BUTTON_DIMENSION);
 
         button.addActionListener(e -> {
-            String name = getUserInput(Prompts.ALBUM_NAME.getValue());
-            String artist = getUserInput(Prompts.ARTIST.getValue());
+            try {
+                String name = getUserInput(Prompts.ALBUM_NAME.getValue());
+                String artist = getUserInput(Prompts.ARTIST.getValue());
 
-            Album wantedAlbum = manager.getWantedAlbum(name, artist);
-            boolean removeMoreSongs = true;
+                Album wantedAlbum = manager.getWantedAlbum(name, artist);
+                boolean removeMoreSongs = true;
 
-            if (wantedAlbum != null) {
-                while (removeMoreSongs) {
-                    try {
-                        if (!promptUserToRemoveSongs(wantedAlbum, wantedAlbum.getTracklist().size())) {
-                            removeMoreSongs = false;
+                if (wantedAlbum != null) {
+                    while (removeMoreSongs) {
+                        try {
+                            if (!promptUserToRemoveSongs(wantedAlbum, wantedAlbum.getTracklist().size())) {
+                                removeMoreSongs = false;
+                            }
+                        } catch (NumberFormatException except) {
+                            showErrorMessage(this, ErrorMessages.NOT_A_NUM.getValue());
+
                         }
-                    } catch (NumberFormatException except) {
-                        showErrorMessage(this, ErrorMessages.NOT_A_NUM.getValue());
 
                     }
-
+                } else {
+                    showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
                 }
-            } else {
-                showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
+            } catch (PopUpClosedOrCancelledException except) {
+
             }
         });
 
@@ -250,12 +272,18 @@ public class AlbumsTab extends Tab {
 
     // this is a helper function for createRemoveFromTracklistButton()
     public boolean promptUserToRemoveSongs(Album albumToRemoveSongFrom, int tracklistSize) {
-        Integer songNumber = Integer.parseInt(getUserInput(Prompts.SONG_NUMBER.getValue()));
 
-        if (songNumber >= 1 && songNumber <= tracklistSize) {
-            manager.removeFromAlbumTracklist(albumToRemoveSongFrom, songNumber);
-        } else {
-            showErrorMessage(this, ErrorMessages.NOT_A_SONG_NUMBER.getValue());
+        try {
+            Integer songNumber = Integer.parseInt(getUserInput(Prompts.SONG_NUMBER.getValue()));
+
+            if (songNumber >= 1 && songNumber <= tracklistSize) {
+                manager.removeFromAlbumTracklist(albumToRemoveSongFrom, songNumber);
+            } else {
+                showErrorMessage(this, ErrorMessages.NOT_A_SONG_NUMBER.getValue());
+            }
+
+        } catch (PopUpClosedOrCancelledException exception) {
+
         }
 
         int confirmation = getUserConfirmation(this, Prompts.CONTINUE.getValue());

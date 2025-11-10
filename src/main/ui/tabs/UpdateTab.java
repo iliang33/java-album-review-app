@@ -3,6 +3,7 @@ package ui.tabs;
 import javax.swing.JButton;
 
 import exceptions.NotInRatingRangeException;
+import exceptions.PopUpClosedOrCancelledException;
 import model.ReviewManager;
 import ui.ButtonNames;
 import ui.ErrorMessages;
@@ -43,15 +44,19 @@ public class UpdateTab extends Tab {
         JButton button = createButton(ButtonNames.UPDATE_NAME.getValue(), BUTTON_DIMENSION);
 
         button.addActionListener(e -> {
-            String name = getUserInput(Prompts.ALBUM_NAME.getValue());
-            String artist = getUserInput(Prompts.ARTIST.getValue());
-            String newName = getUserInput(Prompts.NEW_ALBUM_NAME.getValue());
+            try {
+                String name = getUserInput(Prompts.ALBUM_NAME.getValue());
+                String artist = getUserInput(Prompts.ARTIST.getValue());
+                String newName = getUserInput(Prompts.NEW_ALBUM_NAME.getValue());
 
-            if (manager.getWantedAlbum(name, artist) != null) {
-                manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(name, artist)))
-                        .setName(newName);
-            } else {
-                showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
+                if (manager.getWantedAlbum(name, artist) != null) {
+                    manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(name, artist)))
+                            .setName(newName);
+                } else {
+                    showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
+                }
+            } catch (PopUpClosedOrCancelledException exception) {
+
             }
 
         });
@@ -67,15 +72,20 @@ public class UpdateTab extends Tab {
 
         button.addActionListener(e -> {
 
-            String name = getUserInput(Prompts.ALBUM_NAME.getValue());
-            String artist = getUserInput(Prompts.ARTIST.getValue());
-            String newArtist = getUserInput(Prompts.NEW_ARTIST.getValue());
+            try {
 
-            if (manager.getWantedAlbum(name, artist) != null) {
-                manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(name, artist)))
-                        .setArtist(newArtist);
-            } else {
-                showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
+                String name = getUserInput(Prompts.ALBUM_NAME.getValue());
+                String artist = getUserInput(Prompts.ARTIST.getValue());
+                String newArtist = getUserInput(Prompts.NEW_ARTIST.getValue());
+
+                if (manager.getWantedAlbum(name, artist) != null) {
+                    manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(name, artist)))
+                            .setArtist(newArtist);
+                } else {
+                    showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
+                }
+            } catch (PopUpClosedOrCancelledException exception) {
+
             }
 
         });
@@ -91,15 +101,20 @@ public class UpdateTab extends Tab {
 
         button.addActionListener(e -> {
 
-            String name = getUserInput(Prompts.ALBUM_NAME.getValue());
-            String artist = getUserInput(Prompts.ARTIST.getValue());
-            String newGenre = getUserInput(Prompts.NEW_GENRE.getValue());
+            try {
 
-            if (manager.getWantedAlbum(name, artist) != null) {
-                manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(name, artist)))
-                        .setGenre(newGenre);
-            } else {
-                showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
+                String name = getUserInput(Prompts.ALBUM_NAME.getValue());
+                String artist = getUserInput(Prompts.ARTIST.getValue());
+                String newGenre = getUserInput(Prompts.NEW_GENRE.getValue());
+
+                if (manager.getWantedAlbum(name, artist) != null) {
+                    manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(name, artist)))
+                            .setGenre(newGenre);
+                } else {
+                    showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
+                }
+            } catch (PopUpClosedOrCancelledException exception) {
+
             }
 
         });
@@ -115,10 +130,10 @@ public class UpdateTab extends Tab {
 
         button.addActionListener(e -> {
 
-            String name = getUserInput(Prompts.ALBUM_NAME.getValue());
-            String artist = getUserInput(Prompts.ARTIST.getValue());
-
             try {
+
+                String name = getUserInput(Prompts.ALBUM_NAME.getValue());
+                String artist = getUserInput(Prompts.ARTIST.getValue());
                 Double newRating = Double.parseDouble(getUserInput(Prompts.NEW_RATING.getValue()));
 
                 if (!(newRating >= 0.0 && newRating <= 10.0)) {
@@ -135,8 +150,10 @@ public class UpdateTab extends Tab {
             } catch (NumberFormatException excpetion) {
                 showErrorMessage(this, ErrorMessages.NOT_A_NUM.getValue());
 
-            } catch (NotInRatingRangeException | NullPointerException exception) {
+            } catch (NotInRatingRangeException exception) {
                 showErrorMessage(this, ErrorMessages.NOT_IN_RANGE.getValue());
+
+            } catch (PopUpClosedOrCancelledException exception) {
 
             }
 
@@ -153,15 +170,20 @@ public class UpdateTab extends Tab {
 
         button.addActionListener(e -> {
 
-            String name = getUserInput(Prompts.ALBUM_NAME.getValue());
-            String artist = getUserInput(Prompts.ARTIST.getValue());
-            String newReview = getUserInput(Prompts.NEW_REVIEW.getValue());
+            try {
 
-            if (manager.getWantedAlbum(name, artist) != null) {
-                manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(name, artist)))
-                        .setReview(newReview);
-            } else {
-                showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
+                String name = getUserInput(Prompts.ALBUM_NAME.getValue());
+                String artist = getUserInput(Prompts.ARTIST.getValue());
+                String newReview = getUserInput(Prompts.NEW_REVIEW.getValue());
+
+                if (manager.getWantedAlbum(name, artist) != null) {
+                    manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(name, artist)))
+                            .setReview(newReview);
+                } else {
+                    showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
+                }
+            } catch (PopUpClosedOrCancelledException exception) {
+
             }
 
         });

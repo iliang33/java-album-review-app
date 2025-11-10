@@ -2,6 +2,7 @@ package ui.tabs;
 
 import javax.swing.*;
 
+import exceptions.PopUpClosedOrCancelledException;
 import model.ReviewManager;
 
 import java.awt.*;
@@ -58,8 +59,12 @@ public class Tab extends JPanel {
         sidebar.add(button);
     }
 
-    protected String getUserInput(String prompt) {
+    protected String getUserInput(String prompt) throws PopUpClosedOrCancelledException {
         String inputValue = JOptionPane.showInputDialog(prompt);
+        if (inputValue == null){
+            throw new PopUpClosedOrCancelledException();
+
+        }
         return inputValue;
     }
 
