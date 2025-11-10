@@ -151,15 +151,8 @@ public class AlbumsTab extends Tab {
 
             if (albumToAddSongTo != null) {
                 while (addMoreSongs) {
-                    try {
-                        if (!promptUserToAddSongs(albumToAddSongTo)) {
-                            addMoreSongs = false;
-                        }
-                    } catch (NumberFormatException nfe) {
-                        showErrorMessage(this, ErrorMessages.NOT_A_NUM.getValue());
-                    } catch (NotInRatingRangeException nirre) {
-                        showErrorMessage(this, ErrorMessages.NOT_IN_RANGE.getValue());
-
+                    if (!promptUserToAddSongs(albumToAddSongTo)) {
+                        addMoreSongs = false;
                     }
 
                 }
@@ -179,7 +172,7 @@ public class AlbumsTab extends Tab {
     // both inclusive and handles it with an error message
 
     // this is a helper function for createAddToTracklistButton()
-    public boolean promptUserToAddSongs(Album albumToAddSongTo) throws NotInRatingRangeException {
+    public boolean promptUserToAddSongs(Album albumToAddSongTo) {
         String songName = getUserInput(Prompts.SONG.getValue());
         String artistName = getUserInput(Prompts.ARTIST.getValue());
 

@@ -154,7 +154,7 @@ public class CategoriesTab extends Tab {
         button.addActionListener(e -> {
 
             String oldName = getUserInput(Prompts.CATEGORY_NAME.getValue());
-            String newName = getUserInput(Prompts.NEW_VALUE.getValue());
+            String newName = getUserInput(Prompts.NEW_CATEGORY_NAME.getValue());
 
             if (manager.getWantedCategory(oldName) != null) {
                 for (int i = 0; i < manager.getAlbumCategoriesList().size(); i++) {

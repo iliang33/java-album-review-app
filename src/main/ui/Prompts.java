@@ -17,8 +17,12 @@ public enum Prompts {
     CONTINUE("Continue?"),
     SONG_NUMBER("Enter number of song in tracklist"),
     CATEGORY_NAME("Enter category name"),
-    NEW_VALUE("Enter new value");
-    
+    NEW_CATEGORY_NAME("Enter new name for the category"),
+    NEW_ALBUM_NAME("Enter new album name"),
+    NEW_ARTIST("Enter new artist"),
+    NEW_GENRE("Enter new genre"),
+    NEW_RATING("Enter new rating"),
+    NEW_REVIEW("Enter new review");
 
     private final String prompt;
 
