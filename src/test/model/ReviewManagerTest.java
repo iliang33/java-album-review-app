@@ -324,6 +324,34 @@ public class ReviewManagerTest {
 
     }
 
+
+     @Test
+    void testRemoveFromAllCategories() {
+        manager.addCategory(testAlbumCategory);
+        manager.addCategory(otherAlbumCategory);
+
+        manager.addAlbum(testAlbum);
+        manager.addAlbum(lastTestAlbum);
+
+        manager.addToCategory(testAlbumCategory, "Speak Now", "Taylor Swift");
+        manager.addToCategory(testAlbumCategory, "21", "Adele");
+
+        manager.addToCategory(otherAlbumCategory, "Speak Now", "Taylor Swift");
+        manager.addToCategory(otherAlbumCategory, "21", "Adele");
+
+        manager.removeFromAllCategories("Speak Now", "Taylor Swift");
+
+        assertEquals(testAlbumCategory.getAlbumList().size(), 1);
+        assertEquals(testAlbumCategory.getAlbumList().get(0), lastTestAlbum);
+
+        assertEquals(otherAlbumCategory.getAlbumList().size(), 1);
+        assertEquals(otherAlbumCategory.getAlbumList().get(0), lastTestAlbum);
+
+        
+
+    }
+
+
     @Test
     void testSortAlbumsByAlphabeticalArtistEmptyList() {
         manager.sortAlbumsByAlphabeticalArtist();

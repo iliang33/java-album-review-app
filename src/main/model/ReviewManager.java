@@ -87,6 +87,20 @@ public class ReviewManager implements Writable {
     }
 
     // MODIFIES: this
+    // EFFECTS: removes the given album (referenced by name and artist) from all
+    // categories
+    public void removeFromAllCategories(String albumName, String artistName) {
+        for (AlbumCategory category : getAlbumCategoriesList()) {
+            Album album = getWantedAlbumInWantedCategory(albumName, artistName, category);
+            if (album != null) {
+                category.removeAlbum(albumName, artistName);
+
+            }
+        }
+
+    }
+
+    // MODIFIES: this
     // EFFECTS: sorts album list by artist alphabetically. If two albums have the
     // same artist, the order does not matter
     public void sortAlbumsByAlphabeticalArtist() {
@@ -177,7 +191,7 @@ public class ReviewManager implements Writable {
 
     }
 
-    // EFFECTS: return album specified by name and artist in given categor, null if
+    // EFFECTS: return album specified by name and artist in given category, null if
     // not found
     public Album getWantedAlbumInWantedCategory(String name, String artist, AlbumCategory category) {
         Album wantedAlbum = null;

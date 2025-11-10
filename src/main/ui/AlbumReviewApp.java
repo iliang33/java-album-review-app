@@ -217,7 +217,7 @@ public class AlbumReviewApp {
         System.out.println("\tType ca to create an album review");
         System.out.println("\tType ra to remove an album review");
         System.out.println(
-                "\tType m to merge the tracklists of two album reviews that are not in any categories");
+                "\tType m to merge the tracklists of two album reviews");
         System.out.println("\tType atl to add songs to the tracklist of an existing album review");
         System.out.println("\tType rtl to remove songs from the tracklist of an existing album review\n");
 
@@ -443,9 +443,9 @@ public class AlbumReviewApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: combines the two given album's tracklists together only if the
-    // album's are not in any categories. The second album is removed from albums
-    // list. Duplicate songs are not added to the merged tracklist
+    // EFFECTS: combines the two given album's tracklists together. The second album
+    // is removed from albums list. Duplicate songs are not added to the merged
+    // tracklist
     public void mergeAlbums() {
         System.out.println("Enter name of first album (this one will have the merged tracklist)");
         String name = scan.nextLine();
@@ -463,19 +463,20 @@ public class AlbumReviewApp {
         Album secondAlbum = manager.getWantedAlbum(name2, artist2);
 
         if (firstAlbum != null && secondAlbum != null) {
-            if (!manager.albumIsInAnyCategory(firstAlbum) && !manager.albumIsInAnyCategory(secondAlbum)) {
-                manager.getAlbumsList().get(manager.getIndexOfAlbum(firstAlbum))
-                        .mergeAlbum(manager.getAlbumsList().get(manager.getIndexOfAlbum(secondAlbum)));
-                manager.removeAlbum(secondAlbum);
-                System.out.println("\nAlbums merged!");
-            } else {
-                System.out.println("\nError: neither of the albums should be in a category");
+            manager.getAlbumsList().get(manager.getIndexOfAlbum(firstAlbum))
+                    .mergeAlbum(manager.getAlbumsList().get(manager.getIndexOfAlbum(secondAlbum)));
+            manager.removeAlbum(secondAlbum);
+
+            if (manager.albumIsInAnyCategory(secondAlbum)) {
+                manager.removeFromAllCategories(name2, artist2);
             }
+            System.out.println("\nAlbums merged!");
+
         } else {
             System.out.println("\nEither one of or both albums were not found");
         }
-
     }
+
 
     // MODIFIES: this
     // EFFECTS: creates a new category with the given name and adds it to the
