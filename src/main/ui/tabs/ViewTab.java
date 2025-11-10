@@ -125,7 +125,7 @@ public class ViewTab extends Tab {
     }
 
     // EFFECTS: returns a JPanel that has labels with info about the given album
-    private JPanel getAlbumInfo(Album album) {
+    private JScrollPane getAlbumInfo(Album album) {
 
         JPanel albumEntry = new JPanel();
         albumEntry.setLayout(new BoxLayout(albumEntry, BoxLayout.Y_AXIS));
@@ -167,7 +167,12 @@ public class ViewTab extends Tab {
 
         }
 
-        return albumEntry;
+        JScrollPane scroll = new JScrollPane(albumEntry, JScrollPane.VERTICAL_SCROLLBAR_NEVER,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+        return scroll;
+
+
 
     }
 
@@ -184,7 +189,7 @@ public class ViewTab extends Tab {
         }
 
         JScrollPane scroll = new JScrollPane(categoryEntry, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         return scroll;
 
