@@ -131,7 +131,6 @@ public class UpdateTab extends Tab {
         button.addActionListener(e -> {
 
             try {
-
                 String name = getUserInput(Prompts.ALBUM_NAME.getValue());
                 String artist = getUserInput(Prompts.ARTIST.getValue());
                 Double newRating = Double.parseDouble(getUserInput(Prompts.NEW_RATING.getValue()));
@@ -139,6 +138,8 @@ public class UpdateTab extends Tab {
                 if (!(newRating >= 0.0 && newRating <= 10.0)) {
                     throw new NotInRatingRangeException();
                 }
+
+                newRating = Math.round(newRating * 10.0) / 10.0;
 
                 if (manager.getWantedAlbum(name, artist) != null) {
                     manager.getAlbumsList().get(manager.getIndexOfAlbum(manager.getWantedAlbum(name, artist)))

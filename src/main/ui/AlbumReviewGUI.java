@@ -10,6 +10,7 @@ import persistence.JsonWriter;
 import ui.tabs.AlbumsTab;
 import ui.tabs.CategoriesTab;
 import ui.tabs.HomeTab;
+import ui.tabs.StatsTab;
 import ui.tabs.UpdateTab;
 import ui.tabs.ViewTab;
 
@@ -23,6 +24,7 @@ public class AlbumReviewGUI extends JFrame {
     private static final int CATEGORIES_TAB_INDEX = 2;
     private static final int UPDATE_TAB_INDEX = 3;
     private static final int VIEW_TAB_INDEX = 4;
+    private static final int STATS_TAB_INDEX = 5;
     public final int WIDTH = 600;
     public final int HEIGHT = 600;
     private final String JSON_SAVE_FILE = "./data/ReviewManager.json";
@@ -59,10 +61,11 @@ public class AlbumReviewGUI extends JFrame {
     // EFFECTS: adds home, albums, categories, update, and view tabs to the navbar
     public void showTabs() {
         JPanel homeTab = new HomeTab(manager, this);
-        JPanel viewTab = new ViewTab(manager, this);
         JPanel albumsTab = new AlbumsTab(manager);
         JPanel categoriesTab = new CategoriesTab(manager);
         JPanel updateTab = new UpdateTab(manager);
+        JPanel viewTab = new ViewTab(manager, this);
+        JPanel statsTab= new StatsTab(manager);
 
         navbar.add(homeTab, HOME_TAB_INDEX);
         navbar.setTitleAt(HOME_TAB_INDEX, "Home");
@@ -78,6 +81,9 @@ public class AlbumReviewGUI extends JFrame {
 
         navbar.add(viewTab, VIEW_TAB_INDEX);
         navbar.setTitleAt(VIEW_TAB_INDEX, "View");
+
+        navbar.add(statsTab, STATS_TAB_INDEX);
+        navbar.setTitleAt(STATS_TAB_INDEX, "Stats");
 
     }
 

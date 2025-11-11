@@ -58,6 +58,8 @@ public class AlbumsTab extends Tab {
                     throw new NotInRatingRangeException();
                 }
 
+                rating = Math.round(rating * 10.0) / 10.0;
+
                 String review = getUserInput(Prompts.REVIEW.getValue());
 
                 if (manager.getWantedAlbum(name, artist) == null) {
@@ -199,6 +201,8 @@ public class AlbumsTab extends Tab {
                 throw new NotInRatingRangeException();
             }
 
+            rating = Math.round(rating * 10.0) / 10.0;
+
             String review = getUserInput(Prompts.REVIEW.getValue());
 
             if (manager.getWantedSongInTracklist(songName, artistName, albumToAddSongTo) == null) {
@@ -282,19 +286,17 @@ public class AlbumsTab extends Tab {
                 showErrorMessage(this, ErrorMessages.NOT_A_SONG_NUMBER.getValue());
             }
 
-            
-
         } catch (PopUpClosedOrCancelledException exception) {
 
         }
 
         int confirmation = getUserConfirmation(this, Prompts.CONTINUE.getValue());
 
-            if (confirmation == 0) { // 0 means user clicked yes
-                return true;
-            } else {
-                return false;
-            }
+        if (confirmation == 0) { // 0 means user clicked yes
+            return true;
+        } else {
+            return false;
+        }
 
     }
 
