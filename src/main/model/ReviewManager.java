@@ -209,7 +209,7 @@ public class ReviewManager implements Writable {
     public Song getWantedSongInTracklist(String name, String artist, Album album) {
         Song wantedSong = null;
         for (Song song : album.getTracklist()) {
-            if (song.getName().equalsIgnoreCase(name)) {
+            if (song.getName().equalsIgnoreCase(name) && song.getArtist().equalsIgnoreCase(artist)) {
                 wantedSong = song;
             }
         }

@@ -1,53 +1,76 @@
 {
     "albums": [
         {
-            "name": "Born to Die",
-            "artist": "Lana Del Rey",
-            "genre": "Alt-Pop",
-            "rating": 9.1,
-            "review": "Amazing",
             "tracklist": [
                 {
-                    "name": "Summertime Sadness",
-                    "artist": "Lana Del Rey",
-                    "rating": 9.0,
-                    "review": "classic"
+                    "artist": "lana del rey",
+                    "review": "good",
+                    "name": "born to die",
+                    "rating": 9
                 },
                 {
-                    "name": "Born to Die",
-                    "artist": "Lana Del Rey",
-                    "rating": 9.5,
-                    "review": "amazing"
+                    "artist": "lana del rey",
+                    "review": "good",
+                    "name": "dark paradise ",
+                    "rating": 9.4
                 }
-            ]
+            ],
+            "artist": "Lana Del Rey",
+            "review": "Amazing",
+            "name": "Born to Die",
+            "genre": "Alt-Pop",
+            "rating": 9.1
+        },
+        {
+            "tracklist": [
+                {
+                    "artist": "olivia rodrigo",
+                    "review": "eh",
+                    "name": "all american",
+                    "rating": 5
+                },
+                {
+                    "artist": "olivia rodrigo",
+                    "review": "eh",
+                    "name": "born to die",
+                    "rating": 2
+                },
+                {
+                    "artist": "lana del rey",
+                    "review": "l",
+                    "name": "born to die",
+                    "rating": 7.9
+                }
+            ],
+            "artist": "Olivia Rodrigo",
+            "review": "Fun",
+            "name": "GUTS",
+            "genre": "Pop Rock",
+            "rating": 8.6
         }
     ],
     "categories": [
         {
-            "name": "My Top Albums",
-            "albums": [
-                {
-                    "name": "Born to Die",
-                    "artist": "Lana Del Rey",
-                    "genre": "Alt-Pop",
-                    "rating": 9.1,
-                    "review": "Amazing",
-                    "tracklist": [
-                        {
-                            "name": "Summertime Sadness",
-                            "artist": "Lana Del Rey",
-                            "rating": 9.0,
-                            "review": "classic"
-                        },
-                        {
-                            "name": "Born to Die",
-                            "artist": "Lana Del Rey",
-                            "rating": 9.5,
-                            "review": "amazing"
-                        }
-                    ]
-                }
-            ]
+            "albums": [{
+                "tracklist": [],
+                "artist": "Lana Del Rey",
+                "review": "Amazing",
+                "name": "Born to Die",
+                "genre": "Alt-Pop",
+                "rating": 9.1
+            }],
+            "name": "My Top Albums"
+        },
+        {
+            "albums": [{
+                "tracklist": [],
+                "artist": "Olivia Rodrigo",
+                "review": "Fun",
+                "name": "GUTS",
+                "genre": "Pop Rock",
+                "rating": 8.6
+            }],
+            "name": "My Other Top Albums"
         }
     ]
 }
