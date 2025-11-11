@@ -67,7 +67,7 @@ public class ViewTab extends Tab {
         List<Album> albums = manager.getAlbumsList();
 
         for (Album album : albums) {
-            JButton button = createButton("View " + album.getName() + " by " + album.getArtist() + " info",
+            JButton button = createButton("View " + album.getName() + " by " + album.getArtist() + " (album)",
                     BUTTON_DIMENSION);
             button.addActionListener(e -> {
                 createAlbumPopup(album);
@@ -83,12 +83,10 @@ public class ViewTab extends Tab {
     // with info for each album in the category appears
     private void createCategoryButtons() {
 
-        // use a scroll pane for the pop up window
-
         List<AlbumCategory> categories = manager.getAlbumCategoriesList();
 
         for (AlbumCategory category : categories) {
-            JButton button = createButton("View " + category.getName() + " info",
+            JButton button = createButton("View " + category.getName() + " (category)",
                     BUTTON_DIMENSION);
             button.addActionListener(e -> {
                 createCategoryPopup(category);
@@ -170,9 +168,9 @@ public class ViewTab extends Tab {
         JScrollPane scroll = new JScrollPane(albumEntry, JScrollPane.VERTICAL_SCROLLBAR_NEVER,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
+        scroll.setBorder(null);
+
         return scroll;
-
-
 
     }
 
@@ -190,6 +188,8 @@ public class ViewTab extends Tab {
 
         JScrollPane scroll = new JScrollPane(categoryEntry, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
                 JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+        scroll.setBorder(null);
 
         return scroll;
 

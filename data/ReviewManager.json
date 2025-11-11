@@ -1,11 +1,53 @@
 {
-    "albums": [{
-        "tracklist": [],
-        "artist": "t",
-        "review": "good",
-        "name": "red",
-        "genre": "f",
-        "rating": 9
-    }],
-    "categories": []
+    "albums": [
+        {
+            "name": "Born to Die",
+            "artist": "Lana Del Rey",
+            "genre": "Alt-Pop",
+            "rating": 9.1,
+            "review": "Amazing",
+            "tracklist": [
+                {
+                    "name": "Summertime Sadness",
+                    "artist": "Lana Del Rey",
+                    "rating": 9.0,
+                    "review": "classic"
+                },
+                {
+                    "name": "Born to Die",
+                    "artist": "Lana Del Rey",
+                    "rating": 9.5,
+                    "review": "amazing"
+                }
+            ]
+        }
+    ],
+    "categories": [
+        {
+            "name": "My Top Albums",
+            "albums": [
+                {
+                    "name": "Born to Die",
+                    "artist": "Lana Del Rey",
+                    "genre": "Alt-Pop",
+                    "rating": 9.1,
+                    "review": "Amazing",
+                    "tracklist": [
+                        {
+                            "name": "Summertime Sadness",
+                            "artist": "Lana Del Rey",
+                            "rating": 9.0,
+                            "review": "classic"
+                        },
+                        {
+                            "name": "Born to Die",
+                            "artist": "Lana Del Rey",
+                            "rating": 9.5,
+                            "review": "amazing"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
 }
