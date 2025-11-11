@@ -101,6 +101,10 @@ public class AlbumsTab extends Tab {
                 if (albumToRemove != null) {
                     manager.removeAlbum(albumToRemove);
 
+                    if (manager.albumIsInAnyCategory(albumToRemove)) {
+                        manager.removeFromAllCategories(name, artist);
+                    }
+
                 } else {
                     showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
                 }

@@ -3,74 +3,90 @@
         {
             "tracklist": [
                 {
-                    "artist": "lana del rey",
-                    "review": "good",
-                    "name": "born to die",
-                    "rating": 9
+                    "artist": "song1",
+                    "review": "eh",
+                    "name": "song1",
+                    "rating": 4
                 },
                 {
-                    "artist": "lana del rey",
-                    "review": "good",
-                    "name": "dark paradise ",
-                    "rating": 9.4
+                    "artist": "song2",
+                    "review": "eh",
+                    "name": "song2",
+                    "rating": 6
+                },
+                {
+                    "artist": "song3",
+                    "review": "f",
+                    "name": "song3",
+                    "rating": 5
                 }
             ],
-            "artist": "Lana Del Rey",
-            "review": "Amazing",
-            "name": "Born to Die",
-            "genre": "Alt-Pop",
-            "rating": 9.1
+            "artist": "test1",
+            "review": "good",
+            "name": "test1",
+            "genre": "pop",
+            "rating": 5
         },
         {
-            "tracklist": [
-                {
-                    "artist": "olivia rodrigo",
-                    "review": "eh",
-                    "name": "all american",
-                    "rating": 5
-                },
-                {
-                    "artist": "olivia rodrigo",
-                    "review": "eh",
-                    "name": "born to die",
-                    "rating": 2
-                },
-                {
-                    "artist": "lana del rey",
-                    "review": "l",
-                    "name": "born to die",
-                    "rating": 7.9
-                }
-            ],
-            "artist": "Olivia Rodrigo",
-            "review": "Fun",
-            "name": "GUTS",
-            "genre": "Pop Rock",
-            "rating": 8.6
+            "tracklist": [{
+                "artist": "song4",
+                "review": "g",
+                "name": "song4",
+                "rating": 8
+            }],
+            "artist": "test2",
+            "review": "eh",
+            "name": "test2",
+            "genre": "pop",
+            "rating": 6
         }
     ],
     "categories": [
         {
             "albums": [{
-                "tracklist": [],
-                "artist": "Lana Del Rey",
-                "review": "Amazing",
-                "name": "Born to Die",
-                "genre": "Alt-Pop",
-                "rating": 9.1
+                "tracklist": [
+                    {
+                        "artist": "song1",
+                        "review": "eh",
+                        "name": "song1",
+                        "rating": 4
+                    },
+                    {
+                        "artist": "song2",
+                        "review": "eh",
+                        "name": "song2",
+                        "rating": 6
+                    },
+                    {
+                        "artist": "song3",
+                        "review": "f",
+                        "name": "song3",
+                        "rating": 5
+                    }
+                ],
+                "artist": "test1",
+                "review": "good",
+                "name": "test1",
+                "genre": "pop",
+                "rating": 5
             }],
-            "name": "My Top Albums"
+            "name": "pop1"
         },
         {
             "albums": [{
-                "tracklist": [],
-                "artist": "Olivia Rodrigo",
-                "review": "Fun",
-                "name": "GUTS",
-                "genre": "Pop Rock",
-                "rating": 8.6
+                "tracklist": [{
+                    "artist": "song4",
+                    "review": "g",
+                    "name": "song4",
+                    "rating": 8
+                }],
+                "artist": "test2",
+                "review": "eh",
+                "name": "test2",
+                "genre": "pop",
+                "rating": 6
             }],
-            "name": "My Other Top Albums"
+            "name": "pop2"
         }
     ]
 }

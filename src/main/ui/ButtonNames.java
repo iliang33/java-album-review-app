@@ -16,7 +16,7 @@ public enum ButtonNames {
     SORT_NAME("Sort by name"),
     SORT_RATING("Sort by rating"),
     ADD_CATEGORY("Add category"),
-    REMOVE_CATEGORY("Remove catgory"),
+    REMOVE_CATEGORY("Remove category"),
     ADD_TO_CATEGORY("Add to category"),
     REMOVE_FROM_CATEGORY("Remove from category"),
     UPDATE_CATEGORY_NAME("Update category name"),

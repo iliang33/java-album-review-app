@@ -434,6 +434,10 @@ public class AlbumReviewApp {
 
         if (albumToRemove != null) {
             manager.removeAlbum(albumToRemove);
+
+            if (manager.albumIsInAnyCategory(albumToRemove)) {
+                manager.removeFromAllCategories(name, artist);
+            }
             System.out.println("\n\nAlbum removed!");
 
         } else {
@@ -476,7 +480,6 @@ public class AlbumReviewApp {
             System.out.println("\nEither one of or both albums were not found");
         }
     }
-
 
     // MODIFIES: this
     // EFFECTS: creates a new category with the given name and adds it to the
