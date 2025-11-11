@@ -65,7 +65,7 @@ public class AlbumReviewGUI extends JFrame {
         JPanel categoriesTab = new CategoriesTab(manager);
         JPanel updateTab = new UpdateTab(manager);
         JPanel viewTab = new ViewTab(manager, this);
-        JPanel statsTab= new StatsTab(manager);
+        JPanel statsTab = new StatsTab(manager);
 
         navbar.add(homeTab, HOME_TAB_INDEX);
         navbar.setTitleAt(HOME_TAB_INDEX, "Home");
@@ -103,8 +103,12 @@ public class AlbumReviewGUI extends JFrame {
         return this.manager;
     }
 
-    public void setReviewManager(ReviewManager manager) {
-        this.manager = manager;
+    public int getWidth() {
+        return this.WIDTH;
+    }
+
+    public int getHeight() {
+        return this.HEIGHT;
     }
 
 }
