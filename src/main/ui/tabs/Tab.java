@@ -3,6 +3,7 @@ package ui.tabs;
 import javax.swing.*;
 
 import exceptions.PopUpClosedOrCancelledException;
+
 import model.ReviewManager;
 
 import java.awt.*;
@@ -12,15 +13,14 @@ import java.awt.*;
 
 // represents a tab that can have a sidebar and buttons
 public class Tab extends JPanel {
-
-    protected final ReviewManager manager;
-    protected JPanel sidebar;
     protected static final int BUTTON_WIDTH = 500;
     protected static final int BUTTON_HEIGHT = 30;
     protected static final Dimension BUTTON_DIMENSION = new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT);
+    protected static ReviewManager manager;
+    protected JPanel sidebar;
 
     public Tab(ReviewManager manager) {
-        this.manager = manager;
+        Tab.manager = manager;
         setLayout(new BorderLayout());
 
     }
@@ -55,13 +55,13 @@ public class Tab extends JPanel {
     }
 
     // EFFECTS: adds given button to the sidebar
-    protected void addToSidebar(JButton button){
+    protected void addToSidebar(JButton button) {
         sidebar.add(button);
     }
 
     protected String getUserInput(String prompt) throws PopUpClosedOrCancelledException {
         String inputValue = JOptionPane.showInputDialog(prompt);
-        if (inputValue == null){
+        if (inputValue == null) {
             throw new PopUpClosedOrCancelledException();
 
         }
@@ -76,10 +76,6 @@ public class Tab extends JPanel {
     protected void showErrorMessage(Component parentComponent, String msg) {
         JOptionPane.showMessageDialog(parentComponent, msg, "Error", JOptionPane.ERROR_MESSAGE);
 
-    }
-
-    public ReviewManager getManager() {
-        return this.manager;
     }
 
 }

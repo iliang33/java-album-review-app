@@ -1,11 +1,12 @@
 package ui;
 
+import java.io.FileNotFoundException;
+
 import javax.swing.*;
 
-import model.Album;
-import model.AlbumCategory;
 import model.ReviewManager;
-import model.Song;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 import ui.tabs.AlbumsTab;
 import ui.tabs.CategoriesTab;
 import ui.tabs.HomeTab;
@@ -17,65 +18,74 @@ import ui.tabs.ViewTab;
 
 // represents the GUI for the album review app
 public class AlbumReviewGUI extends JFrame {
-    public static final int HOME_TAB_INDEX = 0;
-    public static final int ALBUMS_TAB_INDEX = 1;
-    public static final int CATEGORIES_TAB_INDEX = 2;
-    public static final int UPDATE_TAB_INDEX = 3;
-    public static final int VIEW_TAB_INDEX = 4;
-
+    private static final int HOME_TAB_INDEX = 0;
+    private static final int ALBUMS_TAB_INDEX = 1;
+    private static final int CATEGORIES_TAB_INDEX = 2;
+    private static final int UPDATE_TAB_INDEX = 3;
+    private static final int VIEW_TAB_INDEX = 4;
     public final int WIDTH = 600;
     public final int HEIGHT = 600;
+    private final String JSON_SAVE_FILE = "./data/ReviewManager.json";
+
     private JTabbedPane navbar;
-    private ReviewManager manager;
+    protected ReviewManager manager;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // EFFECTS: creates AlbumReviewGUI, initializes ReviewManager and shows navbar
     // with its tabs
-    public AlbumReviewGUI() {
+    public AlbumReviewGUI() throws FileNotFoundException {
         super("Album Review App");
+
+        jsonWriter = new JsonWriter(JSON_SAVE_FILE);
+        jsonReader = new JsonReader(JSON_SAVE_FILE);
+
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        Album album1 = new Album("Speak Now", "Taylor Swift", "Pop Rock", 9.1, "Good");
-        Album album2 = new Album("Melodrama", "Lorde", "Alt-Pop", 8.5, "Cool");
-        Album album3 = new Album("The Rise and Fall of a Midwest Princess", "Chappell Roan", "Dance-Pop", 8.3, "Fun");
-        Album album4 = new Album("GNX", "Kendrick Lamar", "Rap", 8.2, "aoty");
+        // Album album1 = new Album("Speak Now", "Taylor Swift", "Pop Rock", 9.1,
+        // "Good");
+        // Album album2 = new Album("Melodrama", "Lorde", "Alt-Pop", 8.5, "Cool");
+        // Album album3 = new Album("The Rise and Fall of a Midwest Princess", "Chappell
+        // Roan", "Dance-Pop", 8.3, "Fun");
+        // Album album4 = new Album("GNX", "Kendrick Lamar", "Rap", 8.2, "aoty");
 
-        Song song1 = new Song("Mine", "Taylor Swift", 9, "");
-        Song song2 = new Song("Sparks Fly", "Taylor Swift", 9.5, "");
-        Song song3 = new Song("Dear John", "Taylor Swift", 9, "");
+        // Song song1 = new Song("Mine", "Taylor Swift", 9, "");
+        // Song song2 = new Song("Sparks Fly", "Taylor Swift", 9.5, "");
+        // Song song3 = new Song("Dear John", "Taylor Swift", 9, "");
 
-        AlbumCategory cat1 = new AlbumCategory("pop1");
-        AlbumCategory cat2 = new AlbumCategory("pop2");
-        AlbumCategory cat3 = new AlbumCategory("pop3");
+        // AlbumCategory cat1 = new AlbumCategory("pop1");
+        // AlbumCategory cat2 = new AlbumCategory("pop2");
+        // AlbumCategory cat3 = new AlbumCategory("pop3");
 
-        album1.addSong(song1);
-        album1.addSong(song2);
+        // album1.addSong(song1);
+        // album1.addSong(song2);
 
-        album2.addSong(song1);
-        album2.addSong(song2);
-        album2.addSong(song3);
+        // album2.addSong(song1);
+        // album2.addSong(song2);
+        // album2.addSong(song3);
 
-        album3.addSong(song1);
-        album3.addSong(song2);
-        album3.addSong(song3);
+        // album3.addSong(song1);
+        // album3.addSong(song2);
+        // album3.addSong(song3);
 
-        album4.addSong(song1);
-        album4.addSong(song2);
-        album4.addSong(song3);
+        // album4.addSong(song1);
+        // album4.addSong(song2);
+        // album4.addSong(song3);
 
-        cat1.addAlbum(album3);
-        cat1.addAlbum(album4);
+        // cat1.addAlbum(album3);
+        // cat1.addAlbum(album4);
 
         manager = new ReviewManager();
 
-        manager.addAlbum(album1);
-        manager.addAlbum(album2);
-        manager.addAlbum(album3);
-        manager.addAlbum(album4);
+        // manager.addAlbum(album1);
+        // manager.addAlbum(album2);
+        // manager.addAlbum(album3);
+        // manager.addAlbum(album4);
 
-        manager.addCategory(cat1);
-        manager.addCategory(cat2);
-        manager.addCategory(cat3);
+        // manager.addCategory(cat1);
+        // manager.addCategory(cat2);
+        // manager.addCategory(cat3);
 
         navbar = new JTabbedPane();
         navbar.setTabPlacement(JTabbedPane.TOP);
@@ -95,7 +105,6 @@ public class AlbumReviewGUI extends JFrame {
         JPanel albumsTab = new AlbumsTab(manager);
         JPanel categoriesTab = new CategoriesTab(manager);
         JPanel updateTab = new UpdateTab(manager);
-        
 
         navbar.add(homeTab, HOME_TAB_INDEX);
         navbar.setTitleAt(HOME_TAB_INDEX, "Home");
@@ -114,13 +123,24 @@ public class AlbumReviewGUI extends JFrame {
 
     }
 
-    public ReviewManager getReviewManager() {
-        return this.manager;
-
+    public JsonWriter getJsonWriter() {
+        return this.jsonWriter;
     }
 
-    public JTabbedPane getNavbar() {
-        return this.navbar;
+    public JsonReader getJsonReader() {
+        return this.jsonReader;
+    }
+
+    public String getJsonSaveFile() {
+        return JSON_SAVE_FILE;
+    }
+
+    public ReviewManager getReviewManager() {
+        return this.manager;
+    }
+
+    public void setReviewManager(ReviewManager manager) {
+        this.manager = manager;
     }
 
 }

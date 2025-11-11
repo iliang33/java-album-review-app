@@ -2,17 +2,22 @@ package ui.tabs;
 
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.ReviewManager;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 import ui.AlbumReviewGUI;
 import ui.ButtonNames;
 
-// referenced from SmartHomeUI
+// referenced from SmartHomeUI, JsonSerializationDemo
 // https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
+// https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
 // represents the home tab on the navbar of the GUI
 public class HomeTab extends Tab {
@@ -47,6 +52,33 @@ public class HomeTab extends Tab {
         JButton save = createButton(ButtonNames.SAVE.getValue(), BUTTON_DIMENSION);
         JButton load = createButton(ButtonNames.LOAD.getValue(), BUTTON_DIMENSION);
         JButton exit = createButton(ButtonNames.EXIT.getValue(), BUTTON_DIMENSION);
+
+        JsonWriter writer = gui.getJsonWriter();
+        JsonReader reader = gui.getJsonReader();
+        String saveFile = gui.getJsonSaveFile();
+
+        save.addActionListener(e -> {
+
+            try {
+                writer.open();
+                writer.writeReviewManager(manager);
+                writer.close();
+                
+            } catch (FileNotFoundException exception) {
+                System.out.println("Error: failed to write to file: " + saveFile);
+            }
+
+        });
+
+        load.addActionListener(e -> {
+
+            try {
+                manager = reader.readReviewManager();
+            } catch (IOException exception) {
+                System.out.println("Error: failed to read from file: " + saveFile);
+            }
+
+        });
 
         exit.addActionListener(e -> {
             gui.dispose();

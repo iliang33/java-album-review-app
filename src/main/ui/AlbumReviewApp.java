@@ -797,6 +797,5 @@ public class AlbumReviewApp {
         } catch (FileNotFoundException e) {
             System.out.println("Error: failed to write to file: " + JSON_SAVE_FILE);
         }
-
     }
 }

@@ -282,17 +282,19 @@ public class AlbumsTab extends Tab {
                 showErrorMessage(this, ErrorMessages.NOT_A_SONG_NUMBER.getValue());
             }
 
+            
+
         } catch (PopUpClosedOrCancelledException exception) {
 
         }
 
         int confirmation = getUserConfirmation(this, Prompts.CONTINUE.getValue());
 
-        if (confirmation == 0) { // 0 means user clicked yes
-            return true;
-        } else {
-            return false;
-        }
+            if (confirmation == 0) { // 0 means user clicked yes
+                return true;
+            } else {
+                return false;
+            }
 
     }
 
