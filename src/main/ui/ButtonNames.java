@@ -30,7 +30,6 @@ public enum ButtonNames {
     UPDATE_RATING("Update rating"),
     UPDATE_REVIEW("Update review");
 
-
     private final String name;
 
     ButtonNames(String name) {

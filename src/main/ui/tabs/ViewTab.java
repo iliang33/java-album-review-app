@@ -98,7 +98,8 @@ public class ViewTab extends Tab {
         popup.setVisible(true);
     }
 
-    // EFFECTS: returns a JScrollPane that has labels with info about the given album
+    // EFFECTS: returns a JScrollPane that has labels with info about the given
+    // album
     private JScrollPane getAlbumInfo(Album album) {
 
         JPanel albumEntry = new JPanel();

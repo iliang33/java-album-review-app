@@ -53,7 +53,6 @@ class JsonReaderTest extends JsonTest {
 
             checkAlbum("Born to Die", "Lana Del Rey", "Alt-Pop", 9.1, "Amazing", albums.get(0));
             checkAlbum("GUTS", "Olivia Rodrigo", "Pop Rock", 8.6, "Fun", albums.get(1));
- 
 
             assertTrue(albums.get(0).getTracklist().isEmpty());
             assertTrue(albums.get(1).getTracklist().isEmpty());
@@ -64,7 +63,6 @@ class JsonReaderTest extends JsonTest {
             checkAlbum("Born to Die", "Lana Del Rey", "Alt-Pop", 9.1, "Amazing",
                     categories.get(0).getAlbumList().get(0));
             assertTrue(categories.get(0).getAlbumList().get(0).getTracklist().isEmpty());
-
 
             checkAlbum("GUTS", "Olivia Rodrigo", "Pop Rock", 8.6, "Fun",
                     categories.get(1).getAlbumList().get(0));

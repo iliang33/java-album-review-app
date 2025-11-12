@@ -1,52 +1,87 @@
 {
     "albums": [
         {
+            "tracklist": [],
+            "artist": "justin beiber",
+            "review": "f",
+            "name": "swag",
+            "genre": "pop",
+            "rating": 9
+        },
+        {
+            "tracklist": [],
+            "artist": "renee rapp",
+            "review": "goof",
+            "name": "BITE ME ",
+            "genre": "8",
+            "rating": 8
+        },
+        {
+            "tracklist": [],
+            "artist": "taylor swift",
+            "review": "f",
+            "name": "red",
+            "genre": "pop rock",
+            "rating": 7
+        },
+        {
+            "tracklist": [],
+            "artist": "JID",
+            "review": "g",
+            "name": "god does like Ugly",
+            "genre": "rap",
+            "rating": 6.7
+        },
+        {
+            "tracklist": [],
+            "artist": "clipse",
+            "review": "fun",
+            "name": "let god sort em out",
+            "genre": "rap",
+            "rating": 6
+        },
+        {
             "tracklist": [
                 {
                     "artist": "song1",
                     "review": "eh",
                     "name": "song1",
-                    "rating": 4
-                },
-                {
-                    "artist": "song2",
-                    "review": "eh",
-                    "name": "song2",
                     "rating": 6
                 },
                 {
+                    "artist": "song2",
+                    "review": "g",
+                    "name": "song2",
+                    "rating": 5
+                },
+                {
                     "artist": "song3",
-                    "review": "f",
+                    "review": "g",
                     "name": "song3",
                     "rating": 5
                 }
             ],
-            "artist": "test1",
-            "review": "good",
-            "name": "test1",
-            "genre": "pop",
-            "rating": 5
-        },
-        {
-            "tracklist": [{
-                "artist": "song4",
-                "review": "g",
-                "name": "song4",
-                "rating": 8
-            }],
-            "artist": "test2",
-            "review": "eh",
-            "name": "test2",
-            "genre": "pop",
-            "rating": 6
+            "artist": "test67",
+            "review": "fun",
+            "name": "test67",
+            "genre": "rap",
+            "rating": 10
         },
         {
             "tracklist": [],
-            "artist": "test3",
-            "review": "f",
-            "name": "test3",
-            "genre": "g",
-            "rating": 8
+            "artist": "adele",
+            "review": "good",
+            "name": "19",
+            "genre": "pop",
+            "rating": 3
+        },
+        {
+            "tracklist": [],
+            "artist": "charli xcx",
+            "review": "bad",
+            "name": "brat",
+            "genre": "2",
+            "rating": 2
         }
     ],
     "categories": [
@@ -57,42 +92,56 @@
                         "artist": "song1",
                         "review": "eh",
                         "name": "song1",
-                        "rating": 4
-                    },
-                    {
-                        "artist": "song2",
-                        "review": "eh",
-                        "name": "song2",
                         "rating": 6
                     },
                     {
+                        "artist": "song2",
+                        "review": "g",
+                        "name": "song2",
+                        "rating": 5
+                    },
+                    {
                         "artist": "song3",
-                        "review": "f",
+                        "review": "g",
                         "name": "song3",
                         "rating": 5
                     }
                 ],
-                "artist": "test1",
-                "review": "good",
-                "name": "test1",
-                "genre": "pop",
-                "rating": 5
+                "artist": "test67",
+                "review": "fun",
+                "name": "test67",
+                "genre": "rap",
+                "rating": 10
             }],
             "name": "pop1"
         },
         {
             "albums": [{
-                "tracklist": [{
-                    "artist": "song4",
-                    "review": "g",
-                    "name": "song4",
-                    "rating": 8
-                }],
-                "artist": "test2",
-                "review": "eh",
-                "name": "test2",
-                "genre": "pop",
-                "rating": 6
+                "tracklist": [
+                    {
+                        "artist": "song1",
+                        "review": "eh",
+                        "name": "song1",
+                        "rating": 6
+                    },
+                    {
+                        "artist": "song2",
+                        "review": "g",
+                        "name": "song2",
+                        "rating": 5
+                    },
+                    {
+                        "artist": "song3",
+                        "review": "g",
+                        "name": "song3",
+                        "rating": 5
+                    }
+                ],
+                "artist": "test67",
+                "review": "fun",
+                "name": "test67",
+                "genre": "rap",
+                "rating": 10
             }],
             "name": "pop2"
         }

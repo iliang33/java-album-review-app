@@ -21,7 +21,7 @@ public class AlbumReviewApp {
     // operations on them such as adding and removing
 
     private static final String JSON_SAVE_FILE = "./data/ReviewManager.json";
-    
+
     private ReviewManager manager;
     private Scanner scan;
     private JsonWriter jsonWriter;

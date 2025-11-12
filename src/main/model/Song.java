@@ -91,7 +91,7 @@ public class Song implements Writable {
     @ExcludeFromJacocoGeneratedReport
     // EFFECTS: checks if this object is equal to the given object based on name and
     // artist
-    
+
     // helper method for the overriden equals method
     private boolean equalsCheckFields(Object obj) {
         Song other = (Song) obj;

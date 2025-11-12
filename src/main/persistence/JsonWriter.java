@@ -12,7 +12,7 @@ import java.io.*;
 // Represents a writer that writes the JSON representation of ReviewManager to file
 public class JsonWriter {
     private static final int TAB = 4;
-    
+
     private PrintWriter jsonWriter;
     private String destinationFile;
 

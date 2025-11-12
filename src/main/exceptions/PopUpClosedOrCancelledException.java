@@ -1,5 +1,5 @@
 package exceptions;
 
-public class PopUpClosedOrCancelledException extends Exception{
+public class PopUpClosedOrCancelledException extends Exception {
 
 }
