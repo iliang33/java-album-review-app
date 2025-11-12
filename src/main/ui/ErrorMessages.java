@@ -1,7 +1,11 @@
 package ui;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
 // referenced from SmartHomeUI
 // https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
+
+@ExcludeFromJacocoGeneratedReport
 
 public enum ErrorMessages {
     DUPLICATE_ALBUM("Album already exists"),
@@ -22,7 +26,7 @@ public enum ErrorMessages {
         this.errMsg = errMsg;
     }
 
-    // EFFECTS: returns the needed error message
+    // EFFECTS: returns error message
     public String getValue() {
         return errMsg;
     }

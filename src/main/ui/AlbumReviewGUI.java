@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 
 import javax.swing.*;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 import ui.tabs.AlbumsTab;
@@ -17,6 +18,7 @@ import ui.tabs.ViewTab;
 // https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
 
 // GUI Album Review Application
+@ExcludeFromJacocoGeneratedReport
 public class AlbumReviewGUI extends JFrame {
     private static final int HOME_TAB_INDEX = 0;
     private static final int ALBUMS_TAB_INDEX = 1;
@@ -32,8 +34,8 @@ public class AlbumReviewGUI extends JFrame {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
-    // EFFECTS: creates AlbumReviewGUI, initializes ReviewManager and shows navbar
-    // with its tabs
+    // EFFECTS: creates AlbumReviewGUI, initializes ReviewManager, JsonWriter, and
+    // JsonReader, and shows a navbar with its tabs
     public AlbumReviewGUI() throws FileNotFoundException {
         super("Album Review App");
 
@@ -54,7 +56,8 @@ public class AlbumReviewGUI extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds home, albums, categories, update, and view tabs to the navbar
+    // EFFECTS: adds home, albums, categories, update, view, and stats tabs to the
+    // navbar
     public void showTabs() {
         JPanel homeTab = new HomeTab(this);
         JPanel albumsTab = new AlbumsTab();

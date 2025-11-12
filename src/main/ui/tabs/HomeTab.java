@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Album;
 import model.AlbumCategory;
 import persistence.JsonReader;
@@ -23,9 +24,11 @@ import ui.ErrorMessages;
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
 // represents the home tab on the navbar of the GUI where saving, loading, and exiting is done
+@ExcludeFromJacocoGeneratedReport
 public class HomeTab extends Tab {
-    private JLabel welcomeMsg;
     private static final String WELCOME = "Welcome to the Album Review App";
+
+    private JLabel welcomeMsg;
     private AlbumReviewGUI gui;
 
     // EFFECTS: creates a home tab with a welcome message and exit, load and save
@@ -47,7 +50,7 @@ public class HomeTab extends Tab {
         welcomeMsg = new JLabel(WELCOME, JLabel.CENTER);
         welcomeMsg.setSize(WIDTH, HEIGHT / 3);
         welcomeMsg.setFont(new Font("Times New Roman", Font.BOLD, 25));
-        this.add(welcomeMsg);
+        add(welcomeMsg);
 
     }
 

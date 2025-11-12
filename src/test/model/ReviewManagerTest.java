@@ -346,6 +346,14 @@ public class ReviewManagerTest {
         assertEquals(otherAlbumCategory.getAlbumList().size(), 1);
         assertEquals(otherAlbumCategory.getAlbumList().get(0), lastTestAlbum);
 
+        manager.removeFromAllCategories("GNX", "Kendrick Lamar");
+
+        assertEquals(testAlbumCategory.getAlbumList().size(), 1);
+        assertEquals(testAlbumCategory.getAlbumList().get(0), lastTestAlbum);
+
+        assertEquals(otherAlbumCategory.getAlbumList().size(), 1);
+        assertEquals(otherAlbumCategory.getAlbumList().get(0), lastTestAlbum);
+
     }
 
     @Test
@@ -718,11 +726,21 @@ public class ReviewManagerTest {
     }
 
     @Test
-    void testGetWantedSongInTracklistNotFoundOneOfNameArtistCorrect() {
+    void testGetWantedSongInTracklistNotFoundOnlyArtistCorrect() {
         testAlbum.addSong(testSong);
         testAlbum.addSong(otherTestSong);
         manager.addAlbum(testAlbum);
         Song song = manager.getWantedSongInTracklist("Timeless", "Taylor Swift", testAlbum);
+
+        assertNull(song);
+    }
+
+    @Test
+    void testGetWantedSongInTracklistNotFoundOneOfOnlyNameCorrect() {
+        testAlbum.addSong(testSong);
+        testAlbum.addSong(otherTestSong);
+        manager.addAlbum(testAlbum);
+        Song song = manager.getWantedSongInTracklist("Mine", "Lizzy mcalpine", testAlbum);
 
         assertNull(song);
     }

@@ -2,6 +2,7 @@ package ui.tabs;
 
 import javax.swing.JButton;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import exceptions.NotInRatingRangeException;
 import exceptions.PopUpClosedOrCancelledException;
 import ui.ButtonNames;
@@ -13,9 +14,10 @@ import ui.Prompts;
 
 // represents the update tab on the navbar of the GUI where 
 // updating existing album review info is done
+@ExcludeFromJacocoGeneratedReport
 public class UpdateTab extends Tab {
 
-    // EFFECTS: creates an update tab displaying all albums reviews and a sidebar
+    // EFFECTS: creates an update tab with a sidebar
     // containing buttons related to updating album review fields
     public UpdateTab() {
         super();
@@ -24,7 +26,6 @@ public class UpdateTab extends Tab {
         setVisible(true);
     }
 
-    // MODIFIES: this
     // EFFECTS: adds all buttons related to updating album review operations to the
     // sidebar
     private void addButtonsToSidebar() {
@@ -33,11 +34,10 @@ public class UpdateTab extends Tab {
         createUpdateGenreButton();
         createUpdateRatingButton();
         createUpdateReviewButton();
-
     }
 
-    // EFFECTS: prompts user for an album and new name, then updates that album to
-    // have the new name
+    // EFFECTS: prompts user for an album (referenced by name and artist) and new
+    // name, then updates that album to have the new name
     private void createUpdateNameButton() {
         JButton button = createButton(ButtonNames.UPDATE_NAME.getValue(), BUTTON_DIMENSION);
 
@@ -55,24 +55,19 @@ public class UpdateTab extends Tab {
                 }
             } catch (PopUpClosedOrCancelledException exception) {
                 // do nothing
-
             }
-
         });
-
         addToSidebar(button);
-
     }
 
-    // EFFECTS: prompts user for an album and new artist, then updates that album to
-    // have the new artist
+    // EFFECTS: prompts user for an album (referenced by name and artist) and new
+    // artist, then updates that album to have the new artist
     private void createUpdateArtistButton() {
         JButton button = createButton(ButtonNames.UPDATE_ARTIST.getValue(), BUTTON_DIMENSION);
 
         button.addActionListener(e -> {
 
             try {
-
                 String name = getUserInput(Prompts.ALBUM_NAME.getValue());
                 String artist = getUserInput(Prompts.ARTIST.getValue());
                 String newArtist = getUserInput(Prompts.NEW_ARTIST.getValue());
@@ -85,24 +80,19 @@ public class UpdateTab extends Tab {
                 }
             } catch (PopUpClosedOrCancelledException exception) {
                 // do nothing
-
             }
-
         });
-
         addToSidebar(button);
-
     }
 
-    // EFFECTS: prompts user for an album and new genre, then updates that album to
-    // have the new genre
+    // EFFECTS: prompts user for an album (referenced by name and artist) and new
+    // genre, then updates that album to have the new genre
     private void createUpdateGenreButton() {
         JButton button = createButton(ButtonNames.UPDATE_GENRE.getValue(), BUTTON_DIMENSION);
 
         button.addActionListener(e -> {
 
             try {
-
                 String name = getUserInput(Prompts.ALBUM_NAME.getValue());
                 String artist = getUserInput(Prompts.ARTIST.getValue());
                 String newGenre = getUserInput(Prompts.NEW_GENRE.getValue());
@@ -115,17 +105,15 @@ public class UpdateTab extends Tab {
                 }
             } catch (PopUpClosedOrCancelledException exception) {
                 // do nothing
-
             }
-
         });
-
         addToSidebar(button);
-
     }
 
-    // EFFECTS: prompts user for an album and new rating, then updates that album to
-    // have the new rating
+    // EFFECTS: prompts user for an album (referenced by name and artist) and new
+    // rating, then updates that album to have the new rating. if the given rating
+    // is not between 0.0 and 10.0 inclusive then throw NotInRatingRangeException()
+    // and handle it by displaying an error message
     private void createUpdateRatingButton() {
         JButton button = createButton(ButtonNames.UPDATE_RATING.getValue(), BUTTON_DIMENSION);
 
@@ -148,29 +136,22 @@ public class UpdateTab extends Tab {
                 } else {
                     showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
                 }
-
             } catch (NumberFormatException | NotInRatingRangeException excpetion) {
                 showErrorMessage(this, ErrorMessages.INVALID.getValue());
             } catch (PopUpClosedOrCancelledException exception) {
                 // do nothing
-
             }
-
         });
-
         addToSidebar(button);
-
     }
 
-    // EFFECTS: prompts user for an album and new review, then updates that album to
-    // have the new artist
+    // EFFECTS: prompts user for an album (referenced by name and artist) and new
+    // review, then updates that album to have the new artist
     private void createUpdateReviewButton() {
         JButton button = createButton(ButtonNames.UPDATE_REVIEW.getValue(), BUTTON_DIMENSION);
 
         button.addActionListener(e -> {
-
             try {
-
                 String name = getUserInput(Prompts.ALBUM_NAME.getValue());
                 String artist = getUserInput(Prompts.ARTIST.getValue());
                 String newReview = getUserInput(Prompts.NEW_REVIEW.getValue());
@@ -183,11 +164,8 @@ public class UpdateTab extends Tab {
                 }
             } catch (PopUpClosedOrCancelledException exception) {
                 // do nothing
-
             }
-
         });
-
         addToSidebar(button);
 
     }

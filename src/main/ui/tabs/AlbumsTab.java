@@ -2,6 +2,7 @@ package ui.tabs;
 
 import javax.swing.JButton;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import exceptions.NotInRatingRangeException;
 import exceptions.PopUpClosedOrCancelledException;
 import model.Album;
@@ -14,10 +15,11 @@ import ui.Prompts;
 
 // represents the albums tab on the navbar of the GUI where 
 // album related operations are done
+@ExcludeFromJacocoGeneratedReport
 public class AlbumsTab extends Tab {
 
-    // EFFECTS: creates an albums tab containing buttons related to album review
-    // related operations
+    // EFFECTS: creates an albums tab with a sidebar containing buttons related to
+    // album review related operations
     public AlbumsTab() {
         super();
         createSidebar();
@@ -81,7 +83,7 @@ public class AlbumsTab extends Tab {
     }
 
     // EFFECTS: creates a remove review button that when clicked, prompts the user
-    // for a review and removes it
+    // for an album (referenced by name and artist) and removes it
     private void createRemoveReviewButton() {
         JButton button = createButton(ButtonNames.REMOVE_ALBUM.getValue(), BUTTON_DIMENSION);
 
@@ -113,7 +115,8 @@ public class AlbumsTab extends Tab {
     }
 
     // EFFECTS: creates a merge reviews button that when clicked, prompts the user
-    // for two albums, and merges the tracklists together
+    // for two albums (referenced by name and artist), and merges the tracklists
+    // together
     private void createMergeReviewButton() {
         JButton button = createButton(ButtonNames.MERGE.getValue(), BUTTON_DIMENSION);
 
@@ -151,13 +154,13 @@ public class AlbumsTab extends Tab {
     }
 
     // EFFECTS: creates an add tracklist button that when clicked, prompts the user
-    // for an album and songs, then adds the songs to the album's tracklist
+    // for an album and songs (both referenced by name and artist), then adds the
+    // songs to the album's tracklist
     private void createAddToTracklistButton() {
         JButton button = createButton(ButtonNames.ADD_TO_TRACKLIST.getValue(), BUTTON_DIMENSION);
 
         button.addActionListener(e -> {
             try {
-
                 String name = getUserInput(Prompts.ALBUM_NAME.getValue());
                 String artist = getUserInput(Prompts.ARTIST.getValue());
 
@@ -169,20 +172,15 @@ public class AlbumsTab extends Tab {
                         if (!promptUserToAddSongs(albumToAddSongTo)) {
                             addMoreSongs = false;
                         }
-
                     }
                 } else {
                     showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
-
                 }
             } catch (PopUpClosedOrCancelledException except) {
                 // do nothing
-
             }
         });
-
         addToSidebar(button);
-
     }
 
     // EFFECTS: asks users for information to add songs to a tracklist if the song
@@ -192,7 +190,6 @@ public class AlbumsTab extends Tab {
 
     // this is a helper function for createAddToTracklistButton()
     public boolean promptUserToAddSongs(Album albumToAddSongTo) {
-
         try {
             String songName = getUserInput(Prompts.SONG.getValue());
             String artistName = getUserInput(Prompts.ARTIST.getValue());
@@ -225,11 +222,11 @@ public class AlbumsTab extends Tab {
         }
 
         return false;
-
     }
 
     // EFFECTS: creates a remove tracklist button that when clicked, prompts the
-    // user for an album and song, then removes the songs from the album's tracklist
+    // user for an album (referenced by name and artist) and song (referenced number
+    // in tracklist), then removes the songs from the album's tracklist
     private void createRemoveFromTracklistButton() {
         JButton button = createButton(ButtonNames.REMOVE_FROM_TRACKLIST.getValue(), BUTTON_DIMENSION);
 

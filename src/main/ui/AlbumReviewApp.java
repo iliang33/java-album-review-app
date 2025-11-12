@@ -19,9 +19,11 @@ public class AlbumReviewApp {
 
     // the review manager stores all album review and categories and performs
     // operations on them such as adding and removing
+
+    private static final String JSON_SAVE_FILE = "./data/ReviewManager.json";
+    
     private ReviewManager manager;
     private Scanner scan;
-    private static final String JSON_SAVE_FILE = "./data/ReviewManager.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 

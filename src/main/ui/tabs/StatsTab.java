@@ -12,12 +12,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Album;
 
 // referenced from SimpleDrawingPlayer-Starter
 //https://github.students.cs.ubc.ca/CPSC210/SimpleDrawingPlayer-Starter.git
 
 // represents the stats tab on the navbar where graphs relating to album statistics is shown
+@ExcludeFromJacocoGeneratedReport
 public class StatsTab extends Tab {
     private static final int numOfRanges = 5;
     private static final String RANGE1 = "0.0-5.0";
@@ -69,6 +71,8 @@ public class StatsTab extends Tab {
     private int numInRange5 = 0;
     private boolean clearScreen = false;
 
+    // EFFECTS: creates a stats tab containing a bar graph showing how many albums
+    // have ratings that fall into certain ranges
     public StatsTab() {
         super();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -88,6 +92,7 @@ public class StatsTab extends Tab {
         createRefreshButton();
     }
 
+    // MODFIES: this
     // EFFECTS: draws a bar graph that shows the number of albums that falls into
     // different ranges based on their rating
     @Override
@@ -142,7 +147,6 @@ public class StatsTab extends Tab {
     // MODIFIES: this
     // EFFECTS: gets the number of album ratings that fall in each range and sets
     // the corresponding fields to their respective numbers
-
     public void setupNumInRanges() {
         List<Album> albums = manager.getAlbumsList();
 
@@ -172,6 +176,7 @@ public class StatsTab extends Tab {
 
     }
 
+    // MODIFIES: this
     // EFFECTS: creates a button that when clicked, recreates graph to account
     // for any newly added albums
     private void createRefreshButton() {

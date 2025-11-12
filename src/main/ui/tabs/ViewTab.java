@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Album;
 import model.AlbumCategory;
 import model.Song;
@@ -19,6 +20,7 @@ import model.Song;
 // https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
 
 // represents the view tab on the navbar that displays album and category info through pressing buttons
+@ExcludeFromJacocoGeneratedReport
 public class ViewTab extends Tab {
 
     private static final String FONT = "Times New Roman";
@@ -31,32 +33,12 @@ public class ViewTab extends Tab {
     // EFFECTS: creates a view tab that shows all albums and categories
     public ViewTab() {
         super();
-        // showCreatedReviews();
         createSidebar();
         createRefreshButton();
         createAlbumButtons();
         createCategoryButtons();
 
         setVisible(true);
-
-    }
-
-    // EFFECTS: creates a button that when clicked, recreates the button to account
-    // for any newly added albums
-    private void createRefreshButton() {
-        JButton button = createButton("Refresh", BUTTON_DIMENSION);
-        button.addActionListener(e -> {
-            sidebar.removeAll();
-            createRefreshButton();
-            createAlbumButtons();
-            createCategoryButtons();
-            repaint();
-            revalidate();
-
-        });
-
-        addToSidebar(button);
-
     }
 
     // EFFECTS: creates a button for each album that when clicked, a popup window
@@ -69,18 +51,14 @@ public class ViewTab extends Tab {
                     BUTTON_DIMENSION);
             button.addActionListener(e -> {
                 createAlbumPopup(album);
-
             });
             addToSidebar(button);
-
         }
-
     }
 
     // EFFECTS: creates a button for each category that when clicked, a popup window
     // with info for each album in the category appears
     private void createCategoryButtons() {
-
         List<AlbumCategory> categories = manager.getAlbumCategoriesList();
 
         for (AlbumCategory category : categories) {
@@ -120,7 +98,7 @@ public class ViewTab extends Tab {
         popup.setVisible(true);
     }
 
-    // EFFECTS: returns a JPanel that has labels with info about the given album
+    // EFFECTS: returns a JScrollPane that has labels with info about the given album
     private JScrollPane getAlbumInfo(Album album) {
 
         JPanel albumEntry = new JPanel();
@@ -135,7 +113,6 @@ public class ViewTab extends Tab {
         scroll.setBorder(null);
 
         return scroll;
-
     }
 
     // EFFECTS: creates and adds the album field labels
@@ -167,7 +144,6 @@ public class ViewTab extends Tab {
         albumEntry.add(tracklistLabel);
 
         addTracklistLabel(albumEntry, album);
-
     }
 
     // EFFECTS: creates and adds tracklist label
@@ -180,14 +156,11 @@ public class ViewTab extends Tab {
                     FONT_STYLE, FONT_SIZE);
             albumEntry.add(songLabel);
             position++;
-
         }
-
     }
 
-    // EFFECTS: displays all created categories
+    // EFFECTS: displays all created categories using a scroll pane
     private JScrollPane getCategoryInfo(AlbumCategory category) {
-
         JPanel categoryEntry = new JPanel();
         categoryEntry.setLayout(new BoxLayout(categoryEntry, BoxLayout.Y_AXIS));
         categoryEntry.setBorder(new EmptyBorder(25, 25, 25, 0));
@@ -203,17 +176,30 @@ public class ViewTab extends Tab {
         scroll.setBorder(null);
 
         return scroll;
-
     }
 
-    // EFFECTS: creates and returns a label with the given info
+    // EFFECTS: creates and returns a label with the given info and font info
     private JLabel createLabel(String text, int width, int height, String font, int style, int size) {
         JLabel label = new JLabel(text);
         label.setSize(width, height);
         label.setFont(new Font(font, style, size));
 
         return label;
-
     }
 
+    // EFFECTS: creates a button that when clicked, recreates all buttons to account
+    // for any newly added albums
+    private void createRefreshButton() {
+        JButton button = createButton("Refresh", BUTTON_DIMENSION);
+        button.addActionListener(e -> {
+            sidebar.removeAll();
+            createRefreshButton();
+            createAlbumButtons();
+            createCategoryButtons();
+            repaint();
+            revalidate();
+
+        });
+        addToSidebar(button);
+    }
 }

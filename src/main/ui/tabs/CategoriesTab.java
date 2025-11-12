@@ -2,6 +2,7 @@ package ui.tabs;
 
 import javax.swing.JButton;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import exceptions.PopUpClosedOrCancelledException;
 import model.Album;
 import model.AlbumCategory;
@@ -14,9 +15,10 @@ import ui.Prompts;
 
 // represents the categories tab on the navbar of the GUI where 
 // category related operations are done
+@ExcludeFromJacocoGeneratedReport
 public class CategoriesTab extends Tab {
 
-    // EFFECTS: creates a categories tab displaying all categories and sidebar
+    // EFFECTS: creates a categories tab with a sidebar
     // containing buttons related to category operations
     public CategoriesTab() {
         super();
@@ -25,7 +27,6 @@ public class CategoriesTab extends Tab {
         setVisible(true);
     }
 
-    // MODIFIES: this
     // EFFECTS: adds all buttons related to category operations to the sidebar
     private void addButtonsToSidebar() {
         createCategoryButton();
@@ -63,7 +64,7 @@ public class CategoriesTab extends Tab {
     }
 
     // EFFECTS: creates a remove category button that when clicked, prompts the user
-    // for a category and removes it
+    // for a category (referenced by name) and removes it
     private void createRemoveCategoryButton() {
         JButton button = createButton(ButtonNames.REMOVE_CATEGORY.getValue(), BUTTON_DIMENSION);
 
@@ -91,7 +92,8 @@ public class CategoriesTab extends Tab {
     }
 
     // EFFECTS: creates an add to category button that when clicked, prompts the
-    // user for a category and album then adds the album to the category
+    // user for a category (referenced by name) and album (referenced by name and
+    // artist), then adds the album to the category
     private void createAddToCategoryButton() {
         JButton button = createButton(ButtonNames.ADD_TO_CATEGORY.getValue(), BUTTON_DIMENSION);
         button.addActionListener(e -> {
@@ -125,7 +127,8 @@ public class CategoriesTab extends Tab {
     }
 
     // EFFECTS: creates a remove from category button that when clicked, prompts the
-    // user for a category and album, then removes the album from the category
+    // user for a category (referenced by name) and album (referenced by name and
+    // artist), then removes the album from the category
     private void createRemoveFromCategoryButton() {
         JButton button = createButton(ButtonNames.REMOVE_FROM_CATEGORY.getValue(), BUTTON_DIMENSION);
 
@@ -162,7 +165,8 @@ public class CategoriesTab extends Tab {
     }
 
     // EFFECTS: creates an update name button that when clicked, prompts the user
-    // for a category, and a name, then updates that category's name to the name
+    // for a category (referenced by name), and a new name, then updates that
+    // category's name to the new name
     private void createUpdateNameButton() {
         JButton button = createButton(ButtonNames.UPDATE_NAME.getValue(), BUTTON_DIMENSION);
 
