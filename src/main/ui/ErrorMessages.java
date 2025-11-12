@@ -12,7 +12,9 @@ public enum ErrorMessages {
     NOT_A_SONG_NUMBER("Not a valid song number"),
     DUPLICATE_CATEGORY("Category already exists"),
     NO_CATEGORY("Category not found"),
-    ALBUM_IN_CATEGORY("Album already in the category");
+    ALBUM_IN_CATEGORY("Album already in the category"),
+    INVALID("Invalid input"),
+    NO_FILE("Error: failed to read/write to/from file");
 
     private final String errMsg;
 

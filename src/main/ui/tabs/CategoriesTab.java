@@ -5,7 +5,6 @@ import javax.swing.JButton;
 import exceptions.PopUpClosedOrCancelledException;
 import model.Album;
 import model.AlbumCategory;
-import model.ReviewManager;
 import ui.ButtonNames;
 import ui.ErrorMessages;
 import ui.Prompts;
@@ -20,8 +19,8 @@ public class CategoriesTab extends Tab {
 
     // EFFECTS: creates a categories tab displaying all categories and sidebar
     // containing buttons related to category operations
-    public CategoriesTab(ReviewManager manager) {
-        super(manager);
+    public CategoriesTab() {
+        super();
         createSidebar();
         addButtonsToSidebar();
         setVisible(true);
@@ -54,6 +53,7 @@ public class CategoriesTab extends Tab {
                     showErrorMessage(this, ErrorMessages.DUPLICATE_CATEGORY.getValue());
                 }
             } catch (PopUpClosedOrCancelledException except) {
+                // do nothing
 
             }
 
@@ -81,6 +81,7 @@ public class CategoriesTab extends Tab {
                     showErrorMessage(this, ErrorMessages.NO_CATEGORY.getValue());
                 }
             } catch (PopUpClosedOrCancelledException exception) {
+                // do nothing
 
             }
 
@@ -94,34 +95,28 @@ public class CategoriesTab extends Tab {
     // user for a category and album then adds the album to the category
     private void createAddToCategoryButton() {
         JButton button = createButton(ButtonNames.ADD_TO_CATEGORY.getValue(), BUTTON_DIMENSION);
-
         button.addActionListener(e -> {
-
             try {
-
                 String name = getUserInput(Prompts.CATEGORY_NAME.getValue());
                 String albumName = getUserInput(Prompts.ALBUM_NAME.getValue());
                 String artistName = getUserInput(Prompts.ARTIST.getValue());
 
                 AlbumCategory categoryToAddto = manager.getWantedCategory(name);
-                Album wantedAlbum = manager.getWantedAlbum(albumName, artistName);
 
-                if (categoryToAddto != null) {
-                    if (wantedAlbum != null) {
-                        if (manager.getWantedAlbumInWantedCategory(albumName, artistName, categoryToAddto) == null) {
-                            manager.addToCategory(categoryToAddto, albumName, artistName);
-                        } else {
-                            showErrorMessage(this, ErrorMessages.ALBUM_IN_CATEGORY.getValue());
-                        }
-
+                if (categoryToAddto != null && manager.getWantedAlbum(albumName, artistName) != null) {
+                    if (manager.getWantedAlbumInWantedCategory(albumName, artistName, categoryToAddto) == null) {
+                        manager.addToCategory(categoryToAddto, albumName, artistName);
                     } else {
-                        showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
+                        showErrorMessage(this, ErrorMessages.ALBUM_IN_CATEGORY.getValue());
                     }
-                } else {
-                    showErrorMessage(this, ErrorMessages.NO_CATEGORY.getValue());
-                }
-            } catch (PopUpClosedOrCancelledException exception) {
 
+                } else {
+                    showErrorMessage(this,
+                            ErrorMessages.NO_CATEGORY.getValue() + " and/or " + ErrorMessages.NO_ALBUM.getValue());
+                }
+
+            } catch (PopUpClosedOrCancelledException exception) {
+                // do nothing
             }
 
         });
@@ -157,6 +152,7 @@ public class CategoriesTab extends Tab {
                 }
 
             } catch (PopUpClosedOrCancelledException exception) {
+                // do nothing
 
             }
 
@@ -190,6 +186,7 @@ public class CategoriesTab extends Tab {
                     showErrorMessage(this, ErrorMessages.NO_CATEGORY.getValue());
                 }
             } catch (PopUpClosedOrCancelledException exception) {
+                // do nothing
 
             }
 

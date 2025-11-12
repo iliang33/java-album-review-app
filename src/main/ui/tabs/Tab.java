@@ -22,8 +22,8 @@ public class Tab extends JPanel {
     protected static ReviewManager manager;
     protected JPanel sidebar;
 
-    public Tab(ReviewManager manager) {
-        Tab.manager = manager;
+    public Tab() {
+        manager = new ReviewManager();
         setLayout(new BorderLayout());
 
     }

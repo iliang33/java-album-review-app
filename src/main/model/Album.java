@@ -186,23 +186,40 @@ public class Album implements Writable {
     @ExcludeFromJacocoGeneratedReport
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
+
+        return equalsCheckFields(obj);
+    }
+
+    @ExcludeFromJacocoGeneratedReport
+    // EFFECTS: checks if this object is equal to the given object based on name and
+    // artist
+
+    // helper method for the overriden equals method
+    private boolean equalsCheckFields(Object obj) {
         Album other = (Album) obj;
         if (name == null) {
-            if (other.name != null)
+            if (other.name != null) {
                 return false;
-        } else if (!name.equals(other.name))
+            }
+        } else if (!name.equals(other.name)) {
             return false;
+        }
         if (artist == null) {
-            if (other.artist != null)
+            if (other.artist != null) {
                 return false;
-        } else if (!artist.equals(other.artist))
+            }
+        } else if (!artist.equals(other.artist)) {
             return false;
+        }
         return true;
     }
 

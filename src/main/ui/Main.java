@@ -10,7 +10,7 @@ public class Main {
 
         try {
             new AlbumReviewGUI();
-             new AlbumReviewApp();
+            new AlbumReviewApp();
         } catch (FileNotFoundException e) {
             System.out.println("Error: file not found");
 

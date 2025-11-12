@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
 import model.Album;
-import model.ReviewManager;
 
 // referenced from SimpleDrawingPlayer-Starter
 //https://github.students.cs.ubc.ca/CPSC210/SimpleDrawingPlayer-Starter.git
@@ -69,8 +68,8 @@ public class StatsTab extends Tab {
     private int numInRange5 = 0;
     private boolean clearScreen = false;
 
-    public StatsTab(ReviewManager manager) {
-        super(manager);
+    public StatsTab() {
+        super();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(new EmptyBorder(VERTICAL_SPACING, LEFT_PADDING, 0, 0));
 
@@ -109,16 +108,16 @@ public class StatsTab extends Tab {
 
                 g.setColor(Color.ORANGE);
 
-                int xCoord = LEFT_PADDING + FONT_SIZE * 5;
-                int yCoord = VERTICAL_SPACING * (i + 1) + 24 * i;
+                int posX = LEFT_PADDING + FONT_SIZE * 5;
+                int posY = VERTICAL_SPACING * (i + 1) + 24 * i;
 
-                g.drawRect(xCoord, yCoord, barWidth, BAR_HEIGHT);
-                g.fillRect(xCoord, yCoord, barWidth + 1, BAR_HEIGHT + 1);
+                g.drawRect(posX, posY, barWidth, BAR_HEIGHT);
+                g.fillRect(posX, posY, barWidth + 1, BAR_HEIGHT + 1);
 
                 g.setColor(Color.BLACK);
                 g.setFont(new Font(FONT, FONT_STYLE, FONT_SIZE));
 
-                g.drawString(numsInRanges.get(i).toString(), xCoord + barWidth + 15, yCoord + BAR_HEIGHT / 2);
+                g.drawString(numsInRanges.get(i).toString(), posX + barWidth + 15, posY + BAR_HEIGHT / 2);
                 g.drawString(barGraphTitle, Math.round(MAX_BAR_WIDTH / 2), VERTICAL_SPACING / 2);
 
             }

@@ -5,7 +5,6 @@ import javax.swing.JButton;
 import exceptions.NotInRatingRangeException;
 import exceptions.PopUpClosedOrCancelledException;
 import model.Album;
-import model.ReviewManager;
 import ui.ButtonNames;
 import ui.ErrorMessages;
 import ui.Prompts;
@@ -20,8 +19,8 @@ public class AlbumsTab extends Tab {
 
     // EFFECTS: creates an albums tab displaying all album reviews and sidebar
     // containing buttons related to album reviews operations
-    public AlbumsTab(ReviewManager manager) {
-        super(manager);
+    public AlbumsTab() {
+        super();
         createSidebar();
         addButtonsToSidebar();
         setVisible(true);
@@ -63,20 +62,17 @@ public class AlbumsTab extends Tab {
                 String review = getUserInput(Prompts.REVIEW.getValue());
 
                 if (manager.getWantedAlbum(name, artist) == null) {
-                    Album newAlbum = new Album(name, artist, genre, rating, review);
-                    manager.addAlbum(newAlbum);
+                    manager.addAlbum(new Album(name, artist, genre, rating, review));
 
                 } else {
                     showErrorMessage(this, ErrorMessages.DUPLICATE_ALBUM.getValue());
                 }
 
-            } catch (NumberFormatException excpetion) {
-                showErrorMessage(this, ErrorMessages.NOT_A_NUM.getValue());
-
-            } catch (NotInRatingRangeException except) {
-                showErrorMessage(this, ErrorMessages.NOT_IN_RANGE.getValue());
+            } catch (NumberFormatException | NotInRatingRangeException exception) {
+                showErrorMessage(this, ErrorMessages.INVALID.getValue());
 
             } catch (PopUpClosedOrCancelledException exception) {
+                // do nothing
 
             }
 
@@ -109,6 +105,7 @@ public class AlbumsTab extends Tab {
                     showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
                 }
             } catch (PopUpClosedOrCancelledException except) {
+                // do nothing
 
             }
 
@@ -146,6 +143,7 @@ public class AlbumsTab extends Tab {
                     showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
                 }
             } catch (PopUpClosedOrCancelledException except) {
+                // do nothing
 
             }
         });
@@ -180,6 +178,7 @@ public class AlbumsTab extends Tab {
 
                 }
             } catch (PopUpClosedOrCancelledException except) {
+                // do nothing
 
             }
         });
@@ -216,21 +215,14 @@ public class AlbumsTab extends Tab {
                 showErrorMessage(this, ErrorMessages.DUPLICATE_SONG.getValue());
             }
 
-            int confirmation = getUserConfirmation(this, Prompts.CONTINUE.getValue());
-
-            if (confirmation == 0) { // 0 means user clicked yes
+            if (getUserConfirmation(this, Prompts.CONTINUE.getValue()) == 0) { // 0 means user clicked yes
                 return true;
-            } else {
-                return false;
             }
-
-        } catch (NumberFormatException exception) {
-            showErrorMessage(this, ErrorMessages.NOT_A_NUM.getValue());
-
-        } catch (NotInRatingRangeException exception) {
-            showErrorMessage(this, ErrorMessages.NOT_IN_RANGE.getValue());
+        } catch (NumberFormatException | NotInRatingRangeException exception) {
+            showErrorMessage(this, ErrorMessages.INVALID.getValue());
 
         } catch (PopUpClosedOrCancelledException exception) {
+            // do nothing
 
         }
 
@@ -253,26 +245,18 @@ public class AlbumsTab extends Tab {
 
                 if (wantedAlbum != null) {
                     while (removeMoreSongs) {
-                        try {
-                            if (!promptUserToRemoveSongs(wantedAlbum, wantedAlbum.getTracklist().size())) {
-                                removeMoreSongs = false;
-                            }
-                        } catch (NumberFormatException except) {
-                            showErrorMessage(this, ErrorMessages.NOT_A_NUM.getValue());
-
+                        if (!promptUserToRemoveSongs(wantedAlbum, wantedAlbum.getTracklist().size())) {
+                            removeMoreSongs = false;
                         }
-
                     }
                 } else {
                     showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
                 }
             } catch (PopUpClosedOrCancelledException except) {
-
+                // do nothing
             }
         });
-
         addToSidebar(button);
-
     }
 
     // EFFECTS: asks users for information to remove songs from a tracklist and
@@ -290,7 +274,10 @@ public class AlbumsTab extends Tab {
                 showErrorMessage(this, ErrorMessages.NOT_A_SONG_NUMBER.getValue());
             }
 
+        } catch (NumberFormatException except) {
+            showErrorMessage(this, ErrorMessages.NOT_A_NUM.getValue());
         } catch (PopUpClosedOrCancelledException exception) {
+            // do nothing
 
         }
 

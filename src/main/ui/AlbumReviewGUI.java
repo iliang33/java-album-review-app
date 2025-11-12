@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 
 import javax.swing.*;
 
-import model.ReviewManager;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 import ui.tabs.AlbumsTab;
@@ -25,12 +24,11 @@ public class AlbumReviewGUI extends JFrame {
     private static final int UPDATE_TAB_INDEX = 3;
     private static final int VIEW_TAB_INDEX = 4;
     private static final int STATS_TAB_INDEX = 5;
-    public final int WIDTH = 600;
-    public final int HEIGHT = 600;
-    private final String JSON_SAVE_FILE = "./data/ReviewManager.json";
+    public static final int WIDTH = 600;
+    public static final int HEIGHT = 600;
+    private static final String JSON_SAVE_FILE = "./data/ReviewManager.json";
 
     private JTabbedPane navbar;
-    protected ReviewManager manager;
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
 
@@ -45,8 +43,6 @@ public class AlbumReviewGUI extends JFrame {
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        manager = new ReviewManager();
-
         navbar = new JTabbedPane();
         navbar.setTabPlacement(JTabbedPane.TOP);
 
@@ -60,12 +56,12 @@ public class AlbumReviewGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: adds home, albums, categories, update, and view tabs to the navbar
     public void showTabs() {
-        JPanel homeTab = new HomeTab(manager, this);
-        JPanel albumsTab = new AlbumsTab(manager);
-        JPanel categoriesTab = new CategoriesTab(manager);
-        JPanel updateTab = new UpdateTab(manager);
-        JPanel viewTab = new ViewTab(manager, this);
-        JPanel statsTab = new StatsTab(manager);
+        JPanel homeTab = new HomeTab(this);
+        JPanel albumsTab = new AlbumsTab();
+        JPanel categoriesTab = new CategoriesTab();
+        JPanel updateTab = new UpdateTab();
+        JPanel viewTab = new ViewTab();
+        JPanel statsTab = new StatsTab();
 
         navbar.add(homeTab, HOME_TAB_INDEX);
         navbar.setTitleAt(HOME_TAB_INDEX, "Home");
@@ -93,22 +89,6 @@ public class AlbumReviewGUI extends JFrame {
 
     public JsonReader getJsonReader() {
         return this.jsonReader;
-    }
-
-    public String getJsonSaveFile() {
-        return JSON_SAVE_FILE;
-    }
-
-    public ReviewManager getReviewManager() {
-        return this.manager;
-    }
-
-    public int getWidth() {
-        return this.WIDTH;
-    }
-
-    public int getHeight() {
-        return this.HEIGHT;
     }
 
 }

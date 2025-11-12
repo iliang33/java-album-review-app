@@ -324,8 +324,7 @@ public class ReviewManagerTest {
 
     }
 
-
-     @Test
+    @Test
     void testRemoveFromAllCategories() {
         manager.addCategory(testAlbumCategory);
         manager.addCategory(otherAlbumCategory);
@@ -347,10 +346,7 @@ public class ReviewManagerTest {
         assertEquals(otherAlbumCategory.getAlbumList().size(), 1);
         assertEquals(otherAlbumCategory.getAlbumList().get(0), lastTestAlbum);
 
-        
-
     }
-
 
     @Test
     void testSortAlbumsByAlphabeticalArtistEmptyList() {

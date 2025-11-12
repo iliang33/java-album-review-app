@@ -13,9 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import model.Album;
 import model.AlbumCategory;
-import model.ReviewManager;
 import model.Song;
-import ui.AlbumReviewGUI;
 
 // referenced from SmartHomeUI
 // https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
@@ -26,13 +24,12 @@ public class ViewTab extends Tab {
     private static final int FONT_STYLE = Font.BOLD;
     private static final int FONT_SIZE = 25;
     private static final String TAB = "    ";
-
-    private AlbumReviewGUI gui;
+    public static final int WIDTH = 600;
+    public static final int HEIGHT = 600;
 
     // EFFECTS: creates a view tab that shows all albums and categories
-    public ViewTab(ReviewManager manager, AlbumReviewGUI gui) {
-        super(manager);
-        this.gui = gui;
+    public ViewTab() {
+        super();
         // showCreatedReviews();
         createSidebar();
         createRefreshButton();
@@ -102,7 +99,7 @@ public class ViewTab extends Tab {
     public void createAlbumPopup(Album album) {
 
         JFrame popup = new JFrame(album.getName() + " by " + album.getArtist());
-        popup.setSize(gui.WIDTH, gui.HEIGHT);
+        popup.setSize(WIDTH, HEIGHT);
 
         popup.add(getAlbumInfo(album));
 
@@ -114,7 +111,7 @@ public class ViewTab extends Tab {
     private void createCategoryPopup(AlbumCategory category) {
 
         JFrame popup = new JFrame(category.getName());
-        popup.setSize(gui.WIDTH, gui.HEIGHT);
+        popup.setSize(WIDTH, HEIGHT);
 
         popup.add(getCategoryInfo(category));
 
@@ -128,6 +125,20 @@ public class ViewTab extends Tab {
         JPanel albumEntry = new JPanel();
         albumEntry.setLayout(new BoxLayout(albumEntry, BoxLayout.Y_AXIS));
         albumEntry.setBorder(new EmptyBorder(25, 25, 0, 0));
+
+        addAlbumLabels(albumEntry, album);
+
+        JScrollPane scroll = new JScrollPane(albumEntry, JScrollPane.VERTICAL_SCROLLBAR_NEVER,
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+        scroll.setBorder(null);
+
+        return scroll;
+
+    }
+
+    // EFFECTS: creates and adds the album field labels
+    private void addAlbumLabels(JPanel albumEntry, Album album) {
 
         JLabel nameLabel = createLabel("Name: " + album.getName(), WIDTH, HEIGHT / 3, FONT, FONT_STYLE, FONT_SIZE);
         albumEntry.add(nameLabel);
@@ -153,7 +164,13 @@ public class ViewTab extends Tab {
                 FONT_STYLE,
                 FONT_SIZE);
         albumEntry.add(tracklistLabel);
+        
+        addTracklistLabel(albumEntry, album);
 
+    }
+
+    // EFFECTS: creates and adds tracklist label
+    private void addTracklistLabel(JPanel albumEntry, Album album) {
         int position = 1;
         for (Song song : album.getTracklist()) {
 
@@ -164,13 +181,6 @@ public class ViewTab extends Tab {
             position++;
 
         }
-
-        JScrollPane scroll = new JScrollPane(albumEntry, JScrollPane.VERTICAL_SCROLLBAR_NEVER,
-                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
-        scroll.setBorder(null);
-
-        return scroll;
 
     }
 

@@ -4,16 +4,19 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import model.ReviewManager;
+import model.Album;
+import model.AlbumCategory;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 import ui.AlbumReviewGUI;
 import ui.ButtonNames;
+import ui.ErrorMessages;
 
 // referenced from SmartHomeUI, JsonSerializationDemo
 // https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
@@ -27,14 +30,15 @@ public class HomeTab extends Tab {
 
     // EFFECTS: creates a home tab with a welcome message and exit, load and save
     // buttons
-    public HomeTab(ReviewManager manager, AlbumReviewGUI gui) {
-        super(manager);
+    public HomeTab(AlbumReviewGUI gui) {
+        super();
         this.gui = gui;
 
-        setLayout(new GridLayout(3, 1));
+        setLayout(new GridLayout(4, 1));
 
         createWelcomeMessage();
         createHomeButtons();
+
     }
 
     // EFFECTS: creates the welcome message that is showned at the top of the home
@@ -49,13 +53,16 @@ public class HomeTab extends Tab {
 
     // EFFECTS: creates save, load, and exit buttons
     private void createHomeButtons() {
-        JButton save = createButton(ButtonNames.SAVE.getValue(), BUTTON_DIMENSION);
-        JButton load = createButton(ButtonNames.LOAD.getValue(), BUTTON_DIMENSION);
-        JButton exit = createButton(ButtonNames.EXIT.getValue(), BUTTON_DIMENSION);
+        createSaveButton();
+        createLoadButton();
+        createExitButton();
 
+    }
+
+    // EFFECTS: creates save button that saves to file when pressed
+    private void createSaveButton() {
+        JButton save = createButton(ButtonNames.SAVE.getValue(), BUTTON_DIMENSION);
         JsonWriter writer = gui.getJsonWriter();
-        JsonReader reader = gui.getJsonReader();
-        String saveFile = gui.getJsonSaveFile();
 
         save.addActionListener(e -> {
 
@@ -63,36 +70,76 @@ public class HomeTab extends Tab {
                 writer.open();
                 writer.writeReviewManager(manager);
                 writer.close();
-                
+
             } catch (FileNotFoundException exception) {
-                System.out.println("Error: failed to write to file: " + saveFile);
+                showErrorMessage(this, ErrorMessages.NO_FILE.getValue());
             }
 
         });
+
+        JPanel buttonRow = formatButtonRow(save);
+        add(buttonRow);
+
+    }
+
+    // EFFECTS: creates load button that loads from file when pressed
+    private void createLoadButton() {
+
+        JButton load = createButton(ButtonNames.LOAD.getValue(), BUTTON_DIMENSION);
+
+        JsonReader reader = gui.getJsonReader();
 
         load.addActionListener(e -> {
 
             try {
                 manager = reader.readReviewManager();
+                recreateSharedReferences();
             } catch (IOException exception) {
-                System.out.println("Error: failed to read from file: " + saveFile);
+                showErrorMessage(this, ErrorMessages.NO_FILE.getValue());
             }
 
         });
+
+        JPanel buttonRow = formatButtonRow(load);
+        add(buttonRow);
+
+    }
+
+    // EFFECTS: creates exit button that closes the gui when pressed
+    private void createExitButton() {
+        JButton exit = createButton(ButtonNames.EXIT.getValue(), BUTTON_DIMENSION);
 
         exit.addActionListener(e -> {
             gui.dispose();
 
         });
 
-        JPanel buttonRow1 = formatButtonRow(save);
-        buttonRow1.add(load);
-        buttonRow1.setSize(WIDTH, HEIGHT / 6);
-        add(buttonRow1);
+        JPanel buttonRow = formatButtonRow(exit);
+        add(buttonRow);
 
-        JPanel buttonRow2 = formatButtonRow(exit);
-        buttonRow2.setSize(WIDTH, HEIGHT / 6);
-        add(buttonRow2);
+    }
+
+    // EFFECTS: recreates any shared references between albums and album categories
+    // that were erased when serializied to JSON
+    public void recreateSharedReferences() {
+        for (Album album : manager.getAlbumsList()) {
+            if (manager.albumIsInAnyCategory(album)) {
+                for (AlbumCategory category : manager.getAlbumCategoriesList()) {
+                    List<Album> currentCategoryAlbumList = category.getAlbumList();
+                    for (int i = 0; i < currentCategoryAlbumList.size(); i++) {
+                        Album currentAlbum = currentCategoryAlbumList.get(i);
+                        if (currentAlbum.equals(album)) {
+                            currentCategoryAlbumList.remove(currentAlbum);
+                            currentCategoryAlbumList.add(i, album);
+
+                        }
+
+                    }
+
+                }
+
+            }
+        }
 
     }
 

@@ -39,6 +39,14 @@
             "name": "test2",
             "genre": "pop",
             "rating": 6
+        },
+        {
+            "tracklist": [],
+            "artist": "test3",
+            "review": "f",
+            "name": "test3",
+            "genre": "g",
+            "rating": 8
         }
     ],
     "categories": [

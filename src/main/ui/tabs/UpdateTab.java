@@ -4,7 +4,6 @@ import javax.swing.JButton;
 
 import exceptions.NotInRatingRangeException;
 import exceptions.PopUpClosedOrCancelledException;
-import model.ReviewManager;
 import ui.ButtonNames;
 import ui.ErrorMessages;
 import ui.Prompts;
@@ -19,8 +18,8 @@ public class UpdateTab extends Tab {
 
     // EFFECTS: creates an update tab displaying all albums reviews and a sidebar
     // containing buttons related to updating album review fields
-    public UpdateTab(ReviewManager manager) {
-        super(manager);
+    public UpdateTab() {
+        super();
         createSidebar();
         addButtonsToSidebar();
         setVisible(true);
@@ -56,6 +55,7 @@ public class UpdateTab extends Tab {
                     showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
                 }
             } catch (PopUpClosedOrCancelledException exception) {
+                // do nothing
 
             }
 
@@ -85,6 +85,7 @@ public class UpdateTab extends Tab {
                     showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
                 }
             } catch (PopUpClosedOrCancelledException exception) {
+                // do nothing
 
             }
 
@@ -114,6 +115,7 @@ public class UpdateTab extends Tab {
                     showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
                 }
             } catch (PopUpClosedOrCancelledException exception) {
+                // do nothing
 
             }
 
@@ -148,13 +150,10 @@ public class UpdateTab extends Tab {
                     showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
                 }
 
-            } catch (NumberFormatException excpetion) {
-                showErrorMessage(this, ErrorMessages.NOT_A_NUM.getValue());
-
-            } catch (NotInRatingRangeException exception) {
-                showErrorMessage(this, ErrorMessages.NOT_IN_RANGE.getValue());
-
+            } catch (NumberFormatException | NotInRatingRangeException excpetion) {
+                showErrorMessage(this, ErrorMessages.INVALID.getValue());
             } catch (PopUpClosedOrCancelledException exception) {
+                // do nothing
 
             }
 
@@ -184,6 +183,7 @@ public class UpdateTab extends Tab {
                     showErrorMessage(this, ErrorMessages.NO_ALBUM.getValue());
                 }
             } catch (PopUpClosedOrCancelledException exception) {
+                // do nothing
 
             }
 
