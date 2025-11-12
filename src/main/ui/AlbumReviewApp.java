@@ -13,7 +13,7 @@ import java.util.Scanner;
 import exceptions.NotInRatingRangeException;
 import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
-// Album Review Application
+// Console Album Review Application
 @ExcludeFromJacocoGeneratedReport
 public class AlbumReviewApp {
 

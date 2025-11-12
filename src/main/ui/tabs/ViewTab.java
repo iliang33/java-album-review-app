@@ -18,6 +18,7 @@ import model.Song;
 // referenced from SmartHomeUI
 // https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
 
+// represents the view tab on the navbar that displays album and category info through pressing buttons
 public class ViewTab extends Tab {
 
     private static final String FONT = "Times New Roman";
@@ -164,7 +165,7 @@ public class ViewTab extends Tab {
                 FONT_STYLE,
                 FONT_SIZE);
         albumEntry.add(tracklistLabel);
-        
+
         addTracklistLabel(albumEntry, album);
 
     }

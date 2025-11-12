@@ -13,8 +13,7 @@ import ui.Prompts;
 // https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
 
 // represents the categories tab on the navbar of the GUI where 
-// category creation, removal. adding to, removing from, and name updating is done
-
+// category related operations are done
 public class CategoriesTab extends Tab {
 
     // EFFECTS: creates a categories tab displaying all categories and sidebar

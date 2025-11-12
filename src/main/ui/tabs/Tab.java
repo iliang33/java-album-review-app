@@ -16,9 +16,6 @@ public class Tab extends JPanel {
     protected static final int BUTTON_WIDTH = 500;
     protected static final int BUTTON_HEIGHT = 30;
     protected static final Dimension BUTTON_DIMENSION = new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT);
-    
-    
-
     protected static ReviewManager manager;
     protected JPanel sidebar;
 

@@ -16,7 +16,7 @@ import ui.tabs.ViewTab;
 // referenced from SmartHomeUI
 // https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
 
-// represents the GUI for the album review app
+// GUI Album Review Application
 public class AlbumReviewGUI extends JFrame {
     private static final int HOME_TAB_INDEX = 0;
     private static final int ALBUMS_TAB_INDEX = 1;

@@ -13,7 +13,6 @@ import ui.Prompts;
 
 // represents the update tab on the navbar of the GUI where 
 // updating existing album review info is done
-
 public class UpdateTab extends Tab {
 
     // EFFECTS: creates an update tab displaying all albums reviews and a sidebar

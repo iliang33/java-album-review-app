@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import persistence.Writable;
 
 // Represents a named category of albums that can be used to group album reviews
-//   with similar themes
+// with similar themes
 public class AlbumCategory implements Writable {
     private String name;
     private List<Album> albumList;

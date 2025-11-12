@@ -13,12 +13,11 @@ import ui.Prompts;
 // https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
 
 // represents the albums tab on the navbar of the GUI where 
-// album creation, removal, listing and sorting is done
-
+// album related operations are done
 public class AlbumsTab extends Tab {
 
-    // EFFECTS: creates an albums tab displaying all album reviews and sidebar
-    // containing buttons related to album reviews operations
+    // EFFECTS: creates an albums tab containing buttons related to album review
+    // related operations
     public AlbumsTab() {
         super();
         createSidebar();
@@ -26,7 +25,6 @@ public class AlbumsTab extends Tab {
         setVisible(true);
     }
 
-    // MODIFIES: this
     // EFFECTS: adds all buttons related to album review operations to the sidebar
     private void addButtonsToSidebar() {
         createAddReviewButton();

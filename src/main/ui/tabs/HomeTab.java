@@ -22,7 +22,7 @@ import ui.ErrorMessages;
 // https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
-// represents the home tab on the navbar of the GUI
+// represents the home tab on the navbar of the GUI where saving, loading, and exiting is done
 public class HomeTab extends Tab {
     private JLabel welcomeMsg;
     private static final String WELCOME = "Welcome to the Album Review App";
