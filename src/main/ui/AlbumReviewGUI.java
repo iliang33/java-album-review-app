@@ -113,7 +113,7 @@ public class AlbumReviewGUI extends JFrame implements WindowListener {
         EventLog eventLog = EventLog.getInstance();
 
         for (Event event : eventLog) {
-            System.out.println(event);
+            System.out.println(event + "\n");
 
         }
     }
