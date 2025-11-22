@@ -37,7 +37,79 @@ clicking the refresh button
 - You can locate my visual component by clicking the Stats tab
 - You can save the state of my application by clicking the save button in the Home tab
 - You can reload the state of my application by clicking the load button in the Home tab
-  
+
+# Phase 4: Task 2
+Sat Nov 22 11:37:46 PST 2025
+Album created
+
+Sat Nov 22 11:37:46 PST 2025
+Album added to all albums list
+
+Sat Nov 22 11:38:12 PST 2025
+Song created
+
+Sat Nov 22 11:38:12 PST 2025
+Song added to tracklist
+
+Sat Nov 22 11:38:21 PST 2025
+Song created
+
+Sat Nov 22 11:38:21 PST 2025
+Song added to tracklist
+
+Sat Nov 22 11:38:28 PST 2025
+Song created
+
+Sat Nov 22 11:38:28 PST 2025
+Song added to tracklist
+
+Sat Nov 22 11:38:40 PST 2025
+Song removed from tracklist
+
+Sat Nov 22 11:38:53 PST 2025
+Album created
+
+Sat Nov 22 11:38:53 PST 2025
+Album added to all albums list
+
+Sat Nov 22 11:39:09 PST 2025
+Album created
+
+Sat Nov 22 11:39:09 PST 2025
+Album added to all albums list
+
+Sat Nov 22 11:39:13 PST 2025
+Albums sorted by artist alphabetical
+
+Sat Nov 22 11:39:14 PST 2025
+Albums sorted by name alphabetical
+
+Sat Nov 22 11:39:16 PST 2025
+Albums sorted by rating high to low
+
+Sat Nov 22 11:39:32 PST 2025
+Album category created
+
+Sat Nov 22 11:39:32 PST 2025
+Album category added to all categories list
+
+Sat Nov 22 11:39:37 PST 2025
+Album category created
+
+Sat Nov 22 11:39:37 PST 2025
+Album category added to all categories list
+
+Sat Nov 22 11:39:45 PST 2025
+Album added to album category
+
+Sat Nov 22 11:40:04 PST 2025
+Album removed from album category
+
+Sat Nov 22 11:40:18 PST 2025
+Album category removed from all categories list
+
+Sat Nov 22 11:40:33 PST 2025
+Album removed from all albums list
 
 
 

@@ -20,6 +20,7 @@ public class Song implements Writable {
         this.artist = artist;
         this.rating = rating;
         this.review = review;
+        EventLog.getInstance().logEvent(new Event("Song created"));
 
     }
 

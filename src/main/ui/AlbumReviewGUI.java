@@ -1,10 +1,13 @@
 package ui;
 
 import java.io.FileNotFoundException;
+import java.awt.event.*;
 
 import javax.swing.*;
 
 import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+import model.Event;
+import model.EventLog;
 import persistence.JsonReader;
 import persistence.JsonWriter;
 import ui.tabs.AlbumsTab;
@@ -19,7 +22,7 @@ import ui.tabs.ViewTab;
 
 // GUI Album Review Application
 @ExcludeFromJacocoGeneratedReport
-public class AlbumReviewGUI extends JFrame {
+public class AlbumReviewGUI extends JFrame implements WindowListener {
     private static final int HOME_TAB_INDEX = 0;
     private static final int ALBUMS_TAB_INDEX = 1;
     private static final int CATEGORIES_TAB_INDEX = 2;
@@ -43,13 +46,14 @@ public class AlbumReviewGUI extends JFrame {
         jsonReader = new JsonReader(JSON_SAVE_FILE);
 
         setSize(WIDTH, HEIGHT);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         navbar = new JTabbedPane();
         navbar.setTabPlacement(JTabbedPane.TOP);
 
         showTabs();
         add(navbar);
+        addWindowListener(this);
 
         setVisible(true);
 
@@ -92,6 +96,46 @@ public class AlbumReviewGUI extends JFrame {
 
     public JsonReader getJsonReader() {
         return this.jsonReader;
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+        // unused
+    }
+
+    @Override
+    public void windowClosing(WindowEvent e) {
+        // unused
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+        EventLog eventLog = EventLog.getInstance();
+
+        for (Event event : eventLog) {
+            System.out.println(event);
+
+        }
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+        // unused);
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+        // unused
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+        // unused
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+        // unused
     }
 
 }

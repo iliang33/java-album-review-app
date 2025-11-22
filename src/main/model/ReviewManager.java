@@ -26,6 +26,7 @@ public class ReviewManager implements Writable {
     // EFFECTS: adds given album to all albums list
     public void addAlbum(Album album) {
         this.albums.add(album);
+        EventLog.getInstance().logEvent(new Event("Album added to all albums list"));
 
     }
 
@@ -34,6 +35,7 @@ public class ReviewManager implements Writable {
     // EFFECTS: removes given album from all albums list
     public void removeAlbum(Album album) {
         this.albums.remove(album);
+        EventLog.getInstance().logEvent(new Event("Album removed from all albums list"));
 
     }
 
@@ -53,6 +55,7 @@ public class ReviewManager implements Writable {
     // given album
     public void removeFromAlbumTracklist(Album album, int songNumber) {
         this.albums.get(getIndexOfAlbum(album)).getTracklist().remove(songNumber - 1);
+        EventLog.getInstance().logEvent(new Event("Song removed from tracklist"));
     }
 
     // REQUIRES: category is not already in list
@@ -60,6 +63,7 @@ public class ReviewManager implements Writable {
     // EFFECTS: adds given category to all categories list
     public void addCategory(AlbumCategory category) {
         this.categories.add(category);
+        EventLog.getInstance().logEvent(new Event("Album category added to all categories list"));
 
     }
 
@@ -68,6 +72,7 @@ public class ReviewManager implements Writable {
     // EFFECTS: removes given category from all categories list
     public void removeCategory(AlbumCategory category) {
         this.categories.remove(category);
+        EventLog.getInstance().logEvent(new Event("Album category removed from all categories list"));
 
     }
 
@@ -120,6 +125,8 @@ public class ReviewManager implements Writable {
             }
 
         }
+
+        EventLog.getInstance().logEvent(new Event("Albums sorted by artist alphabetical"));
     }
 
     // MODIFIES: this
@@ -142,6 +149,8 @@ public class ReviewManager implements Writable {
             }
 
         }
+
+        EventLog.getInstance().logEvent(new Event("Albums sorted by name alphabetical"));
     }
 
     // MODIFIES: this
@@ -163,6 +172,8 @@ public class ReviewManager implements Writable {
             }
 
         }
+
+        EventLog.getInstance().logEvent(new Event("Albums sorted by rating high to low"));
     }
 
     // EFFECTS: return album specified by name and artist, null if not found
@@ -223,7 +234,6 @@ public class ReviewManager implements Writable {
                 return true;
 
             }
-
         }
         return false;
     }

@@ -29,6 +29,8 @@ public class Album implements Writable {
         this.rating = rating;
         this.review = review;
 
+        EventLog.getInstance().logEvent(new Event("Album created"));
+
     }
 
     // REQUIRES: a song with the same name and artist is not already in the
@@ -37,26 +39,7 @@ public class Album implements Writable {
     // EFFECTS: adds given song to tracklist
     public void addSong(Song song) {
         this.tracklist.add(song);
-    }
-
-    // MODIFIES: this
-    // EFFECTS: Remove song with given name and artist from tracklist, do nothing if
-    // not there
-    public void removeSong(String name, String artist) {
-        // value of -1 means the song was not found
-        int indexOfSongToRemove = -1;
-        for (int i = 0; i < this.tracklist.size(); i++) {
-            Song currentSong = this.tracklist.get(i);
-            if (currentSong.getName().equalsIgnoreCase(name) && currentSong.getArtist().equalsIgnoreCase(artist)) {
-                indexOfSongToRemove = i;
-            }
-
-        }
-        if (indexOfSongToRemove != -1) {
-            this.tracklist.remove(indexOfSongToRemove);
-
-        }
-
+        EventLog.getInstance().logEvent(new Event("Song added to tracklist"));
     }
 
     // MODIFIES: this
@@ -68,6 +51,8 @@ public class Album implements Writable {
                 this.tracklist.add(song);
             }
         }
+
+        EventLog.getInstance().logEvent(new Event("Albums merged"));
 
     }
 

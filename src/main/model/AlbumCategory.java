@@ -19,6 +19,7 @@ public class AlbumCategory implements Writable {
     public AlbumCategory(String name) {
         this.name = name;
         albumList = new ArrayList<>();
+        EventLog.getInstance().logEvent(new Event("Album category created"));
     }
 
     // REQUIRES: an album with the same name and artist that is not already in the
@@ -27,6 +28,7 @@ public class AlbumCategory implements Writable {
     // EFFECTS: adds given album to album list
     public void addAlbum(Album album) {
         this.albumList.add(album);
+        EventLog.getInstance().logEvent(new Event("Album added to album category"));
     }
 
     // MODIFIES: this
@@ -44,6 +46,7 @@ public class AlbumCategory implements Writable {
         }
         if (indexOfAlbumToRemove != -1) {
             this.albumList.remove(indexOfAlbumToRemove);
+            EventLog.getInstance().logEvent(new Event("Album removed from album category"));
 
         }
 
