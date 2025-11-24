@@ -9,7 +9,7 @@ import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 // https://github.students.cs.ubc.ca/CPSC210/AlarmSystem.git
 
 /**
- * Represents an alarm system event.
+ * Represents an album review application event.
  */
 public class Event {
     private static final int HASH_CONSTANT = 13;
