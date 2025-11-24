@@ -39,6 +39,7 @@ clicking the refresh button
 - You can reload the state of my application by clicking the load button in the Home tab
 
 # Phase 4: Task 2
+
 Sat Nov 22 11:37:46 PST 2025
 Album created
 
@@ -110,6 +111,18 @@ Album category removed from all categories list
 
 Sat Nov 22 11:40:33 PST 2025
 Album removed from all albums list
+
+# Phase 4: Task 3
+
+One thing I would do is create a new abstract class and have Album, AlbumCategory, and Song extend it.
+This is because the three classes have a lot of the same behaviour and there is duplicate code as well.
+All three classes add and remove objects from a list and share some of the exact same getters. One other
+thing I would do is create new classes and have them handle some of the responsiblities of the ReviewManager.
+This is because I feel the ReviewManager is doing too much for one class as it adds/removes from albums,
+categories, and tracklists, as well as sorts albums by different categories and contains many helper
+methods concerning finding wanted songs, albums, and categories.
+
+
 
 
 
