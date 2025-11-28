@@ -40,6 +40,10 @@ clicking the refresh button
 
 # Phase 4: Task 2
 
+NOTE: I did not add logging for displaying all X's in my Y as all of this is done in the ui package
+and nothing changes in my model package when the X's are displayed so I was unsure where to 
+call logEvent.
+
 Sat Nov 22 11:37:46 PST 2025
 Album created
 
