@@ -82,7 +82,7 @@ public class AlbumReviewGUI extends JFrame implements WindowListener {
         navbar.add(updateTab, UPDATE_TAB_INDEX);
         navbar.setTitleAt(UPDATE_TAB_INDEX, "Update");
 
-        navbar.add(viewTab, VIEW_TAB_INDEX);
+        navbar.add(new JScrollPane(viewTab), VIEW_TAB_INDEX);
         navbar.setTitleAt(VIEW_TAB_INDEX, "View");
 
         navbar.add(statsTab, STATS_TAB_INDEX);

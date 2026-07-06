@@ -23,10 +23,10 @@ import model.Album;
 public class StatsTab extends Tab {
     private static final int numOfRanges = 5;
     private static final String RANGE1 = "0.0-5.0";
-    private static final String RANGE2 = "5.1-7.0";
-    private static final String RANGE3 = "7.1-8.0";
-    private static final String RANGE4 = "8.1-9.0";
-    private static final String RANGE5 = "9.1-10.0";
+    private static final String RANGE2 = "5.1-6.9";
+    private static final String RANGE3 = "7.0-7.9";
+    private static final String RANGE4 = "8.0-8.9";
+    private static final String RANGE5 = "9.0-10.0";
 
     private static final int BEGIN_INDEX_LOWER_BOUND = 0;
     private static final int END_INDEX_LOWER_BOUND_EXCLUSIVE = 3;
