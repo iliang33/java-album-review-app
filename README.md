@@ -29,7 +29,7 @@ Java
 
 ## How to run
 
-1. Clone the repo (https://github.com/burstfire23/java-album-review-app)
+1. Clone the repo (https://github.com/iliang33/java-album-review-app)
 2. Open in an IDE of your choice
 3. Run src/main/ui.Main.java
 
