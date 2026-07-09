@@ -8,7 +8,7 @@ I built this project because I started fully listening to albums front to back w
 before I would only pick and choose popular songs from the albums to listen to. While listening, 
 I would do a review for it by scoring each track out of ten and giving an overall score at the end. 
 So I needed a place to store all the reviews that is easily accessible and organized, thus this project
-was born
+was born.
 
 ## Features
   
