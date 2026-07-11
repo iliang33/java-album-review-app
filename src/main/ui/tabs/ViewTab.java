@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Album;
 import model.AlbumCategory;
 import model.Song;
@@ -20,7 +19,6 @@ import model.Song;
 // https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
 
 // represents the view tab on the navbar that displays album and category info through pressing buttons
-@ExcludeFromJacocoGeneratedReport
 public class ViewTab extends Tab {
 
     private static final String FONT = "Times New Roman";

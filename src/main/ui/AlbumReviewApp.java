@@ -11,10 +11,8 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import exceptions.NotInRatingRangeException;
-import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
 // Console Album Review Application
-@ExcludeFromJacocoGeneratedReport
 public class AlbumReviewApp {
 
     // the review manager stores all album review and categories and performs

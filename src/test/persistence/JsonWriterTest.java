@@ -2,7 +2,6 @@ package persistence;
 
 import org.junit.jupiter.api.Test;
 
-import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Album;
 import model.AlbumCategory;
 import model.ReviewManager;
@@ -16,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.*;
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
 // Set of tests for JsonWriter
-@ExcludeFromJacocoGeneratedReport
 public class JsonWriterTest extends JsonTest {
 
     @Test

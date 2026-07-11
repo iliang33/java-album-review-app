@@ -2,7 +2,6 @@ package ui.tabs;
 
 import javax.swing.JButton;
 
-import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import exceptions.NotInRatingRangeException;
 import exceptions.PopUpClosedOrCancelledException;
 import ui.ButtonNames;
@@ -14,7 +13,6 @@ import ui.Prompts;
 
 // represents the update tab on the navbar of the GUI where 
 // updating existing album review info is done
-@ExcludeFromJacocoGeneratedReport
 public class UpdateTab extends Tab {
 
     // EFFECTS: creates an update tab with a sidebar

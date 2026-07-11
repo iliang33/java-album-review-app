@@ -3,7 +3,6 @@ package model;
 import java.util.Calendar;
 import java.util.Date;
 
-import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
 // referenced from AlarmSystem
 // https://github.students.cs.ubc.ca/CPSC210/AlarmSystem.git
@@ -45,7 +44,6 @@ public class Event {
         return description;
     }
 
-    @ExcludeFromJacocoGeneratedReport
     @Override
     public boolean equals(Object other) {
         if (other == null) {
@@ -62,7 +60,6 @@ public class Event {
                 && this.description.equals(otherEvent.description));
     }
 
-    @ExcludeFromJacocoGeneratedReport
     @Override
     public int hashCode() {
         return (HASH_CONSTANT * dateLogged.hashCode() + description.hashCode());

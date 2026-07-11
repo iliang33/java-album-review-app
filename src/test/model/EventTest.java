@@ -3,8 +3,6 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -16,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Unit tests for the Event class
  */
-@ExcludeFromJacocoGeneratedReport
 public class EventTest {
     private Event event;
     private Date date;

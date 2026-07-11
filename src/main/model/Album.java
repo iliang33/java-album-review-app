@@ -6,7 +6,6 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import persistence.Writable;
 
 // Represents an album with a name, artist, genre, tracklist of songs, rating, and review
@@ -158,7 +157,6 @@ public class Album implements Writable {
         return jsonArray;
     }
 
-    @ExcludeFromJacocoGeneratedReport
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -168,7 +166,6 @@ public class Album implements Writable {
         return result;
     }
 
-    @ExcludeFromJacocoGeneratedReport
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -183,8 +180,7 @@ public class Album implements Writable {
 
         return equalsCheckFields(obj);
     }
-
-    @ExcludeFromJacocoGeneratedReport
+    
     // EFFECTS: checks if this object is equal to the given object based on name and
     // artist
 

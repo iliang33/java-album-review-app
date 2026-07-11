@@ -3,10 +3,8 @@ package model;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
 // Set of tests for the Song class
-@ExcludeFromJacocoGeneratedReport
 public class SongTest {
     private Song testSong;
 

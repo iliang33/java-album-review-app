@@ -1,6 +1,5 @@
 package model;
 
-import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import org.json.JSONObject;
 
 import persistence.Writable;
@@ -61,7 +60,6 @@ public class Song implements Writable {
         return json;
     }
 
-    @ExcludeFromJacocoGeneratedReport
     @Override
     // EFFECTS: overrides hashCode to go with the override of equals
     public int hashCode() {
@@ -72,7 +70,6 @@ public class Song implements Writable {
         return result;
     }
 
-    @ExcludeFromJacocoGeneratedReport
     @Override
     // EFFECTS: overrides equals to base equality on the name and artist
     public boolean equals(Object obj) {
@@ -89,7 +86,6 @@ public class Song implements Writable {
 
     }
 
-    @ExcludeFromJacocoGeneratedReport
     // EFFECTS: checks if this object is equal to the given object based on name and
     // artist
 

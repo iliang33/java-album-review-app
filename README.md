@@ -23,9 +23,8 @@ was born.
 - Save all created reviews and categories 
 - Load all saved reviews and categories  
 
-## Languages used
+## Technologies used
 Java
-
 
 ## How to run
 

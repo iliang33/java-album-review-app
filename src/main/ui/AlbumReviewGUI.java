@@ -5,7 +5,6 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Event;
 import model.EventLog;
 import persistence.JsonReader;
@@ -21,7 +20,6 @@ import ui.tabs.ViewTab;
 // https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
 
 // GUI Album Review Application
-@ExcludeFromJacocoGeneratedReport
 public class AlbumReviewGUI extends JFrame implements WindowListener {
     private static final int HOME_TAB_INDEX = 0;
     private static final int ALBUMS_TAB_INDEX = 1;

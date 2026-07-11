@@ -1,11 +1,7 @@
 package ui;
 
-import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
-
 // referenced from SmartHomeUI
 // https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
-
-@ExcludeFromJacocoGeneratedReport
 
 public enum ErrorMessages {
     DUPLICATE_ALBUM("Album already exists"),

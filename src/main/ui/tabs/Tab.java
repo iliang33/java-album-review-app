@@ -1,19 +1,14 @@
 package ui.tabs;
 
 import javax.swing.*;
-
-import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import exceptions.PopUpClosedOrCancelledException;
-
 import model.ReviewManager;
-
 import java.awt.*;
 
 // referenced from SmartHomeUI
 // https://github.students.cs.ubc.ca/CPSC210/LongFormProblemStarters.git
 
 // represents a tab that can have a sidebar and buttons
-@ExcludeFromJacocoGeneratedReport
 public class Tab extends JPanel {
     protected static final int BUTTON_WIDTH = 500;
     protected static final int BUTTON_HEIGHT = 30;

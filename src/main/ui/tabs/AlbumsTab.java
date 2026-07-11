@@ -2,7 +2,6 @@ package ui.tabs;
 
 import javax.swing.JButton;
 
-import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import exceptions.NotInRatingRangeException;
 import exceptions.PopUpClosedOrCancelledException;
 import model.Album;
@@ -15,7 +14,6 @@ import ui.Prompts;
 
 // represents the albums tab on the navbar of the GUI where 
 // album related operations are done
-@ExcludeFromJacocoGeneratedReport
 public class AlbumsTab extends Tab {
 
     // EFFECTS: creates an albums tab with a sidebar containing buttons related to

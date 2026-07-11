@@ -194,6 +194,14 @@
         },
         {
             "tracklist": [],
+            "artist": "Lana Del Rey",
+            "review": "",
+            "name": "Chemtrails Over The Country Club",
+            "genre": "Folk Pop",
+            "rating": 7.1
+        },
+        {
+            "tracklist": [],
             "artist": "Tyler, The Creator",
             "review": "",
             "name": "CHROMAKOPIA",
@@ -582,7 +590,7 @@
             "review": "",
             "name": "luck... or something",
             "genre": "Alt-Pop",
-            "rating": 7.4
+            "rating": 7.5
         },
         {
             "tracklist": [],
@@ -1151,6 +1159,14 @@
             "name": "Yours Truly",
             "genre": "Pop",
             "rating": 7
+        },
+        {
+            "tracklist": [],
+            "artist": "Hayley Williams",
+            "review": "",
+            "name": "Ego Death At A Bachelorette Party",
+            "genre": "Alternative Rock",
+            "rating": 6.9
         }
     ],
     "categories": []

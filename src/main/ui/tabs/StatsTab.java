@@ -12,14 +12,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
-import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Album;
 
 // referenced from SimpleDrawingPlayer-Starter
 //https://github.students.cs.ubc.ca/CPSC210/SimpleDrawingPlayer-Starter.git
 
 // represents the stats tab on the navbar where graphs relating to album statistics is shown
-@ExcludeFromJacocoGeneratedReport
 public class StatsTab extends Tab {
     private static final int numOfRanges = 5;
     private static final String RANGE1 = "0.0-5.0";

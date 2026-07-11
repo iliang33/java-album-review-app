@@ -7,10 +7,8 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
 // Set of tests for the ReviewManager class
-@ExcludeFromJacocoGeneratedReport
 public class ReviewManagerTest {
     private ReviewManager manager;
     private Album testAlbum;

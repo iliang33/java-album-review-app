@@ -2,7 +2,6 @@ package persistence;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Album;
 import model.Song;
 
@@ -10,7 +9,6 @@ import model.Song;
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
 // Methods useful for testing JsonReader and JsonWriter
-@ExcludeFromJacocoGeneratedReport
 public class JsonTest {
 
     protected void checkAlbum(String name, String artist, String genre, double rating, String review, Album album) {

@@ -2,7 +2,6 @@ package ui.tabs;
 
 import javax.swing.JButton;
 
-import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import exceptions.PopUpClosedOrCancelledException;
 import model.Album;
 import model.AlbumCategory;
@@ -15,7 +14,6 @@ import ui.Prompts;
 
 // represents the categories tab on the navbar of the GUI where 
 // category related operations are done
-@ExcludeFromJacocoGeneratedReport
 public class CategoriesTab extends Tab {
 
     // EFFECTS: creates a categories tab with a sidebar
