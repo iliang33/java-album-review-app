@@ -24,12 +24,16 @@ was born.
 - Load all saved reviews and categories  
 
 ## Technologies used
-Java
+Java, Java Swing, JSON, JUnit
+
+## Requirements
+- Java JDK 8
+- VS Code with Java Extension Pack
 
 ## How to run
 
 1. Clone the repo (https://github.com/iliang33/java-album-review-app)
-2. Open in an IDE of your choice
+2. Open in VS Code
 3. Run src/main/ui.Main.java
 
 ## Usage
